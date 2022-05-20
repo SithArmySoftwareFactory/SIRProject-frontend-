@@ -4,13 +4,13 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import {styleBanner} from "../themes/themes";
-import ASFIcon from "./common/ASFIcon";
+import {styleBanner} from "../../themes/themes";
+import ASFIcon from "./ASFIcon";
 
 
 export function Banner() {
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box component={"div"} sx={{ flexGrow: 1 }}>
             <AppBar style={styleBanner}
             >
                 <Toolbar>
@@ -30,7 +30,6 @@ export function Banner() {
                         }}
                         ></MenuIcon>
                     </IconButton>
-
                     <IconButton
                         size="small"
                         color="inherit"

@@ -4,7 +4,7 @@ export const styleBanner={
         alignItems: "center",
         padding: "8px 12px",
 
-        position: "absolute",
+        position: "sticky",
         width: "1440px",
         height: "64px",
         left: "0px",
