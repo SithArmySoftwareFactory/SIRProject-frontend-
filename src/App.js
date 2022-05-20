@@ -1,11 +1,10 @@
 import './App.css';
+import {Banner} from "./components/Banner";
 
 function App() {
   return (
-    <div>
-      <h1>SIR</h1>
-
-    </div>
+    <Banner>
+    </Banner>
   );
 }
 
