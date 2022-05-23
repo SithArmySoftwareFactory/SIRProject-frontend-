@@ -4,7 +4,6 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {Grid} from "@mui/material";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {Label} from "@mui/icons-material";
 
 
 const DateOfEvent = () => {
@@ -70,6 +69,7 @@ const DateOfEvent = () => {
                 <label style={styleLabel}>Date of Event</label>
                 <DatePicker
                     style={styleDate}
+
                     disableFuture
                     openTo="year"
                     views={['year', 'month', 'day']}
