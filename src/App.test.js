@@ -13,6 +13,7 @@ import HarmEventBox from "./components/SIRForm/Fields/HarmEventBox";
 import IndividualsInvolvedFormGroup from "./components/SIRForm/Fields/IndividualsInvolvedFormGroup";
 import TypeOfEventBox from "./components/SIRForm/Fields/TypeOfEventBox";
 import EffectOfIncidentBox from "./components/SIRForm/Fields/EffectOfIncidentBox";
+import Witness from "./components/SIRForm/Fields/Witness";
 
 
 describe("Component tests",()=> {
@@ -179,7 +180,10 @@ describe("Component tests",()=> {
     it("should see a Witness telephone number label", async ()=>{
       expect(screen.getByText('Witness Telephone Number')).toBeInTheDocument();
     });
+    it("should render 6 textboxes", async ()=>{
+      expect(screen.getAllByRole('textbox').length==6);
 
+    })
   });
 
 
