@@ -10,6 +10,7 @@ import TimeOfEvent from "./components/SIRForm/Fields/TimeOfEvent";
 import LocationBox from "./components/SIRForm/Fields/LocationBox";
 import EventTypeBox from "./components/SIRForm/Fields/EventTypeBox";
 import HarmEventBox from "./components/SIRForm/Fields/HarmEventBox";
+import IndividualsInvolvedFormGroup from "./components/SIRForm/Fields/IndividualsInvolvedFormGroup";
 
 
 describe("Component tests",()=> {
@@ -95,6 +96,61 @@ describe("Component tests",()=> {
       expect(screen.getByText('Harm or Potential Harm')).toBeInTheDocument();
     })
   })
+
+  describe("testing Individuals Involved checkboxes", ()=>{
+    beforeEach(()=>render(<IndividualsInvolvedFormGroup/>));
+    it("should see patient", async ()=>{
+      expect(screen.getByText('Patient')).toBeInTheDocument();
+    })
+    it("should see patient checkbox", async ()=>{
+      expect(screen.getByRole('checkbox', {name:"Patient"})).toBeInTheDocument();
+    })
+    it("should see family member", async ()=>{
+      expect(screen.getByText('Family Member')).toBeInTheDocument();
+    })
+    it("should see family member checkbox", async ()=>{
+      expect(screen.getByRole('checkbox', {name:"Family Member"})).toBeInTheDocument();
+    })
+    it("should see Adult", async ()=>{
+      expect(screen.getByText('Adult')).toBeInTheDocument();
+    })
+    it("should see Adult checkbox", async ()=>{
+      expect(screen.getByRole('checkbox', {name:"Adult"})).toBeInTheDocument();
+    })
+    it("should see Child", async ()=>{
+      expect(screen.getByText('Child <18 years old')).toBeInTheDocument();
+    })
+    it("should see Child checkbox", async ()=>{
+      expect(screen.getByRole('checkbox', {name:"Child <18 years old"})).toBeInTheDocument();
+    })
+    it("should see Staff member", async ()=>{
+      expect(screen.getByText('Staff Member')).toBeInTheDocument();
+    })
+    it("should see Staff member checkbox", async ()=>{
+      expect(screen.getByRole('checkbox', {name:"Staff Member"})).toBeInTheDocument();
+    })
+    it("should see visitor", async ()=>{
+      expect(screen.getByText('Visitor')).toBeInTheDocument();
+    })
+    it("should see Visitor checkbox", async ()=>{
+      expect(screen.getByRole('checkbox', {name:"Visitor"})).toBeInTheDocument();
+    })
+    it("should see Volunteer", async ()=>{
+      expect(screen.getByText('Volunteer')).toBeInTheDocument();
+    })
+    it("should see Volunteer checkbox", async ()=>{
+      expect(screen.getByRole('checkbox', {name:"Volunteer"})).toBeInTheDocument();
+    })
+    it("should see Other", async ()=>{
+      expect(screen.getByText('Other')).toBeInTheDocument();
+    })
+    it("should see Other checkbox", async ()=>{
+      expect(screen.getByRole('checkbox', {name:"Other"})).toBeInTheDocument();
+    })
+
+
+  })
+
 
 
 });

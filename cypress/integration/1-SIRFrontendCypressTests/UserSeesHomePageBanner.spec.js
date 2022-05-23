@@ -48,12 +48,12 @@ describe('user navigating to the homepage', () => {
         cy.findByRole('checkbox',({checked:false,name:/family member/i})).should('exist');
         cy.findByText(/adult/i).should('exist');
         cy.findByRole('checkbox',({checked:false,name:/adult/i})).should('be.disabled').should("exist");
-        cy.findByText(/child < 18 years old/i).should('exist');
+        cy.findByText(/child <18 years old/i).should('exist');
         cy.findByRole('checkbox',({checked:false,name:/child/i})).should("be.disabled").should('exist');
         cy.findByText(/staff member/i).should('exist');
         cy.findByRole('checkbox',({checked:false,name:/staff member/i})).should('exist');
         cy.findByText(/visitor/i).should('exist');
-        cy.findByRole('checkbox',({checked:false,name:/vistor/i})).should('exist');
+        cy.findByRole('checkbox',({checked:false,name:/visitor/i})).should('exist');
         cy.findByText(/other/i).should('exist');
         cy.findByRole('checkbox',({checked:false,name:/other/i})).should('exist');
     });
