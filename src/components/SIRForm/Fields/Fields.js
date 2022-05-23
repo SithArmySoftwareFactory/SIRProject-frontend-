@@ -6,6 +6,9 @@ import EventTypeBox from "./EventTypeBox";
 import * as React from "react";
 import HarmEventBox from "./HarmEventBox";
 import IndividualsInvolvedFormGroup from "./IndividualsInvolvedFormGroup";
+import TypeOfEventBox from "./TypeOfEventBox";
+import EffectOfIncidentBox from "./EffectOfIncidentBox";
+import Witness from "./Witness";
 
 const Fields = () => {
     return (
@@ -21,6 +24,11 @@ const Fields = () => {
                 <HarmEventBox/>
             </Grid>
             <IndividualsInvolvedFormGroup/>
+            <TypeOfEventBox/>
+            <br/>
+            <EffectOfIncidentBox/>
+            <br/>
+            <Witness/>
 
         </>
     );

@@ -2,15 +2,15 @@
 import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
 
-const LocationBox = () => {
+const TypeOfEventBox = () => {
 
     return (
       <>
           <br/>
-          <label style={styleLabel}>Location of Event</label>
+          <label style={styleLabel}>Type of Event</label>
           <TextField
-              id="Location of Event"
-              name={"Location of Event"}
+              id="Type of Event"
+              name={"Type of Event"}
               variant={"outlined"}
           />
       </>
@@ -18,4 +18,4 @@ const LocationBox = () => {
 
 }
 
-export default LocationBox;
+export default TypeOfEventBox;

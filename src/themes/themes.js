@@ -12,7 +12,7 @@ export const styleBanner = {
 
 export const styleLabel = {
     /* Label */
-    width: "248px", height: "12px",
+    height: "12px",
 
     /* Desktop typography/components/input-label */
     fontFamily: 'Public Sans', fontStyle: "normal", fontWeight: "600", fontSize: "16px", lineHeight: "12px",

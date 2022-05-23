@@ -59,15 +59,12 @@ describe('user navigating to the homepage', () => {
     });
     it('should see a type of event box',()=>{
         cy.findByText(/type of event/i).should('exist');
-        cy.findByRole('textbox',({name: /type of event/i})).should('exist');
+        cy.findByText(/type of event/i).siblings().last().children().last().children().last().should('exist');
     });
-    it('should see a location box',()=>{
-        cy.findByText(/location of event/i).should('exist');
-        cy.findByRole('textbox',({name: /location of event/i})).should('exist');
-    });
+
     it('should see a effect of this incident on the individual(s) involved box',()=>{
-        cy.findByText(/effect of this incident on the individual(s) involved/i).should('exist');
-        cy.findByRole('combobox',({name: /effect of this incident on the individual(s) involved/i})).should('exist');
+        cy.findByText(/effect of this incident on the individual\(s\) involved/i).should('exist');
+        cy.findByText(/effect of this incident on the individual\(s\) involved/i).siblings().last().children().last().children().last().should('exist');
     });
     it('should see three witness name boxes',()=>{
         cy.findByText(/witness namet/i).should('exist');
@@ -82,7 +79,7 @@ describe('user navigating to the homepage', () => {
         cy.findByRole('textbox',({name: /witness 3 telephone/i})).should('exist');
     });
     it('should see department(s) involved in this incident box',()=>{
-        cy.findByText(/department(s) involved in this incident/i).should('exist');
+        cy.findByText(/department\(s\) involved in this incident/i).should('exist');
         cy.findByRole('textbox',({name: /departements involved/i})).should('exist');
     });
     it('should see description of incident box',()=>{

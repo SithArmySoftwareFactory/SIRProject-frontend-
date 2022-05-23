@@ -5,34 +5,31 @@ import Select from '@mui/material/Select';
 import {styleLabel} from "../../../themes/themes";
 import {Grid} from "@mui/material";
 
-const HarmEventBox = () => {
-    const [isHarmed, setIsHarmed] = React.useState('');
+const EffectOfIncidentBox = () => {
+    const [isHarmSustained, setIsHarmSustained] = React.useState('');
 
     const handleChange = (event) => {
-        setIsHarmed(event.target.value);
+        setIsHarmSustained(event.target.value);
     };
 
     return (
-        <Grid item xs={6}>
-
-            <label style={styleLabel}>Harm or Potential Harm</label>
+        <>
+            <label style={styleLabel}>Effect of this incident on the individual(s) Involved</label>
             <FormControl fullWidth>
                 <Select
-                    labelId="harm-type-label"
-                    id="harm-type-options"
-                    value={isHarmed}
-                    label="Harm-type"
+                    labelId="harm-effect-label"
+                    id="harm-effect-options"
+                    value={isHarmSustained}
+                    label="Harm-effect"
                     onChange={handleChange}
                 >
-                    <MenuItem value={"Yes"}>Yes</MenuItem>
-                    <MenuItem value={"No"}>No</MenuItem>
+                    <MenuItem value={"No"}>No harm sustained</MenuItem>
+                    <MenuItem value={"Yes"}>Harm sustained</MenuItem>
 
                 </Select>
             </FormControl>
-
-        </Grid>
-
+    </>
     );
 }
 
-export default HarmEventBox;
+export default EffectOfIncidentBox;
