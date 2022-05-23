@@ -31,6 +31,7 @@ describe('user navigating to the homepage', () => {
     it('should see a location box',()=>{
         cy.findByText(/location of event/i).should('exist');
         cy.findByRole('textbox',({name: /location of event/i})).should('exist');
+
     });
     it('should see a event drop down',()=>{
         cy.findByText(/event type/i).should('exist');
