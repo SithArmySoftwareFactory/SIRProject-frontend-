@@ -8,7 +8,7 @@ import {styleBanner} from "../../themes/themes";
 import ASFIcon from "./ASFIcon";
 
 
-export function Banner() {
+export function Banner({ setIsHome, isHome }) {
     return (
         <Box component={"div"} sx={{ flexGrow: 1 }}>
             <AppBar style={styleBanner}
@@ -19,6 +19,7 @@ export function Banner() {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
+                        onClick={() => setIsHome(!isHome)}
                     >
                         <MenuIcon sx={{/* Vector */
                             position: "absolute",
