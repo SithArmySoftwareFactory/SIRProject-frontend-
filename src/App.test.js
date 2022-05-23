@@ -8,6 +8,8 @@ import DateOfEvent from "./components/SIRForm/Fields/DateOfEvent";
 import Header from "./components/SIRForm/Header/Header";
 import TimeOfEvent from "./components/SIRForm/Fields/TimeOfEvent";
 import LocationBox from "./components/SIRForm/Fields/LocationBox";
+import EventTypeBox from "./components/SIRForm/Fields/EventTypeBox";
+import HarmEventBox from "./components/SIRForm/Fields/HarmEventBox";
 
 
 describe("Component tests",()=> {
@@ -74,5 +76,25 @@ describe("Component tests",()=> {
       expect(screen.getByRole('textbox')).toBeInTheDocument();
     })
   });
+
+  describe("testing EventTypeBox Component", ()=>{
+    beforeEach(()=>render(<EventTypeBox/>));
+    it("should see a button event type", async ()=>{
+      expect(screen.getByRole('button')).toBeInTheDocument();
+    })
+    it("should display event type text", async ()=>{
+      expect(screen.getByText('Event Type')).toBeInTheDocument();
+    })
+  })
+  describe("testing HarmEventBox Component", ()=>{
+    beforeEach(()=>render(<HarmEventBox/>));
+    it("should see a button harm event boolean", async ()=>{
+      expect(screen.getByRole('button')).toBeInTheDocument();
+    })
+    it("should display harm boolean text", async ()=>{
+      expect(screen.getByText('Harm or Potential Harm')).toBeInTheDocument();
+    })
+  })
+
 
 });
