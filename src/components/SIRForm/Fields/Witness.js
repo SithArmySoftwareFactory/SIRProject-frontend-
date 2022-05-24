@@ -9,7 +9,7 @@ const Witness = () =>{
        <Grid container spacing={1}>
            <Grid item xs={6}>
                <label style={styleLabel}>Witness Name</label>
-               <TextField variant={"outlined"} fullWidth/>
+               <TextField name="witness 1" variant={"outlined"} fullWidth/>
                <TextField variant={"outlined"} fullWidth/>
                <TextField variant={"outlined"} fullWidth/>
 

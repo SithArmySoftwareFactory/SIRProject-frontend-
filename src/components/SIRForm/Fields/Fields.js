@@ -9,6 +9,15 @@ import IndividualsInvolvedFormGroup from "./IndividualsInvolvedFormGroup";
 import TypeOfEventBox from "./TypeOfEventBox";
 import EffectOfIncidentBox from "./EffectOfIncidentBox";
 import Witness from "./Witness";
+import DepartmentsInvolvedBox from "./DepartmentsInvolvedBox";
+import DescriptionOfIncidentBox from "./DescriptionOfIncidentBox";
+import ActionsTakenBox from "./ActionsTakenBox";
+import PatientNameBox from "./PatientNameBox";
+import PatientSSNBox from "./PatientSSNBox";
+import PatientPhoneBox from "./PatientPhoneBox";
+import AddressBox from "./AddressBox";
+import Button from '@mui/material/Button';
+import {styleDisabledButton} from "../../../themes/themes";
 
 const Fields = () => {
     return (
@@ -20,7 +29,7 @@ const Fields = () => {
             <LocationBox/>
             <br/>
             <Grid container spacing={1}>
-                <EventTypeBox />
+                <EventTypeBox/>
                 <HarmEventBox/>
             </Grid>
             <IndividualsInvolvedFormGroup/>
@@ -29,6 +38,28 @@ const Fields = () => {
             <EffectOfIncidentBox/>
             <br/>
             <Witness/>
+            <DepartmentsInvolvedBox/>
+            <DescriptionOfIncidentBox/>
+            <ActionsTakenBox/>
+            <PatientNameBox/>
+            <Grid container spacing={1}>
+                <PatientSSNBox/>
+                <PatientPhoneBox/>
+            </Grid>
+            <AddressBox/>
+            <Grid container spacing={1}>
+                <Grid item xs={7}/>
+                <Grid item xs={5}>
+                    <Button
+                        style={styleDisabledButton}
+                        variant="contained"
+                        disabled
+                    >
+                        Submit
+                    </Button>
+                </Grid>
+            </Grid>
+
 
         </>
     );
