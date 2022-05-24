@@ -82,5 +82,31 @@ export const styleEnabledButton = {
     /* action/disabled-background */
 
     background: " #5D6A18",
+    color: "#FFFFFF",
     borderRadius: 4
+}
+
+export const styleSnackBar = {
+    /* Auto layout */
+
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: "6px 16px",
+    gap: "12px",
+
+    width: "1440px",
+    height: "56px",
+
+    /* success/alert/background */
+
+    background: "#EAF5F4",
+    borderRadius: "4px",
+
+    /* Inside auto layout */
+
+    flex: "none",
+    order: 0,
+    alignSelf: "stretch",
+    flexGrow: 0
 }

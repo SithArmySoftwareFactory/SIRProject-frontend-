@@ -18,57 +18,100 @@ import PatientPhoneBox from "./PatientPhoneBox";
 import AddressBox from "./AddressBox";
 import Button from '@mui/material/Button';
 import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+
+
 
 const Fields = () => {
-    const [disable, setDisable] = useState(false)
+    const [isDisabled, setIsDisabled] = useState(true)
+    const [isReportSubmitted, setIsReportSubmitted] = useState(false)
 
+    const submitState = [
+        {dateEvent: false},
+        {timeEvent: false},
+        {location: false},
+        {eventType: false},
+        {harmEvent: false},
+        {individualsInvolved: false},
+        {typeEvent: false},
+        {effect: false},
+        {witness: false},
+        {departmentsInvolved: false},
+        {description: false},
+        {actions: false},
+        {patientName: false},
+        {patientSSN: false},
+        {patientPhone: false},
+        {patientAddress: false}
+    ]
 
+    useEffect(() => {
+       if(submitState[0] === {dateEvent: true}) {
+           setIsDisabled(false)
+       }
+    }, []);
+
+    const handleClick = () => {
+        setIsReportSubmitted(true);
+        setIsDisabled(true)
+        submitState[0] = {dateEvent: false}
+    }
 
 
     return (
         <>
-        <Grid container spacing={1}>
-            <DateOfEvent />
-            <TimeOfEvent />
-        </Grid>
-    <LocationBox/>
-    <br/>
-    <Grid container spacing={1}>
-        <EventTypeBox />
-        <HarmEventBox />
-    </Grid>
-    <IndividualsInvolvedFormGroup />
-    <TypeOfEventBox />
-    <br/>
-    <EffectOfIncidentBox />
-    <br/>
-    <Witness />
-    <DepartmentsInvolvedBox />
-    <DescriptionOfIncidentBox />
-    <ActionsTakenBox />
-    <PatientNameBox />
-    <Grid container spacing={1}>
-        <PatientSSNBox />
-        <PatientPhoneBox />
-    </Grid>
-    <AddressBox/>
-    <Grid container spacing={1}>
-        <Grid item xs={7}/>
-        <Grid item xs={5}>
-            <Button
-                style={styleEnabledButton}
-                variant="contained"
-                disabled={disable}
+            <Grid container spacing={1}>
+                <DateOfEvent submitState={submitState}/>
+                <TimeOfEvent submitState={submitState}/>
+            </Grid>
+            <LocationBox submitState={submitState}/>
+            <br/>
+            <Grid container spacing={1}>
+                <EventTypeBox submitState={submitState}/>
+                <HarmEventBox submitState={submitState}/>
+            </Grid>
+            <IndividualsInvolvedFormGroup submitState={submitState}/>
+            <TypeOfEventBox submitState={submitState}/>
+            <br/>
+            <EffectOfIncidentBox submitState={submitState}/>
+            <br/>
+            <Witness submitState={submitState}/>
+            <DepartmentsInvolvedBox submitState={submitState}/>
+            <DescriptionOfIncidentBox submitState={submitState}/>
+            <ActionsTakenBox submitState={submitState}/>
+            <PatientNameBox submitState={submitState}/>
+            <Grid container spacing={1}>
+                <PatientSSNBox submitState={submitState}/>
+                <PatientPhoneBox submitState={submitState}/>
+            </Grid>
+            <AddressBox submitState={submitState}/>
+            <Grid container spacing={1}>
+                <Grid item xs={7}/>
+                <Grid item xs={5}>
+                    {isDisabled ?
+                        <Button
+                            style={styleDisabledButton}
+                            value={isReportSubmitted}
+                            variant="contained"
+                            disabled={isDisabled}
+                            onClick={handleClick}
+                        >
+                            Submit
+                        </Button> :
+                        <Button
+                            style={styleEnabledButton}
+                            variant="contained"
+                            value={isReportSubmitted}
+                            disabled={isDisabled}
+                            onClick={handleClick}
+                        >
+                            Submit
+                        </Button>
+                    }
 
-            >
-                Submit
-            </Button>
-        </Grid>
-    </Grid>
-
-
-</>
+                </Grid>
+            </Grid>
+        </>
     );
 
 }

@@ -6,14 +6,8 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
 
-
-
-const DateOfEvent = () => {
+const DateOfEvent = ({submitState}) => {
     const [value, setValue] = React.useState(new Date());
-
-
-
-
 
     return (
         <Grid item xs={6}>
@@ -28,7 +22,7 @@ const DateOfEvent = () => {
                     value={value}
                     onChange={(newValue) => {
                         setValue(newValue);
-
+                        submitState[0] = {dateEvent: true};
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />
