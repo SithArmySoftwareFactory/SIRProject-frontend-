@@ -27,7 +27,7 @@
 
     font-family: 'Public Sans', sans-serif;
     font-style: normal;
-    font-weight: 1000;
+    font-weight: 550;
     font-size: 18px;
     line-height: 26px;
     /* identical to box height, or 144% */
@@ -56,7 +56,9 @@
 .MuiDataGrid-columnHeaderTitle {
     font-weight: bold !important;
 }
+
 .MuiDataGrid-columnHeaderTitle { font-weight: bold !important; overflow: visible !important; }
+
 .dataGridHeader {
     text-align: left;
     width: 50vw;
