@@ -1,21 +1,23 @@
 
 import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
+import {Grid} from "@mui/material";
 
-const PatientNameBox = () => {
+const PatientSSNBox = () => {
 
     return (
-      <>
+      <Grid item xs={6}>
           <br/>
-          <label style={styleLabel}>Patient Name or ID Plate</label>
+          <label style={styleLabel}>Patient SSN</label>
           <TextField
-              id="Patient Name"
-              name={"Patient Name"}
+              id="Patient SSN"
+              name={"Patient SSN"}
               variant={"outlined"}
+              fullWidth
           />
-      </>
+      </Grid>
     );
 
 }
 
-export default PatientNameBox;
+export default PatientSSNBox;

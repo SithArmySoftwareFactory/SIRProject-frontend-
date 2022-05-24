@@ -5,53 +5,45 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
-const TypeOfEventBox = () => {
-    const eventTypes = [
-        {title: "Adverse Drug Reaction"},
-        {title: "AMA/Left Without Being Seen"},
-        {title: "Assault"},
-        {title: "Blood Products Related"},
-        {title: "Delay in: Diagnosis/Treatment/Transfer"},
-        {title: "Equipment/Supply Problem"},
-        {title: "Exposure to Blood/Body Fluids"},
-        {title: "Facility/Physical Plant Problem"},
-        {title: "Fall"},
-        {title: "Infant Abduction"},
-        {title: "Infant Discharge to Wrong Family"},
-        {title: "Laboratory Related"},
-        {title: "Medication Related"},
-        {title: "Needle Stick/Sharp Injury"},
-        {title: "Obstetrics Related"},
-        {title: "Operative/Invasive Procedure Related"},
-        {title: "Property Damage/Destroyed"},
-        {title: "Property Lost/Stolen"},
-        {title: "Radiology Related"},
-        {title: "Rape"},
-        {title: "Restrained Patient Injury"},
-        {title: "Suicide in a 24-hour Facility"},
+const DepartmentsInvolvedBox = () => {
+    const departmentTypes = [
+        {title: "Ambulatory Care"},
+        {title: "Behaviorial/Mental Health"},
+        {title: "Dental"},
+        {title: "Emergency Care"},
+        {title: "Information Management"},
+        {title: "Laboratory"},
+        {title: "Logistics"},
+        {title: "Medicine"},
+        {title: "Nursing"},
+        {title: "OB/GYN"},
+        {title: "Pediatrics"},
+        {title: "Pharmacy"},
+        {title: "Radiology"},
+        {title: "Surgery"},
         {title: "Other"}
     ];
 
     return (
         <>
             <br/>
-            <label style={styleLabel}>Type of Event</label>
-            <Stack spacing={3} sx={{ width: 500 }}>
+            <label style={styleLabel}>Department(s) Involved in this incident</label>
+            <Stack spacing={3}>
                 <Autocomplete
                     multiple
-                    id="tags-filled"
-                    options={eventTypes.map((option) => option.title)}
+                    id="departmentsInvolved"
+                    options={departmentTypes.map((option) => option.title)}
                     freeSolo
                     renderTags={(value, getTagProps) =>
                         value.map((option, index) => (
-                            <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                            <Chip variant="outlined" label={option} {...getTagProps({index})} />
                         ))
                     }
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            id="Type of Event"
-                            name={"Type of Event"}
+                            id="Department-Types"
+                            name={"Type of Department"}
                             variant="outlined"
                         />
                     )}
@@ -62,4 +54,4 @@ const TypeOfEventBox = () => {
 
 }
 
-export default TypeOfEventBox;
+export default DepartmentsInvolvedBox;

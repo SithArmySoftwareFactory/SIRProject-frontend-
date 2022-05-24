@@ -2,22 +2,23 @@
 import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
 
-const DescriptionOfIncidentBox = () => {
+const ActionsTakenBox = () => {
 
     return (
       <>
           <br/>
-          <label style={styleLabel}>Description of Incident</label>
+          <label style={styleLabel}>What actions, if any, could have been taken to prevent this incident from occurring?</label>
+          <br/>
           <TextField
-              id="Description of Incident"
-              name={"Description of Incident"}
+              id="Actions Taken"
+              name={"Actions Taken"}
               variant={"outlined"}
               multiline
-              rows={6}
+              rows={4}
           />
       </>
     );
 
 }
 
-export default DescriptionOfIncidentBox;
+export default ActionsTakenBox;
