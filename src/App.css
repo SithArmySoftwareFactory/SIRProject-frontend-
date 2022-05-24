@@ -17,3 +17,59 @@
 
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.14), 0 1px 5px rgba(0, 0, 0, 0.12);
 }
+
+.viewLink {
+    /* button */
+    width: 49px;
+    height: 26px;
+
+    /* Desktop typography/components/button-large */
+
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 1000;
+    font-size: 18px;
+    line-height: 26px;
+    /* identical to box height, or 144% */
+
+    letter-spacing: 0.46px;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    /* primary/main */
+
+    color: #5D6A18;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+.css-1jbbcbn-MuiDataGrid-columnHeaderTitle {
+    font-weight: bold !important;
+}
+
+.MuiDataGrid-columnHeaderTitle {
+    font-weight: bold !important;
+}
+.MuiDataGrid-columnHeaderTitle { font-weight: bold !important; overflow: visible !important; }
+.dataGridHeader {
+    text-align: left;
+    width: 50vw;
+    font-weight: normal;
+
+}
+.dataGridReports {
+    font-weight: 500;
+    font-family: Verdana, serif;
+}
+.tableDataGrid {
+    width:100%;
+}
+.tableDataGridTD {
+    text-align: right;
+}

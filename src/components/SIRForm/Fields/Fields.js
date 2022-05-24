@@ -20,7 +20,7 @@ const Fields = () => {
             <LocationBox/>
             <br/>
             <Grid container spacing={1}>
-                <EventTypeBox />
+                <EventTypeBox/>
                 <HarmEventBox/>
             </Grid>
             <IndividualsInvolvedFormGroup/>
