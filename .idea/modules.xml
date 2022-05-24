@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.sith.sri.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.sith.sri.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/frontend.iml" filepath="$PROJECT_DIR$/.idea/frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sri.iml" filepath="$PROJECT_DIR$/.idea/modules/sri.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sri.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sri.main.iml" />
     </modules>
   </component>
 </project>
