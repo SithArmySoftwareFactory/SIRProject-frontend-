@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import {useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import SupervisorView from "./components/SupervisorView";
+import SIRForm from "./components/SIRForm/SIRForm";
 
 function App() {
     const [isHome, setIsHome] = useState(true);

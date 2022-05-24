@@ -65,7 +65,7 @@
 }
 .dataGridReports {
     font-weight: 500;
-    font-family: Verdana, serif;
+    /*font-family: Verdana, serif;*/
 }
 .tableDataGrid {
     width:100%;

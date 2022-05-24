@@ -933,7 +933,7 @@ const SupervisorView = (props) => {
             sx={{
                 width:'50vw',
                 '.css-1jbbcbn-MuiDataGrid-columnHeaderTitle': {
-                    fontFamily: 'Public Sans bold !important',
+                    fontFamily: '\"Public Sans\" bold !important',
                 },
                 '&.MuiDataGrid-root': {
                     border: 'none',
