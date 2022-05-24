@@ -36,11 +36,6 @@ const TypeOfEventBox = () => {
         <>
             <br/>
             <label style={styleLabel}>Type of Event</label>
-            <TextField
-                id="Type of Event"
-                name={"Type of Event"}
-                variant={"outlined"}
-            />
             <Stack spacing={3} >
                 <Autocomplete
                     multiple

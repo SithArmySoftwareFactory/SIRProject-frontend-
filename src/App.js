@@ -5,7 +5,7 @@ import SIRForm from "./components/SIRForm/SIRForm";
 import {useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import SupervisorView from "./components/Supervisor/SupervisorView";
-import SIRForm from "./components/SIRForm/SIRForm";
+import SendToCommandDialog from "./components/SendToCommandDialog/SendToCommandDialog";
 
 
 function App() {
