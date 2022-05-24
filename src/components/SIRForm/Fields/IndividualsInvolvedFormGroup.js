@@ -56,7 +56,7 @@ const IndividualsInvolvedFormGroup = () => {
 
     return (
         <Box sx={{display: 'flex'}}>
-            <FormControl sx={{m: 3}} component="fieldset" variant="standard">
+            <FormControl required sx={{m: 3}} component="fieldset" variant="standard">
                 <FormLabel sx={styleLabel}>Individuals Involved</FormLabel>
                 <FormGroup>
                     <FormControlLabel

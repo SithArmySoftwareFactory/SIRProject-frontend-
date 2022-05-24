@@ -18,6 +18,7 @@ const EventTypeBox = () => {
             <label style={styleLabel}>Event Type </label>
             <FormControl fullWidth>
                 <Select
+                    required
                     labelId="event-type-label"
                     id="event-type-options"
                     value={eventType}

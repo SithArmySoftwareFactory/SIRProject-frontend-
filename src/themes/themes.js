@@ -43,3 +43,44 @@ export const styleDate = {
     /* Inside auto layout */
     flex: "none", order: "0", flexGrow: "1"
 }
+export const styleDisabledButton = {
+
+    /* Auto layout */
+
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+
+
+    left: "59.58%",
+    right: "32.22%",
+    top: "75%",
+    bottom: "3.42%",
+
+    /* action/disabled-background */
+
+    background: "rgba(0, 0, 0, 0.12)",
+    borderRadius: 4
+
+}
+
+export const styleEnabledButton = {
+    /* Auto layout */
+
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+
+
+    left: "59.58%",
+    right: "32.22%",
+    top: "75%",
+    bottom: "3.42%",
+
+    /* action/disabled-background */
+
+    background: " #5D6A18",
+    borderRadius: 4
+}

@@ -9,6 +9,7 @@ const LocationBox = () => {
           <br/>
           <label style={styleLabel}>Location of Event</label>
           <TextField
+              required
               id="Location of Event"
               name={"Location of Event"}
               variant={"outlined"}

@@ -7,8 +7,10 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
 
 
+
 const DateOfEvent = () => {
     const [value, setValue] = React.useState(new Date());
+
 
 
 
@@ -18,6 +20,7 @@ const DateOfEvent = () => {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <label style={styleLabel}>Date of Event</label>
                 <DatePicker
+                    required
                     style={styleDate}
                     disableFuture
                     openTo="year"
@@ -25,6 +28,7 @@ const DateOfEvent = () => {
                     value={value}
                     onChange={(newValue) => {
                         setValue(newValue);
+
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />

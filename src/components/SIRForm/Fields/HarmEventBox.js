@@ -18,6 +18,7 @@ const HarmEventBox = () => {
             <label style={styleLabel}>Harm or Potential Harm</label>
             <FormControl fullWidth>
                 <Select
+                    required
                     labelId="harm-type-label"
                     id="harm-type-options"
                     value={isHarmed}

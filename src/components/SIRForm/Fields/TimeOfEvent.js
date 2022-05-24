@@ -16,6 +16,7 @@ const TimeOfEvent = () => {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <label style={styleLabel}>Time of Event</label>
                 <TimePicker
+                    required
                     value={value}
                     onChange={setValue}
                     renderInput={(params) => <TextField {...params} />}
