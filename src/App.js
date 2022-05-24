@@ -3,7 +3,7 @@ import {Banner} from "./components/common/Banner";
 import Box from "@mui/material/Box";
 import {useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
-import SupervisorView from "./components/SupervisorView";
+import SupervisorView from "./components/Supervisor/SupervisorView";
 import SIRForm from "./components/SIRForm/SIRForm";
 
 function App() {
