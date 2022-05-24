@@ -14,6 +14,14 @@ import IndividualsInvolvedFormGroup from "./components/SIRForm/Fields/Individual
 import TypeOfEventBox from "./components/SIRForm/Fields/TypeOfEventBox";
 import EffectOfIncidentBox from "./components/SIRForm/Fields/EffectOfIncidentBox";
 import Witness from "./components/SIRForm/Fields/Witness";
+import DepartmentsInvolvedBox from "./components/SIRForm/Fields/DepartmentsInvolvedBox";
+import DescriptionOfIncidentBox from "./components/SIRForm/Fields/DescriptionOfIncidentBox";
+import ActionsTakenBox from "./components/SIRForm/Fields/ActionsTakenBox";
+import PatientNameBox from "./components/SIRForm/Fields/PatientNameBox";
+import PatientSSNBox from "./components/SIRForm/Fields/PatientSSNBox";
+import PatientPhoneBox from "./components/SIRForm/Fields/PatientPhoneBox";
+import AddressBox from "./components/SIRForm/Fields/AddressBox";
+import Fields from "./components/SIRForm/Fields/Fields";
 
 
 describe("Component tests",()=> {
@@ -185,6 +193,89 @@ describe("Component tests",()=> {
 
     })
   });
+
+  describe("testing DepartmentsInvolvedBox Component",()=>{
+    beforeEach(()=>render(<DepartmentsInvolvedBox/>));
+    it("should see a label",async ()=>{
+      expect(screen.getByText(/Department\(s\) Involved in this incident/i)).toBeInTheDocument();
+    });
+    it("should see the combobox",async ()=>{
+      expect(screen.getByRole('combobox')).toBeInTheDocument();
+    });
+  });
+
+  describe("testing DescriptionOfIncidentBox Component",()=>{
+    beforeEach(()=>render(<DescriptionOfIncidentBox/>));
+    it("should see a label",async ()=>{
+      expect(screen.getByText(/Description of Incident/i)).toBeInTheDocument();
+    });
+    it("should see the textbox",async ()=>{
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+    });
+  });
+
+  describe("testing ActionsTakenBox Component",()=>{
+    beforeEach(()=>render(<ActionsTakenBox/>));
+    it("should see a label",async ()=>{
+      expect(screen.getByText(/What actions, if any, could have been taken to prevent this incident from occurring?/i)).toBeInTheDocument();
+    });
+    it("should see the textbox",async ()=>{
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+    });
+  });
+
+  describe("testing PatientNameBox Component",()=>{
+    beforeEach(()=>render(<PatientNameBox/>));
+    it("should see a label",async ()=>{
+      expect(screen.getByText(/Patient Name or ID Plate/i)).toBeInTheDocument();
+    });
+    it("should see the textbox",async ()=>{
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+    });
+  });
+
+  describe("testing PatientSSNBox Component",()=>{
+    beforeEach(()=>render(<PatientSSNBox/>));
+    it("should see a label",async ()=>{
+      expect(screen.getByText(/Patient SSN/i)).toBeInTheDocument();
+    });
+    it("should see the textbox",async ()=>{
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+    });
+  });
+
+  describe("testing PatientPhoneBox Component",()=>{
+    beforeEach(()=>render(<PatientPhoneBox/>));
+    it("should see a label",async ()=>{
+      expect(screen.getByText(/Patient Telephone Number/i)).toBeInTheDocument();
+    });
+    it("should see the textbox",async ()=>{
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+    });
+  });
+
+  describe("testing AddressBox Component",()=>{
+    beforeEach(()=>render(<AddressBox/>));
+    it("should see a label",async ()=>{
+      expect(screen.getByText(/Patient Address/i)).toBeInTheDocument();
+    });
+    it("should see the textbox",async ()=>{
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+    });
+  });
+
+  describe("testing disabled Submit button",()=>{
+    beforeEach(()=>render(<Fields/>));
+    it("should see a button",async ()=>{
+      expect(screen.getByText(/Submit/i)).toBeInTheDocument();
+    });
+    it("should see the button",async ()=>{
+      expect(screen.getByText('Submit').closest("button")).toBeDisabled();
+    });
+  });
+
+
+
 
 
 });

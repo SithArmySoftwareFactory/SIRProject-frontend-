@@ -15,6 +15,7 @@ function App() {
         <Box>
             <Banner setIsHome={setIsHome} isHome={isHome}/>
             <SIRForm/>
+
             <ViewMenu isHome={isHome} setIsHome={setIsHome} setSupervisorView={setSupervisorView}/>
         </Box>
             :

@@ -14,7 +14,7 @@ const EffectOfIncidentBox = () => {
 
     return (
         <>
-            <label style={styleLabel}>Effect of this incident on the individual(s) Involved</label>
+            <label style={styleLabel}>Effect of this incident on the individual(s) involved</label>
             <FormControl fullWidth>
                 <Select
                     labelId="harm-effect-label"
@@ -25,7 +25,6 @@ const EffectOfIncidentBox = () => {
                 >
                     <MenuItem value={"No"}>No harm sustained</MenuItem>
                     <MenuItem value={"Yes"}>Harm sustained</MenuItem>
-
                 </Select>
             </FormControl>
     </>
