@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Menu, MenuItem, Typography,Drawer} from "@mui/material";
 
 
-const ViewMenu = ({ isHome, setIsHome, setSupervisorView }) => {
+const ViewMenu = ({ isHome, setIsHome, setSupervisorView, isOpen, setIsOpen }) => {
 
     const handleSupervisorView = () => {
         setIsHome(!isHome)
@@ -13,6 +13,10 @@ const ViewMenu = ({ isHome, setIsHome, setSupervisorView }) => {
     const handleReporterView = () => {
         setIsHome(true)
         setSupervisorView(false)
+    }
+
+    const openModal = () => {
+        setIsOpen(true)
     }
 
     return (
@@ -26,6 +30,11 @@ const ViewMenu = ({ isHome, setIsHome, setSupervisorView }) => {
             <MenuItem  sx={{color: 'black'}} onClick={() => handleSupervisorView()}>
                 <Typography sx={{paddingLeft: '20px'}}>
                     Supervisor
+                </Typography>
+            </MenuItem>
+            <MenuItem  sx={{color: 'black'}} onClick={() => openModal()}>
+                <Typography sx={{paddingLeft: '20px'}} color={'error'}>
+                    Test Command Button - REMOVE
                 </Typography>
             </MenuItem>
         </Drawer>
