@@ -15,10 +15,10 @@ export const apiPostIncident = async (data) => {
     return axios.post(API_URL + "incident", data)
 }
 
-export const apiPatchIncident = async (index, data) =>{
+export const apiPatchIncident = async (index, data) => {
     return axios.patch(API_URL + "incident/" + {index}, data)
 }
 
-export const apiDeleteIncident = async (index) =>{
+export const apiDeleteIncident = async (index) => {
     return axios.delete(API_URL + "incident/" + {index})
 }

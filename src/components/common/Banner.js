@@ -8,9 +8,9 @@ import {styleBanner} from "../../themes/themes";
 import ASFIcon from "./ASFIcon";
 
 
-export function Banner({ setIsHome, isHome }) {
+export function Banner({setIsHome, isHome}) {
     return (
-        <Box component={"div"} sx={{ flexGrow: 1 }}>
+        <Box component={"div"} sx={{flexGrow: 1}}>
             <AppBar style={styleBanner}
             >
                 <Toolbar>
@@ -27,7 +27,7 @@ export function Banner({ setIsHome, isHome }) {
                             right: "12.5%",
                             top: "25%",
                             bottom: "25%",
-                            color:"#4B5320"
+                            color: "#4B5320"
                         }}
                         ></MenuIcon>
                     </IconButton>

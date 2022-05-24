@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import Fields from "./Fields/Fields";
 import Header from "./Header/Header";
 
-const SIRForm = () =>{
+const SIRForm = () => {
     return (
         <Container component={"div"}
                    maxWidth={"sm"}
