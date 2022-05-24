@@ -11,8 +11,6 @@ const DateOfEvent = () => {
     const [value, setValue] = React.useState(new Date());
 
 
-
-
     return (
         <Grid item xs={6}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>

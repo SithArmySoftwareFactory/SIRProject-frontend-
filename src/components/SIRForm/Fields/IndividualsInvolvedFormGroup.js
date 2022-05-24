@@ -1,11 +1,11 @@
 import * as React from 'react';
+import {useState} from 'react';
 import Box from '@mui/material/Box';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import {useState} from "react";
 import {styleLabel} from "../../../themes/themes";
 
 const IndividualsInvolvedFormGroup = () => {
@@ -36,16 +36,16 @@ const IndividualsInvolvedFormGroup = () => {
     };
 
     const children = (
-        <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+        <Box sx={{display: 'flex', flexDirection: 'column', ml: 3}}>
             <FormControlLabel
                 label="Adult"
                 disabled={isDisabled}
-                control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+                control={<Checkbox checked={checked[0]} onChange={handleChange2}/>}
             />
             <FormControlLabel
                 label="Child <18 years old"
                 disabled={isDisabled}
-                control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                control={<Checkbox checked={checked[1]} onChange={handleChange3}/>}
             />
         </Box>
     );

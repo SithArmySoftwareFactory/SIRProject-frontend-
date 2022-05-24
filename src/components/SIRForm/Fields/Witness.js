@@ -20,8 +20,6 @@ const Witness = () =>{
                <TextField variant={"outlined"} fullWidth/>
                <TextField variant={"outlined"} fullWidth/>
            </Grid>
-
-
        </Grid>
     );
 

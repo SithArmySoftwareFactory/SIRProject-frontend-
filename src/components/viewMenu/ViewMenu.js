@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Button, Menu, MenuItem, Typography,Drawer} from "@mui/material";
 
-import {Drawer, MenuItem, Typography} from "@mui/material";
 
 const ViewMenu = ({ isHome, setIsHome, setSupervisorView }) => {
 

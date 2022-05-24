@@ -3,7 +3,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {styleLabel} from "../../../themes/themes";
-import {Grid} from "@mui/material";
 
 const EffectOfIncidentBox = () => {
     const [isHarmSustained, setIsHarmSustained] = React.useState('');
@@ -27,7 +26,7 @@ const EffectOfIncidentBox = () => {
                     <MenuItem value={"Yes"}>Harm sustained</MenuItem>
                 </Select>
             </FormControl>
-    </>
+        </>
     );
 }
 
