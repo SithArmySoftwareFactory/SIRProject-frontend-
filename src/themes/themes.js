@@ -42,6 +42,7 @@ export const styleDate = {
 
     /* Inside auto layout */
     flex: "none", order: "0", flexGrow: "1"
+
 }
 
 export const styleMenu = {
@@ -101,4 +102,5 @@ export const styleDisabledButton = {
 
     background: "rgba(0, 0, 0, 0.12)",
     borderRadius: 4
+
 }
