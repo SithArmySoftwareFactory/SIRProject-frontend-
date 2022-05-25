@@ -40,13 +40,6 @@ const SupervisorView = (props) => {
         }, 3500)
     }
 
-
-    // rows = [
-    //     { id: 1, col1: 'Hello', col2: 'World' },
-    //     { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-    //     { id: 3, col1: 'MUI', col2: 'is Amazing' },
-    // ];
-
     const columns: GridColumns = [
         {field: 'date', headerName: 'Event Date', headerClassName: 'dataGridHeader', fontWeight: 'bold', width: 100},
         {field: 'location', headerName: 'Location', headerClassName: 'dataGridHeader', width: 125},
@@ -143,6 +136,7 @@ const SupervisorView = (props) => {
                 autoHeight
                 disableColumnSelector
                 disableDensitySelector
+                disableSelectionOnClick
                 onRowClick={(event) => {
                     // fetchTextAPI(event)
                 }}
