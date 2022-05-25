@@ -1,14 +1,14 @@
-   //test data
-   export const rows = [
+//test data
+export const rows = [
     {
 
         id: 1,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
+        date: '08/18/2014',
+        location: 'San Diego',
+        incidentType: 'Actual Event/Incident',
+        harm: true,
+        eventType: 'Operative/Invasive Procedure',
+        individuals: 'Family Member, Program Value, Another Word, Word',
         effects: 'test',
         time: 'test',
         patientSSN: 'test',
@@ -29,12 +29,12 @@
     {
 
         id: 2,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Search For Me',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
+        date: '12/25/2019',
+        location: 'Los Angelos',
+        incidentType: 'Actual Event/Incident',
+        harm: true,
+        eventType: 'Assault, Fall, one, two, three, four, five',
+        individuals: 'Patient, Visitor, another, anything',
         effects: 'test',
         time: 'test',
         patientSSN: 'test',
@@ -56,12 +56,12 @@
     , {
 
         id: 3,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
+        date: '01/25/2020',
+        location: 'New York',
+        incidentType: 'Near Miss/Close Call',
+        harm: false,
+        eventType: 'AMA/Left Without Being Seen',
+        individuals: 'Volunteer',
         effects: 'test',
         time: 'test',
         patientSSN: 'test',
@@ -84,12 +84,12 @@
     , {
 
         id: 4,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
+        date: '12/08/2020',
+        location: 'Minneapolis',
+        incidentType: 'Actual Event/Incident',
+        harm: false,
+        eventType: 'Property Lost/Stolen',
+        individuals: 'Other',
         effects: 'test',
         time: 'test',
         patientSSN: 'test',
@@ -107,15 +107,15 @@
         prevention: 'test',
 
         command: 'test'
-    }        , {
+    }, {
 
         id: 5,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
+        date: '06/30/2021',
+        location: 'Dallas',
+        incidentType: 'Near Miss/Close Call',
+        harm: false,
+        eventType: 'Other',
+        individuals: 'Staff Member',
         effects: 'test',
         time: 'test',
         patientSSN: 'test',
@@ -133,36 +133,9 @@
         prevention: 'test',
 
         command: 'test'
-    }        , {
+    }, {
 
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }
-    , {
-
-        id: 6,
+        id: 7,
         date: 'test',
         location: 'test',
         incidentType: 'Other',
@@ -189,7 +162,7 @@
     }
     , {
 
-        id: 6,
+        id: 8,
         date: 'test',
         location: 'test',
         incidentType: 'Other',
@@ -216,7 +189,7 @@
     }
     , {
 
-        id: 6,
+        id: 9,
         date: 'test',
         location: 'test',
         incidentType: 'Other',
@@ -243,7 +216,7 @@
     }
     , {
 
-        id: 6,
+        id: 10,
         date: 'test',
         location: 'test',
         incidentType: 'Other',
@@ -270,163 +243,7 @@
     }
     , {
 
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }   , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }   , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }   , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }   , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }   , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }   , {
-
-        id: 6,
+        id: 11,
         date: 'test',
         location: 'test',
         incidentType: 'Other',
@@ -453,7 +270,163 @@
     }
     , {
 
-        id: 6,
+        id: 12,
+        date: 'test',
+        location: 'test',
+        incidentType: 'Other',
+        harm: 'test',
+        eventType: 'test',
+        individuals: 'test',
+        effects: 'test',
+        time: 'test',
+        patientSSN: 'test',
+        patientPhone: 'test',
+        patientAddress: 'test',
+        patientName: 'test',
+        witness1Name: 'test',
+        witness1Phone: 'test',
+        witness2Name: 'test',
+        witness2Phone: 'test',
+        witness3Name: 'test',
+        witness3Phone: 'test',
+        department: 'test',
+        description: 'test',
+        prevention: 'test',
+
+        command: 'test'
+    }, {
+
+        id: 13,
+        date: 'test',
+        location: 'test',
+        incidentType: 'Other',
+        harm: 'test',
+        eventType: 'test',
+        individuals: 'test',
+        effects: 'test',
+        time: 'test',
+        patientSSN: 'test',
+        patientPhone: 'test',
+        patientAddress: 'test',
+        patientName: 'test',
+        witness1Name: 'test',
+        witness1Phone: 'test',
+        witness2Name: 'test',
+        witness2Phone: 'test',
+        witness3Name: 'test',
+        witness3Phone: 'test',
+        department: 'test',
+        description: 'test',
+        prevention: 'test',
+
+        command: 'test'
+    }, {
+
+        id: 14,
+        date: 'test',
+        location: 'test',
+        incidentType: 'Other',
+        harm: 'test',
+        eventType: 'test',
+        individuals: 'test',
+        effects: 'test',
+        time: 'test',
+        patientSSN: 'test',
+        patientPhone: 'test',
+        patientAddress: 'test',
+        patientName: 'test',
+        witness1Name: 'test',
+        witness1Phone: 'test',
+        witness2Name: 'test',
+        witness2Phone: 'test',
+        witness3Name: 'test',
+        witness3Phone: 'test',
+        department: 'test',
+        description: 'test',
+        prevention: 'test',
+
+        command: 'test'
+    }, {
+
+        id: 15,
+        date: 'test',
+        location: 'test',
+        incidentType: 'Other',
+        harm: 'test',
+        eventType: 'test',
+        individuals: 'test',
+        effects: 'test',
+        time: 'test',
+        patientSSN: 'test',
+        patientPhone: 'test',
+        patientAddress: 'test',
+        patientName: 'test',
+        witness1Name: 'test',
+        witness1Phone: 'test',
+        witness2Name: 'test',
+        witness2Phone: 'test',
+        witness3Name: 'test',
+        witness3Phone: 'test',
+        department: 'test',
+        description: 'test',
+        prevention: 'test',
+
+        command: 'test'
+    }, {
+
+        id: 16,
+        date: 'test',
+        location: 'test',
+        incidentType: 'Other',
+        harm: 'test',
+        eventType: 'test',
+        individuals: 'test',
+        effects: 'test',
+        time: 'test',
+        patientSSN: 'test',
+        patientPhone: 'test',
+        patientAddress: 'test',
+        patientName: 'test',
+        witness1Name: 'test',
+        witness1Phone: 'test',
+        witness2Name: 'test',
+        witness2Phone: 'test',
+        witness3Name: 'test',
+        witness3Phone: 'test',
+        department: 'test',
+        description: 'test',
+        prevention: 'test',
+
+        command: 'test'
+    }, {
+
+        id: 17,
+        date: 'test',
+        location: 'test',
+        incidentType: 'Other',
+        harm: 'test',
+        eventType: 'test',
+        individuals: 'test',
+        effects: 'test',
+        time: 'test',
+        patientSSN: 'test',
+        patientPhone: 'test',
+        patientAddress: 'test',
+        patientName: 'test',
+        witness1Name: 'test',
+        witness1Phone: 'test',
+        witness2Name: 'test',
+        witness2Phone: 'test',
+        witness3Name: 'test',
+        witness3Phone: 'test',
+        department: 'test',
+        description: 'test',
+        prevention: 'test',
+
+        command: 'test'
+    }, {
+
+        id: 18,
         date: 'test',
         location: 'test',
         incidentType: 'Other',
@@ -480,7 +453,7 @@
     }
     , {
 
-        id: 6,
+        id: 19,
         date: 'test',
         location: 'test',
         incidentType: 'Other',
@@ -507,7 +480,7 @@
     }
     , {
 
-        id: 6,
+        id: 20,
         date: 'test',
         location: 'test',
         incidentType: 'Other',
@@ -534,248 +507,7 @@
     }
     , {
 
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }
-    , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }
-    , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }
-    , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }   , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }   , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }
-    , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }
-    , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }
-    , {
-
-        id: 6,
-        date: 'test',
-        location: 'test',
-        incidentType: 'Other',
-        harm: 'test',
-        eventType: 'test',
-        individuals: 'test',
-        effects: 'test',
-        time: 'test',
-        patientSSN: 'test',
-        patientPhone: 'test',
-        patientAddress: 'test',
-        patientName: 'test',
-        witness1Name: 'test',
-        witness1Phone: 'test',
-        witness2Name: 'test',
-        witness2Phone: 'test',
-        witness3Name: 'test',
-        witness3Phone: 'test',
-        department: 'test',
-        description: 'test',
-        prevention: 'test',
-
-        command: 'test'
-    }
-    , {
-
-        id: 6,
+        id: 21,
         date: 'test',
         location: 'test',
         incidentType: 'Other',

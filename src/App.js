@@ -1,12 +1,11 @@
 import './App.css';
 import {Banner} from "./components/common/Banner";
-import Box from "@mui/material/Box";
 import SIRForm from "./components/SIRForm/SIRForm";
 import {useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import SupervisorView from "./components/Supervisor/SupervisorView";
-import SendToCommandDialog from "./components/SendToCommandDialog/SendToCommandDialog";
 import {Route, Routes} from "react-router-dom";
+import {Grid} from "@mui/material";
 
 
 function App() {
@@ -16,15 +15,25 @@ function App() {
 
     return (
         <>
-        <Banner setIsHome={setIsHome} isHome={isHome}/>
-        <Routes>
-            <Route exact path="/" element={<SIRForm/>}/>
-            <Route path="/supervisor" element={<SupervisorView/>}/>
-            </Routes>
-       <ViewMenu isHome={isHome} setIsHome={setIsHome} setSupervisorView={setSupervisorView} setIsOpen={setIsOpen}/>
+            <Grid container columns={12} spacing={2}>
+                <Grid item xs={12}>
+                    <Banner setIsHome={setIsHome} isHome={isHome}/>
+                </Grid>
+                <Grid item xl={12}>
+                <Routes>
+                    <Route exact path="/" element={<SIRForm/>}/>
+                     <Route path="/supervisor" element={<SupervisorView/>}/>
+                </Routes>
+            </Grid>
+                <Grid item xs={12}>
+                    <ViewMenu isHome={isHome} setIsHome={setIsHome} setSupervisorView={setSupervisorView}
+                              setIsOpen={setIsOpen}/>
+                </Grid>
+            </Grid>
         </>
     );
 }
 
 export default App;
+
 
