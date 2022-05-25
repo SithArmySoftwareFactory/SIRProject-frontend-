@@ -8,25 +8,36 @@ import Checkbox from '@mui/material/Checkbox';
 import {useState} from "react";
 import {styleLabel} from "../../../themes/themes";
 
-const IndividualsInvolvedFormGroup = ({increment}) => {
-    const [state, setState] = React.useState({
-        patient: false,
-        familyMember: false,
-        staffMember: false,
-        visitor: false,
-        volunteer: false,
-        other: false
-    });
-    const [checked, setChecked] = React.useState([false, false]);
+const IndividualsInvolvedFormGroup = ({increment,individualsInvolved,setIndividualsInvolved}) => {
+
+    const [checked, setChecked] = useState([false, false]);
     const [isDisabled, setIsDisabled] = useState(true);
+    const [counter,setCounter] = useState(false);
 
     const handleChange = (event) => {
-        setState({
-            ...state,
-            [event.target.name]: event.target.checked,
-        });
-
-            increment(1)
+        setIndividualsInvolved(event);
+        if(!counter){
+            Object.values(individualsInvolved).every((value) => {
+                if(value){
+                    setCounter(true);
+                }
+            });
+            if(counter){
+                increment(1);
+            }
+        } else {
+            let tempCounter = true;
+            Object.values(individualsInvolved).every((value) => {
+                if(value){
+                    tempCounter=false;
+                }
+            });
+            if(tempCounter){
+                increment(-1);
+                setCounter(false);
+            }
+        }
+        console.log(counter);
     };
 
     const handleChange2 = (event) => {
@@ -53,8 +64,7 @@ const IndividualsInvolvedFormGroup = ({increment}) => {
     );
 
 
-    const {patient, familyMember, staffMember, visitor, volunteer, other} = state;
-    // const error = [patient, familyMember, staffMember, visitor, volunteer, other].filter((v) => v).length !== 1;
+    const {patient, familyMember, staffMember, visitor, volunteer, other} = individualsInvolved;
 
     return (
         <Box sx={{display: 'flex'}}>
@@ -87,7 +97,6 @@ const IndividualsInvolvedFormGroup = ({increment}) => {
             </FormControl>
             <FormControl
                 required
-                // error={error}
                 component="fieldset"
                 sx={{m: 3}}
                 variant="standard"

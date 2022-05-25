@@ -3,16 +3,23 @@ import {styleLabel} from "../../../themes/themes";
 import {Grid} from "@mui/material";
 import {useState} from "react";
 
-const PatientSSNBox = ({increment}) => {
-    const [value, setValue] = useState("")
+const PatientSSNBox = ({increment,setPatientSSN,patientSSN}) => {
+    const [counter,setCounter] = useState(0);
 
-    const handleChange = (event) =>{
-        setValue(event.target.value)
-        if(value.length > 0 && value.length < 2){
-            increment(1)
+        const handleChange =  async (event) =>{
+            await setPatientSSN(event.target.value);
+            //it goes back to blank string
+            if(patientSSN===""&&counter>0){
+                increment(-1);
+                setCounter(0);
+            } else {
+                //it initially sets location
+                if(patientSSN!==""&&counter===0){
+                    setCounter(counter+1);
+                    increment(1);
+                }
+            }
         }
-
-    }
     return (
         <Grid item xs={6}>
             <br/>
@@ -22,7 +29,7 @@ const PatientSSNBox = ({increment}) => {
                 name={"Patient SSN"}
                 variant={"outlined"}
                 fullWidth
-                value={value}
+                value={patientSSN}
                 onChange={handleChange}
             />
         </Grid>

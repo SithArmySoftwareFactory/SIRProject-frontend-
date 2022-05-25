@@ -5,12 +5,10 @@ import Select from '@mui/material/Select';
 import {styleLabel} from "../../../themes/themes";
 import {Grid} from "@mui/material";
 
-const HarmEventBox = ({increment}) => {
-    const [isHarmed, setIsHarmed] = React.useState('');
+const HarmEventBox = ({harmEvent,setHarmEvent}) => {
 
     const handleChange = (event) => {
-        setIsHarmed(event.target.value);
-        increment(1)
+        setHarmEvent(event.target.value);
     };
 
     return (
@@ -22,7 +20,7 @@ const HarmEventBox = ({increment}) => {
                     required
                     labelId="harm-type-label"
                     id="harm-type-options"
-                    value={isHarmed}
+                    value={harmEvent}
                     label="Harm-type"
                     onChange={handleChange}
                 >

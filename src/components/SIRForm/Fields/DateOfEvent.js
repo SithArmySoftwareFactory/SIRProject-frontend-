@@ -6,8 +6,17 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
 
-const DateOfEvent = ({increment}) => {
-    const [value, setValue] = React.useState(new Date());
+const DateOfEvent = ({increment,dateOfEvent,setDateOfEvent}) => {
+
+    const handleChange = (newValue) =>{
+        if(dateOfEvent===0){
+            increment(-1);
+        }
+        else {
+            setDateOfEvent(newValue);
+        }
+    };
+
 
     return (
         <Grid item xs={6}>
@@ -19,10 +28,9 @@ const DateOfEvent = ({increment}) => {
                     disableFuture
                     openTo="year"
                     views={['year', 'month', 'day']}
-                    value={value}
+                    value={dateOfEvent}
                     onChange={(newValue) => {
-                        setValue(newValue);
-                       increment(0.4);
+                        handleChange(newValue);
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />

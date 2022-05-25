@@ -4,12 +4,15 @@ import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {TimePicker} from '@mui/x-date-pickers/TimePicker';
 import {Grid} from "@mui/material";
-import {useState} from "react";
 import {styleLabel} from "../../../themes/themes";
 
 
-const TimeOfEvent = ({increment}) => {
-    const [value, setValue] = useState(new Date('2018-01-01T00:00:00.000Z'));
+const TimeOfEvent = ({timeOfEvent,setTimeOfEvent}) => {
+
+    const handleChange = (newValue) => {
+        setTimeOfEvent(newValue);
+    }
+
 
     return (
         <Grid item xs={6}>
@@ -17,10 +20,9 @@ const TimeOfEvent = ({increment}) => {
                 <label style={styleLabel}>Time of Event</label>
                 <TimePicker
                     required
-                    value={value}
+                    value={timeOfEvent}
                     onChange={(newValue) => {
-                        setValue(newValue);
-                        increment(0.5);
+                        handleChange(newValue);
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />

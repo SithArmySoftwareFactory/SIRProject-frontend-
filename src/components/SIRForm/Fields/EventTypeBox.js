@@ -5,12 +5,11 @@ import Select from '@mui/material/Select';
 import {styleLabel} from "../../../themes/themes";
 import {Grid} from "@mui/material";
 
-const EventTypeBox = ({increment}) => {
-    const [eventType, setEventType] = React.useState("Actual Event/Incident");
+const EventTypeBox = ({eventType,setEventType}) => {
 
-    const handleChange = (event) => {
-        setEventType(event.target.value);
-        increment(1)
+    const handleChange = async (event) => {
+        await setEventType(event.target.value);
+        console.log(eventType);
     };
 
     return (
@@ -27,7 +26,6 @@ const EventTypeBox = ({increment}) => {
                 >
                     <MenuItem value={"Actual Event/Incident"}>Actual Event/Incident</MenuItem>
                     <MenuItem value={"Near Miss/Close Call"}>Near Miss/Close Call</MenuItem>
-
                 </Select>
             </FormControl>
 
