@@ -19,6 +19,7 @@
 }
 
 .viewLink {
+    cursor:pointer;
     /* button */
     width: 49px;
     height: 26px;
@@ -61,8 +62,17 @@
 
 .dataGridHeader {
     text-align: left;
-    width: 50vw;
-    font-weight: normal;
+    width:43vw;
+    font-weight: lighter;
+
+}
+.dataGridHeaderTitle {
+    font-family: "Public Sans", sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    text-align: left;
+    width:42.5vw;
+    font-weight: 100;
 
 }
 .dataGridReports {
@@ -105,4 +115,9 @@
 
 .selectedCount {
     font-weight: 500;
+}
+
+.dataGridStyle{
+    width: 1039px;
+
 }

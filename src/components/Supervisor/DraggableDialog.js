@@ -10,6 +10,7 @@ import Draggable from 'react-draggable';
 import SIRForm from "../SIRForm/SIRForm";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+
 function PaperComponent(props) {
     return (
         <Draggable
@@ -43,7 +44,7 @@ export default function DraggableDialog() {
                 PaperComponent={PaperComponent}
                 aria-labelledby="draggable-dialog-title"
             >
-                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
                     Incident Report
                     <IconButton
                         aria-label="close"
@@ -55,12 +56,12 @@ export default function DraggableDialog() {
                             color: (theme) => theme.palette.grey[500],
                         }}
                     >
-                        <CloseIcon />
+                        <CloseIcon/>
                     </IconButton>
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                       <SIRForm />
+                        <SIRForm/>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
