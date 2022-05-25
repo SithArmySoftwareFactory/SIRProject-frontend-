@@ -6,32 +6,24 @@ import {useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import SupervisorView from "./components/Supervisor/SupervisorView";
 import SendToCommandDialog from "./components/SendToCommandDialog/SendToCommandDialog";
+import {Route, Routes} from "react-router-dom";
 
 
 function App() {
     const [isHome, setIsHome] = useState(true);
     const [supervisorView, setSupervisorView] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
-   if (!isOpen) {
     return (
-        !supervisorView ?
-        <Box>
-            <Banner setIsHome={setIsHome} isHome={isHome}/>
-            <SIRForm/>
-            <ViewMenu isHome={isHome} setIsHome={setIsHome} setSupervisorView={setSupervisorView} setIsOpen={setIsOpen}/>
-        </Box>
-            :
-            <Box>
-                <Banner setIsHome={setIsHome} isHome={isHome}/>
-                <SupervisorView/>
-                <ViewMenu isHome={isHome} setIsHome={setIsHome} setSupervisorView={setSupervisorView} setIsOpen={setIsOpen} />
-            </Box>
-
-    );}
-   else {
-       return <SendToCommandDialog isOpen={isOpen} setIsOpen={setIsOpen}/>
-   }
+        <>
+        <Banner setIsHome={setIsHome} isHome={isHome}/>
+        <Routes>
+            <Route exact path="/" element={<SIRForm/>}/>
+            <Route path="/supervisor" element={<SupervisorView/>}/>
+            </Routes>
+       <ViewMenu isHome={isHome} setIsHome={setIsHome} setSupervisorView={setSupervisorView} setIsOpen={setIsOpen}/>
+        </>
+    );
 }
 
 export default App;
