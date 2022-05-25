@@ -75,3 +75,34 @@
 .tableDataGridTD {
     text-align: right;
 }
+.navLink{
+    color: black;
+    text-decoration: none;
+    font-family: "Public Sans", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+
+}
+
+.sentSuccessMsg {
+    width: 100vw;
+}
+.sendToCommandBox {
+    width: 100%;
+    background-color: rgba(244, 245, 241, 1);
+    padding: 8px;
+    font-weight: lighter;
+}
+
+.sendUpToCmdButton{
+    font-weight: bolder;
+    color: #5D6A18;
+
+}
+.sendToCommandBoxTableData {
+    text-align: right;
+}
+
+.selectedCount {
+    font-weight: 500;
+}

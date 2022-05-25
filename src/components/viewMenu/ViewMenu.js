@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Menu, MenuItem, Typography,Drawer} from "@mui/material";
+import {NavLink} from "react-router-dom";
 
 
 const ViewMenu = ({ isHome, setIsHome, setSupervisorView, isOpen, setIsOpen }) => {
@@ -24,17 +25,13 @@ const ViewMenu = ({ isHome, setIsHome, setSupervisorView, isOpen, setIsOpen }) =
             <br/><br/><br/><br/>
             <MenuItem  sx={{color: 'black'}} onClick={() => handleReporterView()}>
                 <Typography sx={{width: 250, paddingLeft: "20px"}}>
-                    Reporter
+
+                    <NavLink className="navLink" page="/" to="/">Reporter</NavLink>
                 </Typography>
             </MenuItem>
             <MenuItem  sx={{color: 'black'}} onClick={() => handleSupervisorView()}>
                 <Typography sx={{paddingLeft: '20px'}}>
-                    Supervisor
-                </Typography>
-            </MenuItem>
-            <MenuItem  sx={{color: 'black'}} onClick={() => openModal()}>
-                <Typography sx={{paddingLeft: '20px'}} color={'error'}>
-                    Test Command Button - REMOVE
+                    <NavLink className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink>
                 </Typography>
             </MenuItem>
         </Drawer>

@@ -13,7 +13,7 @@ import {useState} from "react";
 import {Close} from "@mui/icons-material";
 import {Divider, Grid, Typography} from "@mui/material";
 
-export default function SendToCommandDialog({setIsOpen, isOpen}) {
+export default function SendToCommandDialog(props) {
     const commands = [{
         "Name": "United States Army Forces Command (FORSCOM)"
     }, {
@@ -37,18 +37,19 @@ export default function SendToCommandDialog({setIsOpen, isOpen}) {
     const [currentCommand, setCurrentCommand] = useState(commands[0].Name);
 
     const handleClose = () => {
-        setIsOpen(false);
+        props.setDialog(false);
     };
 
     const handleSend = () => {
-        setIsOpen(false)
+        props.setDialog(false)
+        props.handleSent(true);
         // Need to input Logic for SMTP Server //
     }
 
     return (
         <Grid container flexDirection={'column'} display={'inline-flex'}>
             <Dialog
-                open={isOpen}
+                open={props.dialog}
                 onClose={handleClose}
             >
                 <Grid item xs={12}>
