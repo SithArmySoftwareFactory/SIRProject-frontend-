@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import {useState} from "react";
 import {styleLabel} from "../../../themes/themes";
 
-const IndividualsInvolvedFormGroup = () => {
+const IndividualsInvolvedFormGroup = ({increment}) => {
     const [state, setState] = React.useState({
         patient: false,
         familyMember: false,
@@ -25,6 +25,8 @@ const IndividualsInvolvedFormGroup = () => {
             ...state,
             [event.target.name]: event.target.checked,
         });
+
+            increment(1)
     };
 
     const handleChange2 = (event) => {
@@ -36,16 +38,16 @@ const IndividualsInvolvedFormGroup = () => {
     };
 
     const children = (
-        <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+        <Box sx={{display: 'flex', flexDirection: 'column', ml: 3}}>
             <FormControlLabel
                 label="Adult"
                 disabled={isDisabled}
-                control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+                control={<Checkbox checked={checked[0]} onChange={handleChange2}/>}
             />
             <FormControlLabel
                 label="Child <18 years old"
                 disabled={isDisabled}
-                control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                control={<Checkbox checked={checked[1]} onChange={handleChange3}/>}
             />
         </Box>
     );

@@ -6,7 +6,7 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
 
-const DateOfEvent = ({submitState}) => {
+const DateOfEvent = ({increment}) => {
     const [value, setValue] = React.useState(new Date());
 
     return (
@@ -22,7 +22,7 @@ const DateOfEvent = ({submitState}) => {
                     value={value}
                     onChange={(newValue) => {
                         setValue(newValue);
-                        submitState[0] = {dateEvent: true};
+                       increment(0.4);
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />

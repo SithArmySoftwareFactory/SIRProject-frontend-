@@ -3,12 +3,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {styleLabel} from "../../../themes/themes";
-import {Grid} from "@mui/material";
 
-const EffectOfIncidentBox = () => {
+
+const EffectOfIncidentBox = ({increment}) => {
     const [isHarmSustained, setIsHarmSustained] = React.useState('');
 
     const handleChange = (event) => {
+            increment(1)
         setIsHarmSustained(event.target.value);
     };
 

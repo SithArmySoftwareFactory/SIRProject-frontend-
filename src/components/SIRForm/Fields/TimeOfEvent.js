@@ -8,7 +8,7 @@ import {useState} from "react";
 import {styleLabel} from "../../../themes/themes";
 
 
-const TimeOfEvent = () => {
+const TimeOfEvent = ({increment}) => {
     const [value, setValue] = useState(new Date('2018-01-01T00:00:00.000Z'));
 
     return (
@@ -18,7 +18,10 @@ const TimeOfEvent = () => {
                 <TimePicker
                     required
                     value={value}
-                    onChange={setValue}
+                    onChange={(newValue) => {
+                        setValue(newValue);
+                        increment(0.5);
+                    }}
                     renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>

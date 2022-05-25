@@ -25,66 +25,55 @@ import {useState, useEffect} from "react";
 const Fields = () => {
     const [isDisabled, setIsDisabled] = useState(true)
     const [isReportSubmitted, setIsReportSubmitted] = useState(false)
+    const [count, setCount] = useState(0)
 
-    const submitState = [
-        {dateEvent: false},
-        {timeEvent: false},
-        {location: false},
-        {eventType: false},
-        {harmEvent: false},
-        {individualsInvolved: false},
-        {typeEvent: false},
-        {effect: false},
-        {witness: false},
-        {departmentsInvolved: false},
-        {description: false},
-        {actions: false},
-        {patientName: false},
-        {patientSSN: false},
-        {patientPhone: false},
-        {patientAddress: false}
-    ]
+
+    let increment= (newCount)=>{
+        setCount(count +newCount)
+    }
 
     useEffect(() => {
-       if(submitState[0] === {dateEvent: true}) {
-           setIsDisabled(false)
-       }
-    }, []);
+        console.log("use "+ count)
+        if (count > 16){
+            console.log("use "+ count)
+            setIsDisabled(false)
+
+        }
+    }, [count]);
 
     const handleClick = () => {
         setIsReportSubmitted(true);
         setIsDisabled(true)
-        submitState[0] = {dateEvent: false}
     }
 
 
     return (
         <>
             <Grid container spacing={1}>
-                <DateOfEvent submitState={submitState}/>
-                <TimeOfEvent submitState={submitState}/>
+                <DateOfEvent increment={increment} />
+                <TimeOfEvent increment={increment}/>
             </Grid>
-            <LocationBox submitState={submitState}/>
+            <LocationBox increment={increment}/>
             <br/>
             <Grid container spacing={1}>
-                <EventTypeBox submitState={submitState}/>
-                <HarmEventBox submitState={submitState}/>
+                <EventTypeBox increment={increment}/>
+                <HarmEventBox increment={increment}/>
             </Grid>
-            <IndividualsInvolvedFormGroup submitState={submitState}/>
-            <TypeOfEventBox submitState={submitState}/>
+            <IndividualsInvolvedFormGroup increment={increment}/>
+            <TypeOfEventBox increment={increment}/>
             <br/>
-            <EffectOfIncidentBox submitState={submitState}/>
+            <EffectOfIncidentBox increment={increment}/>
             <br/>
-            <Witness submitState={submitState}/>
-            <DepartmentsInvolvedBox submitState={submitState}/>
-            <DescriptionOfIncidentBox submitState={submitState}/>
-            <ActionsTakenBox submitState={submitState}/>
-            <PatientNameBox submitState={submitState}/>
+            <Witness increment={increment}/>
+            <DepartmentsInvolvedBox increment={increment}/>
+            <DescriptionOfIncidentBox increment={increment}/>
+            <ActionsTakenBox increment={increment}/>
+            <PatientNameBox increment={increment}/>
             <Grid container spacing={1}>
-                <PatientSSNBox submitState={submitState}/>
-                <PatientPhoneBox submitState={submitState}/>
+                <PatientSSNBox increment={increment}/>
+                <PatientPhoneBox increment={increment} />
             </Grid>
-            <AddressBox submitState={submitState}/>
+            <AddressBox increment={increment}/>
             <Grid container spacing={1}>
                 <Grid item xs={7}/>
                 <Grid item xs={5}>
@@ -93,7 +82,7 @@ const Fields = () => {
                             style={styleDisabledButton}
                             value={isReportSubmitted}
                             variant="contained"
-                            disabled={isDisabled}
+                            disabled={true}
                             onClick={handleClick}
                         >
                             Submit
@@ -102,7 +91,7 @@ const Fields = () => {
                             style={styleEnabledButton}
                             variant="contained"
                             value={isReportSubmitted}
-                            disabled={isDisabled}
+                            disabled={false}
                             onClick={handleClick}
                         >
                             Submit

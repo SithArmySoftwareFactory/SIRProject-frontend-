@@ -5,11 +5,12 @@ import Select from '@mui/material/Select';
 import {styleLabel} from "../../../themes/themes";
 import {Grid} from "@mui/material";
 
-const EventTypeBox = () => {
+const EventTypeBox = ({increment}) => {
     const [eventType, setEventType] = React.useState("Actual Event/Incident");
 
     const handleChange = (event) => {
         setEventType(event.target.value);
+        increment(1)
     };
 
     return (

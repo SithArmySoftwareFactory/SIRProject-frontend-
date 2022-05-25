@@ -5,11 +5,12 @@ import Select from '@mui/material/Select';
 import {styleLabel} from "../../../themes/themes";
 import {Grid} from "@mui/material";
 
-const HarmEventBox = () => {
+const HarmEventBox = ({increment}) => {
     const [isHarmed, setIsHarmed] = React.useState('');
 
     const handleChange = (event) => {
         setIsHarmed(event.target.value);
+        increment(1)
     };
 
     return (
