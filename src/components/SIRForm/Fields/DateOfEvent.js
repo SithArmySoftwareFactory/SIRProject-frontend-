@@ -6,16 +6,8 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
 
-const DateOfEvent = ({increment,dateOfEvent,setDateOfEvent}) => {
+const DateOfEvent = ({formValues,handleInputChange}) => {
 
-    const handleChange = (newValue) =>{
-        if(dateOfEvent===0){
-            increment(-1);
-        }
-        else {
-            setDateOfEvent(newValue);
-        }
-    };
 
 
     return (
@@ -28,9 +20,10 @@ const DateOfEvent = ({increment,dateOfEvent,setDateOfEvent}) => {
                     disableFuture
                     openTo="year"
                     views={['year', 'month', 'day']}
-                    value={dateOfEvent}
+                    name={"dateOfEvent"}
+                    value={formValues.dateOfEvent}
                     onChange={(newValue) => {
-                        handleChange(newValue);
+                        handleInputChange(newValue,"dateOfEvent");
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />

@@ -1,6 +1,4 @@
-import { findAllByRole, render, screen, waitFor} from '@testing-library/react';
-import App from './App';
-import userEvent from "@testing-library/user-event";
+import { render, screen} from '@testing-library/react';
 import mock from "./testServer/mock";
 import {Banner} from "./components/common/Banner";
 import ASFIcon from "./components/common/ASFIcon";

@@ -6,21 +6,13 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import {useState} from "react";
 
-const TypeOfEventBox = ({increment}) => {
+const TypeOfEventBox = ({formValues,handleInputChange}) => {
     const [value, setValue] = useState([])
 
     const handleChange = (event,value) => {
-        if (value.length > 0 && value.length < 2) {
-            increment(1)
-        }
-
+        handleInputChange(value)
     }
 
-    const handleTextFieldChange = (event) => {
-
-        setValue([...value,event.target.value]);
-        console.log(value);
-    }
     const eventTypes = [
         {title: "Adverse Drug Reaction"},
         {title: "AMA/Left Without Being Seen"},

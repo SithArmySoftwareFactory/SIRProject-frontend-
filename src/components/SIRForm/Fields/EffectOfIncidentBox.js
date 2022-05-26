@@ -5,13 +5,8 @@ import Select from '@mui/material/Select';
 import {styleLabel} from "../../../themes/themes";
 
 
-const EffectOfIncidentBox = ({increment}) => {
-    const [isHarmSustained, setIsHarmSustained] = React.useState('');
+const EffectOfIncidentBox = ({formValues,handleInputChange}) => {
 
-    const handleChange = (event) => {
-            increment(1)
-        setIsHarmSustained(event.target.value);
-    };
 
     return (
         <>
@@ -21,13 +16,13 @@ const EffectOfIncidentBox = ({increment}) => {
                     required
                     labelId="harm-effect-label"
                     id="harm-effect-options"
-                    value={isHarmSustained}
+                    value={formValues.effectOfIncident}
+                    name={'effectOfIncident'}
                     label="Harm-effect"
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                 >
-                    <MenuItem value={"No"}>No harm sustained</MenuItem>
-                    <MenuItem value={"Yes"}>Harm sustained</MenuItem>
-
+                    <MenuItem value={"No harm sustained"}>No harm sustained</MenuItem>
+                    <MenuItem value={"Harm sustained"}>Harm sustained</MenuItem>
                 </Select>
             </FormControl>
     </>

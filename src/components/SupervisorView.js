@@ -1,5 +1,5 @@
 import {Box} from "@mui/material";
-import {DataGrid, useGridApiContext} from '@mui/x-data-grid';
+import {DataGrid} from '@mui/x-data-grid';
 
 const SupervisorView = (props) => {
 

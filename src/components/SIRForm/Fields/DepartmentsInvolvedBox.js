@@ -6,13 +6,11 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
 
-const DepartmentsInvolvedBox = ({increment}) => {
+const DepartmentsInvolvedBox = ({formValue,handleInputChange}) => {
 
 
     const handleChange = (event,value) => {
-        if (value.length > 0 && value.length < 2) {
-            increment(1)
-        }
+        handleInputChange(value);
 
     }
 
