@@ -1,19 +1,22 @@
-
 import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
 
-const AddressBox = () => {
+const AddressBox = ({formValues,handleInputChange}) => {
 
     return (
-      <>
-          <br/>
-          <label style={styleLabel}>Patient Address</label>
-          <TextField
-              id="Patient Address"
-              name={"Patient Address"}
-              variant={"outlined"}
-          />
-      </>
+        <>
+            <br/>
+            <label style={styleLabel}>Patient Address</label>
+            <TextField
+                id="Patient Address"
+                name={"address"}
+                type="text"
+                variant={"outlined"}
+                value={formValues.address}
+                onChange={handleInputChange}
+                fullWidth
+            />
+        </>
     );
 
 }

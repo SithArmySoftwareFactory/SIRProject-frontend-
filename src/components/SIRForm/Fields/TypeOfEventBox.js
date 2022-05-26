@@ -4,8 +4,15 @@ import * as React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import {useState} from "react";
 
-const TypeOfEventBox = () => {
+const TypeOfEventBox = ({formValues,handleInputChange}) => {
+    const [value, setValue] = useState([])
+
+    const handleChange = (event,value) => {
+        handleInputChange(value)
+    }
+
     const eventTypes = [
         {title: "Adverse Drug Reaction"},
         {title: "AMA/Left Without Being Seen"},
@@ -36,22 +43,22 @@ const TypeOfEventBox = () => {
         <>
             <br/>
             <label style={styleLabel}>Type of Event</label>
-            <Stack spacing={3} >
+            <Stack spacing={3}>
                 <Autocomplete
+                    onChange={(event,value)=>{
+                        handleChange(event,value);
+                    }}
                     multiple
                     id="typeOfEvent"
                     options={eventTypes.map((option) => option.title)}
-                    freeSolo
                     renderTags={(value, getTagProps) =>
                         value.map((option, index) => (
-                            <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                            <Chip variant="outlined" label={option} {...getTagProps({index})} />
                         ))
                     }
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            id="Type of Event"
-                            name={"Type of Event"}
                             variant="outlined"
                         />
                     )}
