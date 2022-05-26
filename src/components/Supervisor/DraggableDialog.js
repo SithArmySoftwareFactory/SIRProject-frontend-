@@ -35,7 +35,7 @@ export default function DraggableDialog() {
 
     return (
         <div>
-            <a variant="outlined" className="viewLink" onClick={handleClickOpen}>
+            <a className="viewLink" onClick={handleClickOpen}>
                 VIEW
             </a>
             <Dialog

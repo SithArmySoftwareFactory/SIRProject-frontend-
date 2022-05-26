@@ -51,27 +51,30 @@
 
 
 .css-1jbbcbn-MuiDataGrid-columnHeaderTitle {
-    font-weight: bold !important;
+    font-weight: bold;
 }
 
 .MuiDataGrid-columnHeaderTitle {
-    font-weight: bold !important;
+    font-weight: bold;
 }
 
-.MuiDataGrid-columnHeaderTitle { font-weight: bold !important; overflow: visible !important; }
+.MuiDataGrid-columnHeaderTitle { font-weight: bold ; overflow: visible ; }
 
 .dataGridHeader {
     text-align: left;
-    width:43vw;
+    width:100%;
     font-weight: lighter;
 
+}
+.dataGridHeader .MuiDataGrid-columnSeparator {
+    display: none !important;
 }
 .dataGridHeaderTitle {
     font-family: "Public Sans", sans-serif;
     font-size: 40px;
     font-style: normal;
     text-align: left;
-    width:42.5vw;
+    width:100%;
     font-weight: 100;
 
 }
@@ -79,6 +82,7 @@
     font-weight: 500;
     /*font-family: Verdana, serif;*/
 }
+
 .tableDataGrid {
     width:100%;
 }
@@ -115,9 +119,4 @@
 
 .selectedCount {
     font-weight: 500;
-}
-
-.dataGridStyle{
-    width: 1039px;
-
 }

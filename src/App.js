@@ -10,24 +10,24 @@ import {Grid} from "@mui/material";
 
 function App() {
     const [isHome, setIsHome] = useState(true);
-    const [supervisorView, setSupervisorView] = useState(false);
-    const [isOpen, setIsOpen] = useState(true);
 
     return (
         <>
-            <Grid container columns={12} spacing={2}>
-                <Grid item xs={12}>
-                    <Banner setIsHome={setIsHome} isHome={isHome}/>
+            <Grid container spacing={0} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
+                <Grid item xs={14}>
+                    <Banner setIsHome={setIsHome} isHome={isHome} />
                 </Grid>
-                <Grid item xl={12}>
+                <Grid item sm={0} md={3} xs={0} />
+                <Grid item sm={8} md={8}  xs={12} xl={12} >
                 <Routes>
-                    <Route exact path="/" element={<SIRForm/>}/>
-                     <Route path="/supervisor" element={<SupervisorView/>}/>
+                    <Route exact path="/" element={<SIRForm/>} />
+                     <Route path="/supervisor" element={<SupervisorView/>} />
+                    <Route element={<SIRForm/>} />
                 </Routes>
             </Grid>
+                <Grid item sm={0} md={3} xs={0} />
                 <Grid item xs={12}>
-                    <ViewMenu isHome={isHome} setIsHome={setIsHome} setSupervisorView={setSupervisorView}
-                              setIsOpen={setIsOpen}/>
+                    <ViewMenu isHome={isHome} setIsHome={setIsHome} />
                 </Grid>
             </Grid>
         </>
