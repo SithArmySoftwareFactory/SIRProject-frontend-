@@ -1,22 +1,22 @@
 import {Typography} from "@mui/material";
 
 const styleHeader = {
-        /* Incident Report Form */
-        position: "sticky",
-        /* Desktop typography/h1 */
-        fontFamily: "Public Sans",
-        fontStyle: "normal",
-        fontWeight: "100",
-        fontSize: "40px",
-        lineHeight: "112px",
-        /* or 280% */
+    /* Incident Report Form */
+    position: "sticky",
+    /* Desktop typography/h1 */
+    fontFamily: "Public Sans",
+    fontStyle: "normal",
+    fontWeight: "100",
+    fontSize: "40px",
+    lineHeight: "112px",
+    /* or 280% */
 
-        letterSpacing: "-1.5px",
+    letterSpacing: "-1.5px",
 
-        /* text/primary */
+    /* text/primary */
 
-        color: "#000000"
-    }
+    color: "#000000"
+}
 
 const Header = () => {
 

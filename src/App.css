@@ -1,0 +1,123 @@
+.banner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+
+    position: absolute;
+    width: 1440px;
+    height: 64px;
+    left: 0;
+    top: 0;
+
+    /* background/default */
+
+    background: #F7F7F7;
+    /* elevation/2 */
+
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.14), 0 1px 5px rgba(0, 0, 0, 0.12);
+}
+
+.viewLink {
+    cursor:pointer;
+    /* button */
+    width: 49px;
+    height: 26px;
+
+    /* Desktop typography/components/button-large */
+
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 550;
+    font-size: 18px;
+    line-height: 26px;
+    /* identical to box height, or 144% */
+
+    letter-spacing: 0.46px;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    /* primary/main */
+
+    color: #5D6A18;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+.css-1jbbcbn-MuiDataGrid-columnHeaderTitle {
+    font-weight: bold !important;
+}
+
+.MuiDataGrid-columnHeaderTitle {
+    font-weight: bold !important;
+}
+
+.MuiDataGrid-columnHeaderTitle { font-weight: bold !important; overflow: visible !important; }
+
+.dataGridHeader {
+    text-align: left;
+    width:43vw;
+    font-weight: lighter;
+
+}
+.dataGridHeaderTitle {
+    font-family: "Public Sans", sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    text-align: left;
+    width:42.5vw;
+    font-weight: 100;
+
+}
+.dataGridReports {
+    font-weight: 500;
+    /*font-family: Verdana, serif;*/
+}
+.tableDataGrid {
+    width:100%;
+}
+.tableDataGridTD {
+    text-align: right;
+}
+.navLink{
+    color: black;
+    text-decoration: none;
+    font-family: "Public Sans", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+
+}
+
+.sentSuccessMsg {
+    width: 100vw;
+}
+.sendToCommandBox {
+    width: 100%;
+    background-color: rgba(244, 245, 241, 1);
+    padding: 8px;
+    font-weight: lighter;
+}
+
+.sendUpToCmdButton{
+    font-weight: bolder;
+    color: #5D6A18;
+
+}
+.sendToCommandBoxTableData {
+    text-align: right;
+}
+
+.selectedCount {
+    font-weight: 500;
+}
+
+.dataGridStyle{
+    width: 1039px;
+
+}

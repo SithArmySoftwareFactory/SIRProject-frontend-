@@ -8,8 +8,6 @@ import {styleDate, styleLabel} from "../../../themes/themes";
 
 const DateOfEvent = ({formValues,handleInputChange}) => {
 
-
-
     return (
         <Grid item xs={6}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
