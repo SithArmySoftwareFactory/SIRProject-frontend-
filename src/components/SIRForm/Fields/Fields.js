@@ -19,9 +19,10 @@ import PatientPhoneBox from "./PatientPhoneBox";
 import AddressBox from "./AddressBox";
 import Button from '@mui/material/Button';
 import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
+import {apiPostIncident} from "../../../api/APICalls";
 
 
-const Fields = () => {
+const Fields = ({handleClick}) => {
 
     const defaultValues = {
         dateOfEvent: new Date(),
@@ -126,19 +127,40 @@ const Fields = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formValues);
         const dataToBeSent = JSON.parse(JSON.stringify(formValues));
-        if(dataToBeSent.harmEvent==="Yes"){
-            dataToBeSent.harmEvent=true;
+        let individualsInvolvedString = '';
+        let typeOfEventString = "";
+        let departmentsInvolvedString = "";
+
+        if (dataToBeSent.harmEvent === "Yes") {
+            dataToBeSent.harmEvent = true;
         } else {
-            dataToBeSent.harmEvent=false;
+            dataToBeSent.harmEvent = false;
         }
-        if(dataToBeSent.effectOfIncident==="No harm sustained"){
-            dataToBeSent.effectOfIncident=false;
+        if (dataToBeSent.effectOfIncident === "No harm sustained") {
+            dataToBeSent.effectOfIncident = false;
         } else {
-            dataToBeSent.effectOfIncident=true;
+            dataToBeSent.effectOfIncident = true;
         }
 
+        for (const individuals in dataToBeSent.individualsInvolved) {
+            if (dataToBeSent.individualsInvolved[`${individuals}`]) {
+                individualsInvolvedString = individualsInvolvedString + "," + individuals;
+            }
+        }
+        dataToBeSent.individualsInvolved = individualsInvolvedString;
+
+        for (const event of dataToBeSent.typeOfEvent) {
+            typeOfEventString = typeOfEventString + "," + event;
+        }
+        dataToBeSent.typeOfEvent = typeOfEventString;
+
+        for (const department of dataToBeSent.departmentsInvolved) {
+            departmentsInvolvedString = departmentsInvolvedString + "," + department;
+        }
+        dataToBeSent.departmentsInvolved = departmentsInvolvedString;
+        handleClick();
+        apiPostIncident(dataToBeSent);
 
 
     };
@@ -153,61 +175,61 @@ const Fields = () => {
                 case 'individualsInvolved':
                     let flag = true;
                     for (const individualsInvolvedKey in formValues.individualsInvolved) {
-                        if(formValues.individualsInvolved[`${individualsInvolvedKey}`]){
-                           flag=false;
+                        if (formValues.individualsInvolved[`${individualsInvolvedKey}`]) {
+                            flag = false;
                         }
                     }
-                    if(flag){
+                    if (flag) {
                         setIsDisabled(true);
                     }
                     break;
                 case 'typeOfEvent':
-                    if(formValues.typeOfEvent.length===0){
+                    if (formValues.typeOfEvent.length === 0) {
                         setIsDisabled(true);
                     }
                     break;
                 case 'witnessName1':
-                    if(formValues.witnessName1===""){
+                    if (formValues.witnessName1 === "") {
                         setIsDisabled(true);
                     }
                     break;
                 case 'witnessPhone1':
-                    if(formValues.witnessPhone1===""){
+                    if (formValues.witnessPhone1 === "") {
                         setIsDisabled(true);
                     }
                     break;
                 case 'departmentsInvolved':
-                    if(formValues.departmentsInvolved.length===0){
+                    if (formValues.departmentsInvolved.length === 0) {
                         setIsDisabled(true);
                     }
                     break;
                 case 'descriptionOfIncident':
-                    if(formValues.descriptionOfIncident===''){
+                    if (formValues.descriptionOfIncident === '') {
                         setIsDisabled(true);
                     }
                     break;
                 case 'actionsTaken':
-                    if(formValues.actionsTaken===''){
+                    if (formValues.actionsTaken === '') {
                         setIsDisabled(true);
                     }
                     break;
                 case 'patientName':
-                    if(formValues.patientName===''){
+                    if (formValues.patientName === '') {
                         setIsDisabled(true);
                     }
                     break;
                 case 'patientSSN':
-                    if(formValues.patientSSN===''){
+                    if (formValues.patientSSN === '') {
                         setIsDisabled(true);
                     }
                     break;
                 case 'patientPhone':
-                    if(formValues.patientPhone===''){
+                    if (formValues.patientPhone === '') {
                         setIsDisabled(true);
                     }
                     break;
                 case 'address':
-                    if(formValues.address===''){
+                    if (formValues.address === '') {
                         setIsDisabled(true);
                     }
                     break;
