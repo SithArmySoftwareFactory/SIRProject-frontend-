@@ -3,11 +3,11 @@ import {Banner} from "./components/common/Banner";
 import SIRForm from "./components/SIRForm/SIRForm";
 import {forwardRef, useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
-import SupervisorView from "./components/supervisor/SupervisorView";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import CloseIcon from '@mui/icons-material/Close'
 import {Route, Routes} from 'react-router-dom'
+import SupervisorView from "./components/Supervisor/SupervisorView";
 
 const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
