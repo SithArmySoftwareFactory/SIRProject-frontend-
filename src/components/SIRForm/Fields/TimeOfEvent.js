@@ -8,16 +8,20 @@ import {Grid} from "@mui/material";
 import {styleLabel} from "../../../themes/themes";
 
 
-const TimeOfEvent = () => {
-    const [value, setValue] = useState(new Date('2018-01-01T00:00:00.000Z'));
+const TimeOfEvent = ({formValues,handleInputChange}) => {
+
 
     return (
         <Grid item xs={6}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <label style={styleLabel}>Time of Event</label>
                 <TimePicker
-                    value={value}
-                    onChange={setValue}
+                    required
+                    value={formValues.timeOfEvent}
+                    name={"timeOfEvent"}
+                    onChange={(newValue) => {
+                        handleInputChange(newValue,"timeOfEvent");
+                    }}
                     renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>

@@ -1,19 +1,24 @@
-
 import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
 
-const PatientNameBox = () => {
+const PatientNameBox = ({formValues,handleInputChange}) => {
+
+
 
     return (
-      <>
-          <br/>
-          <label style={styleLabel}>Patient Name or ID Plate</label>
-          <TextField
-              id="Patient Name"
-              name={"Patient Name"}
-              variant={"outlined"}
-          />
-      </>
+        <>
+            <br/>
+            <br/>
+            <label style={styleLabel}>Patient Name or ID Plate</label>
+            <TextField
+                id="Patient Name"
+                name={"patientName"}
+                variant={"outlined"}
+                value={formValues.patientName}
+                onChange={handleInputChange}
+                fullWidth
+            />
+        </>
     );
 
 }

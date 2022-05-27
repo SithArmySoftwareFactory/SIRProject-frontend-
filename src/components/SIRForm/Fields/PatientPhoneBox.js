@@ -1,21 +1,23 @@
-
 import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
 import {Grid} from "@mui/material";
 
-const PatientPhoneBox = () => {
+const PatientPhoneBox = ({formValues,handleInputChange}) => {
 
     return (
-      <Grid item xs={6}>
-          <br/>
-          <label style={styleLabel}>Patient Telephone Number</label>
-          <TextField
-              id="Patient Phone"
-              name={"Patient Phone"}
-              variant={"outlined"}
-              fullWidth
-          />
-      </Grid>
+        <Grid item xs={6}>
+            <br/>
+            <label style={styleLabel}>Patient Telephone Number</label>
+            <TextField
+                id="Patient Phone"
+                name={"patientPhone"}
+                variant={"outlined"}
+                fullWidth
+                value={formValues.patientPhone}
+                onChange={handleInputChange}
+                fullWidth
+            />
+        </Grid>
     );
 
 }

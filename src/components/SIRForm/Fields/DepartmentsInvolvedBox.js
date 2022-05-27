@@ -5,7 +5,17 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
-const DepartmentsInvolvedBox = () => {
+
+const DepartmentsInvolvedBox = ({formValue,handleInputChange}) => {
+
+
+    const handleChange = (event,value) => {
+        handleInputChange(value);
+
+    }
+
+
+
     const departmentTypes = [
         {title: "Ambulatory Care"},
         {title: "Behaviorial/Mental Health"},
@@ -30,6 +40,9 @@ const DepartmentsInvolvedBox = () => {
             <label style={styleLabel}>Department(s) Involved in this incident</label>
             <Stack spacing={3}>
                 <Autocomplete
+                    onChange={(event,value)=>{
+                        handleChange(event,value);
+                    }}
                     multiple
                     id="departmentsInvolved"
                     options={departmentTypes.map((option) => option.title)}

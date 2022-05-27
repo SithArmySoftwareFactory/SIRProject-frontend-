@@ -42,47 +42,7 @@ export const styleDate = {
 
     /* Inside auto layout */
     flex: "none", order: "0", flexGrow: "1"
-
 }
-
-export const styleMenu = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "start",
-    padding: "0px",
-    gap: "16px",
-
-    position: "absolute",
-    width: "320px",
-    height: "1936px",
-    left: "0px",
-    top: "64px",
-
-    /* background/paper */
-    background: "#FFFFFF",
-    /* elevation/16 */
-    boxShadow: "0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12)"
-}
-
-export const styleMenuItems = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    padding: "6px 16px",
-    anchorOrigin: {vertical: 'top', horizontal: 'left'},
-
-    position: "relative",
-    height: "100%",
-    left: "20px",
-    right: "1327px",
-    top: "0px",
-
-    /* background/paper */
-    background: "#FFFFFF",
-
-}
-
 export const styleDisabledButton = {
 
     /* Auto layout */
@@ -103,4 +63,50 @@ export const styleDisabledButton = {
     background: "rgba(0, 0, 0, 0.12)",
     borderRadius: 4
 
+}
+
+export const styleEnabledButton = {
+    /* Auto layout */
+
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+
+
+    left: "59.58%",
+    right: "32.22%",
+    top: "75%",
+    bottom: "3.42%",
+
+    /* action/disabled-background */
+
+    background: " #5D6A18",
+    color: "#FFFFFF",
+    borderRadius: 4
+}
+
+export const styleSnackBar = {
+    /* Auto layout */
+
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: "6px 16px",
+    gap: "12px",
+
+    width: "1440px",
+    height: "56px",
+
+    /* success/alert/background */
+
+    background: "#EAF5F4",
+    borderRadius: "4px",
+
+    /* Inside auto layout */
+
+    flex: "none",
+    order: 0,
+    alignSelf: "stretch",
+    flexGrow: 0
 }

@@ -6,23 +6,22 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
 
-
-const DateOfEvent = () => {
-    const [value, setValue] = React.useState(new Date());
-
+const DateOfEvent = ({formValues,handleInputChange}) => {
 
     return (
         <Grid item xs={6}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <label style={styleLabel}>Date of Event</label>
                 <DatePicker
+                    required
                     style={styleDate}
                     disableFuture
                     openTo="year"
                     views={['year', 'month', 'day']}
-                    value={value}
+                    name={"dateOfEvent"}
+                    value={formValues.dateOfEvent}
                     onChange={(newValue) => {
-                        setValue(newValue);
+                        handleInputChange(newValue,"dateOfEvent");
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />
