@@ -1,11 +1,10 @@
 import './App.css';
 import {Banner} from "./components/common/Banner";
-import Box from "@mui/material/Box";
 import SIRForm from "./components/SIRForm/SIRForm";
 import {forwardRef, useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import SupervisorView from "./components/SupervisorView";
-import {Button, Snackbar, Typography} from "@mui/material";
+import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import CloseIcon from '@mui/icons-material/Close'
 
