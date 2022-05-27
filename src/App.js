@@ -7,6 +7,7 @@ import SupervisorView from "./components/SupervisorView";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import CloseIcon from '@mui/icons-material/Close'
+import {Route, Routes} from 'react-router-dom'
 
 const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
