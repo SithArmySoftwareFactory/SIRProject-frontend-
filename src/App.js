@@ -3,7 +3,7 @@ import {Banner} from "./components/common/Banner";
 import SIRForm from "./components/SIRForm/SIRForm";
 import {forwardRef, useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
-import SupervisorView from "./components/SupervisorView";
+import SupervisorView from "./components/supervisor/SupervisorView";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import CloseIcon from '@mui/icons-material/Close'
