@@ -15,7 +15,6 @@ const Alert = forwardRef(function Alert(props, ref) {
 
 function App() {
     const [isHome, setIsHome] = useState(true);
-    const [supervisorView, setSupervisorView] = useState(false);
     const [open, setOpen] = useState(false);
 
     const handleClick = () => {
@@ -28,12 +27,12 @@ function App() {
         }
         setOpen(false);
     };
-
     return (
-        !supervisorView ?
-            <Box>
-                <Banner setIsHome={setIsHome} isHome={isHome}/>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
+        <>
+            <Grid container spacing={0} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
+                <Grid item xs={14}>
+                    <Banner setIsHome={setIsHome} isHome={isHome} />
+                                      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
                           anchorOrigin={{horizontal: "center", vertical: "top"}} sx={{width: "100%"}}>
 
                     <Alert onClose={handleClose} severity={"success"}
@@ -48,15 +47,21 @@ function App() {
                         <Typography noWrap>Incident Report Submitted.</Typography>
                     </Alert>
                 </Snackbar>
-                <SIRForm handleClick={handleClick}/>
-                <ViewMenu isHome={isHome} setIsHome={setIsHome} setSupervisorView={setSupervisorView}/>
-            </Box>
-            :
-            <Box>
-                <Banner setIsHome={setIsHome} isHome={isHome}/>
-                <SupervisorView/>
-                <ViewMenu isHome={isHome} setIsHome={setIsHome} setSupervisorView={setSupervisorView}/>
-            </Box>
+                </Grid>
+                <Grid item sm={0} md={3} xs={0} />
+                <Grid item sm={8} md={8}  xs={12} xl={12} >
+                <Routes>
+                    <Route exact path="/" element={<SIRForm handleClick={handleClick}/>} />
+                     <Route path="/supervisor" element={<SupervisorView/>} />
+                    <Route element={<SIRForm/>} />
+                </Routes>
+            </Grid>
+                <Grid item sm={0} md={3} xs={0} />
+                <Grid item xs={12}>
+                    <ViewMenu isHome={isHome} setIsHome={setIsHome} />
+                </Grid>
+            </Grid>
+        </>
     );
 }
 
