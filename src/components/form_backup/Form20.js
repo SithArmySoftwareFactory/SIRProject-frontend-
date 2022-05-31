@@ -220,8 +220,8 @@ const Form20 = (props) => {
         if(event.target.value === 'patient') {
             setCheckedPatient(!checkedPatient);
         }
-
     }
+
     //saving state is async, so we use an async function and call it within useEffect
     //it monitors formik.values which is in state
     useEffect(() => {
