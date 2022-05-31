@@ -9,10 +9,10 @@ const AddressBox = ({formValues,handleInputChange}) => {
             <label style={styleLabel}>Patient Address</label>
             <TextField
                 id="Patient Address"
-                name={"address"}
+                name={"patientAddress"}
                 type="text"
                 variant={"outlined"}
-                value={formValues.address}
+                value={formValues.patientAddress}
                 onChange={handleInputChange}
                 fullWidth
             />

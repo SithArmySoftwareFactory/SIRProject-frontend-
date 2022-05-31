@@ -74,7 +74,7 @@ describe('user navigating to the homepage', () => {
     });
     it('should see department(s) involved in this incident box', () => {
         cy.findByText(/department\(s\) involved in this incident/i).should('exist');
-        cy.get('#departmentsInvolved').should('exist');
+        cy.findByText(/department\(s\) involved in this incident/i).siblings().last().children().last().children().last().should('exist');
     });
     it('should see description of incident box', () => {
         cy.findByText(/description of incident/i).should('exist');
@@ -97,9 +97,9 @@ describe('user navigating to the homepage', () => {
         cy.findByText(/patient telephone number/i).should('exist');
         cy.findByText(/patient telephone number/i).siblings().last().children().last().children().last().should('exist');
     });
-    it('should see patient address box', () => {
-        cy.findByText(/patient address/i).should('exist');
-        cy.findByText(/patient address/i).siblings().last().children().last().children().last().should('exist');
+    it('should see patientAddress box', () => {
+        cy.findByText(/patient Address/i).should('exist');
+        cy.findByText(/patient Address/i).siblings().last().children().last().children().last().should('exist');
     });
     it('should see submit button', () => {
         cy.findByRole('button', ({name: /submit/i})).should('exist').should("be.disabled");

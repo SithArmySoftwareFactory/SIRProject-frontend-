@@ -6,7 +6,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
 
-const DepartmentsInvolvedBox = ({formValue,handleInputChange}) => {
+const DepartmentsInvolvedBox = ({handleInputChange, formValue}) => {
 
 
     const handleChange = (event,value) => {
@@ -44,7 +44,7 @@ const DepartmentsInvolvedBox = ({formValue,handleInputChange}) => {
                         handleChange(event,value);
                     }}
                     multiple
-                    id="departmentsInvolved"
+                    id="department"
                     options={departmentTypes.map((option) => option.title)}
                     freeSolo
                     renderTags={(value, getTagProps) =>
@@ -52,6 +52,7 @@ const DepartmentsInvolvedBox = ({formValue,handleInputChange}) => {
                             <Chip variant="outlined" label={option} {...getTagProps({index})} />
                         ))
                     }
+                    value={formValue.department}
                     renderInput={(params) => (
                         <TextField
                             {...params}

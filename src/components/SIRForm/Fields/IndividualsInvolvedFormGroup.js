@@ -10,10 +10,35 @@ import {styleLabel} from "../../../themes/themes";
 
 const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChildrenClickChange}) => {
 
-    const [checked, setChecked] = useState([false, false]);
     const [isDisabled, setIsDisabled] = useState(true);
     const [involvedArray, setInvolvedArray] = useState([]);
 
+    let {patient, familyMember, adult, child, staffMember, visitor, volunteer, other} = formValues.individuals;
+
+
+
+    const children = (
+        <Box sx={{display: 'flex', flexDirection: 'column', ml: 3}}>
+            <FormControlLabel
+                label="Adult"
+                disabled={isDisabled}
+                key={'adult'}
+                control={<Checkbox  checked={adult} onChange={(event)=>{
+                    handleChange2(event);
+                }}  name={'adult'}/>}
+
+            />
+            <FormControlLabel
+                label="Child <18 years old"
+                disabled={isDisabled}
+                key={'child'}
+                control={<Checkbox  checked={child} onChange={(event)=>{
+                    handleChange3(event);
+                }} name={'child'}/>}
+
+            />
+        </Box>
+    );
 
     const handleChange = (event) => {
         let name = event.target.name;
@@ -25,13 +50,13 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChild
 
 
     const handleChange2 = (event) => {
-        setChecked([event.target.checked, checked[1]]);
+
         handleChange(event)
 
     };
 
     const handleChange3 = (event) => {
-        setChecked([checked[0], event.target.checked]);
+
         handleChange(event)
     };
 
@@ -44,7 +69,8 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChild
 
             handleChildrenClickChange();
 
-            setChecked([false,false]);
+            adult=false;
+            child=false;
 
             involvedArray.forEach(element => {
                 if (element === 'adult') {
@@ -60,29 +86,11 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChild
     }
 
 
-    const children = (
-        <Box sx={{display: 'flex', flexDirection: 'column', ml: 3}}>
-            <FormControlLabel
-                label="Adult"
-                disabled={isDisabled}
-                key={'adult'}
-                control={<Checkbox checked={checked[0]} onChange={(event)=>{
-                    handleChange2(event);
-                }} name={'adult'}/>}
-            />
-            <FormControlLabel
-                label="Child <18 years old"
-                disabled={isDisabled}
-                key={'child'}
-                control={<Checkbox checked={checked[1]} onChange={(event)=>{
-                    handleChange3(event);
-                }} name={'child'}/>}
-            />
-        </Box>
-    );
 
 
-    const {patient, familyMember, staffMember, visitor, volunteer, other} = formValues.individualsInvolved;
+
+
+
 
     return (
         <Box sx={{display: 'flex'}}>
