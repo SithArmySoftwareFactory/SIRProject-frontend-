@@ -14,6 +14,7 @@ import axios from "axios";
 import {API_URL} from "../../constants/Constants";
 import {Divider} from "@mui/material";
 import {useState} from "react";
+import SIRForm from "../SIRForm/SIRForm";
 
 function PaperComponent(props) {
     return (
