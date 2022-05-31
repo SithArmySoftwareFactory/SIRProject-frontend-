@@ -217,7 +217,7 @@ const Fields = ({handleClick, open, defaultValues }) => {
         handleClick();
         console.log(dataToBeSent);
         apiPostIncident(dataToBeSent);
-        setFormValues(defaultValues);
+        setFormValues(defaultValues2);
 
 
 
