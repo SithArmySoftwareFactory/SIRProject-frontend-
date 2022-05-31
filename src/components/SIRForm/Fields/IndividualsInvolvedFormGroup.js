@@ -83,7 +83,6 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChild
                 }
             })
         }
-        console.log(isDisabled)
     }
 
 
