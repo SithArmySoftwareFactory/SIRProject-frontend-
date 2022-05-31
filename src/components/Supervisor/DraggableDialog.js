@@ -10,6 +10,8 @@ import Draggable from 'react-draggable';
 import SIRForm from "../SIRForm/SIRForm";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import {Divider} from "@mui/material";
+import {useState} from "react";
 
 function PaperComponent(props) {
     return (
@@ -61,14 +63,15 @@ export default function DraggableDialog() {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        <SIRForm/>
+                        <SIRForm open={open}/>
                     </DialogContentText>
                 </DialogContent>
+                <Divider/>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
+                    <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
                         SAVE
                     </Button>
-                    <Button onClick={handleClose}>CANCEL</Button>
+                    <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
                 </DialogActions>
             </Dialog>
         </div>
