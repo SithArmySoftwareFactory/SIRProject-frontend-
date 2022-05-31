@@ -11,11 +11,11 @@ const ActionsTakenBox = ({formValues,handleInputChange}) => {
             <br/>
             <TextField
                 id="Actions Taken"
-                name={"actionsTaken"}
+                name={"prevention"}
                 variant={"outlined"}
                 multiline
                 rows={4}
-                value={formValues.actionsTaken}
+                value={formValues.prevention}
                 onChange={handleInputChange}
                 fullWidth
             />

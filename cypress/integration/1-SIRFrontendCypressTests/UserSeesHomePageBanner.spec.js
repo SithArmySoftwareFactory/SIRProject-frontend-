@@ -97,9 +97,9 @@ describe('user navigating to the homepage', () => {
         cy.findByText(/patient telephone number/i).should('exist');
         cy.findByText(/patient telephone number/i).siblings().last().children().last().children().last().should('exist');
     });
-    it('should see patient address box', () => {
-        cy.findByText(/patient address/i).should('exist');
-        cy.findByText(/patient address/i).siblings().last().children().last().children().last().should('exist');
+    it('should see patient patientAddress box', () => {
+        cy.findByText(/patient patientAddress/i).should('exist');
+        cy.findByText(/patient patientAddress/i).siblings().last().children().last().children().last().should('exist');
     });
     it('should see submit button', () => {
         cy.findByRole('button', ({name: /submit/i})).should('exist').should("be.disabled");

@@ -15,8 +15,8 @@ const HarmEventBox = ({formValues, handleInputChange}) => {
                     required
                     labelId="harm-type-label"
                     id="harm-type-options"
-                    name='harmEvent'
-                    value={formValues.harmEvent}
+                    name='harm'
+                    value={formValues.harm}
                     label="Harm-type"
                     onChange={handleInputChange}
                 >

@@ -82,7 +82,7 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChild
     );
 
 
-    const {patient, familyMember, staffMember, visitor, volunteer, other} = formValues.individualsInvolved;
+    const {patient, familyMember, staffMember, visitor, volunteer, other} = formValues.individuals;
 
     return (
         <Box sx={{display: 'flex'}}>
