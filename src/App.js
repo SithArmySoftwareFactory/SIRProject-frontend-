@@ -50,7 +50,7 @@ function App() {
                 </Grid>
                 <Grid item  xs={12} >
                 <Routes>
-                    <Route exact path="/" element={<SIRForm handleClick={handleClick}/>} />
+                    <Route exact path="/" element={<SIRForm handleClick={handleClick}  />} />
                      <Route path="/supervisor" element={<SupervisorView/>} />
                     <Route element={<SIRForm/>} />
                 </Routes>

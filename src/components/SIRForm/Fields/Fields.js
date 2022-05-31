@@ -22,47 +22,90 @@ import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
 import {apiPostIncident} from "../../../api/APICalls";
 
 
-const Fields = ({handleClick, open}) => {
+const Fields = ({handleClick, open, defaultValues }) => {
 
-    const defaultValues = {
-        date: new Date(),
-        time: new Date(),
-        location: "",
-        eventType: "Actual Event/Incident",
-        //boolean on backend
-        harm: "Yes",
-        //string on backend delineated by commas
-        individuals: {
-            patient: false,
-            familyMember: false,
-            adult: false,
-            child: false,
-            staffMember: false,
-            visitor: false,
-            volunteer: false,
-            other: false
-        },
-        //string on backend delineated by commas
-        incidentType: [],
-        //boolean
-        effects: 'No harm sustained',
-        witness1Name: '',
-        witness1Phone: '',
-        witness2Name: '',
-        witness2Phone: '',
-        witness3Name: '',
-        witness3Phone: '',
-        //string on backend delineated by commas
-        department: [],
-        description: "",
-        prevention: "",
-        patientName: "",
-        patientSSN: "",
-        patientPhone: "",
-        patientAddress: ""
+    let defaultValues2 = null;
+
+    if(defaultValues == null) {
+        defaultValues2 = {
+            date: new Date(),
+            time: new Date(),
+            location: "",
+            eventType: "Actual Event/Incident",
+            //boolean on backend
+            harm: "Yes",
+            //string on backend delineated by commas
+            individuals: {
+                patient: false,
+                familyMember: false,
+                adult: false,
+                child: false,
+                staffMember: false,
+                visitor: false,
+                volunteer: false,
+                other: false
+            },
+            //string on backend delineated by commas
+            incidentType: [],
+            //boolean
+            effects: 'No harm sustained',
+            witness1Name: '',
+            witness1Phone: '',
+            witness2Name: '',
+            witness2Phone: '',
+            witness3Name: '',
+            witness3Phone: '',
+            //string on backend delineated by commas
+            department: [],
+            description: "",
+            prevention: "",
+            patientName: "",
+            patientSSN: "",
+            patientPhone: "",
+            patientAddress: ""
+        }
+    } else {
+        defaultValues2 = {
+            date: defaultValues.date || new Date(),
+            time: defaultValues.time || new Date(),
+            location: defaultValues.location || "",
+            eventType: defaultValues.eventType || "Actual Event/Incident",
+            //boolean on backend
+            harm: (defaultValues.harm) ? "Yes" : "no" || "Yes",
+            //string on backend delineated by commas
+            individuals: {
+                patient: (defaultValues.patient !== null),
+                familyMember: (defaultValues.familymember !== null),
+                adult: (defaultValues.adult !== null),
+                child: (defaultValues.child !== null),
+                staffMember: (defaultValues.staffmember !== null),
+                visitor: (defaultValues.visitor !== null),
+                volunteer: (defaultValues.volunteer !== null),
+                other: (defaultValues.other !== null)
+            },
+            //string on backend delineated by commas
+            incidentType: (defaultValues.incidentType !== null) ? defaultValues.incidentType.trim().split(",") || [] : [],
+            //boolean
+            effects: defaultValues.effects || 'No harm sustained',
+            witness1Name: defaultValues.witness1Name || '',
+            witness1Phone: defaultValues.witness1Phone || '',
+            witness2Name: defaultValues.witness2Name || '',
+            witness2Phone: defaultValues.witness2Phone || '',
+            witness3Name: defaultValues.witness3Name || '',
+            witness3Phone: defaultValues.witness3Phone || '',
+            //string on backend delineated by commas
+            department: (defaultValues.department !== null) ? defaultValues.department.trim().split(",") || [] : [],
+            description: defaultValues.description || "",
+            prevention: defaultValues.prevention || "",
+            patientName: defaultValues.patientName || "",
+            patientSSN: defaultValues.patientSSN || "",
+            patientPhone: defaultValues.patientPhone || "",
+            patientAddress: defaultValues.patientAddress || ""
+        }
     }
+
     const [isDisabled, setIsDisabled] = useState(true);
-    const [formValues, setFormValues] = useState(defaultValues);
+    const [formValues, setFormValues] = useState(defaultValues2);
 
 
     const handleInputChange = (e) => {

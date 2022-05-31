@@ -145,7 +145,7 @@ export default function DraggableDialog(props) {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        <SIRForm open={open}/>
+                        <SIRForm open={open} defaultValues={props.rowViewed}/>
                     </DialogContentText>
                 </DialogContent>
                 <Divider/>
