@@ -22,7 +22,7 @@ import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
 import {apiPostIncident} from "../../../api/APICalls";
 
 
-const Fields = ({handleClick}) => {
+const Fields = ({handleClick, open}) => {
 
     const defaultValues = {
         date: new Date(),
@@ -285,7 +285,9 @@ const Fields = ({handleClick}) => {
                 <Grid container spacing={1}>
                     <Grid item xs={7}/>
                     <Grid item xs={5}>
-                        {isDisabled ?
+                        {/*open is inherited state from the supervisor view. If the form is opened from the supervisor view, it will not render a submit button.*/}
+                        {!open ?
+                        isDisabled ?
                             <Button type="submit"
                                     style={styleDisabledButton}
                                     variant="contained"
@@ -301,7 +303,7 @@ const Fields = ({handleClick}) => {
                             >
                                 Submit
                             </Button>
-                        }
+                        : null}
 
                     </Grid>
                 </Grid>
