@@ -6,11 +6,12 @@ import {
     GridToolbarFilterButton,
     GridToolbarQuickFilter
 } from '@mui/x-data-grid';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Button from '@mui/material/Button';
-import {rows} from './rows';
+// import {rows} from './rows'; test data if not getting data from Get Request
 import DraggableDialog from "./DraggableDialog";
 import SendToCommandDialog from "../SendToCommandDialog/SendToCommandDialog";
+import {apiGetIncident} from "../../api/APICalls";
 
 const SupervisorView = () => {
     const [pageSize, setPageSize] = React.useState(5);
@@ -20,6 +21,17 @@ const SupervisorView = () => {
     const [showCommand, setShowCommand] = useState(false);
     const [sent, setSent] = useState(false);
     const [selectionModel, setSelectionModel] = useState([]);
+    const [rowViewed, setRowViewed] = useState([]);
+    const[rowsFromApi, setRowsFromApi] = useState([]);
+    //Get Data from backend
+    const fetchIncidentAPI = () => {
+        apiGetIncident()
+            .then((r) => setRowsFromApi(r.data))
+            .catch((error) => console.log(error));
+    };
+    useEffect(fetchIncidentAPI, []);
+    let rows = rowsFromApi;
+
 
     //Function to handle the rowsChecked state. Items in rowsChecked state should be sent to the Commander
     //and a success message displayed
@@ -38,6 +50,7 @@ const SupervisorView = () => {
     //be defined, this logic follows for all keys inside of rows. Rows is defined in rows.js, but this data
     //will be fetched from the backend i.e. rows = axios.get(...api/incidents...)
     const columns: GridColumns = [
+        { field: 'id', headerName: 'ID', width: 50, hide: true},
         {
             field: 'date',
             headerName: 'Event Date',
@@ -68,7 +81,10 @@ const SupervisorView = () => {
             renderCell: (params) => {
                 //Splits the individual String by comma
                 //counts the length of the array, if it is 1 then return the name
-                let rowIndividuals = params.row.individuals.trim().split(",")
+                let rowIndividuals = []; //account for async
+                if (params.row.individuals !== null) {
+                    rowIndividuals = params.row.individuals.trim().split(",")
+                }
                 if (rowIndividuals.length === 1) {
                     return rowIndividuals[0]
                 } else if (rowIndividuals[0].length > 13) {
@@ -79,7 +95,14 @@ const SupervisorView = () => {
                 } else if (rowIndividuals[0].length <= 12 || (rowIndividuals[0].length + rowIndividuals[1]) <= 12) {
                     //display two individuals for a combined length of two strings, subtract 2 from the length
                     //because we are displaying two individuals from the list. Show the remaining count.
-                    return `${rowIndividuals[0]},${rowIndividuals[1]}, +${rowIndividuals.length - 2}`
+                    let returnCount = (rowIndividuals.length - 2)
+                    let returnText = '';
+                    if(returnCount > 0)
+                        returnText = `, +${returnCount}`;
+                    else {
+                        returnText = '';
+                    }
+                    return `${rowIndividuals[0]},${rowIndividuals[1]}${returnText}`
                 } else {
                     //no other conditions met, show the first item of the array and a count
                     return `${rowIndividuals[0]}, +${rowIndividuals.length - 1}`
@@ -90,13 +113,23 @@ const SupervisorView = () => {
             field: 'eventType', headerName: 'Event Type', headerClassName: 'dataGridHeader', flex: 1, minWidth: 230,
             renderCell: (params) => {
                 //same logic as above but adjusted for string length
-                let rowEventType = params.row.eventType.trim().split(",")
+                let rowEventType = [];
+                if(params.row.eventType !== null ) {
+                    rowEventType = params.row.eventType.trim().split(",")
+                }
                 if (rowEventType.length === 1) {
                     return rowEventType[0]
                 } else if (rowEventType[0].length > 28) {
                     return `${rowEventType[0]}, +${rowEventType.length - 1}`
                 } else if (rowEventType[0].length <= 27 || (rowEventType[0].length + rowEventType[1]) <= 27) {
-                    return `${rowEventType[0]},${rowEventType[1]}, +${rowEventType.length - 2}`
+                    let returnCount = (rowEventType.length - 2)
+                    let returnText = '';
+                    if(returnCount > 0)
+                        returnText = `, +${returnCount}`;
+                    else {
+                        returnText = '';
+                    }
+                    return `${rowEventType[0]},${rowEventType[1]}${returnText}`
                 } else {
                     return `${rowEventType[0]}, +${rowEventType.length - 1}`
                 }
@@ -106,8 +139,7 @@ const SupervisorView = () => {
             field: 'details',
             headerName: 'Details',
             flex: 1,
-            renderCell: () => (<DraggableDialog/>)
-
+            renderCell: () => (<DraggableDialog  rowViewed={rowViewed} />),
         }
     ];
     //If we implement editing rows directly
@@ -126,7 +158,8 @@ const SupervisorView = () => {
     };
 
     return (
-        <Box height="auto" width="97%" maxWidth="1000px" display="flex" flexDirection="column">
+        <Box height="auto" width="100vw"  display="flex"sx={{textAlign:'center', justifyContent:'center'}}>
+            <Box minWidth="1038px">
             {(sent) ?
                 <p className="sentSuccessMsg">
                     <Alert severity="success" className="sentSuccessMsg">
@@ -167,6 +200,7 @@ const SupervisorView = () => {
                 onRowClick={(event) => {
                     // fetchTextAPI(event)
                     //here we can handle a specific event for a row being clicked
+                    setRowViewed(event.row)
                 }}
                 onSelectionModelChange={(ids) => {
                     //initial count of rows
@@ -261,6 +295,8 @@ const SupervisorView = () => {
                 onCellEditCommit={(params) => setTimeout(handleRowEditCommit(params), 1000)}
                 //various styling, width set to 100% and display handled by App.js Grid component
                 sx={{
+
+                    justifyContent:'center',
                     width: '100%',
 
                     '.css-1jbbcbn-MuiDataGrid-columnHeaderTitle': {
@@ -270,7 +306,7 @@ const SupervisorView = () => {
                         border: 'none',
                     },
                 }}
-            />
+            /></Box>
         </Box>)
 }
 

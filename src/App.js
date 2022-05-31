@@ -29,8 +29,8 @@ function App() {
     };
     return (
         <>
-            <Grid container spacing={0} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
-                <Grid item xs={14}>
+            <Grid container spacing={0} columns={12} justifyContent="center">
+                <Grid item xs={12}>
                     <Banner setIsHome={setIsHome} isHome={isHome} />
                                       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
                           anchorOrigin={{horizontal: "center", vertical: "top"}} sx={{width: "100%"}}>
@@ -48,15 +48,13 @@ function App() {
                     </Alert>
                 </Snackbar>
                 </Grid>
-                <Grid item sm={0} md={3} xs={0} />
-                <Grid item sm={8} md={8}  xs={12} xl={12} >
+                <Grid item  xs={12} >
                 <Routes>
                     <Route exact path="/" element={<SIRForm handleClick={handleClick}/>} />
                      <Route path="/supervisor" element={<SupervisorView/>} />
                     <Route element={<SIRForm/>} />
                 </Routes>
             </Grid>
-                <Grid item sm={0} md={3} xs={0} />
                 <Grid item xs={12}>
                     <ViewMenu isHome={isHome} setIsHome={setIsHome} />
                 </Grid>
