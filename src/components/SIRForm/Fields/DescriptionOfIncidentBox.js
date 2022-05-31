@@ -9,11 +9,11 @@ const DescriptionOfIncidentBox = ({formValues,handleInputChange}) => {
             <label style={styleLabel}>Description of Incident</label>
             <TextField
                 id="Description of Incident"
-                name={"descriptionOfIncident"}
+                name={"description"}
                 variant={"outlined"}
                 multiline
                 rows={6}
-                value={formValues.descriptionOfIncident}
+                value={formValues.description}
                 onChange={handleInputChange}
                 fullWidth
             />

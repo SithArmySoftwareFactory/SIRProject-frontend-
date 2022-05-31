@@ -25,14 +25,14 @@ import {apiPostIncident} from "../../../api/APICalls";
 const Fields = ({handleClick}) => {
 
     const defaultValues = {
-        dateOfEvent: new Date(),
-        timeOfEvent: new Date(),
+        date: new Date(),
+        time: new Date(),
         location: "",
         eventType: "Actual Event/Incident",
         //boolean on backend
-        harmEvent: "Yes",
+        harm: "Yes",
         //string on backend delineated by commas
-        individualsInvolved: {
+        individuals: {
             patient: false,
             familyMember: false,
             adult: false,
@@ -43,26 +43,25 @@ const Fields = ({handleClick}) => {
             other: false
         },
         //string on backend delineated by commas
-        typeOfEvent: [],
+        incidentType: [],
         //boolean
-        effectOfIncident: 'No harm sustained',
-        witnessName1: '',
-        witnessPhone1: '',
-        witnessName2: '',
-        witnessPhone2: '',
-        witnessName3: '',
-        witnessPhone3: '',
+        effects: 'No harm sustained',
+        witness1Name: '',
+        witness1Phone: '',
+        witness2Name: '',
+        witness2Phone: '',
+        witness3Name: '',
+        witness3Phone: '',
         //string on backend delineated by commas
-        departmentsInvolved: [],
-        descriptionOfIncident: "",
-        actionsTaken: "",
+        department: [],
+        description: "",
+        prevention: "",
         patientName: "",
         patientSSN: "",
         patientPhone: "",
-        address: ""
+        patientAddress: ""
     }
     const [isDisabled, setIsDisabled] = useState(true);
-    const [isReportSubmitted, setIsReportSubmitted] = useState(false);
     const [formValues, setFormValues] = useState(defaultValues);
 
 
@@ -77,22 +76,22 @@ const Fields = ({handleClick}) => {
     const handleAutoCompleteTypeOfEvent = (target) => {
         setFormValues({
             ...formValues,
-            ['typeOfEvent']: target,
+            ['incidentType']: target,
         });
     }
 
     const handleAutoCompleteDepartmentsInvolved = (target) => {
         setFormValues({
             ...formValues,
-            ['departmentsInvolved']: target,
+            ['department']: target,
         });
     }
     const handleTimeChange = (newValue, name) => {
-
         setFormValues({
             ...formValues,
             [name]: newValue,
         });
+
 
     }
     const handleClickChange = (e) => {
@@ -101,18 +100,18 @@ const Fields = ({handleClick}) => {
         if (checked) {
             newValue = true;
         }
-        let newIndividualsInvolved = formValues.individualsInvolved;
+        let newIndividualsInvolved = formValues.individuals;
         newIndividualsInvolved = {
             ...newIndividualsInvolved,
             [name]: newValue,
         }
         setFormValues({
             ...formValues,
-            [`individualsInvolved`]: newIndividualsInvolved,
+            [`individuals`]: newIndividualsInvolved,
         })
     }
     const handleClickChildrenChange = () => {
-        let newIndividualsInvolved = formValues.individualsInvolved;
+        let newIndividualsInvolved = formValues.individuals;
         newIndividualsInvolved = {
             ...newIndividualsInvolved,
             ['familyMember']: false,
@@ -121,7 +120,7 @@ const Fields = ({handleClick}) => {
         }
         setFormValues({
             ...formValues,
-            [`individualsInvolved`]: newIndividualsInvolved,
+            [`individuals`]: newIndividualsInvolved,
         })
 
     }
@@ -132,34 +131,48 @@ const Fields = ({handleClick}) => {
         let typeOfEventString = "";
         let departmentsInvolvedString = "";
 
-        if (dataToBeSent.harmEvent === "Yes") {
-            dataToBeSent.harmEvent = true;
+        let tempTime = new Date(dataToBeSent.time);
+
+        if(tempTime.getHours()<10){
+            dataToBeSent.time= "0"+tempTime.getHours()+":"+tempTime.getMinutes();
         } else {
-            dataToBeSent.harmEvent = false;
-        }
-        if (dataToBeSent.effectOfIncident === "No harm sustained") {
-            dataToBeSent.effectOfIncident = false;
-        } else {
-            dataToBeSent.effectOfIncident = true;
+            dataToBeSent.time= tempTime.getHours()+":"+tempTime.getMinutes();
         }
 
-        for (const individuals in dataToBeSent.individualsInvolved) {
-            if (dataToBeSent.individualsInvolved[`${individuals}`]) {
+        if(tempTime.getMinutes()<10){
+            dataToBeSent.time= "0"+tempTime.getHours()+":0"+tempTime.getMinutes();
+        } else {
+            dataToBeSent.time= tempTime.getHours()+":"+tempTime.getMinutes();
+        }
+
+        dataToBeSent.date=dataToBeSent.date.split('T')[0];
+
+
+        dataToBeSent.harm = dataToBeSent.harm === "Yes";
+        if (dataToBeSent.effects === "No harm sustained") {
+            dataToBeSent.effects = false;
+        } else {
+            dataToBeSent.effects = true;
+        }
+
+        for (const individuals in dataToBeSent.individuals) {
+            if (dataToBeSent.individuals[`${individuals}`]) {
                 individualsInvolvedString = individualsInvolvedString + "," + individuals;
             }
         }
-        dataToBeSent.individualsInvolved = individualsInvolvedString;
+        dataToBeSent.individuals = individualsInvolvedString;
 
-        for (const event of dataToBeSent.typeOfEvent) {
+        for (const event of dataToBeSent.incidentType) {
             typeOfEventString = typeOfEventString + "," + event;
         }
-        dataToBeSent.typeOfEvent = typeOfEventString;
+        dataToBeSent.incidentType = typeOfEventString;
 
-        for (const department of dataToBeSent.departmentsInvolved) {
+        for (const department of dataToBeSent.department) {
             departmentsInvolvedString = departmentsInvolvedString + "," + department;
         }
-        dataToBeSent.departmentsInvolved = departmentsInvolvedString;
+        dataToBeSent.department = departmentsInvolvedString;
         handleClick();
+        console.log(dataToBeSent);
         apiPostIncident(dataToBeSent);
 
 
@@ -172,10 +185,10 @@ const Fields = ({handleClick}) => {
                         setIsDisabled(true);
                     }
                     break;
-                case 'individualsInvolved':
+                case 'individuals':
                     let flag = true;
-                    for (const individualsInvolvedKey in formValues.individualsInvolved) {
-                        if (formValues.individualsInvolved[`${individualsInvolvedKey}`]) {
+                    for (const individualsInvolvedKey in formValues.individuals) {
+                        if (formValues.individuals[`${individualsInvolvedKey}`]) {
                             flag = false;
                         }
                     }
@@ -183,33 +196,33 @@ const Fields = ({handleClick}) => {
                         setIsDisabled(true);
                     }
                     break;
-                case 'typeOfEvent':
-                    if (formValues.typeOfEvent.length === 0) {
+                case 'incidentType':
+                    if (formValues.incidentType.length === 0) {
                         setIsDisabled(true);
                     }
                     break;
-                case 'witnessName1':
-                    if (formValues.witnessName1 === "") {
+                case 'witness1Name':
+                    if (formValues.witness1Name === "") {
                         setIsDisabled(true);
                     }
                     break;
-                case 'witnessPhone1':
-                    if (formValues.witnessPhone1 === "") {
+                case 'witness1Phone':
+                    if (formValues.witness1Phone === "") {
                         setIsDisabled(true);
                     }
                     break;
-                case 'departmentsInvolved':
-                    if (formValues.departmentsInvolved.length === 0) {
+                case 'department':
+                    if (formValues.department.length === 0) {
                         setIsDisabled(true);
                     }
                     break;
                 case 'descriptionOfIncident':
-                    if (formValues.descriptionOfIncident === '') {
+                    if (formValues.description === '') {
                         setIsDisabled(true);
                     }
                     break;
-                case 'actionsTaken':
-                    if (formValues.actionsTaken === '') {
+                case 'prevention':
+                    if (formValues.prevention === '') {
                         setIsDisabled(true);
                     }
                     break;
@@ -228,8 +241,8 @@ const Fields = ({handleClick}) => {
                         setIsDisabled(true);
                     }
                     break;
-                case 'address':
-                    if (formValues.address === '') {
+                case 'patientAddress':
+                    if (formValues.patientAddress === '') {
                         setIsDisabled(true);
                     }
                     break;

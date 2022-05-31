@@ -18,10 +18,10 @@ const DateOfEvent = ({formValues,handleInputChange}) => {
                     disableFuture
                     openTo="year"
                     views={['year', 'month', 'day']}
-                    name={"dateOfEvent"}
-                    value={formValues.dateOfEvent}
+                    name={"date"}
+                    value={formValues.date}
                     onChange={(newValue) => {
-                        handleInputChange(newValue,"dateOfEvent");
+                        handleInputChange(newValue,"date");
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />
