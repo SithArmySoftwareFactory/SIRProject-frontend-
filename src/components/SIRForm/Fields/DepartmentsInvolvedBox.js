@@ -6,7 +6,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
 
-const DepartmentsInvolvedBox = ({handleInputChange}) => {
+const DepartmentsInvolvedBox = ({handleInputChange, formValue}) => {
 
 
     const handleChange = (event,value) => {
@@ -52,6 +52,7 @@ const DepartmentsInvolvedBox = ({handleInputChange}) => {
                             <Chip variant="outlined" label={option} {...getTagProps({index})} />
                         ))
                     }
+                    value={formValue.department}
                     renderInput={(params) => (
                         <TextField
                             {...params}

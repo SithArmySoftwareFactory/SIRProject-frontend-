@@ -4,10 +4,10 @@ import * as React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import {useState} from "react";
 
-const TypeOfEventBox = ({formValues,handleInputChange}) => {
-    const [value, setValue] = useState([])
+
+const TypeOfEventBox = ({handleInputChange, formValues}) => {
+
 
     const handleChange = (event,value) => {
         handleInputChange(value)
@@ -50,16 +50,19 @@ const TypeOfEventBox = ({formValues,handleInputChange}) => {
                     }}
                     multiple
                     id="typeOfEvent"
+
                     options={eventTypes.map((option) => option.title)}
                     renderTags={(value, getTagProps) =>
                         value.map((option, index) => (
                             <Chip variant="outlined" label={option} {...getTagProps({index})} />
                         ))
                     }
+                    value={formValues.incidentType}
                     renderInput={(params) => (
                         <TextField
                             {...params}
                             variant="outlined"
+
                         />
                     )}
                 />
