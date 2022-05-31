@@ -160,18 +160,19 @@ const Fields = ({handleClick, open}) => {
                 individualsInvolvedString = individualsInvolvedString + "," + individuals;
             }
         }
-        dataToBeSent.individuals = individualsInvolvedString;
+        dataToBeSent.individuals = individualsInvolvedString.substring(1);
 
         for (const event of dataToBeSent.incidentType) {
             typeOfEventString = typeOfEventString + "," + event;
         }
-        dataToBeSent.incidentType = typeOfEventString;
+        dataToBeSent.incidentType = typeOfEventString.substring(1);
 
         for (const department of dataToBeSent.department) {
             departmentsInvolvedString = departmentsInvolvedString + "," + department;
         }
         dataToBeSent.department = departmentsInvolvedString;
         handleClick();
+        console.log(dataToBeSent);
         apiPostIncident(dataToBeSent);
         setFormValues(defaultValues);
 
