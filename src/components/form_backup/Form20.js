@@ -10,15 +10,13 @@ const validationSchema = yup.object({
     date: yup
          .string('Enter date')
         .required('Date is required'),
-    // time: yup
-    //     .string('Enter time')
-    //     .required('Time is required'),
+    time: yup
+        .string('Enter time')
+        .required('Time is required'),
     location: yup
         .string('Enter your location')
         .min(2, 'Location should have at least 2 characters.')
         .required('Location is required'),
-
-
 });
 
 
@@ -76,7 +74,7 @@ const Form20 = (props) => {
 
             for (let i = 0; i < individualsArray.length; i++) {
                 if(individualsArray[i]=== 'Patient'){
-                    setCheckedPatient(true);
+
                     formik.values.patient = 'Patient';
                     setCheckboxFunc('patient', 'Patient');
                 }
@@ -219,17 +217,19 @@ const Form20 = (props) => {
         if (event.target.value === 'other') {
             setCheckedOther(!checkedOther);
         }
-
+        if(event.target.value === 'patient') {
+            setCheckedPatient(!checkedPatient);
+        }
 
     }
     //saving state is async, so we use an async function and call it within useEffect
     //it monitors formik.values which is in state
     useEffect(() => {
-        async function fetchData() {
+        async function saveData() {
             props.handleSave(formik.values)
         }
-        fetchData();
-    }, [formik.values]);
+        saveData();
+    }, [formik.values, departmentTags, eventTags]);
 
     //update form values for individuals involved
     useEffect(formatIndividuals, [handleChangeEvent]);
@@ -688,9 +688,6 @@ const Form20 = (props) => {
                 </Grid>
                 <Grid item xs={2}>
                     <FormControl>
-                        <Button color="primary" variant="contained" fullWidth type="submit">
-                            Submit
-                        </Button>
                         {(props.view === 'supervisor') ?
                             null
                            :
