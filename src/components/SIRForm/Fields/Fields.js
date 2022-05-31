@@ -173,7 +173,9 @@ const Fields = ({handleClick, open}) => {
         dataToBeSent.department = departmentsInvolvedString;
         handleClick();
         apiPostIncident(dataToBeSent);
+        console.log(formValues);
         setFormValues(defaultValues);
+
 
 
     };
