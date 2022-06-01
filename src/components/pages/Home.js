@@ -59,19 +59,15 @@ const Home = () => {
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
                                     <h2>User</h2><p>
-                                    SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus
-                                    id perferendis! Deserunt doloribus ducimus ea eveniet, fuga libero, modi molestiae
-                                    obcaecati optio quo quod totam velit voluptas?
+                                    Centered around usuability and design patterns to ensure the best user experience. Security is integral to operating data and protecting SIR information is paramount.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 </p></div>
                             </td>
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
                                     <h2>For Soldiers, by Soldiers</h2><p>
-                                    SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus
-                                    id perferendis! Deserunt doloribus ducimus ea eveniet, fuga libero, modi molestiae
-                                    obcaecati optio quo quod totam velit voluptas?
+                                    Software should be developed for Soldiers to ensure that they can operate with the greatest lethality. Even in the strategic environment, time is off the essence. Everything
+                                    ultimately effects the war fighter. Lorem ipsum dolor sit amet, consectetur adipisicing.
                                 </p></div>
                             </td>
                         </tr>
