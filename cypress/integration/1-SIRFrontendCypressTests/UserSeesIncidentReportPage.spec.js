@@ -47,5 +47,9 @@ describe('user navigating to the homepage', () => {
         cy.findByText(/individuals\(s\) involved/i).should('exist');
     });
 
+    it('should see event type',()=>{
+        cy.findByText(/event type/i).should('exist');
+    });
+
 
 });
