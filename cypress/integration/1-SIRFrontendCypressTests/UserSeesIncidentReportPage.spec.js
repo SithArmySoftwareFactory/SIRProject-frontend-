@@ -21,9 +21,13 @@ describe('user navigating to the homepage', () => {
 
     it('should see a searchbox',()=>{
         cy.findByRole('searchbox').should('exist');
-    })
+    });
 
     it('should see a checkbox to select all boxes',()=>{
-        cy.findByRole('checkbox', {  name: /select all rows/i})
-    })
+        cy.findByRole('checkbox', {  name: /select all rows/i}).should('exist');
+    });
+
+    it('should see a event date',()=>{
+        cy.findByText(/event date/i).should('exist');
+    });
 });
