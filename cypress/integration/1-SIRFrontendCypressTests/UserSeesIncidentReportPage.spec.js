@@ -52,4 +52,12 @@ describe('user navigating to the homepage', () => {
     });
 
 
+    it('should see details',()=>{
+        cy.findByText(/details/i).should('exist');
+    });
+
+    it('should see rows per page',()=>{
+        cy.findByText(/rows per page:/i).should('exist');
+    });
+
 });
