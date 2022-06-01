@@ -1,7 +1,6 @@
 import {API_URL} from "../constants/Constants";
 import axios from "axios";
 
-
 export const apiGetIncident = async (index) => {
     if (index > 0) {
         return axios.get(API_URL + "incident/" + index)
