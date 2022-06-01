@@ -2,7 +2,8 @@ import {Card, CardActionArea, CardContent, CardMedia, Grid, Typography} from "@m
 import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined';
 import './home.css'
 import {Add} from "@mui/icons-material";
-
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 const Home = () => {
     return(
         <>
@@ -29,7 +30,34 @@ const Home = () => {
                     <Grid item xs={12}>
 
                         <div className="page-icon-container">
-                            <AddTaskOutlinedIcon className="page-icon"   style={{fontSize: '102px'}}/>
+                            <table width="100%" style={{textAlign:'center', justifyContent:'center', marginTop:'2%'}}>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                    <div style={{maxWidth:'400px', display: "inline-block"}}>
+                                        <DashboardIcon className="page-icon"   style={{fontSize: '250px', left:'2%'}}/>
+                                        <h2>Dashboard</h2><p>
+                                       SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus id perferendis! Deserunt doloribus ducimus ea eveniet, fuga libero, modi molestiae obcaecati optio quo quod totam velit voluptas?
+                                    </p></div>
+                                    </td>
+                                    <td>
+                                        <div style={{maxWidth:'400px', display: "inline-block"}}>
+                                            <GroupAddOutlinedIcon className="page-icon"   style={{fontSize: '250px'}}/>
+                                            <h2>User</h2><p>
+                                            SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus id perferendis! Deserunt doloribus ducimus ea eveniet, fuga libero, modi molestiae obcaecati optio quo quod totam velit voluptas?
+                                        </p></div>
+                                    </td>
+                                    <td>
+                                        <div style={{maxWidth:'400px',  display: "inline-block"}}>
+                                            <img src="icons8-soldier-man-100.png"   style={{width:'200px',height:'200px'}}/>
+                                            <h2>For Soldiers, by Soldiers</h2><p>
+                                            SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus id perferendis! Deserunt doloribus ducimus ea eveniet, fuga libero, modi molestiae obcaecati optio quo quod totam velit voluptas?
+                                        </p></div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
                         </div>
                     </Grid>
                 </Grid>

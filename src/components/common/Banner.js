@@ -1,10 +1,5 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import {styleBanner} from "../../themes/themes";
 import HomeIcon from '@mui/icons-material/Home';
 import ASFIcon from "./ASFIcon";
 import './banner.css';
@@ -12,22 +7,26 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import FaceIcon from '@mui/icons-material/Face';
 import {NavLink} from "react-router-dom";
+import {Grid} from "@mui/material";
 export function Banner({setIsHome, isHome}) {
     return (
         <Box component={"div"} sx={{flexGrow: 1}}>
+            <Grid container spacing={0} columns={12} justifyContent="center">
+                <Grid item xs={12}>
             <header>
-                <nav>
-                    <span id="logo"><ASFIcon/></span>
-                    <ul>
+                <nav >
+                    <img src="/img.png" alt={"logo"}  id="logo"/>
+
+                    <ul  >
                         <li><HomeIcon className="bannerIcons"/><NavLink  className="navLink" page="/" to="/">Home</NavLink></li>
                         <li><AssessmentIcon className="bannerIcons"/><NavLink  className="navLink" page="/report" to="/report">Submit Report</NavLink></li>
                         <li><SupervisedUserCircleIcon className="bannerIcons"/><NavLink  className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink></li>
                         <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/login" to="/login">Login</NavLink></li>
-                        <span style={{width:'300px'}}> --------------------------------------</span>
                     </ul>
                 </nav>
             </header>
-
+                </Grid>
+            </Grid>
 
             {/*<AppBar style={styleBanner}*/}
             {/*>*/}

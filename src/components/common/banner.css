@@ -7,6 +7,8 @@ header {
     border-bottom: 1px solid #e3e3e8;
 }
 #logo {
+    position: absolute;
+    height:98px;
     float: left;
     font-size: 3em;
     margin: 0;
@@ -28,11 +30,12 @@ nav {
     width:100%;
     text-align: center;
     border-bottom: 0.01em solid #F7F7F7;
+
 }
 nav ul {
     list-style-type: none;
-    margin: 0;
-    padding: 2.2em 2em;
+    padding: 2.33em 2em;
+    margin-bottom: -2px;
 }
 nav ul li {
     display: inline;
@@ -44,12 +47,13 @@ nav ul li .navLink {
     text-decoration: none;
     text-transform: uppercase;
     font-size: 0.9em;
-    padding-bottom: 1.0em;
+    padding-bottom: 1.3em;
+    margin-right:2em;
     transition: .5s color;
-    margin-left: -1.5%;
+
 }
-nav ul li .navLink :hover {
-    border-bottom: 3px solid #ffd500;
+nav ul li .navLink:hover {
+    border-bottom: 3px solid #FFFFFF;
 }
 
 #ab:hover {
@@ -66,9 +70,9 @@ nav ul li .navLink :hover {
     overflow: hidden;
 }
 .bannerIcons {
-    padding:3px;
-    margin-right:45px;
-    margin-bottom:-6px;
+    padding:0;
+    margin-right:10px;
+    margin-bottom:0;
     color:#ffc300;
 
 }
