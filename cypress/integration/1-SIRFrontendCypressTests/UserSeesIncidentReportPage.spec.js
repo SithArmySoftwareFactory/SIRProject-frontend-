@@ -1,5 +1,5 @@
 describe('user navigating to the homepage', () => {
-    beforeEach(() => {
+    before(() => {
         cy.visit('/supervisor')
     });
     it('should see a banner and a menu button', () => {
@@ -58,6 +58,18 @@ describe('user navigating to the homepage', () => {
 
     it('should see rows per page',()=>{
         cy.findByText(/rows per page:/i).should('exist');
+    });
+
+    it('should see button changes row per page',()=>{
+        cy.findByRole('button',{name:/rows per page: 5/i}).should('exist');
+    });
+
+    it('should see button changes to the next page',()=>{
+        cy.findByRole('button',{name:/go to next page/i}).should('exist');
+    });
+
+    it('should see button changes to the next page',()=>{
+        cy.findByRole('button',{name:/go to previous page/i}).should('exist');
     });
 
 });
