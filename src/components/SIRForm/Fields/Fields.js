@@ -22,7 +22,7 @@ import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
 import {apiPostIncident} from "../../../api/APICalls";
 
 
-const Fields = ({handleClick, open, defaultValues }) => {
+const Fields = ({handleClick, open, defaultValues}) => {
 
     let defaultValues2 = null;
 
@@ -31,7 +31,7 @@ const Fields = ({handleClick, open, defaultValues }) => {
             date: new Date(),
             time: new Date(),
             location: "",
-            eventType: "Actual Event/Incident",
+            eventType: [],
             //boolean on backend
             harm: "Yes",
             //string on backend delineated by commas
@@ -46,7 +46,7 @@ const Fields = ({handleClick, open, defaultValues }) => {
                 other: false
             },
             //string on backend delineated by commas
-            incidentType: [],
+            incidentType: "Actual Event/Incident",
             //boolean
             effects: 'No harm sustained',
             witness1Name: '',
@@ -75,19 +75,19 @@ const Fields = ({handleClick, open, defaultValues }) => {
             harm: (defaultValues.harm) ? "Yes" : "no" || "Yes",
             //string on backend delineated by commas
             individuals: {
-                patient: (defaultValues.patient !== null),
-                familyMember: (defaultValues.familymember !== null),
-                adult: (defaultValues.adult !== null),
-                child: (defaultValues.child !== null),
-                staffMember: (defaultValues.staffmember !== null),
-                visitor: (defaultValues.visitor !== null),
-                volunteer: (defaultValues.volunteer !== null),
-                other: (defaultValues.other !== null)
+                patient: defaultValues.individuals.includes("Patient"),
+                familyMember: defaultValues.individuals.includes("Family Member"),
+                adult: defaultValues.individuals.includes("Adult"),
+                child: defaultValues.individuals.includes("Child"),
+                staffMember: defaultValues.individuals.includes("Staff Member"),
+                visitor: defaultValues.individuals.includes("Visitor"),
+                volunteer: defaultValues.individuals.includes("Volunteer"),
+                other: defaultValues.individuals.includes("Other")
             },
             //string on backend delineated by commas
             incidentType: (defaultValues.incidentType !== null) ? defaultValues.incidentType.trim().split(",") || [] : [],
             //boolean
-            effects: defaultValues.effects || 'No harm sustained',
+            effects: defaultValues.effects?"Harm sustained":"No harm sustained",
             witness1Name: defaultValues.witness1Name || '',
             witness1Phone: defaultValues.witness1Phone || '',
             witness2Name: defaultValues.witness2Name || '',
@@ -121,7 +121,7 @@ const Fields = ({handleClick, open, defaultValues }) => {
     const handleAutoCompleteTypeOfEvent = (target) => {
         setFormValues({
             ...formValues,
-            ['incidentType']: target,
+            ['eventType']: target,
         });
     }
 
@@ -177,18 +177,17 @@ const Fields = ({handleClick, open, defaultValues }) => {
         let departmentsInvolvedString = "";
 
         let tempTime = new Date(dataToBeSent.time);
+        let tempTimeHour = tempTime.getHours();
+        let tempTimeMinutes = tempTime.getMinutes();
 
-        if(tempTime.getHours()<10){
-            dataToBeSent.time= "0"+tempTime.getHours()+":"+tempTime.getMinutes();
-        } else {
-            dataToBeSent.time= tempTime.getHours()+":"+tempTime.getMinutes();
+        if(tempTimeHour<10){
+            tempTimeHour= `0${tempTimeHour}`;
+        }
+        if(tempTimeMinutes<10){
+            tempTimeMinutes=`0${tempTimeMinutes}`;
         }
 
-        if(tempTime.getMinutes()<10){
-            dataToBeSent.time= "0"+tempTime.getHours()+":0"+tempTime.getMinutes();
-        } else {
-            dataToBeSent.time= tempTime.getHours()+":"+tempTime.getMinutes();
-        }
+        dataToBeSent.time=`${tempTimeHour}:${tempTimeMinutes}`;
 
         dataToBeSent.date=dataToBeSent.date.split('T')[0];
 
@@ -202,20 +201,20 @@ const Fields = ({handleClick, open, defaultValues }) => {
 
         for (const individuals in dataToBeSent.individuals) {
             if (dataToBeSent.individuals[`${individuals}`]) {
-                individualsInvolvedString = individualsInvolvedString + "," + individuals;
+                individualsInvolvedString = individualsInvolvedString + "," + individuals.replace(/^\w/,(c)=>c.toUpperCase());
             }
         }
         dataToBeSent.individuals = individualsInvolvedString.substring(1);
 
-        for (const event of dataToBeSent.incidentType) {
+        for (const event of dataToBeSent.eventType) {
             typeOfEventString = typeOfEventString + "," + event;
         }
-        dataToBeSent.incidentType = typeOfEventString.substring(1);
+        dataToBeSent.eventType = typeOfEventString.substring(1);
 
         for (const department of dataToBeSent.department) {
             departmentsInvolvedString = departmentsInvolvedString + "," + department;
         }
-        dataToBeSent.department = departmentsInvolvedString;
+        dataToBeSent.department = departmentsInvolvedString.substring(1);
         handleClick();
         console.log(dataToBeSent);
         apiPostIncident(dataToBeSent);
