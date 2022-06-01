@@ -43,5 +43,9 @@ describe('user navigating to the homepage', () => {
         cy.findByText(/harm/i).should('exist');
     });
 
+    it('should see individuals(s) involved',()=>{
+        cy.findByText(/individuals\(s\) involved/i).should('exist');
+    });
+
 
 });
