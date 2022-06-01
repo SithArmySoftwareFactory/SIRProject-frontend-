@@ -7,26 +7,27 @@
     font-size: 300px;
 }
 
-.callout-container {
-    width:100%;
+.callout {
     text-align: center;
+    font-family: 'Raleway', sans-serif;
+    width:500px;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
 }
 .callout-container-h1{
-    background: rgba(255, 255, 255, 0.1);
-
+    background: rgba(255, 255, 255, 0.3);
 }
-.callout {
-
-    font-family: 'Raleway', sans-serif;
+.callout-container {
+    width:700px;
     text-align: center;
+
+    justify-content: center;
     color: #F7F7F7;
     font-size: 2em;
-    margin-top:5em;
+    margin-top:3em;
+    margin-bottom: 3em;
     position: center;
-    top:10%;
     left:40%;
     padding:1em;
     border: 1px solid #FFF;
