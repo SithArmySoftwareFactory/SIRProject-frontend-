@@ -65,11 +65,12 @@ const Fields = ({handleClick, open, defaultValues }) => {
             patientAddress: ""
         }
     } else {
+        console.log(defaultValues);
         defaultValues2 = {
-            date: defaultValues.date || new Date(),
-            time: defaultValues.time || new Date(),
-            location: defaultValues.location || "",
-            eventType: defaultValues.eventType || "Actual Event/Incident",
+            date:  new Date(defaultValues.date.split("-")[0],defaultValues.date.split("-")[1]-1,defaultValues.date.split("-")[2]),
+            time: new Date(2022,1,1,defaultValues.time.split(":")[0],defaultValues.time.split(":")[1]),
+            location: defaultValues.location,
+            eventType: defaultValues.eventType.split(","),
             //boolean on backend
             harm: (defaultValues.harm) ? "Yes" : "no" || "Yes",
             //string on backend delineated by commas
@@ -102,8 +103,9 @@ const Fields = ({handleClick, open, defaultValues }) => {
             patientPhone: defaultValues.patientPhone || "",
             patientAddress: defaultValues.patientAddress || ""
         }
-    }
 
+
+    }
     const [isDisabled, setIsDisabled] = useState(true);
     const [formValues, setFormValues] = useState(defaultValues2);
 
