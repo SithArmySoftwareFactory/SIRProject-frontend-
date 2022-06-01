@@ -62,13 +62,7 @@ nav ul li .navLink:hover {
 #abc:hover {
     color: #00acee;
 }
-.video-container {
-    height: 500px;
-    width:100%;
-    max-width:1000px;
-    position: relative;
-    overflow: hidden;
-}
+
 .bannerIcons {
     padding:0;
     margin-right:10px;
@@ -76,13 +70,4 @@ nav ul li .navLink:hover {
     color:#ffc300;
 
 }
-video {
-    object-fit: cover;
-    position: relative;
-    height: 80vh;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    box-shadow: 5px 10px 18px #888888;
-}
+

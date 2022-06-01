@@ -9,14 +9,13 @@ const Home = () => {
         <>
         <div className='vidContain'>
         <div className='vid'>
-            <video autoPlay muted loop className="ideo-container ">
+            <video autoPlay muted loop className="video-container ">
                 <source src="http://localhost:3000/spinning_planet.mp4" type="video/mp4"/>
                 <source src="http://localhost:3000/spinning_planet.webm" type="video/webm"/>
             </video>
         </div>
         <div className="callout">
             <div className="callout-container">
-
                 <h1 className="callout-container-h1"> Serious Incident Report</h1>
             </div>
             <br/> <br/> <br/>
