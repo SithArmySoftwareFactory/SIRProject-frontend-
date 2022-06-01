@@ -30,4 +30,11 @@ describe('user navigating to the homepage', () => {
     it('should see a event date',()=>{
         cy.findByText(/event date/i).should('exist');
     });
+
+    it('should see location',()=>{
+        cy.findByText(/location/i).should('exist');
+    });
+
+
+
 });
