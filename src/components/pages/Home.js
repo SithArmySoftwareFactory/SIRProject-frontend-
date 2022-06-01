@@ -33,6 +33,22 @@ const Home = () => {
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
                                     <DashboardIcon className="page-icon" style={{fontSize: '250px', left: '2%'}}/>
+                       </div>
+                            </td>
+                            <td>
+                                <div style={{maxWidth: '400px', display: "inline-block"}}>
+                                    <GroupAddOutlinedIcon className="page-icon" style={{fontSize: '250px'}}/>
+                                </div>
+                            </td>
+                            <td>
+                                <div style={{maxWidth: '400px', display: "inline-block"}}>
+                                    <img src="icons8-soldier-man-100.png" style={{width: '200px', height: '200px'}}/>
+                          </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style={{maxWidth: '400px', display: "inline-block"}}>
                                     <h2>Dashboard</h2><p>
                                     SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus
@@ -42,7 +58,6 @@ const Home = () => {
                             </td>
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <GroupAddOutlinedIcon className="page-icon" style={{fontSize: '250px'}}/>
                                     <h2>User</h2><p>
                                     SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus
@@ -52,7 +67,6 @@ const Home = () => {
                             </td>
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <img src="icons8-soldier-man-100.png" style={{width: '200px', height: '200px'}}/>
                                     <h2>For Soldiers, by Soldiers</h2><p>
                                     SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus
