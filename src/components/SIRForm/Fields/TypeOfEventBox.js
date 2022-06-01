@@ -49,7 +49,7 @@ const TypeOfEventBox = ({handleInputChange, formValues}) => {
                         handleChange(event,value);
                     }}
                     multiple
-                    id="typeOfEvent"
+                    id="eventType"
 
                     options={eventTypes.map((option) => option.title)}
                     renderTags={(value, getTagProps) =>
@@ -57,7 +57,7 @@ const TypeOfEventBox = ({handleInputChange, formValues}) => {
                             <Chip variant="outlined" label={option} {...getTagProps({index})} />
                         ))
                     }
-                    value={formValues.incidentType}
+                    value={formValues.eventType}
                     renderInput={(params) => (
                         <TextField
                             {...params}
