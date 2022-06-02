@@ -4,6 +4,7 @@ import * as React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import Box from "@mui/material/Box";
 
 
 const DepartmentsInvolvedBox = ({handleInputChange, formValue}) => {
@@ -35,7 +36,7 @@ const DepartmentsInvolvedBox = ({handleInputChange, formValue}) => {
     ];
 
     return (
-        <>
+        <Box>
             <br/>
             <label style={styleLabel}>Department(s) Involved in this incident</label>
             <Stack spacing={3}>
@@ -63,7 +64,7 @@ const DepartmentsInvolvedBox = ({handleInputChange, formValue}) => {
                     )}
                 />
             </Stack>
-        </>
+        </Box>
     );
 
 }
