@@ -13,11 +13,11 @@ const EventTypeBox = ({formValues, handleInputChange}) => {
             <FormControl fullWidth>
                 <Select
                     required
-                    labelId="event-type-label"
-                    id="event-type-options"
-                    name="eventType"
-                    value={formValues.eventType}
-                    label="Event-type"
+                    labelId="incident-type-label"
+                    id="incident-type-options"
+                    name="incidentType"
+                    value={formValues.incidentType}
+                    label="incident-type"
                     onChange={handleInputChange}
                 >
                     <MenuItem key={"Actual Event/Incident"} value={"Actual Event/Incident"}>Actual
