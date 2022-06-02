@@ -16,8 +16,7 @@ export function Banner({setIsHome, isHome}) {
             <header>
                 <nav >
                     <img src="/img.png" alt={"logo"}  id="logo"/>
-
-                    <ul  >
+                    <ul>
                         <li><HomeIcon className="bannerIcons"/><NavLink  className="navLink" page="/" to="/">Home</NavLink></li>
                         <li><AssessmentIcon className="bannerIcons"/><NavLink  className="navLink" page="/report" to="/report">Submit Report</NavLink></li>
                         <li><SupervisedUserCircleIcon className="bannerIcons"/><NavLink  className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink></li>
