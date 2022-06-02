@@ -52,7 +52,7 @@ describe('user navigating to the homepage', () => {
     });
     it('should see a type of event box', () => {
         cy.findByText(/type of event/i).should('exist');
-        cy.findByText(/type of event/i).siblings().last().children().last().children().last().should('exist');
+        cy.findByText(/type of event/i).siblings().last().should('exist');
     });
 
     it('should see a effect of this incident on the individual(s) involved box', () => {
