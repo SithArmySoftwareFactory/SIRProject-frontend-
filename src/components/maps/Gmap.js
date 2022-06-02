@@ -12,15 +12,7 @@ import mapStyles from "./mapstyles";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import * as tf from "@tensorflow/tfjs";
-import padSequences from "./helper/paddedSeq";
-import CodedBy from "../common/CodedBy";
-import { Grid } from "@mui/material";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { ObjectDetector } from "../ai/ObjectDetectV";
+import { Grid, Box, Modal, Button, Typography } from "@mui/material";
 
 function Gmap(props) {
     const { isLoaded } = useJsApiLoader({
@@ -49,64 +41,6 @@ function Gmap(props) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    async function loadModel(url) {
-        try {
-            const model = await tf.loadLayersModel(url.model);
-            setModel(model);
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    async function loadMetadata(url) {
-        try {
-            const metadataJson = await fetch(url.metadata);
-            const metadata = await metadataJson.json();
-            setMetadata(metadata);
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    const getSentimentScore = (text) => {
-        console.log(text);
-        const inputText = text
-            .trim()
-            .toLowerCase()
-            .replace(/(\.|\,|\!)/g, "")
-            .split(" ");
-        setTrim(inputText);
-        console.log(inputText);
-        const sequence = inputText.map((word) => {
-            let wordIndex = metadata.word_index[word] + metadata.index_from;
-            if (wordIndex > metadata.vocabulary_size) {
-                wordIndex = OOV_INDEX;
-            }
-            return wordIndex;
-        });
-        setSeq(sequence);
-        console.log(sequence);
-        // Perform truncation and padding.
-        const paddedSequence = padSequences([sequence], metadata.max_len);
-        console.log(metadata.max_len);
-        setPad(paddedSequence);
-
-        const input = tf.tensor2d(paddedSequence, [1, metadata.max_len]);
-        console.log(input);
-        setInput(input);
-        const predictOut = model.predict(input);
-        const score = predictOut.dataSync()[0];
-        predictOut.dispose();
-        setScore(score);
-        return score;
-    };
-
-    useEffect(() => {
-        tf.ready().then(() => {
-            loadModel(url);
-            loadMetadata(url);
-        });
-    }, []);
 
     //Austin -30.2672° N, 97.7431
     //-> 30.2826922,-97.7740298 - start in+-
@@ -145,8 +79,6 @@ function Gmap(props) {
         []
     );
 
-    //fire projectiles
-    const [fires, setFire] = useState([]);
     //store  clicked locations in state
     const [places, setPlaces] = React.useState([]);
     //const save the prev place for calculating route
@@ -158,22 +90,15 @@ function Gmap(props) {
     //path polyline ...
     const [paths, setPaths] = useState([]);
 
-    //target of missile state
-    const [targetOfMissile, setTargetOfMissile] = useState({});
-
-    //setup the projectile
-    const [targetShot, setTargetShot] = useState([]);
-
+//track last location
     useEffect(() => {
         prevPlace.current = places[places.length - 1];
     });
 
-    const [tick, setTick] = useState(7);
-    //to store coordinate from state
-    const [intervalRender, setIntervalRender] = useState(null);
 
     //directions display control
     const [directionsAvail, setDirectionsAvail] = useState(false);
+
     //store for Info WWindows, if implemented
     const [focusedPlace, setFocusedPlace] = React.useState(null);
 
@@ -192,61 +117,6 @@ function Gmap(props) {
         width: "100%",
     };
 
-    //Target Accuracy options
-    const radOptions = {
-        strikeOpacity: 0.5,
-        strokeWeight: 2,
-        clickable: false,
-        draggable: false,
-        editable: false,
-        visible: true,
-    };
-
-    //inner accuracy - requires recalculations based on art type
-    const accuracyHighRadOptions = {
-        ...radOptions,
-        zIndex: 3,
-        fillOpacity: 0.05,
-        strokeColor: "#8BC30A",
-        fillColor: "#8BC30A",
-    };
-
-    //middle accuracy - may need logic to remove this if range is below
-    //certain radius
-    const accuracyMedRadOptions = {
-        ...radOptions,
-        zIndex: 2,
-        fillOpacity: 0.05,
-        strokeColor: "#FBC12D",
-        fillColor: "#FBC12D",
-    };
-
-    //low accuracy options...
-    const accuracyLowRadOptions = {
-        ...radOptions,
-        zIndex: 1,
-        fillOpacity: 0.05,
-        strokeColor: "#FF5252",
-        fillColor: "#FF5252",
-    };
-
-    //low accuracy options...
-    const accuracyLowFriendRadOptions = {
-        ...radOptions,
-        zIndex: 1,
-        fillOpacity: 0.05,
-        strokeColor: "#0043ff",
-        fillColor: "#0043ff",
-    };
-
-    //fires  options...
-    //   const firesOption = {
-    //     ...radOptions,
-    //     zIndex: 1,
-    //     fillOpacity: 1,
-    //     strokeColor: "#ff0000",
-    //     fillColor: "#ff0000",
-    //   };
 
     const style = {
         position: "absolute",
@@ -264,44 +134,13 @@ function Gmap(props) {
     //function to store places, clicked - store the lat long
     //and record ...previous places  - useCall back to help with map refresh (state changes)
     const handleRender = React.useCallback((event) => {
-        if (props.imageDetected === true) {
-            console.log(props.imageDetected);
-            console.log(props.prediction);
-            console.log(props.prediction.lat);
-            setPlaces([
-                ...places,
-                {
-                    lat: Number(props.prediction.lat),
-                    lng: Number(props.prediction.lng),
-                    range: 10000,
-                    currentArt: "Vehicle",
-                    friendly: true,
-                    rpm: 2,
-                    facts: "Vehicle, range 10000. Threat is significant.",
-                    src: "./truckdetect.png",
-                },
-            ]);
-            props.toggleImageDetected(false);
-        } else if (props.currentArtRange > 0) {
-            props.incrementCount();
             setPlaces([
                 ...places,
                 {
                     lat: event.latLng.lat(),
                     lng: event.latLng.lng(),
-                    range: props.toggle
-                        ? props.currentArtRange
-                        : props.currentInfantryRange,
-                    currentArt: props.toggle ? props.currentArt : props.currentInfantry,
-                    friendly: props.toggle
-                        ? props.currentFriend
-                        : props.currentInfantryFriend,
-                    rpm: props.toggle ? props.currentRPM : props.currentInfantryRPM,
-                    facts: props.toggle ? props.currentFacts : props.currentInfantryFacts,
-                    src: props.toggle ? "./icons8-army-62.png" : "./Spartan.gif",
                 },
             ]);
-        }
     });
 
     useEffect(() => {});
@@ -347,11 +186,6 @@ function Gmap(props) {
             },
         ]);
 
-        //Target of Missle for explosion
-        setTargetOfMissile({
-            lat: prevPlace.current.lat,
-            lng: prevPlace.current.lng,
-        });
 
         //create a path to the target using Polyline
         setPaths([
@@ -362,49 +196,7 @@ function Gmap(props) {
             },
         ]);
 
-        //calculations for missile points.
-        let exact_midpoint = props.midpoint(
-            prevPlace.current.lat,
-            prevPlace.current.lng,
-            currLAT,
-            currLNG
-        );
-        let exact_midpoint_between_target = props.midpoint(
-            exact_midpoint.lat,
-            exact_midpoint.lng,
-            currLAT,
-            currLNG
-        );
-        let exact_midpoint_between_target_half = props.midpoint(
-            exact_midpoint_between_target.lat,
-            exact_midpoint_between_target.lng,
-            currLAT,
-            currLNG
-        );
 
-        let exact_midpoint_between_source = props.midpoint(
-            prevPlace.current.lat,
-            prevPlace.current.lng,
-            exact_midpoint.lat,
-            exact_midpoint.lng
-        );
-        let exact_midpoint_between_source_half = props.midpoint(
-            prevPlace.current.lat,
-            prevPlace.current.lng,
-            exact_midpoint_between_source.lat,
-            exact_midpoint_between_source.lng
-        );
-
-        setTargetShot([
-            exact_midpoint_between_target_half,
-            exact_midpoint_between_target,
-            exact_midpoint,
-            exact_midpoint_between_source,
-            exact_midpoint_between_source_half,
-        ]);
-
-        //reset the tick of missile traveling to 0 this is to render when needed
-        setTick(0);
 
         //routing if enabled to draw driving route
         service.route(
@@ -423,29 +215,9 @@ function Gmap(props) {
         );
     };
 
-    //control render of missle
-    useEffect(() => {
-        if (tick <= 6) {
-            setTimeout(() => {
-                setIntervalRender(targetShot[tick]);
-                setTick(tick + 1);
-            }, 3000);
-        }
-        if (tick === 6) {
-            setFire(targetOfMissile);
-            setTimeout(props.setMessageFunc("Target Hit!"), 1000);
-        } else {
-            props.setMessageFunc("");
-        }
-        //
-        // setInterval(() => setIntervalRender(
-        //     targetShot.filter((e, i) => i === 0)
-        //         .map((targetShot) => targetShot), 3000));
-    }, [tick]);
-
     //Maps loaded, called onLoad
     const toastyLoading = () => {
-        toast.success("Google Maps has been loaded successfully!", {
+        toast.success("SIR Maps has been loaded successfully!", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -510,23 +282,7 @@ function Gmap(props) {
                     tilt={45}
                     onLoad={handleLoadToastAndMaps}
                 >
-                    {" "}
-                    {/* draw directions */}
-                    {/*{directionsAvail && <DirectionsRenderer directions={(directionsAvail) ? directions : null}/>}*/}
-                    {intervalRender !== null ? ( // <Circle
-                        //     center={intervalRender}
-                        //     radius={1000}
-                        //     options={accuracyHighRadOptions}/>
-                        <Marker
-                            position={intervalRender}
-                            icon={{
-                                url: "./missile.gif",
-                                scaledSize: new window.google.maps.Size(100, 100),
-                                origin: new window.google.maps.Point(0, 0),
-                                anchor: new window.google.maps.Point(5, 5),
-                            }}
-                        />
-                    ) : null}
+
                     {paths.map(() => {
                         return (
                             <Polyline
@@ -546,19 +302,6 @@ function Gmap(props) {
                             />
                         );
                     })}
-                    {fires !== null ? (
-                        <>
-                            <Marker
-                                position={{ lat: fires.lat, lng: fires.lng }}
-                                icon={{
-                                    url: "./5.gif",
-                                    scaledSize: new window.google.maps.Size(50, 50),
-                                    origin: new window.google.maps.Point(0, 0),
-                                    anchor: new window.google.maps.Point(25, 25),
-                                }}
-                            />
-                        </>
-                    ) : null}
                     {places.map((place) => {
                         return (
                             <>
@@ -575,51 +318,16 @@ function Gmap(props) {
                                     onClick={() => {
                                         setFocusedPlace(place);
                                         getRoute(place);
-                                        getSentimentScore(place.facts);
-                                        props.setCurrentGridFunc({
-                                            lat: place.lat,
-                                            lng: place.lng,
-                                        });
-                                        elevatorService(place).then((r) =>
-                                            props.setElevatorFunc(r.results)
-                                        );
+
                                     }}
                                     //draggable={true}
                                     //onDragEnd={handleRender}
                                     onDblClick={handleRenderOff}
                                 />
-                                <Circle
-                                    center={place}
-                                    key={2342342}
-                                    radius={place.range / 2.3}
-                                    options={accuracyHighRadOptions}
-                                />
-                                <Circle
-                                    center={place}
-                                    key={2342342}
-                                    radius={place.range / 2.3}
-                                    options={accuracyHighRadOptions}
-                                />
-                                <Circle
-                                    center={place}
-                                    key={23524365}
-                                    radius={place.range / 1.6}
-                                    options={accuracyMedRadOptions}
-                                />
-                                <Circle
-                                    center={place}
-                                    key={523523655}
-                                    radius={place.range}
-                                    options={
-                                        place.friendly
-                                            ? accuracyLowFriendRadOptions
-                                            : accuracyLowRadOptions
-                                    }
-                                />
-                                l;
                             </>
                         );
                     })}
+                    //Render modal for specific place
                     {focusedPlace ? (
                         <InfoWindow
                             position={{ lat: focusedPlace.lat, lng: focusedPlace.lng }}
@@ -637,43 +345,6 @@ function Gmap(props) {
                         </InfoWindow>
                     ) : null}
                 </GoogleMap>
-            </Grid>
-            <Grid item xs={8}>
-                <CodedBy />
-            </Grid>
-            <Grid item xs={4}>
-                <div>
-                    <Button
-                        className="button-49"
-                        sx={{ fontSize: "30px", width: "300px" }}
-                        onClick={handleOpen}
-                    >
-                        VEHICLE_RECONNAISSANCE
-                    </Button>
-                    <Modal
-                        keepMounted
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="keep-mounted-modal-title"
-                        aria-describedby="keep-mounted-modal-description"
-                    >
-                        <Box sx={style}>
-                            <Typography
-                                id="keep-mounted-modal-title"
-                                variant="h6"
-                                component="h2"
-                            >
-                                Upload image for analysis.
-                            </Typography>
-                            <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-                                <ObjectDetector
-                                    predictionService={props.predictionService}
-                                    toggleImageDetected={props.toggleImageDetected}
-                                />
-                            </Typography>
-                        </Box>
-                    </Modal>
-                </div>
             </Grid>
         </Grid>
     ) : (
