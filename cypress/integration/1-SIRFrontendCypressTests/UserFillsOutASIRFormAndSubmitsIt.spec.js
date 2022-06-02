@@ -4,16 +4,20 @@ describe('user filling out form and submitting to the db', () => {
     });
 
     it('should be able to fill out the date box and should not be able to submit', () => {
-        cy.findAllByPlaceholderText('mm/dd/yyyy').clear().type('06/01/2022');
+        cy.findByPlaceholderText('mm/dd/yyyy').clear().type('06/01/2022');
+        cy.findByDisplayValue('06/01/2022').should('exist');
         cy.findByRole('button',{name:/submit/i}).should('be.disabled');
     });
 
-    it('should be able to fill out the time box', () => {
-        cy.findAllByPlaceholderText(/hh:mm/i).clear().type('1200a');
+    it('should be able to fill out the time box and should not be able to submit', () => {
+        cy.findByPlaceholderText(/hh:mm/i).clear().type('1200a');
+        cy.findByDisplayValue('12:00 am').should('exist');
         cy.findByRole('button',{name:/submit/i}).should('be.disabled');
     });
 
-    it('should see a location box', () => {
-        cy.findByText(/location of event/i).siblings().last().children().last().children().last().should('exist');
+    it('should be able to fill out the location box and not be able to submit', () => {
+        cy.findByText(/location of event/i).siblings().last().children().last().children().first().type('1212 Rio Grande St, Austin, TX 78701');
+        cy.findByDisplayValue('1212 Rio Grande St, Austin, TX 78701').should('exist');
+        cy.findByRole('button',{name:/submit/i}).should('be.disabled');
     });
 });

@@ -14,17 +14,17 @@ describe('user navigating to the homepage', () => {
 
     it('should see a date box', () => {
         cy.findByText(/date of event/i).should('exist');
-        cy.findAllByPlaceholderText('mm/dd/yyyy').should('exist');
+        cy.findByPlaceholderText('mm/dd/yyyy').should('exist');
         cy.findByRole('button', {name: /choose date/i}).should('exist');
     });
     it('should see a time box', () => {
         cy.findByText(/time of event/i).should('exist');
-        cy.findAllByPlaceholderText(/hh:mm/i).should('exist');
+        cy.findByPlaceholderText(/hh:mm/i).should('exist');
         cy.findByRole('button', {name: /choose time/i}).should('exist');
     });
     it('should see a location box', () => {
         cy.findByText(/location of event/i).should('exist');
-        cy.findByText(/location of event/i).siblings().last().children().last().children().last().should('exist');
+        cy.findByText(/location of event/i).siblings().last().children().last().children().first().should('exist');
     });
     it('should see a event drop down', () => {
         cy.findByText(/event type/i).should('exist');
