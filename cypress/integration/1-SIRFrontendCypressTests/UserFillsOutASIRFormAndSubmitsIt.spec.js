@@ -1,6 +1,6 @@
 describe('user filling out form and submitting to the db', () => {
     before(() => {
-        cy.visit('/')
+        cy.visit('/report')
     });
 
     it('should be able to fill out the date box and should not be able to submit', () => {
