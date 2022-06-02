@@ -158,7 +158,9 @@ const SupervisorView = () => {
     };
 
     return (
-        <>
+        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center'}}>
+            <Box minWidth="1038px">
+
             {(sent) ?
                 <Alert severity="success" className="sentSuccessMsg">
                     Sent to [Commander]
@@ -166,20 +168,19 @@ const SupervisorView = () => {
                 :
                 null
             }
-            <Box height="auto" width="100vw" display="flex" sx={{textAlign: 'center', justifyContent: 'center'}}>
-                <Box minWidth="1038px">
-                    <br/> <br/>
-                    <h3 className="dataGridHeaderTitle">Incident Reports</h3>
-                    <br/><br/>
-                    <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
-                    <DataGrid
-                        //get page size from state
-                        pageSize={pageSize}
-                        //function to change page size according to rowsPerPage
-                        onPageSizeChange={(newPage) => setPageSize(newPage)}
-                        pagination
-                        //options for dropdown that selects how many pages to display
-                        rowsPerPageOptions={[5, 10, 15]}
+            <br/> <br/>
+            <h3 className="dataGridHeaderTitle">Incident Reports</h3>
+            <br/><br/>
+            <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
+            <DataGrid
+                className="dataGrid"
+                //get page size from state
+                pageSize={pageSize}
+                //function to change page size according to rowsPerPage
+                onPageSizeChange={(newPage) => setPageSize(newPage)}
+                pagination
+                //options for dropdown that selects how many pages to display
+                rowsPerPageOptions={[5, 10, 15]}
 
                         //rows should be fetched from api
                         rows={rows}
@@ -308,9 +309,7 @@ const SupervisorView = () => {
                             },
                         }}
                     /></Box>
-            </Box>
-        </>
-    )
+            </Box>)
 }
 
 export default SupervisorView;

@@ -1,13 +1,16 @@
 import './App.css';
 import {Banner} from "./components/common/Banner";
 import SIRForm from "./components/SIRForm/SIRForm";
-import {forwardRef, useState} from "react";
+import {forwardRef, useEffect, useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import CloseIcon from '@mui/icons-material/Close'
 import {Route, Routes} from 'react-router-dom'
 import SupervisorView from "./components/Supervisor/SupervisorView";
+import Home from "./components/pages/Home";
+import Footer from "./components/common/Footer";
+
 
 const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -16,6 +19,9 @@ const Alert = forwardRef(function Alert(props, ref) {
 function App() {
     const [isHome, setIsHome] = useState(true);
     const [open, setOpen] = useState(false);
+
+
+
 
     const handleClick = () => {
         setOpen(true);
@@ -50,13 +56,17 @@ function App() {
                 </Grid>
                 <Grid item  xs={12} >
                 <Routes>
-                    <Route exact path="/" element={<SIRForm handleClick={handleClick}  />} />
+                    <Route exact path="/" element={<Home />} />
+                    <Route exact path="/report" element={<SIRForm handleClick={handleClick}  />} />
                      <Route path="/supervisor" element={<SupervisorView/>} />
-                    <Route element={<SIRForm/>} />
+                    <Route element={<Home />} />
                 </Routes>
             </Grid>
                 <Grid item xs={12}>
                     <ViewMenu isHome={isHome} setIsHome={setIsHome} />
+                </Grid>
+                <Grid item xs={12}>
+                    <Footer />
                 </Grid>
             </Grid>
         </>

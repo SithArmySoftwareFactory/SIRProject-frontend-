@@ -1,0 +1,76 @@
+.page-icon-container {
+    width:100%;
+    min-height: 600px;
+    background-color: 	rgb(192,192,192, 0.1);
+}
+.page-icon {
+    font-size: 300px;
+}
+
+.callout {
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    width:500px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.callout-container-h1{
+    background: rgba(255, 255, 255, 0.3);
+}
+.callout-container {
+    width:700px;
+    text-align: center;
+
+    justify-content: center;
+    color: #F7F7F7;
+    font-size: 2em;
+    margin-top:3em;
+    margin-bottom: 3em;
+    position: center;
+    left:40%;
+    padding:1em;
+    border: 1px solid #FFF;
+}
+.button {
+    background-color: #F7F7F7;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button5 {
+    background-color: #003566;
+    color: #F7F7F7;
+    border: 1px solid #F7F7F7;
+    margin-top:8em;
+    border-radius: 1px;
+}
+
+.button5:hover {
+    background-color: #000;
+    color: #ffc300;
+}
+
+.video-container {
+    height: 800px;
+    width:100%;
+    position: absolute;
+    overflow: hidden;
+}
+video {
+    object-fit: cover;
+    position: relative;
+    height: 80vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    box-shadow: 5px 10px 18px #888888;
+}
