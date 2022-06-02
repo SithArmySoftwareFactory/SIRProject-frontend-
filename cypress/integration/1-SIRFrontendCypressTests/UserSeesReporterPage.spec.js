@@ -28,7 +28,7 @@ describe('user navigating to the homepage', () => {
     });
     it('should see a event drop down', () => {
         cy.findByText(/event type/i).should('exist');
-        cy.findByText(/event type/i).siblings().last().children().last().children().last().should('exist');
+        cy.findByRole('button', {  name: /actual event\/incident/i}).should('exist');
     });
     it('should see a harm or potential harm drop down', () => {
         cy.findByText(/harm or potential harm/i).should('exist');
