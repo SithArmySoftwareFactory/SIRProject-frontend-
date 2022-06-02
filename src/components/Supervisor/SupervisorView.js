@@ -158,7 +158,7 @@ const SupervisorView = () => {
     };
 
     return (
-        <Box height="auto" width="100vw"  display="flex"sx={{textAlign:'center', justifyContent:'center'}}>
+        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center'}}>
             <Box minWidth="1038px">
             {(sent) ?
                 <p className="sentSuccessMsg">
@@ -174,6 +174,7 @@ const SupervisorView = () => {
             <br/><br/>
             <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
             <DataGrid
+                className="dataGrid"
                 //get page size from state
                 pageSize={pageSize}
                 //function to change page size according to rowsPerPage

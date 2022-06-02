@@ -78,6 +78,10 @@
     font-weight: 100;
 
 }
+.dataGrid {
+    box-shadow: 20px 20px 50px grey;
+    margin-bottom: 15em;
+}
 .dataGridReports {
     font-weight: 500;
     /*font-family: Verdana, serif;*/
@@ -99,7 +103,7 @@
 }
 
 .sentSuccessMsg {
-    width: 100vw;
+    width: 100%;
 }
 .sendToCommandBox {
     width: 100%;
