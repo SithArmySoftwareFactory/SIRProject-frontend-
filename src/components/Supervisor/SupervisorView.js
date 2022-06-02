@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import DraggableDialog from "./DraggableDialog";
 import SendToCommandDialog from "../SendToCommandDialog/SendToCommandDialog";
 import {apiGetIncident} from "../../api/APICalls";
+import Gmap from "../maps/Gmap";
 
 const SupervisorView = () => {
     const [pageSize, setPageSize] = React.useState(5);
@@ -160,7 +161,7 @@ const SupervisorView = () => {
     return (
         <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center'}}>
             <Box minWidth="1038px">
-
+                <Gmap  />
             {(sent) ?
                 <Alert severity="success" className="sentSuccessMsg">
                     Sent to [Commander]

@@ -1,45 +1,119 @@
 import * as React from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
-import {
-    Circle,
-    GoogleMap,
-    InfoWindow,
-    Marker,
-    Polyline,
-    useJsApiLoader,
-} from "@react-google-maps/api";
+import {useEffect, useMemo, useRef, useState} from "react";
+import {GoogleMap, Marker, MarkerClusterer, useJsApiLoader,} from "@react-google-maps/api";
+import {getGeocode, getLatLng,} from "use-places-autocomplete";
 import mapStyles from "./mapstyles";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
-import { toast, ToastContainer } from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Grid, Box, Modal, Button, Typography } from "@mui/material";
+import {Grid} from "@mui/material";
+import {apiGetIncident} from "../../api/APICalls";
+
 
 function Gmap(props) {
-    const { isLoaded } = useJsApiLoader({
+    const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g", // doesnt work --> process.env.MY_ENVIRONMENT_VARIABLE
     });
 
-    const url = {
-        model:
-            "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json",
-        metadata:
-            "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json",
-    };
 
-    const OOV_INDEX = 2;
-
-    const [metadata, setMetadata] = useState();
-    const [model, setModel] = useState();
-    const [testScore, setScore] = useState("");
-    const [trimedText, setTrim] = useState("");
-    const [seqText, setSeq] = useState("");
-    const [padText, setPad] = useState("");
-    const [inputText, setInput] = useState("");
-
+    const [rowsFromApi, setRowsFromApi] = useState([]);
+    const [rowsFromUniApi, setRowsUniFromApi] = useState([]);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    let [latitude, setLatitude] = React.useState(-33.7560119);
+    let [longitude, setLongitude] = React.useState(150.6038367);
+    let [address, setAddress] = React.useState('');
+    //store  clicked locations in state
+    const [places, setPlaces] = React.useState([]);
+    //const save the prev place for calculating route
+    const [directions, setDirections] = useState({});
+
+    //store previous place
+    const prevPlace = useRef();
+
+    //path polyline ...
+    const [paths, setPaths] = useState([]);
+    let rowsArray = ["1600 Pennsylvania Avenue NW, Washington, DC 20500", "Austin, TX", "San Diego", "Austin, TX", "New York"]
+    //Get Data from backend
+    const fetchIncidentAPI = () => {
+        apiGetIncident()
+            .then((r) => {
+                setRowsFromApi(r.data);
+
+                return r.data
+            }).then(
+            (r) => {
+                //
+                //  let arraysVal = getUniqueListBy(r, 'location')
+                //
+                //  for (let i = 0; i < rowsArray.length; i++) {
+                //     setPlaceFunction2(rowsArray[i]).then((event) => {
+                //         handleGetGeo(event)
+                //     })
+                // }
+            })
+            .catch((error) => console.log(error));
+    };
+
+    useEffect(fetchIncidentAPI, []);
+
+    // useEffect(() => {
+    //     let rowsArray = ["1600 Pennsylvania Avenue NW, Washington, DC 20500", "Austin, TX", "San Diego", "Austin, TX", "New York"]
+    //
+    //     async function fetchData(searchAddress) {
+    //         // You can await here
+    //         const results = await getGeocode({address: searchAddress});
+    //         const {lat, lng} = await getLatLng(results[0]);
+    //         handleGetGeo({lat, lng})
+    //     }
+    //
+    //     fetchData("1600 Pennsylvania Avenue NW, Washington, DC 20500");
+    //
+    // }, []);
+
+    async function getTheLocation(searchAddress) {
+        const results = await getGeocode({address: searchAddress});
+        const {lat, lng} = await getLatLng(results[0]);
+        return {lat, lng}
+    }
+
+    // async function setPlaceFunction2(location) {
+    //     return await getTheLocation(location)
+    // }
+
+    function getUniqueListBy(arr, key) {
+        return [...new Map(arr.map(item => [item[key], item])).values()]
+    }
+
+    const handleGetGeo = React.useCallback((event) => {
+        setPlaces([
+            ...places,
+            {
+                lat: event.lat,
+                lng: event.lng,
+            }]);
+
+    });
+
+    // const testFunction = () => {
+    //     let service
+    //     try {
+    //          service = new window.google.maps.Geocoder();
+    //         service.geocode({address: "1600 Pennsylvania Avenue NW, Washington, DC 20500"}, function (results, status) {
+    //             if (status == 'OK') {
+    //                 console.log(results[0].geometry.location)
+    //             } else {
+    //                 alert('Geocode was not successful for the following reason: ' + status);
+    //             }
+    //         });
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
+
+
+
 
 
     //Austin -30.2672° N, 97.7431
@@ -75,20 +149,11 @@ function Gmap(props) {
             terrain: true,
             heading: 90,
             tilt: 45,
+            altitude: 1000,
         }),
         []
     );
 
-    //store  clicked locations in state
-    const [places, setPlaces] = React.useState([]);
-    //const save the prev place for calculating route
-    const [directions, setDirections] = useState({});
-
-    //store previous place
-    const prevPlace = useRef();
-
-    //path polyline ...
-    const [paths, setPaths] = useState([]);
 
 //track last location
     useEffect(() => {
@@ -134,16 +199,15 @@ function Gmap(props) {
     //function to store places, clicked - store the lat long
     //and record ...previous places  - useCall back to help with map refresh (state changes)
     const handleRender = React.useCallback((event) => {
-            setPlaces([
-                ...places,
-                {
-                    lat: event.latLng.lat(),
-                    lng: event.latLng.lng(),
-                },
-            ]);
+        setPlaces([
+            ...places,
+            {
+                lat: event.lat,
+                lng: event.lng
+            },
+        ]);
     });
 
-    useEffect(() => {});
     //remove place on Right Click ---> doesnt work
     const handleRenderOff = React.useCallback((event) => {
         setPlaces([
@@ -163,6 +227,7 @@ function Gmap(props) {
         //For google routes if enabled/rendered
         const service = new window.google.maps.DirectionsService();
 
+
         //target of missile
         let currLNG = currentLatLong.lng;
         let currLAT = currentLatLong.lat;
@@ -173,29 +238,18 @@ function Gmap(props) {
             {
                 lat: prevPlace.current.lat,
                 lng: prevPlace.current.lng,
-                range: props.toggle
-                    ? props.currentArtRange
-                    : props.currentInfantryRange,
-                currentArt: props.toggle ? props.currentArt : props.currentInfantry,
-                friendly: props.toggle
-                    ? props.currentFriend
-                    : props.currentInfantryFriend,
-                rpm: props.toggle ? props.currentRPM : props.currentInfantryRPM,
-                facts: props.toggle ? props.currentFacts : props.currentInfantryFacts,
-                src: props.toggle ? "./icons8-army-62.png" : "./halo1.gif",
             },
         ]);
 
 
         //create a path to the target using Polyline
         setPaths([
-            { lat: prevPlace.current.lat, lng: prevPlace.current.lng },
+            {lat: prevPlace.current.lat, lng: prevPlace.current.lng},
             {
                 lat: currLAT,
                 lng: currLNG,
             },
         ]);
-
 
 
         //routing if enabled to draw driving route
@@ -209,7 +263,6 @@ function Gmap(props) {
                 if (status === "OK" && result) {
                     setDirections(result);
                     setDirectionsAvail(true);
-                    props.haversine_distance(prevPlace.current, currentLatLong);
                 }
             }
         );
@@ -225,17 +278,27 @@ function Gmap(props) {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            icon: "🚀",
             className: "dark",
             bodyClassName: "dark",
             theme: "dark",
         });
     };
 
-    const handleLoadToastAndMaps = (event) => {
+     const  handleLoadToastAndMaps =   (event) => {
         toastyLoading();
         onMapLoad(event);
-    };
+
+        for (let i = 0; i < rowsArray.length; i++) {
+            getTheLocation(rowsArray[i]).then( (placeConvertedToLat) => {
+              setPlaces([
+                  ...places,
+                  placeConvertedToLat,
+              ]);
+                console.log(placeConvertedToLat);
+            } )
+        }
+    }
+
     //set the elavation
     const elevatorService = (latLng) => {
         const elevator = new window.google.maps.ElevationService();
@@ -243,13 +306,14 @@ function Gmap(props) {
             locations: [latLng],
         });
     };
+
     return isLoaded ? (
         <Grid
             container
             spacing={0}
             columns={12}
             rows={10}
-            sx={{ margin: 0, padding: 0 }}
+            sx={{margin: 0, padding: 0}}
         >
             <Grid item xs={12}>
                 <ToastContainer
@@ -266,84 +330,59 @@ function Gmap(props) {
                     theme="dark"
                 />
 
-                <ToastContainer />
-                <h2 className="tacticalMapsLogo">
-                    {props.message}{" "}
-                    {props.message.length > 0 ? "WAY TO GO!" : "System Active"}
-                    <MyLocationIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-                </h2>
+                <ToastContainer/>
                 <GoogleMap
                     id="marker-example"
                     mapContainerStyle={mapContainerStyle}
-                    zoom={8}
+                    zoom={5}
                     center={center}
                     options={options}
-                    onClick={handleRender}
+
                     tilt={45}
                     onLoad={handleLoadToastAndMaps}
                 >
+                    <MarkerClusterer>
 
-                    {paths.map(() => {
-                        return (
-                            <Polyline
-                                path={paths}
-                                options={{
-                                    strokeColor: "#409249",
-                                    strokeOpacity: 0.8,
-                                    strokeWeight: 2,
-                                    fillColor: "rgba(105,206,243,0.42)",
-                                    fillOpacity: 0.35,
-                                    clickable: false,
-                                    draggable: false,
-                                    editable: false,
-                                    visible: true,
-                                    radius: 30000,
-                                }}
-                            />
-                        );
-                    })}
-                    {places.map((place) => {
-                        return (
-                            <>
-                                <Marker
-                                    key={place}
-                                    position={{ lat: place.lat, lng: place.lng }}
-                                    icon={{
-                                        url: place.src,
-                                        scaledSize: new window.google.maps.Size(50, 50),
-                                        origin: new window.google.maps.Point(0, 0),
-                                        anchor: new window.google.maps.Point(25, 25),
-                                    }}
-                                    animation={2}
-                                    onClick={() => {
-                                        setFocusedPlace(place);
-                                        getRoute(place);
+                        {(clusterer) => places.map((place) => {
+                            return (
+                                <>
+                                    <Marker
+                                        key={place.lat}
+                                        position={{lat: place.lat, lng: place.lng}}
+                                        animation={2}
+                                        onClick={() => {
+                                            setFocusedPlace(place);
+                                            getRoute(place);
 
-                                    }}
-                                    //draggable={true}
-                                    //onDragEnd={handleRender}
-                                    onDblClick={handleRenderOff}
-                                />
-                            </>
-                        );
-                    })}
-                    //Render modal for specific place
-                    {focusedPlace ? (
-                        <InfoWindow
-                            position={{ lat: focusedPlace.lat, lng: focusedPlace.lng }}
-                            onCloseClick={() => setFocusedPlace(null)}
-                        >
-                            <div className="infoWindow">
-                                <h5>{focusedPlace.currentArt}</h5>
-                                <p>Max Range: {focusedPlace.range}</p>
-                                <p>RPM: {focusedPlace.rpm}</p>
-                                <p>Facts: {focusedPlace.facts}</p>
-                                <p>
-                                    TensorFlow AI Score: <b>{testScore.toFixed(5)}</b> calculated.
-                                </p>
-                            </div>
-                        </InfoWindow>
-                    ) : null}
+                                        }}
+                                        icon={{
+                                            url: "./firstaid.png",
+                                            scaledSize: new window.google.maps.Size(35, 35),
+                                            origin: new window.google.maps.Point(0, 0),
+                                            anchor: new window.google.maps.Point(5, 5),
+                                        }}
+                                        //draggable={true}
+                                        //onDragEnd={handleRender}
+                                        onDblClick={handleRenderOff}
+                                        clusterer={clusterer}
+                                    />
+                                </>
+                            );
+                        })}
+                        {}
+                        {/*//Render modal for specific place*/}
+                        {/*{focusedPlace ? (*/}
+                        {/*    <InfoWindow*/}
+                        {/*        position={{lat: focusedPlace.lat, lng: focusedPlace.lng}}*/}
+                        {/*        onCloseClick={() => setFocusedPlace(null)}*/}
+                        {/*    >*/}
+                        {/*        <div className="infoWindow">*/}
+                        {/*            <h5>hello</h5>*/}
+
+                        {/*        </div>*/}
+                        {/*    </InfoWindow>*/}
+                        {/*) : null}*/}
+                    </MarkerClusterer>
                 </GoogleMap>
             </Grid>
         </Grid>
