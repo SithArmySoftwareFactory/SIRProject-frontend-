@@ -9,11 +9,9 @@ import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Form20 from "../form_backup/Form20";
 import axios from "axios";
 import {API_URL} from "../../constants/Constants";
 import {Divider} from "@mui/material";
-import {useState} from "react";
 import SIRForm from "../SIRForm/SIRForm";
 
 function PaperComponent(props) {
