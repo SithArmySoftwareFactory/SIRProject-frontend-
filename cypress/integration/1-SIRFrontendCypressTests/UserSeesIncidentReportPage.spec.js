@@ -51,7 +51,6 @@ describe('user navigating to the homepage', () => {
         cy.findByText(/event type/i).should('exist');
     });
 
-
     it('should see details',()=>{
         cy.findByText(/details/i).should('exist');
     });
