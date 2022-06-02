@@ -1,10 +1,11 @@
 import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
+import Box from "@mui/material/Box";
 
 const DescriptionOfIncidentBox = ({formValues,handleInputChange}) => {
 
     return (
-        <>
+        <Box>
             <br/>
             <label style={styleLabel}>Description of Incident</label>
             <TextField
@@ -17,7 +18,7 @@ const DescriptionOfIncidentBox = ({formValues,handleInputChange}) => {
                 onChange={handleInputChange}
                 fullWidth
             />
-        </>
+        </Box>
     );
 
 }

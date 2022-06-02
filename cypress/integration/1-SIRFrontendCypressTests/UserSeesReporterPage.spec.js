@@ -73,7 +73,7 @@ describe('user navigating to the homepage', () => {
     });
     it('should see department(s) involved in this incident box', () => {
         cy.findByText(/department\(s\) involved in this incident/i).should('exist');
-        cy.findByText(/department\(s\) involved in this incident/i).siblings().last().children().last().children().last().should('exist');
+        cy.findByText(/department\(s\) involved in this incident/i).siblings().last().should('exist');
     });
     it('should see description of incident box', () => {
         cy.findByText(/description of incident/i).should('exist');
