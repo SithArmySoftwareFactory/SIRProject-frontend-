@@ -97,11 +97,10 @@ const Home = () => {
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
-                                        Tactical Variants
+                                        Serious Incident Reporting
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                                        species, ranging across all continents except Antarctica
+                                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, reiciendis!
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -121,8 +120,7 @@ const Home = () => {
                                         Seamlessly Coordinate Across Teams
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                                        species, ranging across all continents except Antarctica
+                                       Map data displayed in real time dashboard. Lorem ipsum dolor.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -139,11 +137,10 @@ const Home = () => {
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
-                                        Seamlessly Coordinate Across Teams
+                                        The Software Factory
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                                        species, ranging across all continents except Antarctica
+                                       CI/CD Pipeline - Software Engineering at all levels, Lorem ipsum.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
