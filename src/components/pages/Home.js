@@ -87,7 +87,7 @@ const Home = () => {
                 <tbody>
                 <tr>
                     <td>
-                        <Card sx={{maxWidth: 645, marginLeft: 15}}>
+                        <Card sx={{maxWidth: 645, margin:'50px'}}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -108,12 +108,12 @@ const Home = () => {
                         </Card>
                     </td>
                     <td>
-                        <Card sx={{maxWidth: 645}}>
+                        <Card sx={{maxWidth: 645, margin:'50px'}}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
                                     height="250"
-                                    image="/3.jpg"
+                                    image="/3.jpeg"
                                     alt="green iguana"
                                 />
                                 <CardContent>
@@ -129,12 +129,12 @@ const Home = () => {
                         </Card>
                     </td>
                     <td>
-                        <Card sx={{maxWidth: 645}}>
+                        <Card sx={{maxWidth: 645, margin:'50px'}}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
                                     height="250"
-                                    image="/3.jpg"
+                                    image="/users.jpeg"
                                     alt="green iguana"
                                 />
                                 <CardContent>
