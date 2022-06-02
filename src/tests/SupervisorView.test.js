@@ -32,11 +32,12 @@ describe('Component Test for Supervisor View',()=>{
     });
 
     it('should see location',()=>{
-        expect(screen.getByText(/location/i)).toBeInTheDocument()
+        expect(screen.getByText(/location/i)).toBeInTheDocument();
+
     });
 
     it('should see incident type',()=>{
-        expect(screen.getByRole('columnheader', {  name: /incident type/i})).toBeInTheDocument()
+        expect(screen.getByRole('columnheader', {  name: /incident type/i})).toBeInTheDocument();
     });
 
     it('should see harm',()=>{
