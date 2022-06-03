@@ -13,6 +13,10 @@ export const apiPostIncident = async (data) => {
     return axios.post(API_URL + "incident", data)
 }
 
+export const apiPostIncidentCommand = async (data) => {
+    return axios.post(API_URL + "send", data)
+}
+
 export const apiPatchIncident = async (index, data) => {
       return axios.patch(API_URL + "incident/" + index, data)
 }

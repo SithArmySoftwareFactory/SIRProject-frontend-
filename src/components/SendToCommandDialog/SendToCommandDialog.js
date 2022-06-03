@@ -11,8 +11,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import {Close} from "@mui/icons-material";
 import {Divider, Grid, Typography} from "@mui/material";
+import {apiPostIncidentCommand} from "../../api/APICalls";
 
-export default function SendToCommandDialog(props) {
+export default function SendToCommandDialog(props, {rowsChecked}) {
     const commands = [{
         "Name": "United States Army Forces Command (FORSCOM)"
     }, {
@@ -43,6 +44,7 @@ export default function SendToCommandDialog(props) {
         props.setDialog(false)
         props.handleSent(true);
         // Need to input Logic for SMTP Server //
+        apiPostIncidentCommand();
     }
 
     return (

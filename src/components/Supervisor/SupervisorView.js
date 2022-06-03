@@ -188,7 +188,6 @@ const SupervisorView = () => {
 
     return (
         <Box height="auto" width="100%" display="flex" sx={{textAlign: 'center', justifyContent: 'center'}}>
-            {}
             <Box minWidth="1038px">
                 {(sent) ?
                     <Alert severity="success" className="sentSuccessMsg">

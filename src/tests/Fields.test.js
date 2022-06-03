@@ -24,6 +24,7 @@ import defaultValues from "./testDefaultValues";
 
 describe("Component tests for fields", () => {
 
+
     describe("testing Banner Component", () => {
         const mockIsHome = true;
         const mockSetIsHome = jest.fn(x => !x);
