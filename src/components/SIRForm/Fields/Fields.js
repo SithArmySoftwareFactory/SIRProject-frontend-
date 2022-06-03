@@ -36,7 +36,7 @@ const Fields = ({handleClick, open, defaultValues}) => {
     let defaultValues2;
 
 
-    if (defaultValues!=null) {
+    if (defaultValues != null) {
 
         defaultValues2 = {
             date: defaultValues.date ? new Date(defaultValues.date.split("-")[0], defaultValues.date.split("-")[1] - 1, defaultValues.date.split("-")[2]) : new Date(),
@@ -144,8 +144,6 @@ const Fields = ({handleClick, open, defaultValues}) => {
             ...formValues,
             [name]: newValue,
         });
-
-
     }
     const handleClickChange = (e) => {
         const {name, checked} = e.target;
@@ -224,27 +222,27 @@ const Fields = ({handleClick, open, defaultValues}) => {
         }
         dataToBeSent.department = departmentsInvolvedString.substring(1);
 
-       getTheLocation(dataToBeSent.location).then((data) =>{
+        getTheLocation(dataToBeSent.location).then((data) => {
 
-           dataToBeSent.lat = data.lat;
-           dataToBeSent.lng = data.lng;
+            dataToBeSent.lat = data.lat;
+            dataToBeSent.lng = data.lng;
 
-           apiPostIncident(dataToBeSent);
-           setFormValues(defaultValues2);
-       });
+            apiPostIncident(dataToBeSent);
+            setFormValues(defaultValues2);
+        });
 
         handleClick();
 
         apiPostIncident(dataToBeSent);
         setFormValues(defaultValues2);
 
+    }
 
     async function getTheLocation(searchAddress) {
         const results = await getGeocode({address: searchAddress});
         const {lat, lng} = await getLatLng(results[0]);
         return {lat, lng}
     }
-
 
 
     useEffect(() => {
