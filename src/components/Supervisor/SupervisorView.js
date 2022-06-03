@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import DraggableDialog from "./DraggableDialog";
 import SendToCommandDialog from "../SendToCommandDialog/SendToCommandDialog";
 import {apiGetIncident} from "../../api/APICalls";
+import Gmap from "../maps/Gmap";
 
 const SupervisorView = () => {
     const [pageSize, setPageSize] = React.useState(5);
