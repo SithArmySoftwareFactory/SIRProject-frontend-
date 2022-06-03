@@ -20,7 +20,10 @@ export function Banner({setIsHome, isHome}) {
                         <li><HomeIcon className="bannerIcons"/><NavLink  className="navLink" page="/" to="/">Home</NavLink></li>
                         <li><AssessmentIcon className="bannerIcons"/><NavLink  className="navLink" page="/report" to="/report">Submit Report</NavLink></li>
                         <li><SupervisedUserCircleIcon className="bannerIcons"/><NavLink  className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink></li>
-                        <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/login" to="/login">Login</NavLink></li>
+                        <li><FaceIcon className="bannerIcons"/>
+                            {/*<NavLink  className="navLink" page="/login" to="/login">Login</NavLink>*/}
+                            <a className="navLink" href="http://localhost:8080/api/login">Login</a>
+                        </li>
                     </ul>
                 </nav>
             </header>

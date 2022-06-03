@@ -171,7 +171,7 @@ const SupervisorView = () => {
             <br/> <br/>
             <h3 className="dataGridHeaderTitle">Incident Reports</h3>
             <br/><br/>
-            <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
+            <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent} rowsChecked={rowsChecked}/>
             <DataGrid
                 className="dataGrid"
                 //get page size from state
