@@ -31,6 +31,7 @@ const SupervisorView = () => {
             .catch((error) => console.log(error));
     };
     useEffect(fetchIncidentAPI, []);
+
     let rows = rowsFromApi;
 
 

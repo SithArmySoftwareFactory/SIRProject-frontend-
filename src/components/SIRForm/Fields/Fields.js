@@ -19,15 +19,35 @@ import PatientPhoneBox from "./PatientPhoneBox";
 import AddressBox from "./AddressBox";
 import Button from '@mui/material/Button';
 import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
-import {apiPostIncident} from "../../../api/APICalls";
+import {apiPatchIncident, apiPostIncident} from "../../../api/APICalls";
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
 import {useJsApiLoader} from "@react-google-maps/api";
+import * as tf from "@tensorflow/tfjs";
+import padSequences from "./helper/paddedSeq";
 
 const Fields = ({handleClick, open, defaultValues}) => {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
     });
+
+    const url = {
+        model:
+            "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json",
+        metadata:
+            "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json",
+    };
+
+
+    const OOV_INDEX = 2;
+
+    const [metadata, setMetadata] = useState();
+    const [model, setModel] = useState();
+    const [testScore, setScore] = useState("");
+    const [trimedText, setTrim] = useState("");
+    const [seqText, setSeq] = useState("");
+    const [padText, setPad] = useState("");
+    const [inputText, setInput] = useState("");
 
 
     let defaultValues2 = null;
@@ -71,7 +91,6 @@ const Fields = ({handleClick, open, defaultValues}) => {
             patientAddress: ""
         }
     } else {
-        console.log(defaultValues);
         defaultValues2 = {
             date:  new Date(defaultValues.date.split("-")[0],defaultValues.date.split("-")[1]-1,defaultValues.date.split("-")[2]),
             time: new Date(2022,1,1,defaultValues.time.split(":")[0],defaultValues.time.split(":")[1]),
@@ -115,6 +134,64 @@ const Fields = ({handleClick, open, defaultValues}) => {
     const [isDisabled, setIsDisabled] = useState(true);
     const [formValues, setFormValues] = useState(defaultValues2);
 
+    const getSentimentScore = (text) => {
+
+        const inputText = text
+            .trim()
+            .toLowerCase()
+            .replace(/(\.|\,|\!)/g, "")
+            .split(" ");
+        setTrim(inputText);
+
+        const sequence = inputText.map((word) => {
+            let wordIndex = metadata.word_index[word] + metadata.index_from;
+            if (wordIndex > metadata.vocabulary_size) {
+                wordIndex = OOV_INDEX;
+            }
+            return wordIndex;
+        });
+        setSeq(sequence);
+
+        // Perform truncation and padding.
+        const paddedSequence = padSequences([sequence], metadata.max_len);
+
+        setPad(paddedSequence);
+
+        const input = tf.tensor2d(paddedSequence, [1, metadata.max_len]);
+
+        setInput(input);
+        const predictOut = model.predict(input);
+        const score = predictOut.dataSync()[0];
+        predictOut.dispose();
+        setScore(score);
+        return score;
+    };
+
+    async function loadModel(url) {
+        try {
+            const model = await tf.loadLayersModel(url.model);
+            setModel(model);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async function loadMetadata(url) {
+        try {
+            const metadataJson = await fetch(url.metadata);
+            const metadata = await metadataJson.json();
+            setMetadata(metadata);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        tf.ready().then(() => {
+            loadModel(url);
+            loadMetadata(url);
+        });
+    }, []);
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -123,6 +200,8 @@ const Fields = ({handleClick, open, defaultValues}) => {
             [name]: value,
         });
     }
+
+
 
     const handleAutoCompleteTypeOfEvent = (target) => {
         setFormValues({
@@ -222,20 +301,36 @@ const Fields = ({handleClick, open, defaultValues}) => {
         }
         dataToBeSent.department = departmentsInvolvedString.substring(1);
 
-       getTheLocation(dataToBeSent.location).then((data) =>{
-
+       getTheLocation(dataToBeSent.location).
+       then(
+           (data) =>
+           {
            dataToBeSent.lat = data.lat;
            dataToBeSent.lng = data.lng;
 
-           apiPostIncident(dataToBeSent);
-           setFormValues(defaultValues2);
+
+       }).then(async () => {
+
+            let score = getSentimentScore(dataToBeSent.prevention)
+
+                   let outlook = "";
+                   if(score <= 0.4){
+                       outlook = "low"
+                   } else if(score > 0.4 && score <= 0.7){
+                       outlook = "medium"
+                   } else {
+                       outlook = "high"
+                   }
+                   dataToBeSent.sentiment = outlook;
+
+               setFormValues(defaultValues2);
+               apiPostIncident(dataToBeSent);
+
+
        });
 
+
         handleClick();
-
-
-
-
     };
 
     async function getTheLocation(searchAddress) {
@@ -243,7 +338,6 @@ const Fields = ({handleClick, open, defaultValues}) => {
         const {lat, lng} = await getLatLng(results[0]);
         return {lat, lng}
     }
-
 
 
     useEffect(() => {
