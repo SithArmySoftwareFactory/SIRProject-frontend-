@@ -21,7 +21,7 @@ const styleHeader = {
 const Header = () => {
 
     return (
-        <Typography component={"h1"} style={styleHeader}
+        <Typography component={"h2"} style={styleHeader}
         >Incident Report Form
         </Typography>
     )

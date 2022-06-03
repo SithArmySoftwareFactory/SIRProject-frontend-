@@ -30,70 +30,66 @@ const Fields = ({handleClick, open, defaultValues}) => {
     });
 
 
-    let defaultValues2 = null;
-
-    if(defaultValues == null) {
+    let defaultValues2 = {
+        date: new Date(),
+        time: new Date(),
+        location: "",
+        eventType: [],
+        //boolean on backend
+        harm: "Yes",
+        //string on backend delineated by commas
+        individuals: {
+            patient: false,
+            familyMember: false,
+            adult: false,
+            child: false,
+            staffMember: false,
+            visitor: false,
+            volunteer: false,
+            other: false
+        },
+        //string on backend delineated by commas
+        incidentType: "Actual Event/Incident",
+        //boolean
+        effects: 'No harm sustained',
+        witness1Name: '',
+        witness1Phone: '',
+        witness2Name: '',
+        witness2Phone: '',
+        witness3Name: '',
+        witness3Phone: '',
+        //string on backend delineated by commas
+        department: [],
+        description: "",
+        prevention: "",
+        patientName: "",
+        patientSSN: "",
+        patientPhone: "",
+        patientAddress: ""
+    }
+    if (defaultValues != null) {
         defaultValues2 = {
-            date: new Date(),
-            time: new Date(),
-            location: "",
-            eventType: [],
-            //boolean on backend
-            harm: "Yes",
-            //string on backend delineated by commas
-            individuals: {
-                patient: false,
-                familyMember: false,
-                adult: false,
-                child: false,
-                staffMember: false,
-                visitor: false,
-                volunteer: false,
-                other: false
-            },
-            //string on backend delineated by commas
-            incidentType: "Actual Event/Incident",
-            //boolean
-            effects: 'No harm sustained',
-            witness1Name: '',
-            witness1Phone: '',
-            witness2Name: '',
-            witness2Phone: '',
-            witness3Name: '',
-            witness3Phone: '',
-            //string on backend delineated by commas
-            department: [],
-            description: "",
-            prevention: "",
-            patientName: "",
-            patientSSN: "",
-            patientPhone: "",
-            patientAddress: ""
-        }
-    } else {
-        console.log(defaultValues);
-        defaultValues2 = {
-            date:  new Date(defaultValues.date.split("-")[0],defaultValues.date.split("-")[1]-1,defaultValues.date.split("-")[2]),
-            time: new Date(2022,1,1,defaultValues.time.split(":")[0],defaultValues.time.split(":")[1]),
+            date: defaultValues.date ? new Date(defaultValues.date.split("-")[0], defaultValues.date.split("-")[1] - 1, defaultValues.date.split("-")[2]):new Date(),
+            time: defaultValues.time ? new Date(2022, 1, 1, defaultValues.time.split(":")[0], defaultValues.time.split(":")[1]):new Date(),
             location: defaultValues.location,
-            eventType: defaultValues.eventType.split(","),
+            eventType: defaultValues.eventType ? defaultValues.eventType.split(","): [],
             //boolean on backend
             harm: (defaultValues.harm) ? "Yes" : "no" || "Yes",
             //string on backend delineated by commas
             individuals: {
-                patient: defaultValues.individuals.includes("Patient"),
-                familyMember: defaultValues.individuals.includes("Family Member"),
-                adult: defaultValues.individuals.includes("Adult"),
-                child: defaultValues.individuals.includes("Child"),
-                staffMember: defaultValues.individuals.includes("Staff Member"),
-                visitor: defaultValues.individuals.includes("Visitor"),
-                volunteer: defaultValues.individuals.includes("Volunteer"),
-                other: defaultValues.individuals.includes("Other")
+                patient: defaultValues.individuals? defaultValues.individuals.includes("Patient"):false,
+                familyMember: defaultValues.individuals?defaultValues.individuals.includes("Family Member"):false,
+                adult: defaultValues.individuals?defaultValues.individuals.includes("Adult"):false,
+                child: defaultValues.individuals?defaultValues.individuals.includes("Child"):false,
+                staffMember: defaultValues.individuals?defaultValues.individuals.includes("Staff Member"):false,
+                visitor: defaultValues.individuals?defaultValues.individuals.includes("Visitor"):false,
+                volunteer: defaultValues.individuals?defaultValues.individuals.includes("Volunteer"):false,
+                other: defaultValues.individuals?defaultValues.individuals.includes("Other"):false
             },
             //string on backend delineated by commas
             incidentType: (defaultValues.incidentType !== null) ? defaultValues.incidentType.trim().split(",") || [] : [],
             //boolean
-            effects: defaultValues.effects?"Harm sustained":"No harm sustained",
+            effects: defaultValues.effects ? "Harm sustained" : "No harm sustained",
             witness1Name: defaultValues.witness1Name || '',
             witness1Phone: defaultValues.witness1Phone || '',
             witness2Name: defaultValues.witness2Name || '',
@@ -186,16 +182,16 @@ const Fields = ({handleClick, open, defaultValues}) => {
         let tempTimeHour = tempTime.getHours();
         let tempTimeMinutes = tempTime.getMinutes();
 
-        if(tempTimeHour<10){
-            tempTimeHour= `0${tempTimeHour}`;
+        if (tempTimeHour < 10) {
+            tempTimeHour = `0${tempTimeHour}`;
         }
-        if(tempTimeMinutes<10){
-            tempTimeMinutes=`0${tempTimeMinutes}`;
+        if (tempTimeMinutes < 10) {
+            tempTimeMinutes = `0${tempTimeMinutes}`;
         }
 
-        dataToBeSent.time=`${tempTimeHour}:${tempTimeMinutes}`;
+        dataToBeSent.time = `${tempTimeHour}:${tempTimeMinutes}`;
 
-        dataToBeSent.date=dataToBeSent.date.split('T')[0];
+        dataToBeSent.date = dataToBeSent.date.split('T')[0];
 
 
         dataToBeSent.harm = dataToBeSent.harm === "Yes";
@@ -207,7 +203,7 @@ const Fields = ({handleClick, open, defaultValues}) => {
 
         for (const individuals in dataToBeSent.individuals) {
             if (dataToBeSent.individuals[`${individuals}`]) {
-                individualsInvolvedString = individualsInvolvedString + "," + individuals.replace(/^\w/,(c)=>c.toUpperCase());
+                individualsInvolvedString = individualsInvolvedString + "," + individuals.replace(/^\w/, (c) => c.toUpperCase());
             }
         }
         dataToBeSent.individuals = individualsInvolvedString.substring(1);
@@ -233,8 +229,8 @@ const Fields = ({handleClick, open, defaultValues}) => {
 
         handleClick();
 
-
-
+        apiPostIncident(dataToBeSent);
+        setFormValues(defaultValues2);
 
     };
 
@@ -356,23 +352,23 @@ const Fields = ({handleClick, open, defaultValues}) => {
                     <Grid item xs={5}>
                         {/*open is inherited state from the supervisor view. If the form is opened from the supervisor view, it will not render a submit button.*/}
                         {!open ?
-                        isDisabled ?
-                            <Button type="submit"
-                                    style={styleDisabledButton}
+                            isDisabled ?
+                                <Button type="submit"
+                                        style={styleDisabledButton}
+                                        variant="contained"
+                                        disabled
+                                >
+                                    Submit
+                                </Button> :
+                                <Button
+                                    type="submit"
+                                    style={styleEnabledButton}
                                     variant="contained"
-                                    disabled
-                            >
-                                Submit
-                            </Button> :
-                            <Button
-                                type="submit"
-                                style={styleEnabledButton}
-                                variant="contained"
-                                disabled={false}
-                            >
-                                Submit
-                            </Button>
-                        : null}
+                                    disabled={false}
+                                >
+                                    Submit
+                                </Button>
+                            : null}
 
                     </Grid>
                 </Grid>
