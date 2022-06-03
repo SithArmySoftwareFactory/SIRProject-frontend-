@@ -28,6 +28,8 @@ const TypeOfEventBox = ({handleInputChange, formValues}) => {
         {title: "Infant Discharge to Wrong Family"},
         {title: "Laboratory Related"},
         {title: "Medication Related"},
+        {title: "Medical"},
+        {title: "Property"},
         {title: "Needle Stick/Sharp Injury"},
         {title: "Obstetrics Related"},
         {title: "Operative/Invasive Procedure Related"},
