@@ -1,5 +1,4 @@
 import {fireEvent, render, screen} from '@testing-library/react';
-import mock from "./testServer/mock";
 import {Banner} from "../components/common/Banner";
 import ASFIcon from "../components/common/ASFIcon";
 import DateOfEvent from "../components/SIRForm/Fields/DateOfEvent";
@@ -21,13 +20,10 @@ import PatientPhoneBox from "../components/SIRForm/Fields/PatientPhoneBox";
 import AddressBox from "../components/SIRForm/Fields/AddressBox";
 import Fields from "../components/SIRForm/Fields/Fields";
 import defaultValues from "./testDefaultValues";
-import userEvent from "@testing-library/user-event";
 
 
-describe("Component tests", () => {
-    beforeAll(() => mock.listen());
-    afterEach(() => mock.resetHandlers());
-    afterAll(() => mock.close());
+describe("Component tests for fields", () => {
+
 
     describe("testing Banner Component", () => {
         const mockIsHome = true;
@@ -65,7 +61,7 @@ describe("Component tests", () => {
             expect(screen.getByDisplayValue(`0${new Date().getMonth() + 1}/0${new Date().getDate()}/${new Date().getFullYear()}`)).toBeInTheDocument();
         });
         it("should see a textbox", () => {
-            expect(screen.getByRole('textbox', {name: /choose date, selected date is Jun 1, 2022/i})).toBeInTheDocument();
+            expect(screen.getByRole('textbox', {name: /choose date, selected date is Jun 2, 2022/i})).toBeInTheDocument();
         });
 
         it("should change the date of the textbox when the user clicks a new date", () => {

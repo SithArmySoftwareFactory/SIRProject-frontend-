@@ -3,13 +3,14 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {styleLabel} from "../../../themes/themes";
+import Box from "@mui/material/Box";
 
 
 const EffectOfIncidentBox = ({formValues,handleInputChange}) => {
 
 
     return (
-        <>
+        <Box>
             <label style={styleLabel}>Effect of this incident on the individual(s) Involved</label>
             <FormControl fullWidth>
                 <Select
@@ -25,7 +26,7 @@ const EffectOfIncidentBox = ({formValues,handleInputChange}) => {
                     <MenuItem value={"Harm sustained"}>Harm sustained</MenuItem>
                 </Select>
             </FormControl>
-    </>
+    </Box>
     );
 }
 
