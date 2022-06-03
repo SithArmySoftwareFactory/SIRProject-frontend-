@@ -1,6 +1,6 @@
 import * as React from "react";
-import {useEffect, useMemo, useRef, useState} from "react";
-import {GoogleMap, Marker, MarkerClusterer, useJsApiLoader,} from "@react-google-maps/api";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useJsApiLoader,} from "@react-google-maps/api";
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
 import mapStyles from "./mapstyles";
 import {toast, ToastContainer} from "react-toastify";
@@ -21,39 +21,24 @@ function Gmap(props) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    let [latitude, setLatitude] = React.useState(-33.7560119);
-    let [longitude, setLongitude] = React.useState(150.6038367);
-    let [address, setAddress] = React.useState('');
     //store  clicked locations in state
-    const [places, setPlaces] = React.useState([]);
+    const [places, setPlaces] = React.useState([{ lat: 30.282692, lng:-97.77402}]);
     //const save the prev place for calculating route
     const [directions, setDirections] = useState({});
-
+    const [mapLoaded, setMapLoaded] = useState(false);
     //store previous place
     const prevPlace = useRef();
 
     //path polyline ...
     const [paths, setPaths] = useState([]);
-    let rowsArray = ["1600 Pennsylvania Avenue NW, Washington, DC 20500", "Austin, TX", "San Diego", "Austin, TX", "New York"]
+
     //Get Data from backend
     const fetchIncidentAPI = () => {
         apiGetIncident()
             .then((r) => {
                 setRowsFromApi(r.data);
-
-                return r.data
-            }).then(
-            (r) => {
-                //
-                //  let arraysVal = getUniqueListBy(r, 'location')
-                //
-                //  for (let i = 0; i < rowsArray.length; i++) {
-                //     setPlaceFunction2(rowsArray[i]).then((event) => {
-                //         handleGetGeo(event)
-                //     })
-                // }
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log('error'));
     };
 
     useEffect(fetchIncidentAPI, []);
@@ -73,9 +58,9 @@ function Gmap(props) {
     // }, []);
 
     async function getTheLocation(searchAddress) {
-        const results = await getGeocode({address: searchAddress});
-        const {lat, lng} = await getLatLng(results[0]);
-        return {lat, lng}
+        // const results = await getGeocode({address: searchAddress});
+        // const {lat, lng} = await getLatLng(results[0]);
+        // return {lat, lng}
     }
 
     // async function setPlaceFunction2(location) {
@@ -86,15 +71,6 @@ function Gmap(props) {
         return [...new Map(arr.map(item => [item[key], item])).values()]
     }
 
-    const handleGetGeo = React.useCallback((event) => {
-        setPlaces([
-            ...places,
-            {
-                lat: event.lat,
-                lng: event.lng,
-            }]);
-
-    });
 
     // const testFunction = () => {
     //     let service
@@ -111,9 +87,6 @@ function Gmap(props) {
     //         console.log(e)
     //     }
     // }
-
-
-
 
 
     //Austin -30.2672° N, 97.7431
@@ -156,9 +129,9 @@ function Gmap(props) {
 
 
 //track last location
-    useEffect(() => {
-        prevPlace.current = places[places.length - 1];
-    });
+//     useEffect(() => {
+//         prevPlace.current = places[places.length - 1];
+//     });
 
 
     //directions display control
@@ -183,30 +156,27 @@ function Gmap(props) {
     };
 
 
-    const style = {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        color: "#000000",
-        transform: "translate(-50%, -50%)",
-        width: 400,
-        bgcolor: "background.paper",
-        border: "2px solid #000",
-        boxShadow: 24,
-        p: 4,
-    };
-
     //function to store places, clicked - store the lat long
     //and record ...previous places  - useCall back to help with map refresh (state changes)
-    const handleRender = React.useCallback((event) => {
-        setPlaces([
-            ...places,
-            {
-                lat: event.lat,
-                lng: event.lng
-            },
-        ]);
-    });
+    const handleRender = React.useCallback((event, response) => {
+        let latLngArray = [];
+        // let latLngArray = [{lat: 38.8976633, lng: -77.0365739},
+        //     {lat: 30.267153, lng: -97.7430608},
+        //     {lat: 30.267153, lng: -97.7430608},
+        //     {lat: 32.715738, lng: -117.1610838},
+        //     {lat: 40.7127753, lng: -74.0059728}]
+
+        for (let i = 0; i < rowsFromApi.length / 2; i++) {
+            if(rowsFromApi[i].lat !== null && rowsFromApi[i].lng !== null) {
+                latLngArray.push({lat:Number(rowsFromApi[i].lat), lng:Number(rowsFromApi[i].lng)})
+            }
+
+
+        }
+
+        setPlaces(latLngArray)
+
+    }, );
 
     //remove place on Right Click ---> doesnt work
     const handleRenderOff = React.useCallback((event) => {
@@ -218,55 +188,6 @@ function Gmap(props) {
         ]);
     });
 
-    const getRoute = (currentLatLong = {}) => {
-        //if there are only 1 place or if the place and prev place is the same,
-        //there is no need for a route. need to add additional logic
-        if (places.length < 1) return;
-        if (currentLatLong === prevPlace.current) return;
-
-        //For google routes if enabled/rendered
-        const service = new window.google.maps.DirectionsService();
-
-
-        //target of missile
-        let currLNG = currentLatLong.lng;
-        let currLAT = currentLatLong.lat;
-
-        //Need to render the last place clicked, normally handled in Main map, not on marker click
-        setPlaces([
-            ...places,
-            {
-                lat: prevPlace.current.lat,
-                lng: prevPlace.current.lng,
-            },
-        ]);
-
-
-        //create a path to the target using Polyline
-        setPaths([
-            {lat: prevPlace.current.lat, lng: prevPlace.current.lng},
-            {
-                lat: currLAT,
-                lng: currLNG,
-            },
-        ]);
-
-
-        //routing if enabled to draw driving route
-        service.route(
-            {
-                origin: prevPlace.current,
-                destination: currentLatLong,
-                travelMode: window.google.maps.TravelMode.DRIVING,
-            },
-            (result, status) => {
-                if (status === "OK" && result) {
-                    setDirections(result);
-                    setDirectionsAvail(true);
-                }
-            }
-        );
-    };
 
     //Maps loaded, called onLoad
     const toastyLoading = () => {
@@ -284,28 +205,12 @@ function Gmap(props) {
         });
     };
 
-     const  handleLoadToastAndMaps =   (event) => {
+    const handleLoadToastAndMaps = (event) => {
         toastyLoading();
         onMapLoad(event);
-
-        for (let i = 0; i < rowsArray.length; i++) {
-            getTheLocation(rowsArray[i]).then( (placeConvertedToLat) => {
-              setPlaces([
-                  ...places,
-                  placeConvertedToLat,
-              ]);
-                console.log(placeConvertedToLat);
-            } )
-        }
+        setMapLoaded(true)
+        handleRender();
     }
-
-    //set the elavation
-    const elevatorService = (latLng) => {
-        const elevator = new window.google.maps.ElevationService();
-        return elevator.getElevationForLocations({
-            locations: [latLng],
-        });
-    };
 
     return isLoaded ? (
         <Grid
@@ -337,52 +242,53 @@ function Gmap(props) {
                     zoom={5}
                     center={center}
                     options={options}
-
+                    //onClick={handleRender}
                     tilt={45}
                     onLoad={handleLoadToastAndMaps}
                 >
                     <MarkerClusterer>
+                        {
+                            (clusterer) => places.map((place) => {
+                                return (
+                                    <>
+                                        <Marker
+                                            key={place.lat}
+                                            position={{lat: place.lat, lng: place.lng}}
+                                            animation={2}
+                                            onClick={() => {
+                                                setFocusedPlace(place);
+                                            }}
+                                            icon={{
+                                                url: '/img_1.png',
+                                                scaledSize: new window.google.maps.Size(35, 35),
+                                                origin: new window.google.maps.Point(0, 0),
+                                                anchor: new window.google.maps.Point(5, 5),
+                                            }}
+                                            //draggable={true}
+                                            //onDragEnd={handleRender}
+                                            onDblClick={handleRenderOff}
+                                            clusterer={clusterer}
+                                        />
+                                    </>
+                                );
+                            })}
 
-                        {(clusterer) => places.map((place) => {
-                            return (
-                                <>
-                                    <Marker
-                                        key={place.lat}
-                                        position={{lat: place.lat, lng: place.lng}}
-                                        animation={2}
-                                        onClick={() => {
-                                            setFocusedPlace(place);
-                                            getRoute(place);
-
-                                        }}
-                                        icon={{
-                                            url: "./firstaid.png",
-                                            scaledSize: new window.google.maps.Size(35, 35),
-                                            origin: new window.google.maps.Point(0, 0),
-                                            anchor: new window.google.maps.Point(5, 5),
-                                        }}
-                                        //draggable={true}
-                                        //onDragEnd={handleRender}
-                                        onDblClick={handleRenderOff}
-                                        clusterer={clusterer}
-                                    />
-                                </>
-                            );
-                        })}
                         {}
-                        {/*//Render modal for specific place*/}
-                        {/*{focusedPlace ? (*/}
-                        {/*    <InfoWindow*/}
-                        {/*        position={{lat: focusedPlace.lat, lng: focusedPlace.lng}}*/}
-                        {/*        onCloseClick={() => setFocusedPlace(null)}*/}
-                        {/*    >*/}
-                        {/*        <div className="infoWindow">*/}
-                        {/*            <h5>hello</h5>*/}
 
-                        {/*        </div>*/}
-                        {/*    </InfoWindow>*/}
-                        {/*) : null}*/}
                     </MarkerClusterer>
+
+                    {focusedPlace ? (
+                        <InfoWindow
+                            position={{lat: focusedPlace.lat, lng: focusedPlace.lng}}
+                            onCloseClick={() => setFocusedPlace(null)}
+                        >
+                            <div className="infoWindow">
+                                <h5>hello</h5>
+                                {console.log(focusedPlace)}
+                            </div>
+                        </InfoWindow>
+                    ) : null}
+
                 </GoogleMap>
             </Grid>
         </Grid>
