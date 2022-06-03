@@ -10,6 +10,7 @@ import {Route, Routes} from 'react-router-dom'
 import SupervisorView from "./components/Supervisor/SupervisorView";
 import Home from "./components/pages/Home";
 import Footer from "./components/common/Footer";
+import Dashboard from "./components/dashboard/Dashboard";
 
 
 const Alert = forwardRef(function Alert(props, ref) {
@@ -64,6 +65,7 @@ function App() {
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/report" element={<SIRForm handleClick={handleClick}  />} />
                      <Route path="/supervisor" element={<SupervisorView/>} />
+                     <Route path="/dashboard" element={<Dashboard/>} />
                     <Route element={<Home />} />
                 </Routes>
             </Grid>
