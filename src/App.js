@@ -1,7 +1,7 @@
 import './App.css';
 import {Banner} from "./components/common/Banner";
 import SIRForm from "./components/SIRForm/SIRForm";
-import {forwardRef, useEffect, useState} from "react";
+import {forwardRef, useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";

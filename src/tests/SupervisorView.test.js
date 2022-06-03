@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import SupervisorView from "../components/Supervisor/SupervisorView";
 
 describe('Component Test for Supervisor View',()=>{

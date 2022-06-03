@@ -20,68 +20,37 @@ import AddressBox from "./AddressBox";
 import Button from '@mui/material/Button';
 import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
 import {apiPostIncident} from "../../../api/APICalls";
+import CommandBox from "./CommandBox";
+import Box from "@mui/material/Box";
 
 
 const Fields = ({handleClick, open, defaultValues}) => {
 
-    let defaultValues2 = {
-        date: new Date(),
-        time: new Date(),
-        location: "",
-        eventType: [],
-        //boolean on backend
-        harm: "Yes",
-        //string on backend delineated by commas
-        individuals: {
-            patient: false,
-            familyMember: false,
-            adult: false,
-            child: false,
-            staffMember: false,
-            visitor: false,
-            volunteer: false,
-            other: false
-        },
-        //string on backend delineated by commas
-        incidentType: "Actual Event/Incident",
-        //boolean
-        effects: 'No harm sustained',
-        witness1Name: '',
-        witness1Phone: '',
-        witness2Name: '',
-        witness2Phone: '',
-        witness3Name: '',
-        witness3Phone: '',
-        //string on backend delineated by commas
-        department: [],
-        description: "",
-        prevention: "",
-        patientName: "",
-        patientSSN: "",
-        patientPhone: "",
-        patientAddress: ""
-    }
-    if (defaultValues != null) {
+    let defaultValues2;
+
+
+    if (defaultValues!=null) {
+
         defaultValues2 = {
-            date: defaultValues.date ? new Date(defaultValues.date.split("-")[0], defaultValues.date.split("-")[1] - 1, defaultValues.date.split("-")[2]):new Date(),
-            time: defaultValues.time ? new Date(2022, 1, 1, defaultValues.time.split(":")[0], defaultValues.time.split(":")[1]):new Date(),
+            date: defaultValues.date ? new Date(defaultValues.date.split("-")[0], defaultValues.date.split("-")[1] - 1, defaultValues.date.split("-")[2]) : new Date(),
+            time: defaultValues.time ? new Date(2022, 1, 1, defaultValues.time.split(":")[0], defaultValues.time.split(":")[1]) : new Date(),
             location: defaultValues.location,
-            eventType: defaultValues.eventType ? defaultValues.eventType.split(","): [],
+            eventType: defaultValues.eventType ? defaultValues.eventType.split(",") : [],
             //boolean on backend
-            harm: (defaultValues.harm) ? "Yes" : "no" || "Yes",
+            harm: defaultValues.harm ? "Yes" : "No",
             //string on backend delineated by commas
             individuals: {
-                patient: defaultValues.individuals? defaultValues.individuals.includes("Patient"):false,
-                familyMember: defaultValues.individuals?defaultValues.individuals.includes("Family Member"):false,
-                adult: defaultValues.individuals?defaultValues.individuals.includes("Adult"):false,
-                child: defaultValues.individuals?defaultValues.individuals.includes("Child"):false,
-                staffMember: defaultValues.individuals?defaultValues.individuals.includes("Staff Member"):false,
-                visitor: defaultValues.individuals?defaultValues.individuals.includes("Visitor"):false,
-                volunteer: defaultValues.individuals?defaultValues.individuals.includes("Volunteer"):false,
-                other: defaultValues.individuals?defaultValues.individuals.includes("Other"):false
+                patient: defaultValues.individuals ? defaultValues.individuals.includes("Patient") : false,
+                familyMember: defaultValues.individuals ? defaultValues.individuals.includes("Family Member") : false,
+                adult: defaultValues.individuals ? defaultValues.individuals.includes("Adult") : false,
+                child: defaultValues.individuals ? defaultValues.individuals.includes("Child") : false,
+                staffMember: defaultValues.individuals ? defaultValues.individuals.includes("Staff Member") : false,
+                visitor: defaultValues.individuals ? defaultValues.individuals.includes("Visitor") : false,
+                volunteer: defaultValues.individuals ? defaultValues.individuals.includes("Volunteer") : false,
+                other: defaultValues.individuals ? defaultValues.individuals.includes("Other") : false
             },
             //string on backend delineated by commas
-            incidentType: (defaultValues.incidentType !== null) ? defaultValues.incidentType.trim().split(",") || [] : [],
+            incidentType: defaultValues.incidentType ? defaultValues.incidentType : "Actual Event/Incident",
             //boolean
             effects: defaultValues.effects ? "Harm sustained" : "No harm sustained",
             witness1Name: defaultValues.witness1Name || '',
@@ -91,7 +60,7 @@ const Fields = ({handleClick, open, defaultValues}) => {
             witness3Name: defaultValues.witness3Name || '',
             witness3Phone: defaultValues.witness3Phone || '',
             //string on backend delineated by commas
-            department: (defaultValues.department !== null) ? defaultValues.department.trim().split(",") || [] : [],
+            department: defaultValues.department ? defaultValues.department.split(",") : [],
             description: defaultValues.description || "",
             prevention: defaultValues.prevention || "",
             patientName: defaultValues.patientName || "",
@@ -99,8 +68,44 @@ const Fields = ({handleClick, open, defaultValues}) => {
             patientPhone: defaultValues.patientPhone || "",
             patientAddress: defaultValues.patientAddress || ""
         }
-
-
+    } else {
+        defaultValues2 = {
+            date: new Date(),
+            time: new Date(),
+            location: "",
+            eventType: [],
+            //boolean on backend
+            harm: "Yes",
+            //string on backend delineated by commas
+            individuals: {
+                patient: false,
+                familyMember: false,
+                adult: false,
+                child: false,
+                staffMember: false,
+                visitor: false,
+                volunteer: false,
+                other: false
+            },
+            //string on backend delineated by commas
+            incidentType: "Actual Event/Incident",
+            //boolean
+            effects: 'No harm sustained',
+            witness1Name: '',
+            witness1Phone: '',
+            witness2Name: '',
+            witness2Phone: '',
+            witness3Name: '',
+            witness3Phone: '',
+            //string on backend delineated by commas
+            department: [],
+            description: "",
+            prevention: "",
+            patientName: "",
+            patientSSN: "",
+            patientPhone: "",
+            patientAddress: ""
+        }
     }
     const [isDisabled, setIsDisabled] = useState(true);
     const [formValues, setFormValues] = useState(defaultValues2);
@@ -293,7 +298,7 @@ const Fields = ({handleClick, open, defaultValues}) => {
     }, [formValues]);
 
     return (
-        <>
+        <Box>
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={1}>
                     <DateOfEvent formValues={formValues} handleInputChange={handleTimeChange}/>
@@ -322,6 +327,7 @@ const Fields = ({handleClick, open, defaultValues}) => {
                     <PatientPhoneBox formValues={formValues} handleInputChange={handleInputChange}/>
                 </Grid>
                 <AddressBox formValues={formValues} handleInputChange={handleInputChange}/>
+                {formValues.command && <CommandBox formValues={formValues}/>}
                 <Grid container spacing={1}>
                     <Grid item xs={7}/>
                     <Grid item xs={5}>
@@ -348,7 +354,7 @@ const Fields = ({handleClick, open, defaultValues}) => {
                     </Grid>
                 </Grid>
             </form>
-        </>
+        </Box>
     );
 
 }
