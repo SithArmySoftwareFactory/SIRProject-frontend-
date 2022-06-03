@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import HomeIcon from '@mui/icons-material/Home';
-import ASFIcon from "./ASFIcon";
 import './banner.css';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import FaceIcon from '@mui/icons-material/Face';
 import {NavLink} from "react-router-dom";
 import {Grid} from "@mui/material";
+
 export function Banner({setIsHome, isHome}) {
     return (
         <Box component={"div"} sx={{flexGrow: 1}}>

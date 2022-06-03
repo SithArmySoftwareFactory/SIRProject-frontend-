@@ -3,17 +3,14 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Form20 from "../form_backup/Form20";
 import axios from "axios";
 import {API_URL} from "../../constants/Constants";
 import {Divider} from "@mui/material";
-import {useState} from "react";
 import SIRForm from "../SIRForm/SIRForm";
 
 function PaperComponent(props) {
@@ -46,11 +43,13 @@ export default function DraggableDialog(props) {
 
     const handlePatch = () => {
         //call API
-         axios.patch(API_URL + "incident/" + props.rowViewed.id, transformData(values))
+        axios.patch(API_URL + "incident/" + props.rowViewed.id, transformData(values))
 
     }
-    function transformData (
-        {date,
+
+    function transformData(
+        {
+            date,
             time,
             location,
             incidentType,
@@ -77,14 +76,15 @@ export default function DraggableDialog(props) {
             witness2Name,
             witness2Phone,
             witness3Name,
-            witness3Phone }) {
+            witness3Phone
+        }) {
 
-        let individualArray = [familymember,adult,child,other,patient,staffmember,visitor,volunteer]
+        let individualArray = [familymember, adult, child, other, patient, staffmember, visitor, volunteer]
 
         let filtered = individualArray.filter(x => x !== undefined);
 
         for (let i = 0; i < filtered.length; i++) {
-            if(filtered[i] === 'undefined') {
+            if (filtered[i] === 'undefined') {
                 filtered.splice(i, 1);
             }
         }
@@ -126,7 +126,7 @@ export default function DraggableDialog(props) {
                 onClose={handleClose}
                 PaperComponent={PaperComponent}
                 aria-labelledby="draggable-dialog-title"
-                 maxWidth="800px"
+                maxWidth="800px"
             >
                 <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
                     Incident Report
@@ -144,9 +144,7 @@ export default function DraggableDialog(props) {
                     </IconButton>
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        <SIRForm open={open} defaultValues={props.rowViewed}/>
-                    </DialogContentText>
+                    <SIRForm open={open} defaultValues={props.rowViewed}/>
                 </DialogContent>
                 <Divider/>
                 <DialogActions>

@@ -1,4 +1,3 @@
-import {screen} from "@testing-library/react";
 
 describe('user navigating to the homepage', () => {
     before(() => {

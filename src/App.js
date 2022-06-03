@@ -1,7 +1,7 @@
 import './App.css';
 import {Banner} from "./components/common/Banner";
 import SIRForm from "./components/SIRForm/SIRForm";
-import {forwardRef, useEffect, useState} from "react";
+import {forwardRef, useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
@@ -38,7 +38,7 @@ function App() {
             <Grid container spacing={0} columns={12} justifyContent="center">
                 <Grid item xs={12}>
                     <Banner setIsHome={setIsHome} isHome={isHome} />
-                                      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
+                                      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}
                           anchorOrigin={{horizontal: "center", vertical: "top"}} sx={{width: "100%"}}>
 
                     <Alert onClose={handleClose} severity={"success"}
@@ -46,7 +46,12 @@ function App() {
                            action={
                         <>
                             <Typography noWrap textAlign={"right"}>View Report</Typography>
-                            <CloseIcon onClick={()=>handleClose()}/>
+                            <Button onClick={()=>handleClose()}
+                                    sx={{width:"5%",background: "#EAF5F4", color: "#2A9D8F", fontWeight: "600"}}
+                            >
+                                <CloseIcon />
+                            </Button>
+
                         </>
                     }
                     >
