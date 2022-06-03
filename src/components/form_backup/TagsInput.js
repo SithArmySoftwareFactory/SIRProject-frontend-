@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import Chip from "@mui/material/Chip";
 import TextField from "@mui/material/TextField";
 import Downshift from "downshift";
-
 
 
 export default function TagsInput({ ...props }) {
