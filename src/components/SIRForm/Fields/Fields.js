@@ -20,9 +20,15 @@ import AddressBox from "./AddressBox";
 import Button from '@mui/material/Button';
 import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
 import {apiPostIncident} from "../../../api/APICalls";
-
+import {getGeocode, getLatLng,} from "use-places-autocomplete";
+import {useJsApiLoader} from "@react-google-maps/api";
 
 const Fields = ({handleClick, open, defaultValues}) => {
+    const {isLoaded} = useJsApiLoader({
+        id: "google-map-script",
+        googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
+    });
+
 
     let defaultValues2 = {
         date: new Date(),
@@ -211,12 +217,31 @@ const Fields = ({handleClick, open, defaultValues}) => {
             departmentsInvolvedString = departmentsInvolvedString + "," + department;
         }
         dataToBeSent.department = departmentsInvolvedString.substring(1);
+
+       getTheLocation(dataToBeSent.location).then((data) =>{
+
+           dataToBeSent.lat = data.lat;
+           dataToBeSent.lng = data.lng;
+
+           apiPostIncident(dataToBeSent);
+           setFormValues(defaultValues2);
+       });
+
         handleClick();
+
         apiPostIncident(dataToBeSent);
         setFormValues(defaultValues2);
 
-
     };
+
+    async function getTheLocation(searchAddress) {
+        const results = await getGeocode({address: searchAddress});
+        const {lat, lng} = await getLatLng(results[0]);
+        return {lat, lng}
+    }
+
+
+
     useEffect(() => {
         for (const formValuesKey in formValues) {
             switch (formValuesKey) {

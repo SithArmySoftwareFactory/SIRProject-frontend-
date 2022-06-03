@@ -1,7 +1,8 @@
-import {Card, CardActionArea, CardContent, CardMedia, Grid, Typography} from "@mui/material";
+import {Button, Card, CardActionArea, CardContent, CardMedia, Grid, Typography} from "@mui/material";
 import './home.css'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+import {NavLink} from "react-router-dom";
 
 const Home = () => {
     return (
@@ -21,7 +22,7 @@ const Home = () => {
                     <div className="desc">
                         Global Reporting System
                     </div>
-                    <button className="button button5">Get Started</button>
+                    <Button sx={{marginTop:'100px',padding:'2em', height:'50px', backgroundColor:'#F7F7F7'}} id="#getstarted" component={NavLink} to={'/report'}>Get Started</Button>
                 </div>
             </div>
             <Grid item xs={12}>

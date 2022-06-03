@@ -12,7 +12,7 @@ import {apiGetIncident} from "../../api/APICalls";
 function Gmap(props) {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
-        googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g", // doesnt work --> process.env.MY_ENVIRONMENT_VARIABLE
+        googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
     });
 
 
