@@ -21,6 +21,7 @@ export function Banner({setIsHome, isHome}) {
                         <li><AssessmentIcon className="bannerIcons"/><NavLink  className="navLink" page="/report" to="/report">Submit Report</NavLink></li>
                         <li><SupervisedUserCircleIcon className="bannerIcons"/><NavLink  className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink></li>
                         <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/login" to="/login">Login</NavLink></li>
+                        <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/dashboard" to="/dashboard">Dashboard</NavLink></li>
                     </ul>
                 </nav>
             </header>

@@ -9,8 +9,8 @@ const Footer = () => {
                         <div className="col-sm-6 col-md-3 item">
                             <h3>Services</h3>
                             <ul>
-                                <li><a href="#">MEDVAC APP</a></li>
-                                <li><a href="#">The INCUBATOR</a></li>
+                                <li><a href="http://borgfrontendtooltipsfinal-env.eba-nn3dttb7.us-east-2.elasticbeanstalk.com/">MEDVAC APP</a></li>
+                                <li><a href="https://dev3395.d20mm6b3fjxaop.amplifyapp.com/">The INCUBATOR</a></li>
                                 <li><a href="#">SIR REPORT</a></li>
                             </ul>
                         </div>
