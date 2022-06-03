@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import HomeIcon from '@mui/icons-material/Home';
-import ASFIcon from "./ASFIcon";
 import './banner.css';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import FaceIcon from '@mui/icons-material/Face';
 import {NavLink} from "react-router-dom";
 import {Grid} from "@mui/material";
+
 export function Banner({setIsHome, isHome}) {
     return (
         <Box component={"div"} sx={{flexGrow: 1}}>
@@ -20,8 +20,15 @@ export function Banner({setIsHome, isHome}) {
                         <li><HomeIcon className="bannerIcons"/><NavLink  className="navLink" page="/" to="/">Home</NavLink></li>
                         <li><AssessmentIcon className="bannerIcons"/><NavLink  className="navLink" page="/report" to="/report">Submit Report</NavLink></li>
                         <li><SupervisedUserCircleIcon className="bannerIcons"/><NavLink  className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink></li>
+<<<<<<< HEAD
                         <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/login" to="/login">Login</NavLink></li>
                         <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/dashboard" to="/dashboard">Dashboard</NavLink></li>
+=======
+                        <li><FaceIcon className="bannerIcons"/>
+                            {/*<NavLink  className="navLink" page="/login" to="/login">Login</NavLink>*/}
+                            <a className="navLink" href="http://localhost:8080/api/login">Login</a>
+                        </li>
+>>>>>>> ed3a4f04466beeacb43b82a4cca418a91109f2c8
                     </ul>
                 </nav>
             </header>

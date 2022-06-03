@@ -4,6 +4,7 @@ import * as React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import Box from "@mui/material/Box";
 
 
 const TypeOfEventBox = ({handleInputChange, formValues}) => {
@@ -27,6 +28,8 @@ const TypeOfEventBox = ({handleInputChange, formValues}) => {
         {title: "Infant Discharge to Wrong Family"},
         {title: "Laboratory Related"},
         {title: "Medication Related"},
+        {title: "Medical"},
+        {title: "Property"},
         {title: "Needle Stick/Sharp Injury"},
         {title: "Obstetrics Related"},
         {title: "Operative/Invasive Procedure Related"},
@@ -40,7 +43,7 @@ const TypeOfEventBox = ({handleInputChange, formValues}) => {
     ];
 
     return (
-        <>
+        <Box>
             <br/>
             <label style={styleLabel}>Type of Event</label>
             <Stack spacing={3}>
@@ -67,7 +70,7 @@ const TypeOfEventBox = ({handleInputChange, formValues}) => {
                     )}
                 />
             </Stack>
-        </>
+        </Box>
     );
 
 }
