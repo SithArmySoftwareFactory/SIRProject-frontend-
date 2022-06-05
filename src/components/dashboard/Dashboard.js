@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import SIRLineChart from "./SIRLineChart";
 import {CardContent, Grid, Typography} from "@mui/material";
 import {apiGetIncident} from "../../api/APICalls";
 import SIRPieChart from "./SIRPieChart";
 import SIRBarChart from "./SIRBarChart";
-import Card from "@mui/material/Card";
 
 const Dashboard = () => {
     const [data, setData] = useState([]);
@@ -16,7 +15,7 @@ const Dashboard = () => {
         const result = await apiGetIncident()
         setData(result.data);
     }
-    useEffect(() => {
+    useMemo(() => {
         fetchData(0)
     }, []);
 

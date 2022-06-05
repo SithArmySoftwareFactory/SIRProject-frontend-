@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/incident": {
+      "name": "/incident",
+      "lambdaFunction": "sirprojectfrontend8acc8d0a",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

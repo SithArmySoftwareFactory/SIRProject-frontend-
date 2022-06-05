@@ -1,0 +1,21 @@
+{
+    "appName": "sirprojectfrontend",
+    "roleName": "pinpointLambdaRolefbc05af0",
+    "cloudformationPolicyName": "cloudformationPolicyfbc05af0",
+    "cloudWatchPolicyName": "cloudWatchPolicyfbc05af0",
+    "pinpointPolicyName": "pinpointPolicyfbc05af0",
+    "authPolicyName": "pinpoint_amplify_fbc05af0",
+    "unauthPolicyName": "pinpoint_amplify_fbc05af0",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
