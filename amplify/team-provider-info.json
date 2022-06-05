@@ -15,6 +15,12 @@
       "auth": {
         "undefined": {},
         "sirprojectfrontend": {}
+      },
+      "function": {
+        "sirprojectfrontend8acc8d0a": {
+          "deploymentBucketName": "amplify-sirprojectfrontend-dev-120459-deployment",
+          "s3Key": "amplify-builds/sirprojectfrontend8acc8d0a-57674c7a7232384d7737-build.zip"
+        }
       }
     }
   }
