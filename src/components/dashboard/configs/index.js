@@ -26,7 +26,7 @@ function configs(labels, datasets) {
                     pointBackgroundColor: "blue",
                     borderColor: "blue",
                     borderWidth: 4,
-                    backgroundColor: "black",
+                    backgroundColor: "blue",
                     fill: false,
                     data: datasets.data,
                     maxBarThickness: 6,

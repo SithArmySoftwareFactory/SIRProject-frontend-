@@ -47,7 +47,7 @@ let labelArray = []
     }
 
     return (
-        <Card sx={{ backgroundColor: "darkgray"}} elevation={12}>
+        <Card sx={{ backgroundColor: "darkgray",  border: "2px solid black"}} elevation={12}>
             <Box padding="1rem" style={{backgroundColor: "darkgray"}} minHeight={570} maxHeight={'100%'}>
                     <Bar data={bar.data} options={bar.options} height={300}/>
             </Box>
