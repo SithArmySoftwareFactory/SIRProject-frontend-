@@ -35,36 +35,6 @@ export function Banner() {
                     </header>
                 </Grid>
             </Grid>
-
-            {/*<AppBar style={styleBanner}*/}
-            {/*>*/}
-            {/*    <Toolbar>*/}
-            {/*        <IconButton*/}
-            {/*            size="large"*/}
-            {/*            edge="start"*/}
-            {/*            color="inherit"*/}
-            {/*            aria-label="menu"*/}
-            {/*            onClick={() => setIsHome(!isHome)}*/}
-            {/*        >*/}
-            {/*            <MenuIcon sx={{*/}
-            {/*                position: "absolute",*/}
-            {/*                left: "12.5%",*/}
-            {/*                right: "12.5%",*/}
-            {/*                top: "25%",*/}
-            {/*                bottom: "25%",*/}
-            {/*                color: "#4B5320"*/}
-            {/*            }}*/}
-            {/*            />*/}
-            {/*        </IconButton>*/}
-            {/*        <IconButton*/}
-            {/*            size="small"*/}
-            {/*            color="inherit"*/}
-            {/*            aria-label="Army Software Factory Logo"*/}
-            {/*        >*/}
-            {/*            <ASFIcon/>*/}
-            {/*        </IconButton>*/}
-            {/*    </Toolbar>*/}
-            {/*</AppBar>*/}
         </Box>
     );
 }
