@@ -1,12 +1,30 @@
 import * as React from 'react';
 import axios from "axios";
 import {API_URL} from "../../constants/Constants";
+
+import {Divider} from "@mui/material";
+import SIRForm from "../SIRForm/SIRForm";
+import {useState} from "react";
 import Box from "@mui/material/Box";
 
 
 export default function DraggableDialog({rowViewed, handleClickOpen}) {
     const [values, setValues] = React.useState([]);
+    const [fullWidth, setFullWidth] = React.useState(false);
+    const [displayInDialogOnly, setDisplayInDialogOnly] = useState('dialog');
 
+    const fullWidthFunction = (value) => {
+        setFullWidth(value);
+        setDisplayInDialogOnly('dialog')
+    }
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setFullWidth(false);
+    };
 
     const handleSave = async (formikValues) => {
         setValues(formikValues); //set values to state, perhaps use later?
@@ -93,6 +111,43 @@ export default function DraggableDialog({rowViewed, handleClickOpen}) {
             <a className="viewLink" onClick={handleClickOpen}>
                 VIEW
             </a>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                PaperComponent={PaperComponent}
+                aria-labelledby="draggable-dialog-title"
+                fullScreen={fullWidth}
+                fullWidth={true}
+                >
+                <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
+                    Incident Report
+                    <IconButton
+                        aria-label="close"
+                        onClick={handleClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon/>
+                    </IconButton>
+                </DialogTitle>
+                <DialogContent>
+                    <SIRForm open={open} defaultValues={props.rowViewed} fullWidthFunction={fullWidthFunction} fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
+                </DialogContent>
+                <Divider/>
+                <DialogActions>
+                    <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
+                    {(fullWidth) ? <Button autoFocus onClick={() => setFullWidth(false)} style={{color: "#5D6A18"}}>
+                        RETURN
+                    </Button>:  <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
+                        SAVE
+                    </Button>}
+
+                </DialogActions>
+            </Dialog>
         </Box>
     );
 }

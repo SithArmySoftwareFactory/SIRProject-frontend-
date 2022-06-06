@@ -1,0 +1,406 @@
+.pageContent {
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+.incidentTable {
+    margin-top:20px;
+    align-content: center;
+    justify-content: center;
+    width:100%;
+}
+.incidentInvolvedHarmTable {
+    margin-left:9px;
+    width:100%;
+}
+.s1 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 10pt;
+}
+.s2 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+.s3 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+}
+.s4 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 6pt;
+    vertical-align: 1pt;
+}
+.s5 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+    vertical-align: -1pt;
+}
+.s6 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 6pt;
+}
+.s7 {
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 6pt;
+}
+.s8 {
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 10pt;
+}
+.s9 {
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+.s10 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 7pt;
+}
+.s11 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+.s12 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 6pt;
+}
+.s13 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+h1 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 10pt;
+}
+.p,
+p {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+    margin: 0pt;
+}
+h2 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+}
+.s15 {
+    color: black;
+    font-family: Arial-BoldItalicMT, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 8pt;
+}
+li {
+    display: block;
+}
+#l1 {
+    padding-left: 0pt;
+    counter-reset: c1 1;
+}
+#l1 > li > *:first-child:before {
+    counter-increment: c1;
+    content: counter(c1, decimal) ". ";
+    color: black;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+}
+#l1 > li:first-child > *:first-child:before {
+    counter-increment: c1 0;
+}
+#l2 {
+    padding-left: 0pt;
+    counter-reset: c2 1;
+}
+#l2 > li > *:first-child:before {
+    counter-increment: c2;
+    content: counter(c2, lower-latin) ". ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+#l2 > li:first-child > *:first-child:before {
+    counter-increment: c2 0;
+}
+#l3 {
+    padding-left: 0pt;
+    counter-reset: c3 2;
+}
+#l3 > li > *:first-child:before {
+    counter-increment: c3;
+    content: "(" counter(c3, decimal) ") ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+#l3 > li:first-child > *:first-child:before {
+    counter-increment: c3 0;
+}
+#l4 {
+    padding-left: 0pt;
+    counter-reset: c2 1;
+}
+#l4 > li > *:first-child:before {
+    counter-increment: c2;
+    content: counter(c2, lower-latin) ". ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 8pt;
+}
+#l4 > li:first-child > *:first-child:before {
+    counter-increment: c2 0;
+}
+table,
+tbody {
+    vertical-align: top;
+    overflow: visible;
+}
+
+.td1 {
+    width: 540pt;
+    border-top-style: solid;
+    border-top-width: 2pt;
+    border-left-style: solid;
+    border-left-width: 2pt;
+    border-bottom-style: solid;
+    border-bottom-width: 2pt;
+    border-right-style: solid;
+    border-right-width: 2pt;
+}
+.td2 {
+    padding-left: 147pt;
+    padding-right: 145pt;
+    text-indent: 0pt;
+    line-height: 11pt;
+    text-align: center;
+}
+.td3 {
+    padding-left: 151pt;
+    padding-right: 145pt;
+    text-indent: 0pt;
+    line-height: 8pt;
+    text-align: center;
+}
+.td4 {
+    width: 540pt;
+    border-top-style: solid;
+    border-top-width: 2pt;
+    border-left-style: solid;
+    border-left-width: 2pt;
+    border-bottom-style: solid;
+    border-bottom-width: 1pt;
+    border-right-style: solid;
+    border-right-width: 2pt;
+}
+.p1 {
+    padding-left: 134pt;
+    text-indent: 0pt;
+    line-height: 9pt;
+    text-align: left;
+}
+.p2 {
+    padding-left: 3pt; text-indent: 0pt; text-align: left
+}
+.p3 {
+    padding-top: 1pt;
+    padding-left: 3pt;
+    text-indent: 0pt;
+    text-align: left;
+}
+.p4 {
+   padding-left: 3pt; text-indent: 0pt; text-align: left
+}
+.p5 {
+    padding-left: 3pt; text-indent: 0pt; text-align: left
+}
+.p6 {
+    padding-left: 2pt; text-indent: 0pt; text-align: left;
+}
+.p7 {
+    padding-top: 2pt;
+    padding-left: 3pt;
+    text-indent: 0pt;
+    text-align: left;
+}
+.p8 {
+    padding-top: 2pt;
+    padding-left: 11pt;
+    text-indent: 0pt;
+    text-align: left;
+}
+.td5 {
+    width: 540pt;
+    border-top-style: solid;
+    border-top-width: 1pt;
+    border-left-style: solid;
+    border-left-width: 2pt;
+    border-bottom-style: solid;
+    border-bottom-width: 1pt;
+    border-right-style: solid;
+    border-right-width: 2pt;
+}
+.td6 {
+    width: 169pt;
+    border-top-style: solid;
+    border-top-width: 1pt;
+    border-left-style: solid;
+    border-left-width: 2pt;
+    border-bottom-style: solid;
+    border-bottom-width: 1pt;
+    border-right-style: solid;
+    border-right-width: 1pt;
+}
+.td7 {
+    width: 162pt;
+    border-top-style: solid;
+    border-top-width: 1pt;
+    border-left-style: solid;
+    border-left-width: 1pt;
+    border-bottom-style: solid;
+    border-bottom-width: 1pt;
+    border-right-style: solid;
+    border-right-width: 1pt;
+}
+.td8 {
+    width: 209pt;
+    border-top-style: solid;
+    border-top-width: 1pt;
+    border-left-style: solid;
+    border-left-width: 1pt;
+    border-bottom-style: solid;
+    border-bottom-width: 1pt;
+    border-right-style: solid;
+    border-right-width: 2pt;
+}
+.td9 {
+    width: 295pt;
+    border-top-style: solid;
+    border-top-width: 1pt;
+    border-left-style: solid;
+    border-left-width: 2pt;
+    border-bottom-style: solid;
+    border-bottom-width: 1pt;
+}
+.td10 {
+    width: 130pt;
+    border-top-style: solid;
+    border-top-width: 1pt;
+    border-bottom-style: solid;
+    border-bottom-width: 1pt;
+}
+.typeOfEventOptions {
+    width:100%;
+    margin-left:9px;
+}
+.effectsLowerTable {
+    width:100%;
+    margin-left:9px;
+}
+.bottomPage2Table {
+    margin-left: 10px;
+    width: 100%;
+    border: 2px solid #000;
+    margin-top:27px;
+    padding-right: 10px;
+}
+.bottomPageTd {
+    padding-right: 10px;
+}
+.bottomPage2TableComments {
+    margin-left: 10px;
+    width: 100%;
+    border: 2px solid #000;
+    border-top:0;
+    margin-top:-1px;
+    text-align: center;
+    justify-content: center;
+    min-height: 458px;
+}
+.page1FooterComments {
+    margin-left: 10px;
+    width: 100%;
+    margin-top:0;
+}
+.page1Footer {
+    margin-left: 10px;
+    width: 100%;
+    margin-top:0;
+}
+.page2Footer {
+    margin-left: 10px;
+    width: 100%;
+    margin-top:0;
+    margin-bottom: 60px;
+}
