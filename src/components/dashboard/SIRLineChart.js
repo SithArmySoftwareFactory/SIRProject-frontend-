@@ -16,12 +16,12 @@ import Icon from "@mui/material/Icon";
 
 // ReportsLineChart configurations;
 import {useMemo} from "react";
-import configs from "../dashboard/configs"
-import {CardContent, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import Box from "@mui/material/Box";
+import Configs from "../dashboard/configs";
 
-const SIRLineChart = ({color, title, description, date, chart}) => {
-    const {data, options} = configs(chart.labels || [], chart.datasets || {});
+const SIRLineChart = ({title, description, date, chart}) => {
+    const {data} = Configs(chart.labels || [], chart.datasets || {});
     Chart.register(...registerables);
 
     return (
@@ -29,12 +29,11 @@ const SIRLineChart = ({color, title, description, date, chart}) => {
             <Box padding="1rem" style={{backgroundColor: "darkgray"}} minHeight={570} maxHeight={'100%'}>
                 {useMemo(
                     () => (
-                        <Box
-                        >
+                        <Box>
                             <Line data={data} height={300}/>
                         </Box>
                     ),
-                    [chart, color]
+                    [chart]
                 )}
             </Box>
                 <Box pl={1}>
@@ -52,7 +51,6 @@ const SIRLineChart = ({color, title, description, date, chart}) => {
                     {date}
                 </Typography>
             </Box>
-
         </Card>
     );
 }

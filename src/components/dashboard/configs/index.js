@@ -1,21 +1,25 @@
-/**
- =========================================================
- * Material Dashboard 2 React - v2.1.0
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/material-dashboard-react
- * Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
- Coded by www.creative-tim.com
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- */
+import {useEffect, useMemo} from "react";
 
 
+function Configs(labels, datasets) {
+let pointValues = []
 
-function configs(labels, datasets) {
+    const pointColor = (value) => {
+    pointValues = []
+        value.forEach(number => {
+            if (number === 0) {
+                pointValues.push("green")
+            } else if (number <= 2) {
+                pointValues.push("yellow")
+            } else {
+                pointValues.push("red")
+            }
+        })
+        console.log(pointValues)
+    }
+         useMemo( () => {
+             pointColor(datasets.data)
+         }, [datasets]);
 
     return {
         data: {
@@ -26,10 +30,10 @@ function configs(labels, datasets) {
                     tension: 0,
                     pointRadius: 8 ,
                     pointBorderColor: "transparent",
-                    pointBackgroundColor: "blue",
-                    borderColor: "blue",
-                    borderWidth: 4,
-                    backgroundColor: "blue",
+                    pointBackgroundColor: [...pointValues],
+                    borderColor: 'black',
+                    borderWidth: 3,
+                    backgroundColor: "black",
                     fill: false,
                     data: datasets.data,
                     maxBarThickness: 6,
@@ -97,4 +101,4 @@ function configs(labels, datasets) {
     };
 }
 
-export default configs;
+export default Configs;
