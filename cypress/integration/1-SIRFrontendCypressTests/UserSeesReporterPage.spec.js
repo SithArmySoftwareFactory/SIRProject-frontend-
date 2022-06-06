@@ -83,7 +83,7 @@ describe('user navigating to the homepage', () => {
     });
     it('should see what actions, if any, could have been taken to prevent this incident from occurring box', () => {
         cy.findByText(/what actions, if any, could have been taken to prevent this incident from occurring/i).should('exist');
-        cy.findByText(/what actions, if any, could have been taken to prevent this incident from occurring/i).siblings().last().children().last().children().first().should('exist');
+        cy.findByText(/what actions, if any, could have been taken to prevent this incident from occurring/i).siblings().first().next().next().next().next().children().last().children().first().should('exist');
     });
     it('should see patient name or ID plate box', () => {
         cy.findByText(/patient name or id plate/i).should('exist');

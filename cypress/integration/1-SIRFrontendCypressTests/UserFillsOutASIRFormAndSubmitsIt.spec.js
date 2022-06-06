@@ -162,7 +162,7 @@ describe('user filling out form and submitting to the db', () => {
     });
 
     it('should type in a description of actions taken and should not be able to submit', () => {
-        cy.findByText(/what actions, if any, could have been taken to prevent this incident from occurring/i).siblings().last().children().last().children().first().type('No actions could have prevented this test.');
+        cy.findByText(/what actions, if any, could have been taken to prevent this incident from occurring/i).siblings().first().next().next().next().next().children().last().children().first().type('No actions could have prevented this test.');
         cy.findByDisplayValue('No actions could have prevented this test.').should('exist');
         cy.findByRole('button',{name:/submit/i}).should('be.disabled');
     });
