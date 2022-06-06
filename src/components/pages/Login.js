@@ -3,7 +3,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./login.css";
 import {Grid} from "@mui/material";
-import {apiGetIncident, apiLogin} from "../../api/APICalls";
 import axios from "axios";
 export default function Login(props) {
     const [username, setUsername] = useState("");
@@ -15,25 +14,8 @@ export default function Login(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        let data = {
-           username, password
-        }
-        console.log(data)
-        // {
-        //     headers: {
-        //
-        //     },
-        axios.post('http://localhost:8080/api/login',
-            data, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }},
+        axios.post('http://localhost:8080/api/login',`username=${username}&password=${password}`
         ).then((data) => {
-            // {
-            //     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NoIiwicm9sZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpL2xvZ2luIiwiZXhwIjoxNjU0NTM5OTQ1fQ.akZt8dT5ZQaKs9wZf9VHsY1w1dRdOhUvw2uSoOekXdE",
-            //     "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NoIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwaS9sb2dpbiIsImV4cCI6MTY1NDU0MTE0NX0.8OFI7lMK349vgPDTC4qB9Zll3PXUSKccUQrlyFhSxlE"
-            // }
-        console.log(data)
             //TODO call state to set Logged in to true
             props.userAuthorized(data);
         }).catch((e) => {

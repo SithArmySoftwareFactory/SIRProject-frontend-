@@ -13,6 +13,7 @@ import Footer from "./components/common/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
 import Gmap from "./components/maps/Gmap";
 import Login from "./components/pages/Login";
+import {apiGetIncident} from "./api/APICalls";
 
 
 
@@ -27,17 +28,21 @@ function App() {
 
     const [isHome, setIsHome] = useState(true);
     const [open, setOpen] = useState(false);
-    const [authorizationState, setAuthorizationState] = useState([]);
+    const [authorizationState, setAuthorizationState] = useState(undefined);
+    const [apiCallCount, setApiCallCount] = useState(0);
     const handleClick = () => {
         setOpen(true);
     }
 
     const userAuthorized = (value) => {
-
         //TODO value logic, does it have auth and refresh token? -> yes -> authorize
         //No do not set state
-        console.log(value)
-        setAuthorizationState(value);
+        setAuthorizationState(value.data.access_token);
+
+    }
+
+    const setApiCallCountFunction = () => {
+        setApiCallCount(1);
     }
 
     const handleClose = (event, reason) => {
@@ -50,7 +55,7 @@ function App() {
         <>
             <Grid container spacing={0} columns={12} justifyContent="center">
                 <Grid item xs={12}>
-                    <Banner setIsHome={setIsHome} isHome={isHome} />
+                    <Banner setIsHome={setIsHome} isHome={isHome}  authorizationState={authorizationState} />
                                       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}
                           anchorOrigin={{horizontal: "center", vertical: "top"}} sx={{width: "100%"}}>
 
@@ -76,10 +81,14 @@ function App() {
                 <Routes>
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/report" element={<SIRForm handleClick={handleClick}  />} />
-                     <Route path="/supervisor" element={<SupervisorView/>} />
-                     <Route path="/dashboard" element={<Dashboard/>} />
+                    {authorizationState && <Route path="/supervisor" element={<SupervisorView
+                        authorizationState={authorizationState}
+                        setApiCallCountFunction={setApiCallCountFunction}
+                        apiCallCount={apiCallCount}
+                    />} />}
+                    {authorizationState && <Route path="/dashboard" element={<Dashboard authorizationState={authorizationState}  setApiCallCountFunction={setApiCallCountFunction}/>} />}
                     <Route path="/login" element={<Login userAuthorized={userAuthorized} />} />
-                    <Route path="/map" element={<Gmap />} />
+                    {authorizationState && <Route path="/map" element={<Gmap authorizationState={authorizationState} />} />}
                     <Route path="*" element={<Home />} />
                 </Routes>
             </Grid>

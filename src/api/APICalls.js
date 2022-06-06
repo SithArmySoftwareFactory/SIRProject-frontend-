@@ -1,13 +1,19 @@
 import {API_URL} from "../constants/Constants";
 import axios from "axios";
 
-export const apiGetIncident = async (index) => {
+export const apiGetIncident = async (index, token) => {
+
     if (index > 0) {
         return axios.get(API_URL + "incident/" + index)
     } else {
-        return axios.get(API_URL + "incident")
-    }
-}
+
+        return axios.get(API_URL + "incident", {
+            headers: {
+            'Authorization': `Bearer ${token}`
+        }
+
+    })
+}}
 
 export const apiPostIncident = async (data) => {
     return axios.post(API_URL + "incident", data)

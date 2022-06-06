@@ -34,7 +34,7 @@ function PaperComponent(props) {
 }
 
 
-const SupervisorView = () => {
+const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCount}) => {
     const [pageSize, setPageSize] = React.useState(5);
     const [dialog, setDialog] = useState(false);
     const [rowsChecked, setRowsChecked] = useState({}); //stores the rows checked
@@ -55,8 +55,12 @@ const SupervisorView = () => {
 
     //Get Data from backend
     const fetchIncidentAPI = () => {
-        apiGetIncident()
-            .then((r) => setRowsFromApi(r.data))
+        apiGetIncident(0, authorizationState)
+            .then((r) =>  {
+                setRowsFromApi(r.data);
+                console.log(authorizationState);
+                console.log(r.data)
+            })
             .catch((error) => console.log(error));
     };
     useEffect(fetchIncidentAPI, []);

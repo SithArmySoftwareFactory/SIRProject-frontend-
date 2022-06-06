@@ -8,7 +8,7 @@ import {Grid} from "@mui/material";
 import {apiGetIncident} from "../../api/APICalls";
 import './gmap.css'
 
-function Gmap(props) {
+function Gmap({authorizationState, ...props}) {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
@@ -34,7 +34,7 @@ function Gmap(props) {
 
     //Get Data from backend
     const fetchIncidentAPI = () => {
-        apiGetIncident()
+        apiGetIncident(0, authorizationState)
             .then((r) => {
                 setRowsFromApi(r.data);
             })
