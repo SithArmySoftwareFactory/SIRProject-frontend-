@@ -25,10 +25,6 @@ const Home = () => {
                     <div className="desc">
                         GLOBAL REPORTING SYSTEM
                     </div>
-                    <div id="#getStarted">
-                        <NavLink className="getStarted" to={'/report'}>Get Started</NavLink>
-                    </div>
-
                     <Button sx={{marginTop: '100px', padding: '2em', height: '50px', backgroundColor: '#F7F7F7'}}
                             id="#getstarted" component={NavLink} to={'/report'}>Get Started</Button>
 
@@ -90,7 +86,6 @@ const Home = () => {
                         </tr>
                         </tbody>
                     </table>
-
                 </div>
             </Grid>
         </Grid>

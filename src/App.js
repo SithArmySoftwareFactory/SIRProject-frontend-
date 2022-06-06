@@ -65,15 +65,6 @@ function App() {
                         </Alert>
                     </Snackbar>
                 </Grid>
-                <Grid item xs={12}>
-                    <Routes>
-                        <Route exact path="/" element={<Home/>}/>
-                        <Route exact path="/report" element={<SIRForm handleClick={handleClick}/>}/>
-                        <Route path="/supervisor" element={<SupervisorView/>}/>
-                        <Route path="/dashboard" element={<Dashboard/>}/>
-                        <Route element={<Home/>}/>
-                    </Routes>
-                </Grid>
                 <Grid item  xs={12} >
                 <Routes>
                     <Route exact path="/" element={<Home />} />
