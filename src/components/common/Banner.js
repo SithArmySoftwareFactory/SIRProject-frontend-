@@ -20,50 +20,13 @@ export function Banner({setIsHome, isHome}) {
                         <li><HomeIcon className="bannerIcons"/><NavLink  className="navLink" page="/" to="/">Home</NavLink></li>
                         <li><AssessmentIcon className="bannerIcons"/><NavLink  className="navLink" page="/report" to="/report">Submit Report</NavLink></li>
                         <li><SupervisedUserCircleIcon className="bannerIcons"/><NavLink  className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink></li>
-<<<<<<< HEAD
                         <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/login" to="/login">Login</NavLink></li>
                         <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/dashboard" to="/dashboard">Dashboard</NavLink></li>
-=======
-                        <li><FaceIcon className="bannerIcons"/>
-                            {/*<NavLink  className="navLink" page="/login" to="/login">Login</NavLink>*/}
-                            <a className="navLink" href="http://localhost:8080/api/login">Login</a>
-                        </li>
->>>>>>> ed3a4f04466beeacb43b82a4cca418a91109f2c8
                     </ul>
                 </nav>
             </header>
                 </Grid>
             </Grid>
-
-            {/*<AppBar style={styleBanner}*/}
-            {/*>*/}
-            {/*    <Toolbar>*/}
-            {/*        <IconButton*/}
-            {/*            size="large"*/}
-            {/*            edge="start"*/}
-            {/*            color="inherit"*/}
-            {/*            aria-label="menu"*/}
-            {/*            onClick={() => setIsHome(!isHome)}*/}
-            {/*        >*/}
-            {/*            <MenuIcon sx={{*/}
-            {/*                position: "absolute",*/}
-            {/*                left: "12.5%",*/}
-            {/*                right: "12.5%",*/}
-            {/*                top: "25%",*/}
-            {/*                bottom: "25%",*/}
-            {/*                color: "#4B5320"*/}
-            {/*            }}*/}
-            {/*            />*/}
-            {/*        </IconButton>*/}
-            {/*        <IconButton*/}
-            {/*            size="small"*/}
-            {/*            color="inherit"*/}
-            {/*            aria-label="Army Software Factory Logo"*/}
-            {/*        >*/}
-            {/*            <ASFIcon/>*/}
-            {/*        </IconButton>*/}
-            {/*    </Toolbar>*/}
-            {/*</AppBar>*/}
         </Box>
     );
 }

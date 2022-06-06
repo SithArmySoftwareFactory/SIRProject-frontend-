@@ -99,34 +99,15 @@ const Dashboard = () => {
         <>
             <Grid container columnSpacing={10}
                   direction="row"
-                  justifyContent="space-around"
-                  style={{zIndex: 4999}}
-                  alignItems="stretch">
-
-                <Grid item xs={2}  margin={1} >
-                    <Card sx={{backgroundColor: "white", border: "2px solid black"}} elevation={12} >
-                        <CardContent>
-                            <Typography>
-                                Serious Incidents
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                  justifyContent="center"
+                  alignItems="stretch"
+                  sx={{
+                      backgroundImage: `url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_952510084_395383.jpg")`}}>
+                <Grid item xs={12} margin={2}>
+                    <Typography color={'white'} variant={'h2'} textAlign={"center"}>
+                        Real-Time Metrics
+                    </Typography>
                 </Grid>
-                <Grid item xs={2} margin={1} mb={0}>
-                    <Card sx={{backgroundColor: "white", border: "2px solid black"}} elevation={12}>
-                        <CardContent>Test</CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={2} margin={1} mb={0}>
-                    <Card sx={{backgroundColor: "white", border: "2px solid black"}} elevation={12}>
-                        <CardContent>Test</CardContent>
-                    </Card>
-                </Grid>
-            </Grid>
-                <Grid container columnSpacing={10}
-                      direction="row"
-                      justifyContent="center"
-                      alignItems="stretch">
                 <Grid item xs={3.75} margin={1}>
                     <SIRLineChart
                         color="dark"
