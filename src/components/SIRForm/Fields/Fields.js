@@ -322,8 +322,6 @@ const Fields = ({handleClick, open, defaultValues, fullWidthFunction}) => {
         }
     }, [formValues]);
 
-
-    const [view, setView] = useState('');
     return (
         <Box>
             <form onSubmit={handleSubmit}>

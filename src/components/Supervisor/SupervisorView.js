@@ -45,6 +45,14 @@ const SupervisorView = () => {
     const [rowViewed, setRowViewed] = useState(null);
     const [rowsFromApi, setRowsFromApi] = useState([]);
     const [isSIRFormOpen,setIsSIRFormOpen] = useState(false);
+    const [fullWidth, setFullWidth] = useState(false);
+    const [displayInDialogOnly, setDisplayInDialogOnly] = useState('dialog');
+
+    const fullWidthFunction = (value) => {
+        setFullWidth(value);
+        setDisplayInDialogOnly('dialog');
+    }
+
     //Get Data from backend
     const fetchIncidentAPI = () => {
         apiGetIncident()
@@ -206,7 +214,8 @@ const SupervisorView = () => {
                         onClose={handleClose}
                         PaperComponent={PaperComponent}
                         aria-labelledby="draggable-dialog-title"
-                        maxWidth="800px"
+                        fullScreen={fullWidth}
+                        fullWidth={true}
                     >
                         <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
                             Incident Report
@@ -224,14 +233,17 @@ const SupervisorView = () => {
                             </IconButton>
                         </DialogTitle>
                         <DialogContent>
-                            <SIRForm open={isSIRFormOpen} defaultValues={rowViewed}/>
+                            <SIRForm open={isSIRFormOpen} defaultValues={rowViewed} fullWidthFunction={fullWidthFunction} fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
                         </DialogContent>
                         <Divider/>
                         <DialogActions>
+                            <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
+                            {(fullWidth) ? <Button autoFocus onClick={() => setFullWidth(false)} style={{color: "#5D6A18"}}>
+                                RETURN
+                                </Button> :
                             <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
                                 SAVE
-                            </Button>
-                            <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
+                            </Button> }
                         </DialogActions>
                     </Dialog>
                 }
