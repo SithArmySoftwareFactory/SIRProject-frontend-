@@ -11,7 +11,7 @@ import {styleLabel} from "../../../themes/themes";
 const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChildrenClickChange}) => {
 
     const [isDisabled, setIsDisabled] = useState(true);
-    const [involvedArray, setInvolvedArray] = useState([]);
+    const [involvedArray] = useState([]);
 
     let {patient, familyMember, adult, child, staffMember, visitor, volunteer, other} = formValues.individuals;
 

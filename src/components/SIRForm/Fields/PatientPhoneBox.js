@@ -12,7 +12,6 @@ const PatientPhoneBox = ({formValues,handleInputChange}) => {
                 id="Patient Phone"
                 name={"patientPhone"}
                 variant={"outlined"}
-                fullWidth
                 value={formValues.patientPhone}
                 onChange={handleInputChange}
                 fullWidth

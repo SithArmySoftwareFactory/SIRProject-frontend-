@@ -20,6 +20,7 @@ const Dashboard = () => {
         fetchData(0)
     }, []);
 
+
     const individualDataset = () => {
         let individualsTrimmed = []
         let counts = {}

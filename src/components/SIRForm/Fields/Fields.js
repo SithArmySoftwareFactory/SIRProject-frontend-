@@ -24,13 +24,8 @@ import CommandBox from "./CommandBox";
 import Box from "@mui/material/Box";
 
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
-import {useJsApiLoader} from "@react-google-maps/api";
 
 const Fields = ({handleClick, open, defaultValues}) => {
-    const {isLoaded} = useJsApiLoader({
-        id: "google-map-script",
-        googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
-    });
 
 
     let defaultValues2;
@@ -129,14 +124,14 @@ const Fields = ({handleClick, open, defaultValues}) => {
     const handleAutoCompleteTypeOfEvent = (target) => {
         setFormValues({
             ...formValues,
-            ['eventType']: target,
+            eventType: target,
         });
     }
 
     const handleAutoCompleteDepartmentsInvolved = (target) => {
         setFormValues({
             ...formValues,
-            ['department']: target,
+            department: target,
         });
     }
     const handleTimeChange = (newValue, name) => {
@@ -158,20 +153,20 @@ const Fields = ({handleClick, open, defaultValues}) => {
         }
         setFormValues({
             ...formValues,
-            [`individuals`]: newIndividualsInvolved,
+            individuals: newIndividualsInvolved,
         })
     }
     const handleClickChildrenChange = () => {
         let newIndividualsInvolved = formValues.individuals;
         newIndividualsInvolved = {
             ...newIndividualsInvolved,
-            ['familyMember']: false,
-            ['adult']: false,
-            ['child']: false,
+            familyMember: false,
+            adult: false,
+            child: false,
         }
         setFormValues({
             ...formValues,
-            [`individuals`]: newIndividualsInvolved,
+            individuals: newIndividualsInvolved,
         })
 
     }
@@ -199,11 +194,7 @@ const Fields = ({handleClick, open, defaultValues}) => {
 
 
         dataToBeSent.harm = dataToBeSent.harm === "Yes";
-        if (dataToBeSent.effects === "No harm sustained") {
-            dataToBeSent.effects = false;
-        } else {
-            dataToBeSent.effects = true;
-        }
+        dataToBeSent.effects = dataToBeSent.effects !== "No harm sustained";
 
         for (const individuals in dataToBeSent.individuals) {
             if (dataToBeSent.individuals[`${individuals}`]) {

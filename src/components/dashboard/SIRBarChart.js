@@ -18,6 +18,7 @@ let labelArray = []
     }
     chartLabels()
 
+
     const chartValues = () => {
         sirData.forEach(element => {
             valuesArray.push(element.value)

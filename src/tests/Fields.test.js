@@ -123,10 +123,6 @@ describe("Component tests for fields", () => {
             expect(screen.getByRole('textbox')).toBeInTheDocument();
         });
 
-        // it("should be able to type into the textbox",()=>{
-        //    userEvent.type(screen.getByRole('textbox'),"d");
-        //    expect(screen.getByDisplayValue('d')).toBeInTheDocument();
-        // });
 
     });
 
