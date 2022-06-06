@@ -1,32 +1,14 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Paper from '@mui/material/Paper';
-import Draggable from 'react-draggable';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 import {API_URL} from "../../constants/Constants";
+
 import {Divider} from "@mui/material";
 import SIRForm from "../SIRForm/SIRForm";
 import {useState} from "react";
+import Box from "@mui/material/Box";
 
-function PaperComponent(props) {
-    return (
-        <Draggable
-            handle="#draggable-dialog-title"
-            cancel={'[class*="MuiDialogContent-root"]'}
-        >
-            <Paper {...props} />
-        </Draggable>
-    );
-}
 
-export default function DraggableDialog(props) {
-    const [open, setOpen] = React.useState(false);
+export default function DraggableDialog({rowViewed, handleClickOpen}) {
     const [values, setValues] = React.useState([]);
     const [fullWidth, setFullWidth] = React.useState(false);
     const [displayInDialogOnly, setDisplayInDialogOnly] = useState('dialog');
@@ -51,7 +33,7 @@ export default function DraggableDialog(props) {
 
     const handlePatch = () => {
         //call API
-        axios.patch(API_URL + "incident/" + props.rowViewed.id, transformData(values))
+        axios.patch(API_URL + "incident/" + rowViewed.id, transformData(values))
 
     }
 
@@ -125,7 +107,7 @@ export default function DraggableDialog(props) {
     }
 
     return (
-        <>
+        <Box>
             <a className="viewLink" onClick={handleClickOpen}>
                 VIEW
             </a>
@@ -166,6 +148,6 @@ export default function DraggableDialog(props) {
 
                 </DialogActions>
             </Dialog>
-        </>
+        </Box>
     );
 }

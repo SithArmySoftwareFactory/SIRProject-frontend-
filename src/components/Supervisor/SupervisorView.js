@@ -1,4 +1,4 @@
-import {Alert, Box} from "@mui/material";
+import {Alert, Box, Divider} from "@mui/material";
 import {
     DataGrid,
     GridColumns,
@@ -12,6 +12,27 @@ import Button from '@mui/material/Button';
 import DraggableDialog from "./DraggableDialog";
 import SendToCommandDialog from "../SendToCommandDialog/SendToCommandDialog";
 import {apiGetIncident} from "../../api/APICalls";
+import Draggable from "react-draggable";
+import Paper from "@mui/material/Paper";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import DialogContent from "@mui/material/DialogContent";
+import SIRForm from "../SIRForm/SIRForm";
+import DialogActions from "@mui/material/DialogActions";
+import Dialog from "@mui/material/Dialog";
+
+function PaperComponent(props) {
+    return (
+        <Draggable
+            handle="#draggable-dialog-title"
+            cancel={'[class*="MuiDialogContent-root"]'}
+        >
+            <Paper {...props} />
+        </Draggable>
+    );
+}
+
 
 const SupervisorView = () => {
     const [pageSize, setPageSize] = React.useState(5);
@@ -21,8 +42,9 @@ const SupervisorView = () => {
     const [showCommand, setShowCommand] = useState(false);
     const [sent, setSent] = useState(false);
     const [selectionModel, setSelectionModel] = useState([]);
-    const [rowViewed, setRowViewed] = useState([]);
+    const [rowViewed, setRowViewed] = useState(null);
     const [rowsFromApi, setRowsFromApi] = useState([]);
+    const [isSIRFormOpen,setIsSIRFormOpen] = useState(false);
     //Get Data from backend
     const fetchIncidentAPI = () => {
         apiGetIncident()
@@ -44,6 +66,13 @@ const SupervisorView = () => {
             setSent(false);
         }, 3500)
     }
+    const handleClose = () => {
+        setIsSIRFormOpen(false);
+    };
+
+    const handleClickOpen = () => {
+        setIsSIRFormOpen(true);
+    };
 
     //define how the fetched row data columns are displayed
     //the field must match the key from rows, if there is a row named date, a column for date should
@@ -139,7 +168,7 @@ const SupervisorView = () => {
             field: 'details',
             headerName: 'Details',
             flex: 1,
-            renderCell: () => (<DraggableDialog rowViewed={rowViewed}/>),
+            renderCell: () => (<DraggableDialog rowViewed={rowViewed} handleClickOpen={handleClickOpen}/>),
         }
     ];
     //If we implement editing rows directly
@@ -158,158 +187,191 @@ const SupervisorView = () => {
     };
 
     return (
-        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center'}}>
+        <Box height="auto" width="100%" display="flex" sx={{textAlign: 'center', justifyContent: 'center'}}>
             <Box minWidth="1038px">
+                {(sent) ?
+                    <Alert severity="success" className="sentSuccessMsg">
+                        Sent to [Commander]
+                    </Alert>
+                    :
+                    null
+                }
+                <br/> <br/>
+                <h3 className="dataGridHeaderTitle">Incident Reports</h3>
+                <br/><br/>
+                <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
+                {isSIRFormOpen&&
+                    <Dialog
+                        open={isSIRFormOpen}
+                        onClose={handleClose}
+                        PaperComponent={PaperComponent}
+                        aria-labelledby="draggable-dialog-title"
+                        maxWidth="800px"
+                    >
+                        <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
+                            Incident Report
+                            <IconButton
+                                aria-label="close"
+                                onClick={handleClose}
+                                sx={{
+                                    position: 'absolute',
+                                    right: 8,
+                                    top: 8,
+                                    color: (theme) => theme.palette.grey[500],
+                                }}
+                            >
+                                <CloseIcon/>
+                            </IconButton>
+                        </DialogTitle>
+                        <DialogContent>
+                            <SIRForm open={isSIRFormOpen} defaultValues={rowViewed}/>
+                        </DialogContent>
+                        <Divider/>
+                        <DialogActions>
+                            <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
+                                SAVE
+                            </Button>
+                            <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
+                        </DialogActions>
+                    </Dialog>
+                }
+                <DataGrid
+                    className="dataGrid"
+                    //get page size from state
+                    pageSize={pageSize}
+                    //function to change page size according to rowsPerPage
+                    onPageSizeChange={(newPage) => setPageSize(newPage)}
+                    pagination
+                    //options for dropdown that selects how many pages to display
+                    rowsPerPageOptions={[5, 10, 15]}
 
-            {(sent) ?
-                <Alert severity="success" className="sentSuccessMsg">
-                    Sent to [Commander]
-                </Alert>
-                :
-                null
-            }
-            <br/> <br/>
-            <h3 className="dataGridHeaderTitle">Incident Reports</h3>
-            <br/><br/>
-            <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent} rowsChecked={rowsChecked}/>
-            <DataGrid
-                className="dataGrid"
-                //get page size from state
-                pageSize={pageSize}
-                //function to change page size according to rowsPerPage
-                onPageSizeChange={(newPage) => setPageSize(newPage)}
-                pagination
-                //options for dropdown that selects how many pages to display
-                rowsPerPageOptions={[5, 10, 15]}
+                    //rows should be fetched from api
+                    rows={rows}
+                    //columns prop defines the data structure of the rows
+                    columns={columns}
+                    selectionModel={selectionModel}
+                    //additional pageSize handling
+                    rowsPerPage={pageSize}
+                    //For cell editing, if implemented
+                    onCellEditStop={processRowUpdate}
+                    //various settings to manage display and interaction
+                    checkboxSelection
+                    autoHeight
+                    disableColumnSelector
+                    disableDensitySelector
+                    disableSelectionOnClick
+                    onRowClick={(event) => {
+                        // fetchTextAPI(event)
+                        //here we can handle a specific event for a row being clicked
+                        setRowViewed(event.row)
+                    }}
+                    onSelectionModelChange={(ids) => {
+                        //initial count of rows
+                        let rowCount = 0;
 
-                        //rows should be fetched from api
-                        rows={rows}
-                        //columns prop defines the data structure of the rows
-                        columns={columns}
-                        selectionModel={selectionModel}
-                        //additional pageSize handling
-                        rowsPerPage={pageSize}
-                        //For cell editing, if implemented
-                        onCellEditStop={processRowUpdate}
-                        //various settings to manage display and interaction
-                        checkboxSelection
-                        autoHeight
-                        disableColumnSelector
-                        disableDensitySelector
-                        disableSelectionOnClick
-                        onRowClick={(event) => {
-                            // fetchTextAPI(event)
-                            //here we can handle a specific event for a row being clicked
-                            setRowViewed(event.row)
-                        }}
-                        onSelectionModelChange={(ids) => {
-                            //initial count of rows
-                            let rowCount = 0;
+                        const selectedIDs = new Set(ids);
+                        const selectedRowData = rows.filter((row) =>
+                            selectedIDs.has(row.id),
+                        );
+                        //keep track of ever row checked, store in state for form submit
+                        setRowsChecked(selectedRowData);
+                        //count how many rows are checked, displayed above data grid
+                        for (let selectedRowDataKey in selectedRowData) {
+                            rowCount++
+                        }
+                        //set the state of the rows counted
+                        setCount(rowCount);
+                        //if a row is selected, the row count wil increase, and we can display
+                        //the element that contains the row count text,  managed by state
+                        if (rowCount >= 1) {
+                            setShowCommand(true);
 
-                            const selectedIDs = new Set(ids);
-                            const selectedRowData = rows.filter((row) =>
-                                selectedIDs.has(row.id),
-                            );
-                            //keep track of ever row checked, store in state for form submit
-                            setRowsChecked(selectedRowData);
-                            //count how many rows are checked, displayed above data grid
-                            for (let selectedRowDataKey in selectedRowData) {
-                                rowCount++
-                            }
-                            //set the state of the rows counted
-                            setCount(rowCount);
-                            //if a row is selected, the row count wil increase, and we can display
-                            //the element that contains the row count text,  managed by state
-                            if (rowCount >= 1) {
-                                setShowCommand(true);
+                        } else {
+                            setShowCommand(false);
+                        }
+                        //pass in the information into the model selection, this is given back
+                        //to the Data grid, to help state
+                        setSelectionModel(ids);
+                    }}
+                    //remove various unwanted fields
+                    localeText={{
+                        toolbarFilters: "",
+                        footerRowSelected: () => {
+                            return ("");
+                        }
+                    }}
 
-                            } else {
-                                setShowCommand(false);
-                            }
-                            //pass in the information into the model selection, this is given back
-                            //to the Data grid, to help state
-                            setSelectionModel(ids);
+                    //render a custom toolbar
+                    components={{
+                        Toolbar: () => {
+                            //if showCommand is set to true, a row has been selected.
+                            //show sent to command toolbar,
+                            //otherwise show the search and filter toolbar
+                            return (
+                                <>
+                                    {(showCommand) ?
+                                        <Box className="sendToCommandBox">
+                                            <table width="100%">
+                                                <tbody>
+                                                <tr>
+                                                    <td className="selectedCount">
+                                                        {count} selected
+                                                    </td>
+                                                    <td className="sendToCommandBoxTableData">
+                                                        <Button variant="outlined" color="primary"
+                                                                className="sendUpToCmdButton" sx={{
+                                                            color: "#5D6A18",
+                                                            fontWeight: "bold",
+                                                            borderColor: "#5D6A18"
+                                                        }} onClick={() => setDialog(true)}>SEND UP TO
+                                                            COMMAND</Button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </Box>
+                                        :
+                                        <GridToolbarContainer sx={{justifyContent: 'flex', width: '100%'}}>
+                                            <table className="tableDataGrid">
+                                                <tbody>
+                                                <tr>
+                                                    <td><h3 className="dataGridReports">Reports</h3></td>
+                                                    <td className="tableDataGridTD"><GridToolbarFilterButton
+                                                        sx={{color: 'rgba(0, 0, 0, 0.54)'}}/>
+                                                        <GridToolbarQuickFilter
+                                                            sx={{color: 'rgba(0, 0, 0, 0.54)'}}/></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </GridToolbarContainer>
+                                    }
+                                </>)
+                        }
+                    }}
+                    //Filter for Data grid
+                    componentsProps={{
+                        toolbar: {
+                            showQuickFilter: true,
+                            quickFilterProps: {debounceMs: 500},
+                        },
+                    }}
+                    //This handles editing just a cell value, this has not been implemented
+                    onCellEditCommit={(params) => setTimeout(handleRowEditCommit(params), 1000)}
+                    //various styling, width set to 100% and display handled by App.js Grid component
+                    sx={{
 
-                        }}
-                        //remove various unwanted fields
-                        localeText={{
-                            toolbarFilters: "",
-                            footerRowSelected: () => {
-                                return ("");
-                            }
-                        }}
+                        justifyContent: 'center',
+                        width: '100%',
 
-                        //render a custom toolbar
-                        components={{
-                            Toolbar: () => {
-                                //if showCommand is set to true, a row has been selected.
-                                //show sent to command toolbar,
-                                //otherwise show the search and filter toolbar
-                                return (
-                                    <>
-                                        {(showCommand) ?
-                                            <Box className="sendToCommandBox">
-                                                <table width="100%">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td className="selectedCount">
-                                                            {count} selected
-                                                        </td>
-                                                        <td className="sendToCommandBoxTableData">
-                                                            <Button variant="outlined" color="primary"
-                                                                    className="sendUpToCmdButton" sx={{
-                                                                color: "#5D6A18",
-                                                                fontWeight: "bold",
-                                                                borderColor: "#5D6A18"
-                                                            }} onClick={() => setDialog(true)}>SEND UP TO
-                                                                COMMAND</Button>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </Box>
-                                            :
-                                            <GridToolbarContainer sx={{justifyContent: 'flex', width: '100%'}}>
-                                                <table className="tableDataGrid">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td><h3 className="dataGridReports">Reports</h3></td>
-                                                        <td className="tableDataGridTD"><GridToolbarFilterButton
-                                                            sx={{color: 'rgba(0, 0, 0, 0.54)'}}/>
-                                                            <GridToolbarQuickFilter
-                                                                sx={{color: 'rgba(0, 0, 0, 0.54)'}}/></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </GridToolbarContainer>
-                                        }
-                                    </>)
-                            }
-                        }}
-                        //Filter for Data grid
-                        componentsProps={{
-                            toolbar: {
-                                showQuickFilter: true,
-                                quickFilterProps: {debounceMs: 500},
-                            },
-                        }}
-                        //This handles editing just a cell value, this has not been implemented
-                        onCellEditCommit={(params) => setTimeout(handleRowEditCommit(params), 1000)}
-                        //various styling, width set to 100% and display handled by App.js Grid component
-                        sx={{
-
-                            justifyContent: 'center',
-                            width: '100%',
-
-                            '.css-1jbbcbn-MuiDataGrid-columnHeaderTitle': {
-                                fontFamily: "Public Sans",
-                            },
-                            '&.MuiDataGrid-root': {
-                                border: 'none',
-                            },
-                        }}
-                    /></Box>
-            </Box>)
+                        '.css-1jbbcbn-MuiDataGrid-columnHeaderTitle': {
+                            fontFamily: "Public Sans",
+                        },
+                        '&.MuiDataGrid-root': {
+                            border: 'none',
+                        },
+                    }}
+                /></Box>
+        </Box>)
 }
 
 export default SupervisorView;
