@@ -1,10 +1,10 @@
-import {Button, Card, CardActionArea, CardContent, CardMedia, Grid, Typography} from "@mui/material";
+import {Button, Grid} from "@mui/material";
 import './home.css'
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import {NavLink} from "react-router-dom";
 import SecurityIcon from '@mui/icons-material/Security';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+
 const Home = () => {
 
 
@@ -17,16 +17,16 @@ const Home = () => {
                         <source src="/spinning_planet.webm" type="video/webm"/>
                     </video>
                 </div>
-                <br /><br /><br />
+                <br/><br/><br/>
                 <div className="callout-container">
                     <div className="callout">
                         <h1 className="callout-container-h1">SERIOUS</h1> &nbsp; &nbsp;<h1 id="red">INCIDENT</h1>
                     </div>
                     <div className="desc">
-                       GLOBAL REPORTING SYSTEM
+                        GLOBAL REPORTING SYSTEM
                     </div>
                     <div id="#getStarted">
-                        <NavLink  className="getStarted"   to={'/report'}>Get Started</NavLink>
+                        <NavLink className="getStarted" to={'/report'}>Get Started</NavLink>
                     </div>
 
                     <Button sx={{marginTop: '100px', padding: '2em', height: '50px', backgroundColor: '#F7F7F7'}}
@@ -35,7 +35,7 @@ const Home = () => {
                 </div>
             </div>
             <Grid item xs={12}>
-                <br /><br /> <br /><br />
+                <br/><br/> <br/><br/>
                 <div className="page-icon-container">
                     <table width="100%" style={{textAlign: 'center', justifyContent: 'center', marginTop: '2%'}}>
                         <tbody>
@@ -52,15 +52,15 @@ const Home = () => {
                             </td>
                             <td>
 
-                                <div style={{maxWidth: '400px', display: "inline-block", marginBottom:'1em'}}><br/>
+                                <div style={{maxWidth: '400px', display: "inline-block", marginBottom: '1em'}}><br/>
                                     <PeopleAltIcon className="page-icon" style={{fontSize: '250px'}}/>
-                          </div>
+                                </div>
 
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div style={{minHeight:'250px',maxWidth: '400px', display: "inline-block"}}>
+                                <div style={{minHeight: '250px', maxWidth: '400px', display: "inline-block"}}>
                                     <h2 className="iconTextTitle">Dashboard</h2><p className="iconText">
                                     SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus
@@ -85,7 +85,6 @@ const Home = () => {
                                     Everything
                                     ultimately effects the war fighter. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing.
-
                                 </p></div>
                             </td>
                         </tr>
@@ -95,78 +94,6 @@ const Home = () => {
                 </div>
             </Grid>
         </Grid>
-            <table style={{
-                marginTop: '100px',
-                marginBottom: '100px',
-                padding: '30px',
-                textAlign: 'center',
-                width: '100%'
-            }}>
-                <tbody>
-                <tr>
-                    <td>
-                        <Card sx={{maxWidth: 645, margin: '50px'}}>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    height="250"
-                                    image="/2.jpeg"
-                                    alt="green iguana"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        Serious Incident Reporting
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, reiciendis!
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </td>
-                    <td>
-                        <Card sx={{maxWidth: 645, margin: '50px'}}>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    height="250"
-                                    image="/3.jpeg"
-                                    alt="green iguana"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        Seamlessly Coordinate Across Teams
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Map data displayed in real time dashboard. Lorem ipsum dolor.
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </td>
-                    <td>
-                        <Card sx={{maxWidth: 645, margin: '50px'}}>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    height="250"
-                                    image="/users.jpeg"
-                                    alt="green iguana"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        The Software Factory
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        CI/CD Pipeline - Software Engineering at all levels, Lorem ipsum.
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
         </>);
 }
 
