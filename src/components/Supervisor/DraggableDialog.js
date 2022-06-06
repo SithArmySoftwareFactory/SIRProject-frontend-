@@ -1,40 +1,12 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Paper from '@mui/material/Paper';
-import Draggable from 'react-draggable';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 import {API_URL} from "../../constants/Constants";
-import {Divider} from "@mui/material";
-import SIRForm from "../SIRForm/SIRForm";
+import Box from "@mui/material/Box";
 
-function PaperComponent(props) {
-    return (
-        <Draggable
-            handle="#draggable-dialog-title"
-            cancel={'[class*="MuiDialogContent-root"]'}
-        >
-            <Paper {...props} />
-        </Draggable>
-    );
-}
 
-export default function DraggableDialog(props) {
-    const [open, setOpen] = React.useState(false);
+export default function DraggableDialog({rowViewed, handleClickOpen}) {
     const [values, setValues] = React.useState([]);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const handleSave = async (formikValues) => {
         setValues(formikValues); //set values to state, perhaps use later?
@@ -43,7 +15,7 @@ export default function DraggableDialog(props) {
 
     const handlePatch = () => {
         //call API
-        axios.patch(API_URL + "incident/" + props.rowViewed.id, transformData(values))
+        axios.patch(API_URL + "incident/" + rowViewed.id, transformData(values))
 
     }
 
@@ -117,43 +89,10 @@ export default function DraggableDialog(props) {
     }
 
     return (
-        <>
+        <Box>
             <a className="viewLink" onClick={handleClickOpen}>
                 VIEW
             </a>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                PaperComponent={PaperComponent}
-                aria-labelledby="draggable-dialog-title"
-                maxWidth="800px"
-            >
-                <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
-                    Incident Report
-                    <IconButton
-                        aria-label="close"
-                        onClick={handleClose}
-                        sx={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: (theme) => theme.palette.grey[500],
-                        }}
-                    >
-                        <CloseIcon/>
-                    </IconButton>
-                </DialogTitle>
-                <DialogContent>
-                    <SIRForm open={open} defaultValues={props.rowViewed}/>
-                </DialogContent>
-                <Divider/>
-                <DialogActions>
-                    <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
-                        SAVE
-                    </Button>
-                    <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
-                </DialogActions>
-            </Dialog>
-        </>
+        </Box>
     );
 }
