@@ -4,8 +4,16 @@ import TextField from "@mui/material/TextField";
 import Downshift from "downshift";
 
 
-export default function TagsInput({ ...props }) {
-    const { selectedTags, placeholder, tags, eventTags = [], departmentTags = [], deleteEventTags = {}, ...other } = props;
+export default function TagsInput({...props}) {
+    const {
+        selectedTags,
+        placeholder,
+        tags,
+        eventTags = [],
+        departmentTags = [],
+        deleteEventTags = {},
+        ...other
+    } = props;
     const [inputValue, setInputValue] = React.useState("");
     const [selectedItem, setSelectedItem] = React.useState([]);
     useEffect(() => {
@@ -19,13 +27,13 @@ export default function TagsInput({ ...props }) {
     useEffect(() => {
         //redefined handleChange function to accept array
         //this loop wil be called into the handle change function
-        if(eventTags !== 'undefined') {
+        if (eventTags !== 'undefined') {
             for (let i = 0; i < eventTags.length; i++) {
                 handleChange(eventTags[i], eventTags)
             }
         }
 
-        if(departmentTags !== 'undefined') {
+        if (departmentTags !== 'undefined') {
             for (let i = 0; i < departmentTags.length; i++) {
                 handleChange(departmentTags[i], departmentTags)
             }
@@ -57,9 +65,10 @@ export default function TagsInput({ ...props }) {
             setSelectedItem(selectedItem.slice(0, selectedItem.length - 1));
         }
     }
+
     function handleChange(item, previousItems) {
         let newSelectedItem = [...selectedItem];
-        if(previousItems !== null) {
+        if (previousItems !== null) {
             newSelectedItem = previousItems;
         }
         if (newSelectedItem.indexOf(item) === -1) {
@@ -73,12 +82,13 @@ export default function TagsInput({ ...props }) {
         const newSelectedItem = [...selectedItem];
         newSelectedItem.splice(newSelectedItem.indexOf(item), 1);
         setSelectedItem(newSelectedItem);
-         deleteEventTags(item);
+        deleteEventTags(item);
     };
 
     function handleInputChange(event) {
         setInputValue(event.target.value);
     }
+
     return (
         <React.Fragment>
             <Downshift
@@ -87,8 +97,8 @@ export default function TagsInput({ ...props }) {
                 onChange={handleChange}
                 selectedItem={selectedItem}
             >
-                {({ getInputProps }) => {
-                    const { onBlur, onChange, onFocus, ...inputProps } = getInputProps({
+                {({getInputProps}) => {
+                    const {onBlur, onChange, onFocus, ...inputProps} = getInputProps({
                         onKeyDown: handleKeyDown,
                         placeholder
                     });

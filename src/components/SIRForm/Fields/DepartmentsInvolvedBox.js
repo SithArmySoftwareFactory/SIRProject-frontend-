@@ -10,11 +10,10 @@ import Box from "@mui/material/Box";
 const DepartmentsInvolvedBox = ({handleInputChange, formValue}) => {
 
 
-    const handleChange = (event,value) => {
+    const handleChange = (event, value) => {
         handleInputChange(value);
 
     }
-
 
 
     const departmentTypes = [
@@ -41,8 +40,8 @@ const DepartmentsInvolvedBox = ({handleInputChange, formValue}) => {
             <label style={styleLabel}>Department(s) Involved in this incident</label>
             <Stack spacing={3}>
                 <Autocomplete
-                    onChange={(event,value)=>{
-                        handleChange(event,value);
+                    onChange={(event, value) => {
+                        handleChange(event, value);
                     }}
                     multiple
                     id="department"

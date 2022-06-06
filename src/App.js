@@ -22,8 +22,6 @@ function App() {
     const [open, setOpen] = useState(false);
 
 
-
-
     const handleClick = () => {
         setOpen(true);
     }
@@ -38,42 +36,47 @@ function App() {
         <>
             <Grid container spacing={0} columns={12} justifyContent="center">
                 <Grid item xs={12}>
-                    <Banner setIsHome={setIsHome} isHome={isHome} />
-                                      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}
-                          anchorOrigin={{horizontal: "center", vertical: "top"}} sx={{width: "100%"}}>
+                    <Banner setIsHome={setIsHome} isHome={isHome}/>
+                    <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}
+                              anchorOrigin={{horizontal: "center", vertical: "top"}} sx={{width: "100%"}}>
 
-                    <Alert onClose={handleClose} severity={"success"}
-                           sx={{width: "100%", background: "#EAF5F4", color: "#2A9D8F", fontWeight: "600"}}
-                           action={
-                        <>
-                            <Typography noWrap textAlign={"right"}>View Report</Typography>
-                            <Button onClick={()=>handleClose()}
-                                    sx={{width:"5%",background: "#EAF5F4", color: "#2A9D8F", fontWeight: "600"}}
-                            >
-                                <CloseIcon />
-                            </Button>
+                        <Alert onClose={handleClose} severity={"success"}
+                               sx={{width: "100%", background: "#EAF5F4", color: "#2A9D8F", fontWeight: "600"}}
+                               action={
+                                   <>
+                                       <Typography noWrap textAlign={"right"}>View Report</Typography>
+                                       <Button onClick={() => handleClose()}
+                                               sx={{
+                                                   width: "5%",
+                                                   background: "#EAF5F4",
+                                                   color: "#2A9D8F",
+                                                   fontWeight: "600"
+                                               }}
+                                       >
+                                           <CloseIcon/>
+                                       </Button>
 
-                        </>
-                    }
-                    >
-                        <Typography noWrap>Incident Report Submitted.</Typography>
-                    </Alert>
-                </Snackbar>
-                </Grid>
-                <Grid item  xs={12} >
-                <Routes>
-                    <Route exact path="/" element={<Home />} />
-                    <Route exact path="/report" element={<SIRForm handleClick={handleClick}  />} />
-                     <Route path="/supervisor" element={<SupervisorView/>} />
-                     <Route path="/dashboard" element={<Dashboard/>} />
-                    <Route element={<Home />} />
-                </Routes>
-            </Grid>
-                <Grid item xs={12}>
-                    <ViewMenu isHome={isHome} setIsHome={setIsHome} />
+                                   </>
+                               }
+                        >
+                            <Typography noWrap>Incident Report Submitted.</Typography>
+                        </Alert>
+                    </Snackbar>
                 </Grid>
                 <Grid item xs={12}>
-                    <Footer />
+                    <Routes>
+                        <Route exact path="/" element={<Home/>}/>
+                        <Route exact path="/report" element={<SIRForm handleClick={handleClick}/>}/>
+                        <Route path="/supervisor" element={<SupervisorView/>}/>
+                        <Route path="/dashboard" element={<Dashboard/>}/>
+                        <Route element={<Home/>}/>
+                    </Routes>
+                </Grid>
+                <Grid item xs={12}>
+                    <ViewMenu isHome={isHome} setIsHome={setIsHome}/>
+                </Grid>
+                <Grid item xs={12}>
+                    <Footer/>
                 </Grid>
             </Grid>
         </>

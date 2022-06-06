@@ -6,7 +6,7 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
 
-const DateOfEvent = ({formValues,handleInputChange}) => {
+const DateOfEvent = ({formValues, handleInputChange}) => {
 
     return (
         <Grid item xs={6}>
@@ -21,7 +21,7 @@ const DateOfEvent = ({formValues,handleInputChange}) => {
                     name={"date"}
                     value={formValues.date}
                     onChange={(newValue) => {
-                        handleInputChange(newValue,"date");
+                        handleInputChange(newValue, "date");
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />

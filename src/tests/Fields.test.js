@@ -53,7 +53,7 @@ describe("Component tests for fields", () => {
     describe("testing DateOfEvent Component", () => {
 
 
-        beforeEach(() => render(<DateOfEvent formValues={defaultValues} />));
+        beforeEach(() => render(<DateOfEvent formValues={defaultValues}/>));
         it("should see a label", async () => {
             expect(screen.getByText('Date of Event')).toBeInTheDocument();
         });
@@ -91,20 +91,19 @@ describe("Component tests for fields", () => {
             let tempTimeHour = tempTime.getHours();
             let tempTimeMinutes = tempTime.getMinutes();
 
-            if(tempTimeHour<10){
-                tempTimeHour= `0${tempTimeHour}`;
+            if (tempTimeHour < 10) {
+                tempTimeHour = `0${tempTimeHour}`;
             }
-            if(tempTimeHour>12){
-                tempTimeHour=`0${tempTimeHour-12}`;
+            if (tempTimeHour > 12) {
+                tempTimeHour = `0${tempTimeHour - 12}`;
             }
-            if(tempTimeMinutes<10){
-                tempTimeMinutes=`0${tempTimeMinutes}`;
+            if (tempTimeMinutes < 10) {
+                tempTimeMinutes = `0${tempTimeMinutes}`;
             }
-            if(tempTime.getHours()>12){
-                tempTime=`${tempTimeHour}:${tempTimeMinutes} pm`;
-            }
-            else {
-                tempTime=`${tempTimeHour}:${tempTimeMinutes} am`;
+            if (tempTime.getHours() > 12) {
+                tempTime = `${tempTimeHour}:${tempTimeMinutes} pm`;
+            } else {
+                tempTime = `${tempTimeHour}:${tempTimeMinutes} am`;
             }
             expect(screen.getByDisplayValue(tempTime)).toBeInTheDocument();
         });
@@ -136,7 +135,7 @@ describe("Component tests for fields", () => {
         });
     });
     describe("testing HarmEventBox Component", () => {
-        beforeEach(() => render(<HarmEventBox formValues={defaultValues} />));
+        beforeEach(() => render(<HarmEventBox formValues={defaultValues}/>));
         it("should see a button harm event boolean", async () => {
             expect(screen.getByRole('button')).toBeInTheDocument();
         });
@@ -303,7 +302,7 @@ describe("Component tests for fields", () => {
     });
 
     describe("testing disabled Submit button", () => {
-        beforeEach(() => render(<Fields />));
+        beforeEach(() => render(<Fields/>));
         it("should see a button", async () => {
             expect(screen.getByText(/Submit/i)).toBeInTheDocument();
         });

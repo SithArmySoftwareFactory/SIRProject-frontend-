@@ -1,18 +1,18 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {Pie} from 'react-chartjs-2';
 import Box from "@mui/material/Box";
-import {CardContent, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 import Card from "@mui/material/Card";
 
 
-const SIRPieChart = ({color, title, description, date, sirData}) => {
+const SIRPieChart = ({ title, description, date, sirData}) => {
     const [graph, setGraph] = useState({
         labels: [],
         data: [],
     });
-    const [graphData, setGraphData] = useState([]);
+    const [graphData] = useState([]);
     let labelData = []
 
     let labelDataTrimmed = []
@@ -85,24 +85,24 @@ const SIRPieChart = ({color, title, description, date, sirData}) => {
 
     return (
         <Card sx={{backgroundColor: "darkgray"}} elevation={24}>
-            <Box padding="1rem" minHeight={570} maxHeight={'100%'} >
-                    <Pie data={data} height={300}
-                         />
-                </Box>
+            <Box padding="1rem" minHeight={570} maxHeight={'100%'}>
+                <Pie data={data} height={300}
+                />
+            </Box>
             <Box pl={1}>
-                    <Typography variant="h6" textTransform="capitalize">
-                        {title}
-                    </Typography>
-                    <Typography component="div" variant="button" color="text" fontWeight="light">
-                        {description}
-                    </Typography>
-                    <Divider/>
-                    <Typography variant="button" color="text" lineHeight={1} sx={{mt: 0.15, mr: 0.5}}>
-                        <Icon>schedule</Icon>
-                    </Typography>
-                    <Typography variant="button" color="text" fontWeight="light">
-                        {date}
-                    </Typography>
+                <Typography variant="h6" textTransform="capitalize">
+                    {title}
+                </Typography>
+                <Typography component="div" variant="button" color="text" fontWeight="light">
+                    {description}
+                </Typography>
+                <Divider/>
+                <Typography variant="button" color="text" lineHeight={1} sx={{mt: 0.15, mr: 0.5}}>
+                    <Icon>schedule</Icon>
+                </Typography>
+                <Typography variant="button" color="text" fontWeight="light">
+                    {date}
+                </Typography>
             </Box>
         </Card>
 

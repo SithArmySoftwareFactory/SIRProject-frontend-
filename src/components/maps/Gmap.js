@@ -1,7 +1,6 @@
 import * as React from "react";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useJsApiLoader,} from "@react-google-maps/api";
-import {getGeocode, getLatLng,} from "use-places-autocomplete";
 import mapStyles from "./mapstyles";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,7 +8,7 @@ import {Grid} from "@mui/material";
 import {apiGetIncident} from "../../api/APICalls";
 
 
-function Gmap(props) {
+function Gmap() {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
@@ -17,20 +16,11 @@ function Gmap(props) {
 
 
     const [rowsFromApi, setRowsFromApi] = useState([]);
-    const [rowsFromUniApi, setRowsUniFromApi] = useState([]);
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     //store  clicked locations in state
-    const [places, setPlaces] = React.useState([{ lat: 30.282692, lng:-97.77402}]);
+    const [places, setPlaces] = React.useState([{lat: 30.282692, lng: -97.77402}]);
     //const save the prev place for calculating route
-    const [directions, setDirections] = useState({});
-    const [mapLoaded, setMapLoaded] = useState(false);
-    //store previous place
-    const prevPlace = useRef();
+    const [ setMapLoaded] = useState(false);
 
-    //path polyline ...
-    const [paths, setPaths] = useState([]);
 
     //Get Data from backend
     const fetchIncidentAPI = () => {
@@ -38,7 +28,7 @@ function Gmap(props) {
             .then((r) => {
                 setRowsFromApi(r.data);
             })
-            .catch((error) => console.log('error'));
+            .catch(() => console.log('error'));
     };
 
     useEffect(fetchIncidentAPI, []);
@@ -67,9 +57,6 @@ function Gmap(props) {
     //     return await getTheLocation(location)
     // }
 
-    function getUniqueListBy(arr, key) {
-        return [...new Map(arr.map(item => [item[key], item])).values()]
-    }
 
 
     // const testFunction = () => {
@@ -135,7 +122,6 @@ function Gmap(props) {
 
 
     //directions display control
-    const [directionsAvail, setDirectionsAvail] = useState(false);
 
     //store for Info WWindows, if implemented
     const [focusedPlace, setFocusedPlace] = React.useState(null);
@@ -158,7 +144,7 @@ function Gmap(props) {
 
     //function to store places, clicked - store the lat long
     //and record ...previous places  - useCall back to help with map refresh (state changes)
-    const handleRender = React.useCallback((event, response) => {
+    const handleRender = React.useCallback(() => {
         let latLngArray = [];
         // let latLngArray = [{lat: 38.8976633, lng: -77.0365739},
         //     {lat: 30.267153, lng: -97.7430608},
@@ -167,8 +153,8 @@ function Gmap(props) {
         //     {lat: 40.7127753, lng: -74.0059728}]
 
         for (let i = 0; i < rowsFromApi.length / 2; i++) {
-            if(rowsFromApi[i].lat !== null && rowsFromApi[i].lng !== null) {
-                latLngArray.push({lat:Number(rowsFromApi[i].lat), lng:Number(rowsFromApi[i].lng)})
+            if (rowsFromApi[i].lat !== null && rowsFromApi[i].lng !== null) {
+                latLngArray.push({lat: Number(rowsFromApi[i].lat), lng: Number(rowsFromApi[i].lng)})
             }
 
 
@@ -176,7 +162,7 @@ function Gmap(props) {
 
         setPlaces(latLngArray)
 
-    }, );
+    },);
 
     //remove place on Right Click ---> doesnt work
     const handleRenderOff = React.useCallback((event) => {

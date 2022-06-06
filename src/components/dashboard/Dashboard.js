@@ -8,7 +8,7 @@ import Card from "@mui/material/Card";
 
 const Dashboard = () => {
     const [data, setData] = useState([]);
-    const [monthlyCount, setMonthlyCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [monthlyCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     let months = [...monthlyCount]
     let individuals = []
 
@@ -104,8 +104,8 @@ const Dashboard = () => {
                   style={{zIndex: 4999}}
                   alignItems="stretch">
 
-                <Grid item xs={2}  margin={1} >
-                    <Card sx={{backgroundColor: "white", border: "2px solid black"}} elevation={12} >
+                <Grid item xs={2} margin={1}>
+                    <Card sx={{backgroundColor: "white", border: "2px solid black"}} elevation={12}>
                         <CardContent>
                             <Typography>
                                 Serious Incidents
@@ -124,10 +124,10 @@ const Dashboard = () => {
                     </Card>
                 </Grid>
             </Grid>
-                <Grid container columnSpacing={10}
-                      direction="row"
-                      justifyContent="center"
-                      alignItems="stretch">
+            <Grid container columnSpacing={10}
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="stretch">
                 <Grid item xs={3.75} margin={1}>
                     <SIRLineChart
                         color="dark"

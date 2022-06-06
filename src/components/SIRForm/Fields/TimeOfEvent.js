@@ -7,7 +7,7 @@ import {Grid} from "@mui/material";
 import {styleLabel} from "../../../themes/themes";
 
 
-const TimeOfEvent = ({formValues,handleInputChange}) => {
+const TimeOfEvent = ({formValues, handleInputChange}) => {
 
 
     return (
@@ -19,7 +19,7 @@ const TimeOfEvent = ({formValues,handleInputChange}) => {
                     value={formValues.time}
                     name={"time"}
                     onChange={(newValue) => {
-                        handleInputChange(newValue,"time");
+                        handleInputChange(newValue, "time");
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />

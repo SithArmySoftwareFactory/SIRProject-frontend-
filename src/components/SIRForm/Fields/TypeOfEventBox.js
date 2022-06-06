@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 const TypeOfEventBox = ({handleInputChange, formValues}) => {
 
 
-    const handleChange = (event,value) => {
+    const handleChange = (event, value) => {
         handleInputChange(value)
     }
 
@@ -48,8 +48,8 @@ const TypeOfEventBox = ({handleInputChange, formValues}) => {
             <label style={styleLabel}>Type of Event</label>
             <Stack spacing={3}>
                 <Autocomplete
-                    onChange={(event,value)=>{
-                        handleChange(event,value);
+                    onChange={(event, value) => {
+                        handleChange(event, value);
                     }}
                     multiple
                     id="eventType"

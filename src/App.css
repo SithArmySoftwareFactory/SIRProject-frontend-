@@ -19,7 +19,7 @@
 }
 
 .viewLink {
-    cursor:pointer;
+    cursor: pointer;
     /* button */
     width: 49px;
     height: 26px;
@@ -58,42 +58,51 @@
     font-weight: bold;
 }
 
-.MuiDataGrid-columnHeaderTitle { font-weight: bold ; overflow: visible ; }
+.MuiDataGrid-columnHeaderTitle {
+    font-weight: bold;
+    overflow: visible;
+}
 
 .dataGridHeader {
     text-align: left;
-    width:100%;
+    width: 100%;
     font-weight: lighter;
 
 }
+
 .dataGridHeader .MuiDataGrid-columnSeparator {
     display: none !important;
 }
+
 .dataGridHeaderTitle {
     font-family: "Public Sans", sans-serif;
     font-size: 40px;
     font-style: normal;
     text-align: left;
-    width:100%;
+    width: 100%;
     font-weight: 100;
 
 }
+
 .dataGrid {
     box-shadow: 20px 20px 50px grey;
     margin-bottom: 15em;
 }
+
 .dataGridReports {
     font-weight: 500;
     /*font-family: Verdana, serif;*/
 }
 
 .tableDataGrid {
-    width:100%;
+    width: 100%;
 }
+
 .tableDataGridTD {
     text-align: right;
 }
-.navLink{
+
+.navLink {
     color: black;
     text-decoration: none;
     font-family: "Public Sans", sans-serif;
@@ -105,6 +114,7 @@
 .sentSuccessMsg {
     width: 100%;
 }
+
 .sendToCommandBox {
     width: 100%;
     background-color: rgba(244, 245, 241, 1);
@@ -112,11 +122,12 @@
     font-weight: lighter;
 }
 
-.sendUpToCmdButton{
+.sendUpToCmdButton {
     font-weight: bolder;
     color: #5D6A18;
 
 }
+
 .sendToCommandBoxTableData {
     text-align: right;
 }

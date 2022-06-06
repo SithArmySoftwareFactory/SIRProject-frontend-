@@ -6,7 +6,7 @@ import {styleLabel} from "../../../themes/themes";
 import Box from "@mui/material/Box";
 
 
-const EffectOfIncidentBox = ({formValues,handleInputChange}) => {
+const EffectOfIncidentBox = ({formValues, handleInputChange}) => {
 
 
     return (
@@ -26,7 +26,7 @@ const EffectOfIncidentBox = ({formValues,handleInputChange}) => {
                     <MenuItem value={"Harm sustained"}>Harm sustained</MenuItem>
                 </Select>
             </FormControl>
-    </Box>
+        </Box>
     );
 }
 

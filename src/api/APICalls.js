@@ -18,7 +18,7 @@ export const apiPostIncidentCommand = async (data) => {
 }
 
 export const apiPatchIncident = async (index, data) => {
-      return axios.patch(API_URL + "incident/" + index, data)
+    return axios.patch(API_URL + "incident/" + index, data)
 }
 
 export const apiDeleteIncident = async (index) => {

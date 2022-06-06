@@ -22,7 +22,8 @@ const Home = () => {
                     <div className="desc">
                         Global Reporting System
                     </div>
-                    <Button sx={{marginTop:'100px',padding:'2em', height:'50px', backgroundColor:'#F7F7F7'}} id="#getstarted" component={NavLink} to={'/report'}>Get Started</Button>
+                    <Button sx={{marginTop: '100px', padding: '2em', height: '50px', backgroundColor: '#F7F7F7'}}
+                            id="#getstarted" component={NavLink} to={'/report'}>Get Started</Button>
                 </div>
             </div>
             <Grid item xs={12}>
@@ -33,7 +34,7 @@ const Home = () => {
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
                                     <DashboardIcon className="page-icon" style={{fontSize: '250px', left: '2%'}}/>
-                       </div>
+                                </div>
                             </td>
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
@@ -42,8 +43,8 @@ const Home = () => {
                             </td>
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <img src="icons8-soldier-man-100.png" style={{width: '200px', height: '200px'}}/>
-                          </div>
+                                    <img alt={"Images of Soldiers saluting"} src="icons8-soldier-man-100.png" style={{width: '200px', height: '200px'}}/>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -59,15 +60,20 @@ const Home = () => {
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
                                     <h2>User</h2><p>
-                                    Centered around usuability and design patterns to ensure the best user experience. Security is integral to operating data and protecting SIR information is paramount.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Centered around usuability and design patterns to ensure the best user experience.
+                                    Security is integral to operating data and protecting SIR information is paramount.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit
+                                    amet, consectetur adipisicing elit.
                                 </p></div>
                             </td>
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
                                     <h2>For Soldiers, by Soldiers</h2><p>
-                                    Software should be developed for Soldiers to ensure that they can operate with the greatest lethality. Even in the strategic environment, time is off the essence. Everything
-                                    ultimately effects the war fighter. Lorem ipsum dolor sit amet, consectetur adipisicing.
+                                    Software should be developed for Soldiers to ensure that they can operate with the
+                                    greatest lethality. Even in the strategic environment, time is off the essence.
+                                    Everything
+                                    ultimately effects the war fighter. Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing.
                                 </p></div>
                             </td>
                         </tr>
@@ -87,7 +93,7 @@ const Home = () => {
                 <tbody>
                 <tr>
                     <td>
-                        <Card sx={{maxWidth: 645, margin:'50px'}}>
+                        <Card sx={{maxWidth: 645, margin: '50px'}}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -100,14 +106,14 @@ const Home = () => {
                                         Serious Incident Reporting
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, reiciendis!
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, reiciendis!
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
                     </td>
                     <td>
-                        <Card sx={{maxWidth: 645, margin:'50px'}}>
+                        <Card sx={{maxWidth: 645, margin: '50px'}}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -120,14 +126,14 @@ const Home = () => {
                                         Seamlessly Coordinate Across Teams
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                       Map data displayed in real time dashboard. Lorem ipsum dolor.
+                                        Map data displayed in real time dashboard. Lorem ipsum dolor.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
                     </td>
                     <td>
-                        <Card sx={{maxWidth: 645, margin:'50px'}}>
+                        <Card sx={{maxWidth: 645, margin: '50px'}}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -140,7 +146,7 @@ const Home = () => {
                                         The Software Factory
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                       CI/CD Pipeline - Software Engineering at all levels, Lorem ipsum.
+                                        CI/CD Pipeline - Software Engineering at all levels, Lorem ipsum.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

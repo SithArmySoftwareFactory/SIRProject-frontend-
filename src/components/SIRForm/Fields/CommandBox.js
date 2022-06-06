@@ -2,7 +2,7 @@ import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
 import Box from "@mui/material/Box";
 
-const AddressBox = ({formValues,handleInputChange}) => {
+const AddressBox = ({formValues, handleInputChange}) => {
 
     return (
         <Box>

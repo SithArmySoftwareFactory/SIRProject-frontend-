@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from "@mui/material/Box";
 
 
-export default function DraggableDialog({ handleClickOpen}) {
+export default function DraggableDialog({handleClickOpen}) {
     // const [values, setValues] = React.useState([]);
 
 
@@ -16,7 +16,6 @@ export default function DraggableDialog({ handleClickOpen}) {
     //     axios.patch(API_URL + "incident/" + rowViewed.id, transformData(values))
     //
     // }
-
 
 
     // function transformData(

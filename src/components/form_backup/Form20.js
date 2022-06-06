@@ -8,7 +8,7 @@ import TagsInput from "./TagsInput";
 //validation for form fields
 const validationSchema = yup.object({
     date: yup
-         .string('Enter date')
+        .string('Enter date')
         .required('Date is required'),
     time: yup
         .string('Enter time')
@@ -41,7 +41,7 @@ const Form20 = (props) => {
     const [checkboxValues, setCheckboxValues] = useState([]);
     var individualsArray = [];
 
-    const setCheckboxFunc = ( name, value  ) => {
+    const setCheckboxFunc = (name, value) => {
         setCheckboxValues({
             ...checkboxValues,
             [name]: value,
@@ -52,7 +52,7 @@ const Form20 = (props) => {
         let newArray = [...eventTags];
 
         for (let i = 0; i < newArray.length; i++) {
-            if(newArray[i] === item ) {
+            if (newArray[i] === item) {
                 newArray.splice(i, 1);
             }
         }
@@ -60,7 +60,7 @@ const Form20 = (props) => {
         let newArray2 = [...departmentTags];
 
         for (let i = 0; i < newArray2.length; i++) {
-            if(newArray2[i] === item ) {
+            if (newArray2[i] === item) {
                 newArray2.splice(i, 1);
             }
         }
@@ -68,75 +68,75 @@ const Form20 = (props) => {
     }
 
     const formatIndividuals = () => {
-        if(props.rowsViewed.individuals !== null || props.rowsViewed.individuals !== 'undefined') {
+        if (props.rowsViewed.individuals !== null || props.rowsViewed.individuals !== 'undefined') {
             let individuals = props.rowsViewed.individuals;
             individualsArray = individuals.split(",");
 
             for (let i = 0; i < individualsArray.length; i++) {
-                if(individualsArray[i]=== 'Patient'){
+                if (individualsArray[i] === 'Patient') {
 
                     formik.values.patient = 'Patient';
                     setCheckboxFunc('patient', 'Patient');
                 }
-                if(individualsArray[i] === 'Family Member'){
+                if (individualsArray[i] === 'Family Member') {
                     setCheckedFam(true);
                     setFamilyMemberToggle(true)
                     setCheckboxFunc('familymember', 'Family Member');
-                    if(checkedFam === false) {
+                    if (checkedFam === false) {
                         formik.values.familymember = '';
                     } else {
                         formik.values.familymember = 'Family Member';
                     }
                 }
-                if(individualsArray[i] === 'Adult'){
+                if (individualsArray[i] === 'Adult') {
                     setCheckedAdult(true);
-                    if(checkedAdult === false) {
+                    if (checkedAdult === false) {
                         formik.values.adult = '';
                         setCheckboxFunc('adult', 'Adult');
                     } else {
                         formik.values.adult = 'Adult';
                     }
                 }
-                if(individualsArray[i] === 'Child'){
+                if (individualsArray[i] === 'Child') {
                     setCheckedChild(true);
                     setCheckboxFunc('child', 'Child');
-                    if(checkedChild === false) {
+                    if (checkedChild === false) {
                         formik.values.child = '';
                     } else {
                         formik.values.child = 'Child';
                     }
                 }
-                if(individualsArray[i] === 'Visitor'){
+                if (individualsArray[i] === 'Visitor') {
                     setCheckedVisitor(true);
                     setCheckboxFunc('visitor', 'Visitor');
-                    if(checkedVisitor === false) {
+                    if (checkedVisitor === false) {
                         formik.values.visitor = '';
                     } else {
                         formik.values.visitor = 'Visitor';
                     }
                 }
-                if(individualsArray[i] === 'Staff Member'){
+                if (individualsArray[i] === 'Staff Member') {
                     setCheckedStaffMember(true);
                     setCheckboxFunc('staffmember', 'Staff Member');
-                    if(checkedStaffMember=== false) {
+                    if (checkedStaffMember === false) {
                         formik.values.staffmember = '';
                     } else {
                         formik.values.staffmember = 'Staff Member';
                     }
                 }
-                if(individualsArray[i] === 'Volunteer'){
+                if (individualsArray[i] === 'Volunteer') {
                     setCheckedVolunteer(true);
                     setCheckboxFunc('volunteer', 'Volunteer');
-                    if(checkedVolunteer === false) {
+                    if (checkedVolunteer === false) {
                         formik.values.volunteer = '';
                     } else {
                         formik.values.volunteer = 'Volunteer';
                     }
                 }
-                if(individualsArray[i] === 'Other'){
+                if (individualsArray[i] === 'Other') {
                     setCheckedOther(!checkedOther);
                     setCheckboxFunc('other', 'Other');
-                    if(checkedOther === false) {
+                    if (checkedOther === false) {
                         formik.values.other = '';
                     } else {
                         formik.values.other = 'Other';
@@ -159,32 +159,31 @@ const Form20 = (props) => {
             effects: props.rowsViewed.effects,
             patient: individualsArray['patient'],
             familymember: checkboxValues['familymember'],
-            adult:checkboxValues['adult'],
-            child:checkboxValues['child'],
-            staffmember:checkboxValues['staffmember'],
-            visitor:checkboxValues['visitor'],
-            volunteer:checkboxValues['volunteer'],
-            other:checkboxValues['other'],
-            witness1Name:props.rowsViewed.witness1Name,
-            witness1Phone:props.rowsViewed.witness1Phone,
-            witness2Name:props.rowsViewed.witness2Name,
-            witness2Phone:props.rowsViewed.witness2Phone,
-            witness3Name:props.rowsViewed.witness3Name,
-            witness3Phone:props.rowsViewed.witness3Phone,
-            department:props.rowsViewed.department,
-            description:props.rowsViewed.description,
-            prevention:props.rowsViewed.prevention,
-            patientName:props.rowsViewed.patientName,
-            patientSSN:props.rowsViewed.patientSSN,
-            patientPhone:props.rowsViewed.patientPhone,
-            patientAddress:props.rowsViewed.patientAddress,
+            adult: checkboxValues['adult'],
+            child: checkboxValues['child'],
+            staffmember: checkboxValues['staffmember'],
+            visitor: checkboxValues['visitor'],
+            volunteer: checkboxValues['volunteer'],
+            other: checkboxValues['other'],
+            witness1Name: props.rowsViewed.witness1Name,
+            witness1Phone: props.rowsViewed.witness1Phone,
+            witness2Name: props.rowsViewed.witness2Name,
+            witness2Phone: props.rowsViewed.witness2Phone,
+            witness3Name: props.rowsViewed.witness3Name,
+            witness3Phone: props.rowsViewed.witness3Phone,
+            department: props.rowsViewed.department,
+            description: props.rowsViewed.description,
+            prevention: props.rowsViewed.prevention,
+            patientName: props.rowsViewed.patientName,
+            patientSSN: props.rowsViewed.patientSSN,
+            patientPhone: props.rowsViewed.patientPhone,
+            patientAddress: props.rowsViewed.patientAddress,
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-           console.log(JSON.stringify(values, null, 2));
+            console.log(JSON.stringify(values, null, 2));
         },
     });
-
 
 
     const handleChangeEvent = (event) => {
@@ -217,7 +216,7 @@ const Form20 = (props) => {
         if (event.target.value === 'other') {
             setCheckedOther(!checkedOther);
         }
-        if(event.target.value === 'patient') {
+        if (event.target.value === 'patient') {
             setCheckedPatient(!checkedPatient);
         }
     }
@@ -228,6 +227,7 @@ const Form20 = (props) => {
         async function saveData() {
             props.handleSave(formik.values)
         }
+
         saveData();
     }, [formik.values, departmentTags, eventTags]);
 
@@ -396,13 +396,13 @@ const Form20 = (props) => {
                                 familyMemberToggle
                                     ?
                                     <span>Child &lt; 18 years old</span>
-                            :
+                                    :
                                     <font color="#CCCCCC">Child &lt; 18 years old</font>
                             }
                         </label></div>
                 </Grid>
                 <Grid item xs={4}>
-                    <br />
+                    <br/>
                     <FormControl sx={{width: '100%'}}>
                         <div style={{marginBottom: '15px'}}>
                             <label>
@@ -463,12 +463,12 @@ const Form20 = (props) => {
                         <label>Event Type:</label>
                         <TagsInput
                             selectedTags={handleTagsEventType}
-                                fullWidth
-                                id="evenType"
-                                name="eventType"
-                                type="text"
-                                value={'formik.values.eventType'}
-                                eventTags={eventTags}
+                            fullWidth
+                            id="evenType"
+                            name="eventType"
+                            type="text"
+                            value={'formik.values.eventType'}
+                            eventTags={eventTags}
                             deleteEventTags={deleteEventTags}
                             onChange={formik.handleChange}
                         />
@@ -611,7 +611,8 @@ const Form20 = (props) => {
                 </Grid>
                 <Grid item xs={8}>
                     <FormControl sx={{width: '100%'}}>
-                        <label>What actions, if any, could have been taken to prevent this incident from occurring?</label>
+                        <label>What actions, if any, could have been taken to prevent this incident from
+                            occurring?</label>
                         <TextField
                             multiline
                             rows={4}
@@ -690,7 +691,7 @@ const Form20 = (props) => {
                     <FormControl>
                         {(props.view === 'supervisor') ?
                             null
-                           :
+                            :
                             <Button color="primary" variant="contained" fullWidth type="submit">
                                 Submit
                             </Button>
