@@ -1,4 +1,5 @@
 import './footer.css'
+import {NavLink} from "react-router-dom";
 
 const Footer = () => {
 
@@ -19,8 +20,8 @@ const Footer = () => {
                             <h3>About</h3>
                             <ul>
                                 <li><a href="#">Company</a></li>
-                                <li><a href="#">Team</a></li>
-                                <li><a href="#">Careers</a></li>
+                                <li><NavLink page="/team" to="/team">Team</NavLink></li>
+                                <li><NavLink page="/team" to="/team">Careers</NavLink></li>
                             </ul>
                         </div>
                         <div className="col-md-6 item text">

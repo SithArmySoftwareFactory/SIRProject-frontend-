@@ -11,6 +11,7 @@ import SupervisorView from "./components/Supervisor/SupervisorView";
 import Home from "./components/pages/Home";
 import Footer from "./components/common/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
+import Team from "./components/team/Team";
 
 
 const Alert = forwardRef(function Alert(props, ref) {
@@ -66,6 +67,7 @@ function App() {
                     <Route exact path="/report" element={<SIRForm handleClick={handleClick}  />} />
                      <Route path="/supervisor" element={<SupervisorView/>} />
                      <Route path="/dashboard" element={<Dashboard/>} />
+                    <Route path="/team" element={<Team/>} />
                     <Route element={<Home />} />
                 </Routes>
             </Grid>

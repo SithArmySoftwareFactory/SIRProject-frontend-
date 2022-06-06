@@ -158,7 +158,7 @@ const SupervisorView = () => {
     };
 
     return (
-        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center'}}>
+        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center', backgroundColor: 'darkgray'}}>
             <Box minWidth="1038px">
 
             {(sent) ?
@@ -169,10 +169,10 @@ const SupervisorView = () => {
                 null
             }
             <br/> <br/>
-            <h3 className="dataGridHeaderTitle">Incident Reports</h3>
+            <h3 className="dataGridHeaderTitle" style={{color: "white"}}><strong>Incident Reports</strong></h3>
             <br/><br/>
             <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent} rowsChecked={rowsChecked}/>
-            <DataGrid
+            <DataGrid style={{backgroundColor: "white"}}
                 className="dataGrid"
                 //get page size from state
                 pageSize={pageSize}
