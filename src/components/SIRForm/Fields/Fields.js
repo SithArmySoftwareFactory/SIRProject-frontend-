@@ -22,13 +22,9 @@ import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
 import {apiPostIncident} from "../../../api/APICalls";
 import CommandBox from "./CommandBox";
 import Box from "@mui/material/Box";
-
+import {useJsApiLoader} from "@react-google-maps/api";
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
 
-const Fields = ({handleClick, open, defaultValues}) => {
-
-import {useJsApiLoader} from "@react-google-maps/api";
-import SIRPDFMagic from "../../SIRToPDF/SIRPDFMagic";
 
 const Fields = ({handleClick, open, defaultValues, fullWidthFunction}) => {
     const {isLoaded} = useJsApiLoader({
@@ -381,9 +377,7 @@ const Fields = ({handleClick, open, defaultValues, fullWidthFunction}) => {
                     </Grid>
                 </Grid>
             </form>
-
             <br /> <br /> <br />
-        </>
         </Box>
 
     );

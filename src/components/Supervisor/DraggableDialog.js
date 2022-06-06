@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import axios from "axios";
-import {API_URL} from "../../constants/Constants";
 
 import {Divider} from "@mui/material";
 import SIRForm from "../SIRForm/SIRForm";
@@ -10,7 +8,6 @@ import Box from "@mui/material/Box";
 
 
 export default function DraggableDialog({rowViewed, handleClickOpen}) {
-    const [values, setValues] = React.useState([]);
     const [fullWidth, setFullWidth] = React.useState(false);
     const [displayInDialogOnly, setDisplayInDialogOnly] = useState('dialog');
 
@@ -18,9 +15,6 @@ export default function DraggableDialog({rowViewed, handleClickOpen}) {
         setFullWidth(value);
         setDisplayInDialogOnly('dialog')
     }
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
 
     const handleClose = () => {
