@@ -21,11 +21,23 @@ const Alert = forwardRef(function Alert(props, ref) {
 });
 
 function App() {
+    // const cors = require('cors')
+    //
+    // app.use(cors())
+
     const [isHome, setIsHome] = useState(true);
     const [open, setOpen] = useState(false);
-
+    const [authorizationState, setAuthorizationState] = useState([]);
     const handleClick = () => {
         setOpen(true);
+    }
+
+    const userAuthorized = (value) => {
+
+        //TODO value logic, does it have auth and refresh token? -> yes -> authorize
+        //No do not set state
+        console.log(value)
+        setAuthorizationState(value);
     }
 
     const handleClose = (event, reason) => {
@@ -66,9 +78,9 @@ function App() {
                     <Route exact path="/report" element={<SIRForm handleClick={handleClick}  />} />
                      <Route path="/supervisor" element={<SupervisorView/>} />
                      <Route path="/dashboard" element={<Dashboard/>} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/login" element={<Login userAuthorized={userAuthorized} />} />
                     <Route path="/map" element={<Gmap />} />
-                    <Route element={<Home />} />
+                    <Route path="*" element={<Home />} />
                 </Routes>
             </Grid>
                 <Grid item xs={12}>

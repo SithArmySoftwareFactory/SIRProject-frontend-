@@ -12,7 +12,9 @@ export const apiGetIncident = async (index) => {
 export const apiPostIncident = async (data) => {
     return axios.post(API_URL + "incident", data)
 }
-
+export const apiLogin = async (data) => {
+    return axios.post(API_URL + "login", data)
+}
 export const apiPostIncidentCommand = async (data) => {
     return axios.post(API_URL + "send", data)
 }
