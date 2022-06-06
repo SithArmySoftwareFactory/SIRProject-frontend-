@@ -22,8 +22,9 @@ import {styleDisabledButton, styleEnabledButton} from "../../../themes/themes";
 import {apiPostIncident} from "../../../api/APICalls";
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
 import {useJsApiLoader} from "@react-google-maps/api";
+import SIRPDFMagic from "../../SIRToPDF/SIRPDFMagic";
 
-const Fields = ({handleClick, open, defaultValues}) => {
+const Fields = ({handleClick, open, defaultValues, fullWidthFunction}) => {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
@@ -103,8 +104,10 @@ const Fields = ({handleClick, open, defaultValues}) => {
             patientName: defaultValues.patientName || "",
             patientSSN: defaultValues.patientSSN || "",
             patientPhone: defaultValues.patientPhone || "",
-            patientAddress: defaultValues.patientAddress || ""
+            patientAddress: defaultValues.patientAddress || "",
+            sentiment: defaultValues.sentiment || ""
         }
+
 
 
     }
@@ -317,6 +320,8 @@ const Fields = ({handleClick, open, defaultValues}) => {
         }
     }, [formValues]);
 
+
+    const [view, setView] = useState('');
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -373,6 +378,8 @@ const Fields = ({handleClick, open, defaultValues}) => {
                     </Grid>
                 </Grid>
             </form>
+
+            <br /> <br /> <br />
         </>
     );
 

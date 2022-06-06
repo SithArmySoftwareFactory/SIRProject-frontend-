@@ -7,6 +7,8 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import FaceIcon from '@mui/icons-material/Face';
 import {NavLink} from "react-router-dom";
 import {Grid} from "@mui/material";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import MapIcon from '@mui/icons-material/Map';
 
 export function Banner({setIsHome, isHome}) {
     return (
@@ -21,7 +23,8 @@ export function Banner({setIsHome, isHome}) {
                         <li><AssessmentIcon className="bannerIcons"/><NavLink  className="navLink" page="/report" to="/report">Submit Report</NavLink></li>
                         <li><SupervisedUserCircleIcon className="bannerIcons"/><NavLink  className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink></li>
                         <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/login" to="/login">Login</NavLink></li>
-                        <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/dashboard" to="/dashboard">Dashboard</NavLink></li>
+                        <li><DashboardIcon className="bannerIcons"/><NavLink  className="navLink" page="/dashboard" to="/dashboard">Dashboard</NavLink></li>
+                        <li><MapIcon className="bannerIcons"/><NavLink  className="navLink" page="/map" to="/map">Map</NavLink></li>
                     </ul>
                 </nav>
             </header>

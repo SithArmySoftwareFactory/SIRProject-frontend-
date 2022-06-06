@@ -1,13 +1,12 @@
 import * as React from "react";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useJsApiLoader,} from "@react-google-maps/api";
-import {getGeocode, getLatLng,} from "use-places-autocomplete";
 import mapStyles from "./mapstyles";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {Grid} from "@mui/material";
 import {apiGetIncident} from "../../api/APICalls";
-
+import './gmap.css'
 
 function Gmap(props) {
     const {isLoaded} = useJsApiLoader({
@@ -15,19 +14,20 @@ function Gmap(props) {
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
     });
 
-
     const [rowsFromApi, setRowsFromApi] = useState([]);
     const [rowsFromUniApi, setRowsUniFromApi] = useState([]);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     //store  clicked locations in state
-    const [places, setPlaces] = React.useState([{ lat: 30.282692, lng:-97.77402}]);
+    const [places, setPlaces] = React.useState([{lat: 30.282692, lng: -97.77402}]);
     //const save the prev place for calculating route
     const [directions, setDirections] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
     //store previous place
     const prevPlace = useRef();
+
+    const [currentPopUp, setCurrentPopUp] = useState([])
 
     //path polyline ...
     const [paths, setPaths] = useState([]);
@@ -38,55 +38,10 @@ function Gmap(props) {
             .then((r) => {
                 setRowsFromApi(r.data);
             })
-            .catch((error) => console.log('error'));
+            .catch((error) => console.log(error));
     };
 
     useEffect(fetchIncidentAPI, []);
-
-    // useEffect(() => {
-    //     let rowsArray = ["1600 Pennsylvania Avenue NW, Washington, DC 20500", "Austin, TX", "San Diego", "Austin, TX", "New York"]
-    //
-    //     async function fetchData(searchAddress) {
-    //         // You can await here
-    //         const results = await getGeocode({address: searchAddress});
-    //         const {lat, lng} = await getLatLng(results[0]);
-    //         handleGetGeo({lat, lng})
-    //     }
-    //
-    //     fetchData("1600 Pennsylvania Avenue NW, Washington, DC 20500");
-    //
-    // }, []);
-
-    async function getTheLocation(searchAddress) {
-        // const results = await getGeocode({address: searchAddress});
-        // const {lat, lng} = await getLatLng(results[0]);
-        // return {lat, lng}
-    }
-
-    // async function setPlaceFunction2(location) {
-    //     return await getTheLocation(location)
-    // }
-
-    function getUniqueListBy(arr, key) {
-        return [...new Map(arr.map(item => [item[key], item])).values()]
-    }
-
-
-    // const testFunction = () => {
-    //     let service
-    //     try {
-    //          service = new window.google.maps.Geocoder();
-    //         service.geocode({address: "1600 Pennsylvania Avenue NW, Washington, DC 20500"}, function (results, status) {
-    //             if (status == 'OK') {
-    //                 console.log(results[0].geometry.location)
-    //             } else {
-    //                 alert('Geocode was not successful for the following reason: ' + status);
-    //             }
-    //         });
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
 
 
     //Austin -30.2672° N, 97.7431
@@ -155,29 +110,6 @@ function Gmap(props) {
         width: "100%",
     };
 
-
-    //function to store places, clicked - store the lat long
-    //and record ...previous places  - useCall back to help with map refresh (state changes)
-    const handleRender = React.useCallback((event, response) => {
-        let latLngArray = [];
-        // let latLngArray = [{lat: 38.8976633, lng: -77.0365739},
-        //     {lat: 30.267153, lng: -97.7430608},
-        //     {lat: 30.267153, lng: -97.7430608},
-        //     {lat: 32.715738, lng: -117.1610838},
-        //     {lat: 40.7127753, lng: -74.0059728}]
-
-        for (let i = 0; i < rowsFromApi.length / 2; i++) {
-            if(rowsFromApi[i].lat !== null && rowsFromApi[i].lng !== null) {
-                latLngArray.push({lat:Number(rowsFromApi[i].lat), lng:Number(rowsFromApi[i].lng)})
-            }
-
-
-        }
-
-        setPlaces(latLngArray)
-
-    }, );
-
     //remove place on Right Click ---> doesnt work
     const handleRenderOff = React.useCallback((event) => {
         setPlaces([
@@ -209,8 +141,15 @@ function Gmap(props) {
         toastyLoading();
         onMapLoad(event);
         setMapLoaded(true)
-        handleRender();
     }
+ const styleOption = {
+background:'#000000',
+         height: 29,
+         width: 29,
+         anchor: [0, 0],
+         textSize: 0.001
+     }
+
 
     return isLoaded ? (
         <Grid
@@ -246,9 +185,10 @@ function Gmap(props) {
                     tilt={45}
                     onLoad={handleLoadToastAndMaps}
                 >
-                    <MarkerClusterer>
+                    <MarkerClusterer key={"cluster"}
+                    >
                         {
-                            (clusterer) => places.map((place) => {
+                            (clusterer) => rowsFromApi.map((place, index) => {
                                 return (
                                     <>
                                         <Marker
@@ -277,17 +217,30 @@ function Gmap(props) {
 
                     </MarkerClusterer>
 
-                    {focusedPlace ? (
-                        <InfoWindow
-                            position={{lat: focusedPlace.lat, lng: focusedPlace.lng}}
-                            onCloseClick={() => setFocusedPlace(null)}
-                        >
-                            <div className="infoWindow">
-                                <h5>hello</h5>
-                                {console.log(focusedPlace)}
-                            </div>
-                        </InfoWindow>
-                    ) : null}
+                    {focusedPlace ?
+
+                        (
+                            <InfoWindow
+                                position={{lat: Number(focusedPlace.lat), lng: Number(focusedPlace.lng)}}
+                                onCloseClick={() => setFocusedPlace(null)}
+                                key={Math.random()}
+                                content=" "
+                            >
+                                <div className="infoWindow">
+                                    <h5>{focusedPlace.eventType} &nbsp; &nbsp;</h5>
+                                    <h6>Location:</h6>
+                                    {
+                                        focusedPlace.location
+                                    }&nbsp; &nbsp;
+                                    <br />   <br />
+                                    <h6>Description:</h6>
+                                    <p>    {
+                                        focusedPlace.description
+                                    }&nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+                                </div>
+                            </InfoWindow>
+                        ) : null}
 
                 </GoogleMap>
             </Grid>

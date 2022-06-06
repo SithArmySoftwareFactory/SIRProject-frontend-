@@ -12,6 +12,7 @@ import axios from "axios";
 import {API_URL} from "../../constants/Constants";
 import {Divider} from "@mui/material";
 import SIRForm from "../SIRForm/SIRForm";
+import {useState} from "react";
 
 function PaperComponent(props) {
     return (
@@ -27,13 +28,20 @@ function PaperComponent(props) {
 export default function DraggableDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [values, setValues] = React.useState([]);
+    const [fullWidth, setFullWidth] = React.useState(false);
+    const [displayInDialogOnly, setDisplayInDialogOnly] = useState('dialog');
 
+    const fullWidthFunction = (value) => {
+        setFullWidth(value);
+        setDisplayInDialogOnly('dialog')
+    }
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
+        setFullWidth(false);
     };
 
     const handleSave = async (formikValues) => {
@@ -126,8 +134,9 @@ export default function DraggableDialog(props) {
                 onClose={handleClose}
                 PaperComponent={PaperComponent}
                 aria-labelledby="draggable-dialog-title"
-                maxWidth="800px"
-            >
+                fullScreen={fullWidth}
+                fullWidth={true}
+                >
                 <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
                     Incident Report
                     <IconButton
@@ -144,14 +153,17 @@ export default function DraggableDialog(props) {
                     </IconButton>
                 </DialogTitle>
                 <DialogContent>
-                    <SIRForm open={open} defaultValues={props.rowViewed}/>
+                    <SIRForm open={open} defaultValues={props.rowViewed} fullWidthFunction={fullWidthFunction} fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
                 </DialogContent>
                 <Divider/>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
-                        SAVE
-                    </Button>
                     <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
+                    {(fullWidth) ? <Button autoFocus onClick={() => setFullWidth(false)} style={{color: "#5D6A18"}}>
+                        RETURN
+                    </Button>:  <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
+                        SAVE
+                    </Button>}
+
                 </DialogActions>
             </Dialog>
         </>

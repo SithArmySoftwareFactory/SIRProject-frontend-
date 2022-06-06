@@ -3,8 +3,11 @@ import './home.css'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import {NavLink} from "react-router-dom";
-
+import SecurityIcon from '@mui/icons-material/Security';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 const Home = () => {
+
+
     return (
         <><Grid container spacing={0} columns={12} justifyContent="center">
             <div className='vidContain'>
@@ -14,18 +17,21 @@ const Home = () => {
                         <source src="/spinning_planet.webm" type="video/webm"/>
                     </video>
                 </div>
+                <br /><br /><br />
                 <div className="callout-container">
                     <div className="callout">
-                        <h1 className="callout-container-h1"> Serious Incident Report</h1>
+                        <h1 className="callout-container-h1">SERIOUS</h1> &nbsp; &nbsp;<h1 id="red">INCIDENT</h1>
                     </div>
-                    <br/> <br/> <br/>
                     <div className="desc">
-                        Global Reporting System
+                       GLOBAL REPORTING SYSTEM
                     </div>
-                    <Button sx={{marginTop:'100px',padding:'2em', height:'50px', backgroundColor:'#F7F7F7'}} id="#getstarted" component={NavLink} to={'/report'}>Get Started</Button>
+                    <div id="#getStarted">
+                        <NavLink  className="getStarted"   to={'/report'}>Get Started</NavLink>
+                    </div>
                 </div>
             </div>
             <Grid item xs={12}>
+                <br /><br /> <br /><br />
                 <div className="page-icon-container">
                     <table width="100%" style={{textAlign: 'center', justifyContent: 'center', marginTop: '2%'}}>
                         <tbody>
@@ -37,19 +43,19 @@ const Home = () => {
                             </td>
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <GroupAddOutlinedIcon className="page-icon" style={{fontSize: '250px'}}/>
+                                    <SecurityIcon className="page-icon" style={{fontSize: '250px'}}/>
                                 </div>
                             </td>
                             <td>
-                                <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <img src="icons8-soldier-man-100.png" style={{width: '200px', height: '200px'}}/>
+                                <div style={{maxWidth: '400px', display: "inline-block", marginBottom:'1em'}}><br/>
+                                    <PeopleAltIcon className="page-icon" style={{fontSize: '250px'}}/>
                           </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <h2>Dashboard</h2><p>
+                                <div style={{minHeight:'250px',maxWidth: '400px', display: "inline-block"}}>
+                                    <h2 className="iconTextTitle">Dashboard</h2><p className="iconText">
                                     SIR analytics driven by real time data. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Adipisci animi magni soluta temporibus. A debitis delectus ducimus
                                     id perferendis! Deserunt doloribus ducimus ea eveniet, fuga libero, modi molestiae
@@ -57,15 +63,15 @@ const Home = () => {
                                 </p></div>
                             </td>
                             <td>
-                                <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <h2>User</h2><p>
-                                    Centered around usuability and design patterns to ensure the best user experience. Security is integral to operating data and protecting SIR information is paramount.
+                                <div style={{minHeight:'250px',maxWidth: '400px', display: "inline-block"}}>
+                                    <h2 className="iconTextTitle">Secure</h2><p className="iconText">
+                                    Security centered on usability and design patterns to ensure the best user experience. Security is integral to operating data and protecting SIR information is paramount.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 </p></div>
                             </td>
                             <td>
-                                <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <h2>For Soldiers, by Soldiers</h2><p>
+                                <div style={{minHeight:'250px',maxWidth: '400px', display: "inline-block"}}>
+                                    <h2 className="iconTextTitle">For Soldiers, by Soldiers</h2><p className="iconText">
                                     Software should be developed for Soldiers to ensure that they can operate with the greatest lethality. Even in the strategic environment, time is off the essence. Everything
                                     ultimately effects the war fighter. Lorem ipsum dolor sit amet, consectetur adipisicing.
                                 </p></div>
