@@ -6,14 +6,13 @@ import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {Grid} from "@mui/material";
 import {apiGetIncident} from "../../api/APICalls";
-
+import './gmap.css'
 
 function Gmap() {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
     });
-
 
     const [rowsFromApi, setRowsFromApi] = useState([]);
     //store  clicked locations in state
@@ -22,16 +21,24 @@ function Gmap() {
     const [ setMapLoaded] = useState(false);
 
 
+    const [currentPopUp, setCurrentPopUp] = useState([])
+
+    //path polyline ...
+    const [paths, setPaths] = useState([]);
+
+
     //Get Data from backend
     const fetchIncidentAPI = () => {
         apiGetIncident()
             .then((r) => {
                 setRowsFromApi(r.data);
             })
-            .catch(() => console.log('error'));
+
+            .catch((error) => console.log(error));
     };
 
     useEffect(fetchIncidentAPI, []);
+
 
     // useEffect(() => {
     //     let rowsArray = ["1600 Pennsylvania Avenue NW, Washington, DC 20500", "Austin, TX", "San Diego", "Austin, TX", "New York"]
@@ -195,8 +202,15 @@ function Gmap() {
         toastyLoading();
         onMapLoad(event);
         setMapLoaded(true)
-        handleRender();
     }
+ const styleOption = {
+background:'#000000',
+         height: 29,
+         width: 29,
+         anchor: [0, 0],
+         textSize: 0.001
+     }
+
 
     return isLoaded ? (
         <Grid
@@ -232,9 +246,10 @@ function Gmap() {
                     tilt={45}
                     onLoad={handleLoadToastAndMaps}
                 >
-                    <MarkerClusterer>
+                    <MarkerClusterer key={"cluster"}
+                    >
                         {
-                            (clusterer) => places.map((place) => {
+                            (clusterer) => rowsFromApi.map((place, index) => {
                                 return (
                                     <>
                                         <Marker
@@ -263,17 +278,30 @@ function Gmap() {
 
                     </MarkerClusterer>
 
-                    {focusedPlace ? (
-                        <InfoWindow
-                            position={{lat: focusedPlace.lat, lng: focusedPlace.lng}}
-                            onCloseClick={() => setFocusedPlace(null)}
-                        >
-                            <div className="infoWindow">
-                                <h5>hello</h5>
-                                {console.log(focusedPlace)}
-                            </div>
-                        </InfoWindow>
-                    ) : null}
+                    {focusedPlace ?
+
+                        (
+                            <InfoWindow
+                                position={{lat: Number(focusedPlace.lat), lng: Number(focusedPlace.lng)}}
+                                onCloseClick={() => setFocusedPlace(null)}
+                                key={Math.random()}
+                                content=" "
+                            >
+                                <div className="infoWindow">
+                                    <h5>{focusedPlace.eventType} &nbsp; &nbsp;</h5>
+                                    <h6>Location:</h6>
+                                    {
+                                        focusedPlace.location
+                                    }&nbsp; &nbsp;
+                                    <br />   <br />
+                                    <h6>Description:</h6>
+                                    <p>    {
+                                        focusedPlace.description
+                                    }&nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+                                </div>
+                            </InfoWindow>
+                        ) : null}
 
                 </GoogleMap>
             </Grid>

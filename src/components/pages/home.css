@@ -1,5 +1,12 @@
+@font-face {
+    font-family: Mass-Effect;
+    src: url(masseffect.ttf);
+}
 .page-icon-container {
-    width: 100%;
+
+    padding:2em;
+    margin-top:2em;
+    width:100%;
     min-height: 600px;
     background-color: rgb(192, 192, 192, 0.1);
 }
@@ -7,6 +14,7 @@
 .page-icon {
     font-size: 300px;
 }
+
 
 .callout {
     text-align: center;
@@ -21,10 +29,10 @@
     background: rgba(255, 255, 255, 0.3);
 }
 
-.callout-container {
-    width: 700px;
-    text-align: center;
 
+.callout-container {
+    width:100%;
+    text-align: center;
     justify-content: center;
     color: #F7F7F7;
     font-size: 2em;
@@ -41,33 +49,68 @@
     border: none;
     color: white;
     padding: 16px 32px;
+
+.callout {
+
     text-align: center;
-    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+    width:100%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.callout-container-h1{
+    font-family: 'Lato', sans-serif;
+    font-size: 2.1em;
+    font-weight: bold;
+    color:#F7F7F7;
+    background: rgba(100, 100, 100, 0.0);
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
 }
 
+
 .button5 {
+
+ #red {
+     font-family: 'Lato', sans-serif;
+     display: inline-block;
+    font-size: 2.1em;
+     font-weight: 700;
+     height:75px;
+     /*background:	rgba(178,34,34, 0.6);*/
+     color: rgba(178,34,34, 0.9);;
+     background:	rgba(100,100,100, 0.1);
+
+}
+.desc {
+    margin-top:-20px;
+    font-family: 'Lato', sans-serif;
+    width:100%;
+    font-weight: lighter;
+    text-align: center;
+}
+.getStarted {
     padding: 16px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    transition-duration: 0.4s;
     cursor: pointer;
-    background-color: #003566;
-    color: #F7F7F7;
+    background-color: #FFFFFF;
+
     border: 1px solid #F7F7F7;
+
     margin-top: 8em;
+
     border-radius: 1px;
+    transition-duration: 0.4s;
+    color:#000000;
 }
 
-.button5:hover {
-    background-color: #000;
-    color: #ffc300;
+.getStarted:hover {
+    text-decoration: none;
+    background-color: #ffc300;
+    color: #F7F7F7;
 }
 
 .video-container {
@@ -86,4 +129,12 @@ video {
     left: 0;
     z-index: -1;
     box-shadow: 5px 10px 18px #888888;
+}
+.iconTextTitle {
+    font-size: 36px;
+    font-family: 'Lato', sans-serif;
+}
+.iconText {
+    font-size: 20px;
+    text-align: left;
 }

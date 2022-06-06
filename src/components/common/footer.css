@@ -3,7 +3,10 @@
     color: #f0f9ff;
     background-color: #282d32;
 }
-
+.row p {
+    color:#F7F7F7;
+    font-size: 14px;
+}
 .footer-dark h3 {
     margin-top: 0;
     margin-bottom: 12px;
@@ -86,4 +89,7 @@
     opacity: 0.3;
     font-size: 13px;
     margin-bottom: 0;
+}
+.copyright{
+    color: #F7F7F7;
 }
