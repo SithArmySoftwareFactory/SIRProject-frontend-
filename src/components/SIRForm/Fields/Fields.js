@@ -383,7 +383,6 @@ const Fields = ({handleClick, open, defaultValues, fullWidthFunction}) => {
             </form>
 
             <br /> <br /> <br />
-        </>
         </Box>
 
     );
