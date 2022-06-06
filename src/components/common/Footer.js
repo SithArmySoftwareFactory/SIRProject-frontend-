@@ -2,7 +2,7 @@ import './footer.css'
 
 const Footer = () => {
 
-    return(<>
+    return (<>
         <div className="footer-dark">
             <footer>
                 <div className="container">
@@ -10,7 +10,9 @@ const Footer = () => {
                         <div className="col-sm-6 col-md-3 item">
                             <h3>Services</h3>
                             <ul>
-                                <li><a href="http://borgfrontendtooltipsfinal-env.eba-nn3dttb7.us-east-2.elasticbeanstalk.com/">MEDVAC APP</a></li>
+                                <li><a
+                                    href="http://borgfrontendtooltipsfinal-env.eba-nn3dttb7.us-east-2.elasticbeanstalk.com/">MEDVAC
+                                    APP</a></li>
                                 <li><a href="https://dev3395.d20mm6b3fjxaop.amplifyapp.com/">The INCUBATOR</a></li>
                                 <li><a href="#">SIR REPORT</a></li>
                             </ul>
@@ -36,8 +38,10 @@ const Footer = () => {
                 </div>
             </footer>
         </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script></>);
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    </>);
 
 }
 

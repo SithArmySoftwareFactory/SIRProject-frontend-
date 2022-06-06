@@ -5,20 +5,20 @@ import Box from "@mui/material/Box";
 const LocationBox = ({formValues, handleInputChange}) => {
 
     return (
-      <Box>
-          <br/>
-          <label style={styleLabel}>Location of Event</label>
-          <TextField
-              required
-              id="Location of Event"
-              name={"location"}
-              variant={"outlined"}
-              type={"text"}
-              value={formValues.location}
-              onChange={handleInputChange}
-              fullWidth
-          />
-      </Box>
+        <Box>
+            <br/>
+            <label style={styleLabel}>Location of Event</label>
+            <TextField
+                required
+                id="Location of Event"
+                name={"location"}
+                variant={"outlined"}
+                type={"text"}
+                value={formValues.location}
+                onChange={handleInputChange}
+                fullWidth
+            />
+        </Box>
     );
 
 }

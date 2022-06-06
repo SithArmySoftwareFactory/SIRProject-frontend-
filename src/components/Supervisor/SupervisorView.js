@@ -37,14 +37,14 @@ function PaperComponent(props) {
 const SupervisorView = () => {
     const [pageSize, setPageSize] = React.useState(5);
     const [dialog, setDialog] = useState(false);
-    const [rowsChecked, setRowsChecked] = useState({}); //stores the rows checked
+    const [ setRowsChecked] = useState({}); //stores the rows checked
     const [count, setCount] = useState(0);
     const [showCommand, setShowCommand] = useState(false);
     const [sent, setSent] = useState(false);
     const [selectionModel, setSelectionModel] = useState([]);
     const [rowViewed, setRowViewed] = useState(null);
     const [rowsFromApi, setRowsFromApi] = useState([]);
-    const [isSIRFormOpen,setIsSIRFormOpen] = useState(false);
+    const [isSIRFormOpen, setIsSIRFormOpen] = useState(false);
     //Get Data from backend
     const fetchIncidentAPI = () => {
         apiGetIncident()
@@ -125,7 +125,7 @@ const SupervisorView = () => {
                     //display two individuals for a combined length of two strings, subtract 2 from the length
                     //because we are displaying two individuals from the list. Show the remaining count.
                     let returnCount = (rowIndividuals.length - 2)
-                    let returnText = '';
+                    let returnText;
                     if (returnCount > 0)
                         returnText = `, +${returnCount}`;
                     else {
@@ -152,7 +152,7 @@ const SupervisorView = () => {
                     return `${rowEventType[0]}, +${rowEventType.length - 1}`
                 } else if (rowEventType[0].length <= 27 || (rowEventType[0].length + rowEventType[1]) <= 27) {
                     let returnCount = (rowEventType.length - 2)
-                    let returnText = '';
+                    let returnText;
                     if (returnCount > 0)
                         returnText = `, +${returnCount}`;
                     else {
@@ -179,7 +179,7 @@ const SupervisorView = () => {
         }
     }
     //If we implement editing rows directly
-    const handleRowEditCommit = async (params) => {
+    const handleRowEditCommit = async () => {
         // const id = params.id;
         // const key = params.field;
         // const value = params.value;
@@ -200,7 +200,7 @@ const SupervisorView = () => {
                 <h3 className="dataGridHeaderTitle">Incident Reports</h3>
                 <br/><br/>
                 <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
-                {isSIRFormOpen&&
+                {isSIRFormOpen &&
                     <Dialog
                         open={isSIRFormOpen}
                         onClose={handleClose}

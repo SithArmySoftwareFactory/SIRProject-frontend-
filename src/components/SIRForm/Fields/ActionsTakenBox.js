@@ -3,6 +3,7 @@ import {styleLabel} from "../../../themes/themes";
 import Box from "@mui/material/Box";
 import {useEffect, useState} from "react";
 
+
 const ActionsTakenBox = ({formValues,handleInputChange}) => {
  const [colorElement, setColorElement] = useState('');
 
@@ -21,11 +22,13 @@ const ActionsTakenBox = ({formValues,handleInputChange}) => {
         }}
         ,[formValues])
 
+
     return (
         <Box>
             <br/>
             <br/>
-            <label style={styleLabel}>What actions, if any, could have been taken to prevent this incident from occurring?</label>
+            <label style={styleLabel}>What actions, if any, could have been taken to prevent this incident from
+                occurring?</label>
             <br/>
             <TextField
                 id="Actions Taken"

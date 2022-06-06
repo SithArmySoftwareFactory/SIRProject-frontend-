@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import SIRLineChart from "./SIRLineChart";
-import {CardContent, Grid, Typography} from "@mui/material";
+import { Grid, Typography} from "@mui/material";
 import {apiGetIncident} from "../../api/APICalls";
 import SIRPieChart from "./SIRPieChart";
 import SIRBarChart from "./SIRBarChart";
-import Card from "@mui/material/Card";
 
 const Dashboard = () => {
     const [data, setData] = useState([]);
-    const [monthlyCount, setMonthlyCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [monthlyCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     let months = [...monthlyCount]
     let individuals = []
 
