@@ -1,0 +1,41 @@
+body {
+    background: #eee;
+}
+
+.name {
+    color: whitesmoke;
+    opacity: 1;
+}
+
+.work {
+    font-weight: bold;
+    font-size: 15px;
+    color: whitesmoke;
+}
+
+.about span {
+    font-size: 13px;
+    color: whitesmoke;
+}
+
+.v-profile {
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.box {
+    -webkit-box-shadow: 13px 12px 5px -10px rgba(196,194,196,0.72);
+    -moz-box-shadow: 13px 12px 5px -10px rgba(196,194,196,0.72);
+    box-shadow: 13px 12px 5px -10px rgba(196,194,196,1);
+    background-color: transparent;
+}
+
+.col-md-3 {
+    margin-top: 10px;
+    margin-bottom: 3px;
+}
+
+.sith-container {
+    background-image: url(sithsymbol.gif);
+    background-size: cover;
+}

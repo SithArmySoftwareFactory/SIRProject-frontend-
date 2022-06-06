@@ -1,4 +1,5 @@
-import {useEffect, useState} from 'react';
+
+import {useState, useEffect, useMemo} from 'react';
 import {Pie} from 'react-chartjs-2';
 import Box from "@mui/material/Box";
 import {Typography} from "@mui/material";
@@ -14,11 +15,9 @@ const SIRPieChart = ({ title, description, date, sirData}) => {
     });
     const [graphData] = useState([]);
     let labelData = []
-
     let labelDataTrimmed = []
 
-
-    useEffect(() => {
+    useMemo(() => {
 
         let counts = {}
         sirData.map((incident) => {
@@ -27,6 +26,7 @@ const SIRPieChart = ({ title, description, date, sirData}) => {
         for (let i = 0; i < labelData.length; i++) {
             for (let j = 0; j < labelData[i].length; j++) {
                 labelDataTrimmed.push(labelData[i][j])
+
             }
         }
         for (const event of labelDataTrimmed) {
@@ -59,7 +59,7 @@ const SIRPieChart = ({ title, description, date, sirData}) => {
         labels: graph.labels,
         datasets: [
             {
-                label: '# of Votes',
+                label: '# of incidents',
                 data: graph.data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',

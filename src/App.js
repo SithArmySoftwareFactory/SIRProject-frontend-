@@ -13,6 +13,8 @@ import Footer from "./components/common/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
 import Gmap from "./components/maps/Gmap";
 import Login from "./components/pages/Login";
+import Team from "./components/team/Team";
+
 
 
 const Alert = forwardRef(function Alert(props, ref) {
@@ -75,6 +77,7 @@ function App() {
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/map" element={<Gmap/>}/>
+                        <Route path="/team" element={<Team/>} />
                         <Route element={<Home/>}/>
                     </Routes>
                 </Grid>
