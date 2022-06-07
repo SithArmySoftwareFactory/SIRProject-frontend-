@@ -73,7 +73,7 @@ const Home = () => {
 
                                       margin: 'auto'
                                   }}>
-                                <Grid item xs >
+                                <Grid item>
                                     <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto', textAlign:'center'}}>
                                             <DashboardIcon className="page-icon"
                                                            style={{fontSize: '250px'}}/>
@@ -83,7 +83,7 @@ const Home = () => {
                                         </p>
                                     </div>
                                 </Grid>
-                                <Grid item xs>
+                                <Grid item>
                                     <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto', textAlign:'center'}}>
                                             <SecurityIcon className="page-icon" style={{fontSize: '250px'}}/>
                                             <h2 className="iconTextTitle">Secure & Reliable</h2><p className="iconText">
@@ -136,7 +136,7 @@ const Home = () => {
                                       justifyContent: 'center',
                                       padding: 'auto'
                                   }}>
-                                <Grid item xs>
+                                <Grid item>
                                     <Card sx={{minWidth: '400px', maxWidth: '400px', margin: '50px'}}>
                                         <CardActionArea>
                                             <CardMedia
@@ -158,7 +158,7 @@ const Home = () => {
                                         </CardActionArea>
                                     </Card>
                                 </Grid>
-                                <Grid item xs>
+                                <Grid item>
                                     <Card sx={{minWidth: '400px', maxWidth: '400px', margin: '50px'}}>
                                         <CardActionArea>
                                             <CardMedia
