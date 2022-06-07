@@ -197,8 +197,8 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     };
 
     return (
-        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center'}}>
-            <Box minWidth="1038px" >
+        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center', }}>
+            <Box minWidth="1038px" sx={{backgroundColor:'#fff'}}>
                 {(sent) ?
                     <Alert severity="success" className="sentSuccessMsg">
                         Sent to [Commander]
@@ -207,7 +207,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                     null
                 }
                 <br/> <br/>
-                <h3 className="dataGridHeaderTitle" style={{color: 'white'}}><strong>Incident Reports</strong></h3>
+                <h3 className="dataGridHeaderTitle"><strong>Incident Reports</strong></h3>
                 <br/><br/>
                 <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
                 {isSIRFormOpen &&
