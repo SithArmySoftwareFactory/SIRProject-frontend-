@@ -178,8 +178,6 @@ background:'#000000',
                     icon={false}
                     theme="dark"
                 />
-
-                <ToastContainer/>
                 <GoogleMap
                     id="marker-example"
                     mapContainerStyle={mapContainerStyle}
