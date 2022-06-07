@@ -87,7 +87,7 @@ function App() {
                         apiCallCount={apiCallCount}
                     />} />}
                     {authorizationState && <Route path="/dashboard" element={<Dashboard authorizationState={authorizationState}  setApiCallCountFunction={setApiCallCountFunction}/>} />}
-                    <Route path="/login" element={<Login userAuthorized={userAuthorized} />} />
+                    {(typeof authorizationState == 'undefined') && <Route path="/login" element={<Login userAuthorized={userAuthorized} />} /> }
                     {authorizationState && <Route path="/map" element={<Gmap authorizationState={authorizationState} />} />}
                     <Route path="*" element={<Home />} />
                 </Routes>

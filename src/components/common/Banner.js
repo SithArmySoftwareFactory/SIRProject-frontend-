@@ -22,10 +22,9 @@ export function Banner({setIsHome, isHome, authorizationState}) {
                         <li><HomeIcon className="bannerIcons"/><NavLink  className="navLink" page="/" to="/">Home</NavLink></li>
                         <li><AssessmentIcon className="bannerIcons"/><NavLink  className="navLink" page="/report" to="/report">Submit Report</NavLink></li>
                         {authorizationState &&  <li><SupervisedUserCircleIcon className="bannerIcons"/><NavLink  className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink></li>}
-                        <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/login" to="/login">Login</NavLink></li>
+                        {(typeof authorizationState == 'undefined') && <li><FaceIcon className="bannerIcons"/><NavLink  className="navLink" page="/login" to="/login">Login</NavLink></li> }
                        {authorizationState && <li> <DashboardIcon className="bannerIcons"/><NavLink  className="navLink" page="/dashboard" to="/dashboard">Dashboard</NavLink></li>}
                         {authorizationState &&  <li><MapIcon className="bannerIcons"/><NavLink  className="navLink" page="/map" to="/map">Map</NavLink></li>}
-
                     </ul>
                 </nav>
             </header>
