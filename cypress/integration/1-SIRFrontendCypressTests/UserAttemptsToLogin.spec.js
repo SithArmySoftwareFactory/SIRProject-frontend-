@@ -21,7 +21,7 @@ describe('user attempts to login to the site', () => {
         });
 
         it('user types in the correct username and password and sees the proper views',()=>{
-            cy.findByRole('textbox', {name: /username/i}).clear().type('dakota');
+            cy.findByRole('textbox', {name: /username/i}).clear().type('josh');
             cy.findByLabelText(/password/i).clear().type('1234');
             cy.findByRole('button', {name: /login/i}).click();
             cy.findByRole('link', {name: /supervisor/i}).should('exist');

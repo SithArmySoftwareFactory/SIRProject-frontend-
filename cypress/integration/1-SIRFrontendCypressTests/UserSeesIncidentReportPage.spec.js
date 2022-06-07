@@ -2,7 +2,7 @@
 describe('user navigating to the homepage', () => {
     before(() => {
         cy.visit('/login');
-        cy.findByRole('textbox', {name: /username/i}).clear().type('dakota');
+        cy.findByRole('textbox', {name: /username/i}).clear().type('josh');
         cy.findByLabelText(/password/i).clear().type('1234');
         cy.findByRole('button', {name: /login/i}).click();
         cy.findByRole('link', {name: /supervisor/i}).should('exist');
