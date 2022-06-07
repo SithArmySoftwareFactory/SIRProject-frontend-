@@ -28,6 +28,13 @@ describe('user attempts to login to the site', () => {
             cy.findByRole('link', {name: /dashboard/i}).should('exist');
             cy.findByRole('link', {name: /map/i}).should('exist');
         });
+
+        it('user logs out and does not see the supervisor links',()=>{
+            cy.findByRole('link', {name: /logout/i}).click();
+            cy.findByRole('link', {name: /supervisor/i}).should('not.exist');
+            cy.findByRole('link', {name: /dashboard/i}).should('not.exist');
+            cy.findByRole('link', {name: /map/i}).should('not.exist');
+        });
     });
 
 
