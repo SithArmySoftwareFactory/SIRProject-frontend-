@@ -316,7 +316,7 @@ const Fields = ({handleClick, open, defaultValues, fullWidthFunction}) => {
                     setIsDisabled(false);
             }
         }
-    }, [formValues]);
+    }, [formValues, handleSubmit]);
 
     return (
         <Box>
