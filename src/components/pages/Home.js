@@ -56,6 +56,7 @@ const Home = () => {
                     </tbody>
                 </table>
             </Grid>
+            <br/>
             <Grid container
                   spacing={2}
                   sx={{
