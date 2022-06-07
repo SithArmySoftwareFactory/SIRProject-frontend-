@@ -34,21 +34,31 @@ function PaperComponent(props) {
 }
 
 
-const SupervisorView = () => {
+const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCount}) => {
     const [pageSize, setPageSize] = React.useState(5);
     const [dialog, setDialog] = useState(false);
-    const [ setRowsChecked] = useState({}); //stores the rows checked
+    const [rowsChecked, setRowsChecked] = useState({}); //stores the rows checked
     const [count, setCount] = useState(0);
     const [showCommand, setShowCommand] = useState(false);
     const [sent, setSent] = useState(false);
     const [selectionModel, setSelectionModel] = useState([]);
     const [rowViewed, setRowViewed] = useState(null);
     const [rowsFromApi, setRowsFromApi] = useState([]);
-    const [isSIRFormOpen, setIsSIRFormOpen] = useState(false);
+    const [isSIRFormOpen,setIsSIRFormOpen] = useState(false);
+    const [fullWidth, setFullWidth] = useState(false);
+    const [displayInDialogOnly, setDisplayInDialogOnly] = useState('dialog');
+
+    const fullWidthFunction = (value) => {
+        setFullWidth(value);
+        setDisplayInDialogOnly('dialog');
+    }
+
     //Get Data from backend
     const fetchIncidentAPI = () => {
-        apiGetIncident()
-            .then((r) => setRowsFromApi(r.data))
+        apiGetIncident(0, authorizationState)
+            .then((r) =>  {
+                setRowsFromApi(r.data);
+            })
             .catch((error) => console.log(error));
     };
     useEffect(fetchIncidentAPI, []);
@@ -125,7 +135,7 @@ const SupervisorView = () => {
                     //display two individuals for a combined length of two strings, subtract 2 from the length
                     //because we are displaying two individuals from the list. Show the remaining count.
                     let returnCount = (rowIndividuals.length - 2)
-                    let returnText;
+                    let returnText = '';
                     if (returnCount > 0)
                         returnText = `, +${returnCount}`;
                     else {
@@ -152,7 +162,7 @@ const SupervisorView = () => {
                     return `${rowEventType[0]}, +${rowEventType.length - 1}`
                 } else if (rowEventType[0].length <= 27 || (rowEventType[0].length + rowEventType[1]) <= 27) {
                     let returnCount = (rowEventType.length - 2)
-                    let returnText;
+                    let returnText = '';
                     if (returnCount > 0)
                         returnText = `, +${returnCount}`;
                     else {
@@ -206,7 +216,8 @@ const SupervisorView = () => {
                         onClose={handleClose}
                         PaperComponent={PaperComponent}
                         aria-labelledby="draggable-dialog-title"
-                        maxWidth="800px"
+                        fullScreen={fullWidth}
+                        fullWidth={true}
                     >
                         <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
                             Incident Report
@@ -224,14 +235,17 @@ const SupervisorView = () => {
                             </IconButton>
                         </DialogTitle>
                         <DialogContent>
-                            <SIRForm open={isSIRFormOpen} defaultValues={rowViewed}/>
+                            <SIRForm open={isSIRFormOpen} defaultValues={rowViewed} fullWidthFunction={fullWidthFunction} fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
                         </DialogContent>
                         <Divider/>
                         <DialogActions>
+                            <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
+                            {(fullWidth) ? <Button autoFocus onClick={() => setFullWidth(false)} style={{color: "#5D6A18"}}>
+                                RETURN
+                                </Button> :
                             <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
                                 SAVE
-                            </Button>
-                            <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
+                            </Button> }
                         </DialogActions>
                     </Dialog>
                 }

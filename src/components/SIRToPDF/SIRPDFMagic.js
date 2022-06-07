@@ -2,13 +2,10 @@ import { Grid} from "@mui/material";
 import './pdfmagic.css'
 import {useCallback, useRef, useState} from "react";
 
-
-
 //converted PDF to HTML
 //converted HTML to JSX
 //Modified Tables and classes to approximate
 //PDF Document
-
 
 
 const SIRPDFMagic = ({defaultValues}) => {

@@ -5,19 +5,23 @@ import {apiGetIncident} from "../../api/APICalls";
 import SIRPieChart from "./SIRPieChart";
 import SIRBarChart from "./SIRBarChart";
 
-const Dashboard = () => {
+const Dashboard = ({authorizationState}) => {
     const [data, setData] = useState([]);
     const [monthlyCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     let months = [...monthlyCount]
     let individuals = []
 
-    const fetchData = async () => {
-        const result = await apiGetIncident()
-        setData(result.data);
-    }
-    useMemo(() => {
-        fetchData(0)
-    }, []);
+
+
+    const fetchIncidentAPI = () => {
+        apiGetIncident(0, authorizationState)
+            .then((result) => {
+                setData(result.data);
+            })
+            .catch((error) => console.log(error));
+    };
+
+    useEffect(fetchIncidentAPI, []);
 
     const individualDataset = () => {
         let individualsTrimmed = []
