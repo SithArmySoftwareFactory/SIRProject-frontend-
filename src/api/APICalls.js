@@ -2,18 +2,26 @@ import {API_URL} from "../constants/Constants";
 import axios from "axios";
 
 export const apiGetIncident = async (index, token) => {
+    let localToken = localStorage.getItem('access_token');
 
     if (index > 0) {
         return axios.get(API_URL + "incident/" + index)
-    } else {
+    } else if(localToken.length > 20) {
 
+    return axios.get(API_URL + "incident", {
+        headers: {
+            'Authorization': `Bearer ${localToken}`
+        }
+    })
+} else {
         return axios.get(API_URL + "incident", {
             headers: {
             'Authorization': `Bearer ${token}`
         }
-
     })
-}}
+}
+
+}
 
 export const apiPostIncident = async (data) => {
     return axios.post(API_URL + "incident", data)

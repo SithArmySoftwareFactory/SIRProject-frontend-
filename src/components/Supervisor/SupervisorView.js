@@ -58,8 +58,6 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
         apiGetIncident(0, authorizationState)
             .then((r) =>  {
                 setRowsFromApi(r.data);
-                console.log(authorizationState);
-                console.log(r.data)
             })
             .catch((error) => console.log(error));
     };

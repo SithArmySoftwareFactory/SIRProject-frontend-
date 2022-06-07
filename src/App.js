@@ -28,7 +28,7 @@ function App() {
 
     const [isHome, setIsHome] = useState(true);
     const [open, setOpen] = useState(false);
-    const [authorizationState, setAuthorizationState] = useState(undefined);
+    const [authorizationState, setAuthorizationState] = useState(localStorage.getItem('access_token') || undefined);
     const [apiCallCount, setApiCallCount] = useState(0);
     const handleClick = () => {
         setOpen(true);
@@ -36,8 +36,11 @@ function App() {
 
     const userAuthorized = (value) => {
         //TODO value logic, does it have auth and refresh token? -> yes -> authorize
-        //No do not set state
         setAuthorizationState(value.data.access_token);
+
+        /*TODO add local storage - then in API call check if the access_token is in local storage
+           if it is in local storage, use it as the token. */
+        localStorage.setItem('access_token', value.data.access_token);
 
     }
 
