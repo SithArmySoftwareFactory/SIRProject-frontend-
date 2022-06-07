@@ -34,12 +34,20 @@ function App() {
     }
 
     const userAuthorized = (value) => {
-        //TODO value logic, does it have auth and refresh token? -> yes -> authorize
-        setAuthorizationState(value.data.access_token);
 
-        /*TODO add local storage - then in API call check if the access_token is in local storage
-           if it is in local storage, use it as the token. */
-        localStorage.setItem('access_token', value.data.access_token);
+        if(value){
+            //TODO value logic, does it have auth and refresh token? -> yes -> authorize
+            setAuthorizationState(value.data.access_token);
+
+            /*TODO add local storage - then in API call check if the access_token is in local storage
+               if it is in local storage, use it as the token. */
+            localStorage.setItem('access_token', value.data.access_token);
+        } else {
+            setAuthorizationState(value);
+            localStorage.setItem('access_token', value);
+        }
+
+
 
     }
 
@@ -57,7 +65,7 @@ function App() {
         <>
             <Grid container spacing={0} columns={12} justifyContent="center">
                 <Grid item xs={12}>
-                    <Banner setIsHome={setIsHome} isHome={isHome}  authorizationState={authorizationState} />
+                    <Banner setIsHome={setIsHome} isHome={isHome}  authorizationState={authorizationState} userAuthorized={userAuthorized}/>
                                       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}
                                                 userAuthorized={userAuthorized}
                           anchorOrigin={{horizontal: "center", vertical: "top"}} sx={{width: "100%"}}>
