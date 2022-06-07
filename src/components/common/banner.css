@@ -21,11 +21,18 @@ header {
     transition: .5s all;
     background-color: rgba(255, 255, 255, 0.2);
 }
+.mobileMenu {
+    display: none;
+}
 @media screen and (max-width: 900px) {
 
     #logo {display:none;}
+    .menu {display:none}
+    .mobileMenu {display:inline}
 
 }
+
+
 
 #logo:hover {
     color: #fafafa;

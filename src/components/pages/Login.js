@@ -52,7 +52,7 @@ export default function Login(props) {
             </Form>
         </div>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={0} md={6}>
                 <div>
                     <img className="loginImage" alt="loginImage" src="/login.jpeg" />
                 </div>

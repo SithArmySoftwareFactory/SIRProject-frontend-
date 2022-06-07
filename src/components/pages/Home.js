@@ -45,33 +45,35 @@ const Home = () => {
                 </div></div></td></tr></tbody></table>
         </Grid>
             <Grid container
-                  spacing={12}
+                  spacing={2}
                   sx={{
                       minHeight: '600px',
                       justifyContent: 'center',
-                      padding: 'auto',
+                      verticalAlign:'center',
                       margin: 'auto',
-                      width: '100%'
+                      width: '100%',
+
                   }}>
                 <table
                   style={{
+
                     justifyContent: 'center',
-                    padding: 'auto',
+                      verticalAlign:'center',
                     margin: 'auto',
                     width: '75%'}}>
                     <tbody>
                     <tr>
                         <td>
                             <Grid container
-                                  spacing={0}
+                                  spacing={5}
+                                  alignItems="center"
                                   sx={{
                                       minHeight: '600px',
                                       justifyContent: 'center',
-                                      padding: 'auto',
                                       margin: 'auto'
                                   }}>
-                                <Grid item xs >
-                                    <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto'}}>
+                                <Grid item xs xl md>
+                                    <div style={{minWidth: '450px', margin: 'auto', textAlign:'center'}}>
                                             <DashboardIcon className="page-icon"
                                                            style={{fontSize: '250px'}}/>
                                             <h2 className="iconTextTitle">Dashboard</h2>
@@ -80,8 +82,8 @@ const Home = () => {
                                         </p>
                                     </div>
                                 </Grid>
-                                <Grid item xs>
-                                    <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto'}}>
+                                <Grid item xs xl md>
+                                    <div style={{minWidth: '450px', margin: 'auto', textAlign:'center'}}>
                                             <SecurityIcon className="page-icon" style={{fontSize: '250px'}}/>
                                             <h2 className="iconTextTitle">Secure & Reliable</h2><p className="iconText">
                                             Centered around usability and design patterns to ensure the best user
@@ -91,8 +93,8 @@ const Home = () => {
                                         </p>
                                     </div>
                                 </Grid>
-                                <Grid item>
-                                    <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto'}}>
+                                <Grid item xs xl md>
+                                    <div style={{minWidth: '450px', margin: 'auto', textAlign:'center'}}>
                                             <PeopleAltIcon className="page-icon" style={{fontSize: '250px'}}/>
                                             <h2 className="iconTextTitle">For Soldiers, by Soldiers</h2>
                                         <p className="iconText">
@@ -110,12 +112,14 @@ const Home = () => {
                     </tbody>
                 </table>
             </Grid>
+            <hr className="dashed" />
             <Grid container
                   spacing={2}
+                  alignItems="center"
                   sx={{
                       minHeight: '600px',
                       justifyContent: 'center',
-                      padding: 'auto',
+
                       margin: 'auto',
                       width: '100%'
                   }}>
@@ -131,7 +135,7 @@ const Home = () => {
                                       justifyContent: 'center',
                                       padding: 'auto'
                                   }}>
-                                <Grid item xs>
+                                <Grid item>
                                     <Card sx={{minWidth: '400px', maxWidth: '400px', margin: '50px'}}>
                                         <CardActionArea>
                                             <CardMedia
@@ -153,7 +157,7 @@ const Home = () => {
                                         </CardActionArea>
                                     </Card>
                                 </Grid>
-                                <Grid item xs>
+                                <Grid item>
                                     <Card sx={{minWidth: '400px', maxWidth: '400px', margin: '50px'}}>
                                         <CardActionArea>
                                             <CardMedia
