@@ -99,8 +99,8 @@ const Team = () => {
                                 className="img-responsive rounded-circle"
                                 src={require("./Black1.jpeg")}
                                 width="90"/>
-                            <h5 className="mt-3 name">UI Owner</h5>
-                            <span className="work d-block">Comapay agents house</span>
+                            <h5 className="mt-3 name">Bruce Black</h5>
+                            <span className="work d-block">UI Owner</span>
                             <span className="work d-block">Junior Software Engineer</span>
                             <div className="mt-4 about">
                                 <span>"The dark side of the force is a pathway to many abilities some consider to be unnatural."<br/>
