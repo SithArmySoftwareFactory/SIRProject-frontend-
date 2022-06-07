@@ -196,9 +196,15 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
         // send patch request -> patchMe(id, key, value)
     };
 
+    const handlePatch = () => {
+
+    }
+    const handlePatchChange = (event) => {
+        console.log(event);
+    }
     return (
-        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center', }}>
-            <Box minWidth="1038px" sx={{backgroundColor:'#fff'}}>
+        <Box height="auto" width="100%"  display="flex" sx={{textAlign:'center', justifyContent:'center', }}>
+            <Box minWidth="75%" sx={{backgroundColor:'#fff'}}>
                 {(sent) ?
                     <Alert severity="success" className="sentSuccessMsg">
                         Sent to [Commander]
@@ -235,7 +241,9 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                             </IconButton>
                         </DialogTitle>
                         <DialogContent>
-                            <SIRForm open={isSIRFormOpen} defaultValues={rowViewed} fullWidthFunction={fullWidthFunction} fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
+                            <SIRForm open={isSIRFormOpen}
+                                     handlePatchChange={handlePatchChange}
+                                     defaultValues={rowViewed} fullWidthFunction={fullWidthFunction} fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
                         </DialogContent>
                         <Divider/>
                         <DialogActions>
@@ -243,7 +251,15 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                             {(fullWidth) ? <Button autoFocus onClick={() => setFullWidth(false)} style={{color: "#5D6A18"}}>
                                 RETURN
                                 </Button> :
-                            <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
+                            <Button autoFocus
+                                    onClick={
+                                () =>
+                                    {
+                                        handleClose();
+                                        handlePatch();
+                                    }
+                            }
+                                    style={{color: "#5D6A18"}}>
                                 SAVE
                             </Button> }
                         </DialogActions>
@@ -307,6 +323,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                         //to the Data grid, to help state
                         setSelectionModel(ids);
                     }}
+
                     //remove various unwanted fields
                     localeText={{
                         toolbarFilters: "",
@@ -332,8 +349,10 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                                                         {count} selected
                                                     </td>
                                                     <td className="sendToCommandBoxTableData">
-                                                        <Button variant="outlined" color="primary"
-                                                                className="sendUpToCmdButton" sx={{
+                                                        <Button variant="outlined"
+                                                                color="primary"
+                                                                className="sendUpToCmdButton"
+                                                                sx={{
                                                             color: "#5D6A18",
                                                             fontWeight: "bold",
                                                             borderColor: "#5D6A18"
