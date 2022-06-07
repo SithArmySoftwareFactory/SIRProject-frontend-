@@ -65,12 +65,13 @@ const Home = () => {
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
                                     <h2>User</h2><p>
                                     Centered around usability and design patterns to ensure the best user experience.
+
                                     Security is integral to operating data and protecting SIR information is paramount.
                                 </p></div>
                             </td>
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <h2>For Soldiers, by Soldiers</h2><p>
+                                    <h2 className="iconTextTitle">For Soldiers, by Soldiers</h2><p className="iconText">
                                     Software should be developed for Soldiers to ensure that they can operate with the
                                     greatest lethality. Even in the strategic environment, time is off the essence.
                                     Everything ultimately effects the war fighter.
