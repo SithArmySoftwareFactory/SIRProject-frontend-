@@ -1,4 +1,4 @@
-import {Button, Grid} from "@mui/material";
+import {Button, Card, CardActionArea, CardContent, CardMedia, Grid, Typography} from "@mui/material";
 import './home.css'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import {NavLink} from "react-router-dom";
@@ -20,14 +20,13 @@ const Home = () => {
                 <br/><br/><br/>
                 <div className="callout-container">
                     <div className="callout">
-                        <h1 className="callout-container-h1">SERIOUS</h1> &nbsp; &nbsp;<h1 id="red">INCIDENT</h1>
+                        <h1 className="callout-container-h1">SERIOUS &nbsp; </h1><h1 id="red">INCIDENT</h1>
                     </div>
                     <div className="desc">
                         GLOBAL REPORTING SYSTEM
                     </div>
-                    <Button sx={{marginTop: '100px', padding: '2em', height: '50px', backgroundColor: '#F7F7F7'}}
-                            id="#getstarted" component={NavLink} to={'/report'}>Get Started</Button>
-
+                    <NavLink sx={{marginTop: '100px', padding: '2em', height: '50px', backgroundColor: '#F7F7F7'}}
+                            className="getStarted" component={NavLink} to={'/report'}>Get Started</NavLink>
                 </div>
             </div>
             <Grid item xs={12}>
@@ -82,6 +81,68 @@ const Home = () => {
                 </div>
             </Grid>
         </Grid>
+        <Grid container spacing={1} columns={9} justifyContent="center">
+            <Grid item xs={3}>
+                        <Card sx={{ margin:'50px'}}>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    height="250"
+                                    image="/2.jpeg"
+                                    alt="green iguana"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        Serious Incident Reporting
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Available globally to all Soldiers, give Commanders the ability to monitor and act on SIRs.
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+            <Grid item xs={3}>
+                        <Card sx={{ margin:'50px'}}>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    height="250"
+                                    image="/3.jpeg"
+                                    alt="green iguana"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        Seamlessly Coordinate Across Teams
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Supervisors are provided with the ability to monitor and act on SIR using Map data.
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+            <Grid item xs={3}>
+                        <Card sx={{ margin:'50px'}}>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    height="250"
+                                    image="/users.jpeg"
+                                    alt="green iguana"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        The Software Factory
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        CI/CD Pipeline - Able to quickly monitor and improve application within moments.
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+</Grid>
         </>);
 }
 
