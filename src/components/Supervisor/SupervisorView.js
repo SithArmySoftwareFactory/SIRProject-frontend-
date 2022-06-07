@@ -197,7 +197,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     };
 
     return (
-        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center', backgroundColor: 'darkgray'}}>
+        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center'}}>
             <Box minWidth="1038px" >
                 {(sent) ?
                     <Alert severity="success" className="sentSuccessMsg">
