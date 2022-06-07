@@ -71,7 +71,7 @@ const Home = () => {
                                       margin: 'auto'
                                   }}>
                                 <Grid item xs >
-                                    <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto'}}>
+                                    <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto', textAlign:'center'}}>
                                             <DashboardIcon className="page-icon"
                                                            style={{fontSize: '250px'}}/>
                                             <h2 className="iconTextTitle">Dashboard</h2>
@@ -81,7 +81,7 @@ const Home = () => {
                                     </div>
                                 </Grid>
                                 <Grid item xs>
-                                    <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto'}}>
+                                    <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto', textAlign:'center'}}>
                                             <SecurityIcon className="page-icon" style={{fontSize: '250px'}}/>
                                             <h2 className="iconTextTitle">Secure & Reliable</h2><p className="iconText">
                                             Centered around usability and design patterns to ensure the best user
@@ -92,7 +92,7 @@ const Home = () => {
                                     </div>
                                 </Grid>
                                 <Grid item>
-                                    <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto'}}>
+                                    <div style={{maxWidth: '400px', display: "inline-block", margin: 'auto', textAlign:'center'}}>
                                             <PeopleAltIcon className="page-icon" style={{fontSize: '250px'}}/>
                                             <h2 className="iconTextTitle">For Soldiers, by Soldiers</h2>
                                         <p className="iconText">

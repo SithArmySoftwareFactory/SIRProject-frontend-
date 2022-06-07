@@ -13,6 +13,10 @@
 
 .page-icon {
     font-size: 300px;
+    text-align: center;
+    justify-content: center;
+    margin:auto;
+    padding:0;
 }
 
 
@@ -46,6 +50,24 @@
     position: center;
     padding: 1em;
     border: 1px solid #FFF;
+}
+@media screen and (max-width: 900px) {
+
+    .callout-container2
+    {
+        margin-top:2em;
+        margin-bottom:3em;
+    }
+
+}
+@media screen and (max-width: 1200px) {
+
+    .callout-container2
+    {
+        margin-top:3.7em;
+        margin-bottom:2.7em;
+    }
+
 }
 
 .button {
@@ -105,7 +127,15 @@
     transition-duration: 0.4s;
     color:#000000;
 }
+@media screen and (max-width: 900px) {
 
+    .getStarted
+    {
+        margin-top:5em;
+        margin-bottom:2em;
+    }
+
+}
 .getStarted:hover {
     text-decoration: none;
     background-color: #ffc300;
@@ -132,8 +162,9 @@ video {
 .iconTextTitle {
     font-size: 36px;
     font-family: 'Lato', sans-serif;
+    text-align: center;
 }
 .iconText {
     font-size: 20px;
-    text-align: left;
+    text-align: center;
 }
