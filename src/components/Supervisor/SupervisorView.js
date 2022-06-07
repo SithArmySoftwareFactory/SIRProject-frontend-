@@ -207,7 +207,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                     null
                 }
                 <br/> <br/>
-                <h3 className="dataGridHeaderTitle" style={{color: 'white'}}>Incident Reports</h3>
+                <h3 className="dataGridHeaderTitle" style={{color: 'white'}}><strong>Incident Reports</strong></h3>
                 <br/><br/>
                 <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
                 {isSIRFormOpen &&
