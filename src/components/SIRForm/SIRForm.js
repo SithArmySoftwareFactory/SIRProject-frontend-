@@ -5,6 +5,7 @@ import Header from "./Header/Header";
 import SIRPDFMagic from "../SIRToPDF/SIRPDFMagic";
 import Button from "@mui/material/Button";
 
+
 const SIRForm = ({handleClick, open, defaultValues, fullWidthFunction, fullWidth, displayInDialogOnly}) =>{
     return (
         <>

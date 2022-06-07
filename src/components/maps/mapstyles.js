@@ -1,5 +1,4 @@
-export default
-[
+export default [
     {
         "featureType": "all",
         "elementType": "geometry.fill",

@@ -1,26 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import SIRLineChart from "./SIRLineChart";
-import {CardContent, Grid, Typography} from "@mui/material";
+import { Grid, Typography} from "@mui/material";
 import {apiGetIncident} from "../../api/APICalls";
 import SIRPieChart from "./SIRPieChart";
 import SIRBarChart from "./SIRBarChart";
-import Card from "@mui/material/Card";
 
 const Dashboard = ({authorizationState}) => {
     const [data, setData] = useState([]);
-    const [monthlyCount, setMonthlyCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [monthlyCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     let months = [...monthlyCount]
     let individuals = []
 
 
-    // useEffect(() => {
-    //   const  fetchData = async () => {
-    //         const result = await apiGetIncident(0, apiGetIncident)
-    //         setData(result.data);
-    //     }
-    //     fetchData()
-    // }, []);
-    //Get Data from backend
 
     const fetchIncidentAPI = () => {
         apiGetIncident(0, authorizationState)
@@ -31,6 +22,7 @@ const Dashboard = ({authorizationState}) => {
     };
 
     useEffect(fetchIncidentAPI, []);
+
     const individualDataset = () => {
         let individualsTrimmed = []
         let counts = {}

@@ -1,9 +1,8 @@
 import * as React from 'react';
-
 import Box from "@mui/material/Box";
 
 
-export default function DraggableDialog({handleClickOpen}) {
+export default function DraggableDialog({ handleClickOpen}) {
 
     return (
         <Box>

@@ -1,24 +1,23 @@
-import {useState, useEffect} from 'react';
+
+import {useState, useEffect, useMemo} from 'react';
 import {Pie} from 'react-chartjs-2';
 import Box from "@mui/material/Box";
-import {CardContent, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 import Card from "@mui/material/Card";
 
 
-const SIRPieChart = ({color, title, description, date, sirData}) => {
+const SIRPieChart = ({ title, description, date, sirData}) => {
     const [graph, setGraph] = useState({
         labels: [],
         data: [],
     });
-    const [graphData, setGraphData] = useState([]);
+    const [graphData] = useState([]);
     let labelData = []
-
     let labelDataTrimmed = []
 
-
-    useEffect(() => {
+    useMemo(() => {
 
         let counts = {}
         sirData.map((incident) => {
@@ -27,6 +26,7 @@ const SIRPieChart = ({color, title, description, date, sirData}) => {
         for (let i = 0; i < labelData.length; i++) {
             for (let j = 0; j < labelData[i].length; j++) {
                 labelDataTrimmed.push(labelData[i][j])
+
             }
         }
         for (const event of labelDataTrimmed) {
@@ -59,7 +59,7 @@ const SIRPieChart = ({color, title, description, date, sirData}) => {
         labels: graph.labels,
         datasets: [
             {
-                label: '# of Votes',
+                label: '# of incidents',
                 data: graph.data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -90,19 +90,19 @@ const SIRPieChart = ({color, title, description, date, sirData}) => {
                          />
                 </Box>
             <Box pl={1}>
-                    <Typography variant="h6" textTransform="capitalize">
-                        {title}
-                    </Typography>
-                    <Typography component="div" variant="button" color="text" fontWeight="light">
-                        {description}
-                    </Typography>
-                    <Divider/>
-                    <Typography variant="button" color="text" lineHeight={1} sx={{mt: 0.15, mr: 0.5}}>
-                        <Icon>schedule</Icon>
-                    </Typography>
-                    <Typography variant="button" color="text" fontWeight="light">
-                        {date}
-                    </Typography>
+                <Typography variant="h6" textTransform="capitalize">
+                    {title}
+                </Typography>
+                <Typography component="div" variant="button" color="text" fontWeight="light">
+                    {description}
+                </Typography>
+                <Divider/>
+                <Typography variant="button" color="text" lineHeight={1} sx={{mt: 0.15, mr: 0.5}}>
+                    <Icon>schedule</Icon>
+                </Typography>
+                <Typography variant="button" color="text" fontWeight="light">
+                    {date}
+                </Typography>
             </Box>
         </Card>
 

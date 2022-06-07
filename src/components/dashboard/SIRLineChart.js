@@ -3,8 +3,7 @@
 
 // react-chartjs-2 components
 import {Line} from "react-chartjs-2";
-import {Chart} from 'chart.js';
-import {registerables} from 'chart.js';
+import {Chart, registerables} from 'chart.js';
 
 
 // @mui material components
@@ -13,15 +12,17 @@ import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
-
 // ReportsLineChart configurations;
 import {useMemo} from "react";
-import configs from "../dashboard/configs"
-import {CardContent, Typography} from "@mui/material";
-import Box from "@mui/material/Box";
 
-const SIRLineChart = ({color, title, description, date, chart}) => {
-    const {data, options} = configs(chart.labels || [], chart.datasets || {});
+import {Typography} from "@mui/material";
+import Box from "@mui/material/Box";
+import Configs from "../dashboard/configs";
+
+
+const SIRLineChart = ({title, description, date, chart}) => {
+    const {data} = Configs(chart.labels || [], chart.datasets || {});
+
     Chart.register(...registerables);
 
     return (
@@ -29,15 +30,14 @@ const SIRLineChart = ({color, title, description, date, chart}) => {
             <Box padding="1rem" style={{backgroundColor: "darkgray"}} minHeight={570} maxHeight={'100%'}>
                 {useMemo(
                     () => (
-                        <Box
-                        >
+                        <Box>
                             <Line data={data} height={300}/>
                         </Box>
                     ),
-                    [chart, color]
+                    [chart]
                 )}
             </Box>
-                <Box pl={1}>
+            <Box pl={1}>
                 <Typography variant="h6" textTransform="capitalize">
                     {title}
                 </Typography>
@@ -52,7 +52,6 @@ const SIRLineChart = ({color, title, description, date, chart}) => {
                     {date}
                 </Typography>
             </Box>
-
         </Card>
     );
 }

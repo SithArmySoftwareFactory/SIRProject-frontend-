@@ -3,29 +3,56 @@
     src: url(masseffect.ttf);
 }
 .page-icon-container {
+
     padding:2em;
     margin-top:2em;
     width:100%;
     min-height: 600px;
-    background-color: 	rgb(192,192,192, 0.1);
+    background-color: rgb(192, 192, 192, 0.1);
 }
+
 .page-icon {
     font-size: 300px;
 }
+
+
+.callout {
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    width: 500px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.callout-container-h1 {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
 .callout-container {
     width:100%;
     text-align: center;
     justify-content: center;
     color: #F7F7F7;
     font-size: 2em;
-    margin-top:3em;
+    margin-top: 3em;
     margin-bottom: 3em;
     position: center;
-    left:40%;
-    padding:1em;
+    left: 40%;
+    padding: 1em;
     border: 1px solid #FFF;
 }
+
+.button {
+    background-color: #F7F7F7;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+}
+
 .callout {
+
     text-align: center;
     font-family: 'Raleway', sans-serif;
     width:100%;
@@ -41,6 +68,8 @@
     background: rgba(100, 100, 100, 0.1);
     display: inline-block;
 }
+
+
  #red {
      font-family: 'Lato', sans-serif;
      display: inline-block;
@@ -69,7 +98,9 @@
     background-color: #FFFFFF;
 
     border: 1px solid #F7F7F7;
-    margin-top:4em;
+
+    margin-top: 8em;
+
     border-radius: 1px;
     transition-duration: 0.4s;
     color:#000000;
@@ -83,10 +114,11 @@
 
 .video-container {
     height: 800px;
-    width:100%;
+    width: 100%;
     position: absolute;
     overflow: hidden;
 }
+
 video {
     object-fit: cover;
     position: relative;

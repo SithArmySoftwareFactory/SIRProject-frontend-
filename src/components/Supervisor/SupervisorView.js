@@ -189,7 +189,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
         }
     }
     //If we implement editing rows directly
-    const handleRowEditCommit = async (params) => {
+    const handleRowEditCommit = async () => {
         // const id = params.id;
         // const key = params.field;
         // const value = params.value;
@@ -197,7 +197,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     };
 
     return (
-        <Box height="auto" width="100%" display="flex" sx={{textAlign: 'center', justifyContent: 'center'}}>
+        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center', backgroundColor: 'darkgray'}}>
             <Box minWidth="1038px">
                 {(sent) ?
                     <Alert severity="success" className="sentSuccessMsg">
@@ -210,7 +210,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                 <h3 className="dataGridHeaderTitle">Incident Reports</h3>
                 <br/><br/>
                 <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
-                {isSIRFormOpen&&
+                {isSIRFormOpen &&
                     <Dialog
                         open={isSIRFormOpen}
                         onClose={handleClose}

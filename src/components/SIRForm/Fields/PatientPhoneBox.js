@@ -2,7 +2,7 @@ import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
 import {Grid} from "@mui/material";
 
-const PatientPhoneBox = ({formValues,handleInputChange}) => {
+const PatientPhoneBox = ({formValues, handleInputChange}) => {
 
     return (
         <Grid item xs={6}>
@@ -12,7 +12,6 @@ const PatientPhoneBox = ({formValues,handleInputChange}) => {
                 id="Patient Phone"
                 name={"patientPhone"}
                 variant={"outlined"}
-                fullWidth
                 value={formValues.patientPhone}
                 onChange={handleInputChange}
                 fullWidth

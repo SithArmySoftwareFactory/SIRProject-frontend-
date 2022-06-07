@@ -32,12 +32,14 @@ function Gmap({authorizationState, ...props}) {
     //path polyline ...
     const [paths, setPaths] = useState([]);
 
+
     //Get Data from backend
     const fetchIncidentAPI = () => {
         apiGetIncident(0, authorizationState)
             .then((r) => {
                 setRowsFromApi(r.data);
             })
+
             .catch((error) => console.log(error));
     };
 

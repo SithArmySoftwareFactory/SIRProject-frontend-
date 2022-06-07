@@ -2,8 +2,7 @@ import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
 import Box from "@mui/material/Box";
 
-const PatientNameBox = ({formValues,handleInputChange}) => {
-
+const PatientNameBox = ({formValues, handleInputChange}) => {
 
 
     return (

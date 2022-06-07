@@ -8,13 +8,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import {styleLabel} from "../../../themes/themes";
 
-const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChildrenClickChange}) => {
+const IndividualsInvolvedFormGroup = ({formValues, handleClickChange, handleChildrenClickChange}) => {
 
     const [isDisabled, setIsDisabled] = useState(true);
-    const [involvedArray, setInvolvedArray] = useState([]);
+    const [involvedArray] = useState([]);
 
     let {patient, familyMember, adult, child, staffMember, visitor, volunteer, other} = formValues.individuals;
-
 
 
     const children = (
@@ -23,16 +22,16 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChild
                 label="Adult"
                 disabled={isDisabled}
                 key={'adult'}
-                control={<Checkbox  checked={adult} onChange={(event)=>{
+                control={<Checkbox checked={adult} onChange={(event) => {
                     handleChange2(event);
-                }}  name={'adult'}/>}
+                }} name={'adult'}/>}
 
             />
             <FormControlLabel
                 label="Child <18 years old"
                 disabled={isDisabled}
                 key={'child'}
-                control={<Checkbox  checked={child} onChange={(event)=>{
+                control={<Checkbox checked={child} onChange={(event) => {
                     handleChange3(event);
                 }} name={'child'}/>}
 
@@ -69,8 +68,8 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChild
 
             handleChildrenClickChange();
 
-            adult=false;
-            child=false;
+            adult = false;
+            child = false;
 
             involvedArray.forEach(element => {
                 if (element === 'adult') {
@@ -84,12 +83,6 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange,handleChild
             })
         }
     }
-
-
-
-
-
-
 
 
     return (

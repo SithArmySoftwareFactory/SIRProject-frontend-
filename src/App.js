@@ -1,7 +1,7 @@
 import './App.css';
 import {Banner} from "./components/common/Banner";
 import SIRForm from "./components/SIRForm/SIRForm";
-import {forwardRef, useEffect, useState} from "react";
+import {forwardRef, useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
@@ -14,6 +14,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Gmap from "./components/maps/Gmap";
 import Login from "./components/pages/Login";
 import {apiGetIncident} from "./api/APICalls";
+import Team from "./components/team/Team";
 
 
 
@@ -22,10 +23,6 @@ const Alert = forwardRef(function Alert(props, ref) {
 });
 
 function App() {
-    // const cors = require('cors')
-    //
-    // app.use(cors())
-
     const [isHome, setIsHome] = useState(true);
     const [open, setOpen] = useState(false);
     const [authorizationState, setAuthorizationState] = useState(localStorage.getItem('access_token') || undefined);
@@ -62,23 +59,28 @@ function App() {
                                       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}
                           anchorOrigin={{horizontal: "center", vertical: "top"}} sx={{width: "100%"}}>
 
-                    <Alert onClose={handleClose} severity={"success"}
-                           sx={{width: "100%", background: "#EAF5F4", color: "#2A9D8F", fontWeight: "600"}}
-                           action={
-                        <>
-                            <Typography noWrap textAlign={"right"}>View Report</Typography>
-                            <Button onClick={()=>handleClose()}
-                                    sx={{width:"5%",background: "#EAF5F4", color: "#2A9D8F", fontWeight: "600"}}
-                            >
-                                <CloseIcon />
-                            </Button>
+                        <Alert onClose={handleClose} severity={"success"}
+                               sx={{width: "100%", background: "#EAF5F4", color: "#2A9D8F", fontWeight: "600"}}
+                               action={
+                                   <>
+                                       <Typography noWrap textAlign={"right"}>View Report</Typography>
+                                       <Button onClick={() => handleClose()}
+                                               sx={{
+                                                   width: "5%",
+                                                   background: "#EAF5F4",
+                                                   color: "#2A9D8F",
+                                                   fontWeight: "600"
+                                               }}
+                                       >
+                                           <CloseIcon/>
+                                       </Button>
 
-                        </>
-                    }
-                    >
-                        <Typography noWrap>Incident Report Submitted.</Typography>
-                    </Alert>
-                </Snackbar>
+                                   </>
+                               }
+                        >
+                            <Typography noWrap>Incident Report Submitted.</Typography>
+                        </Alert>
+                    </Snackbar>
                 </Grid>
                 <Grid item  xs={12} >
                 <Routes>
@@ -92,14 +94,15 @@ function App() {
                     {authorizationState && <Route path="/dashboard" element={<Dashboard authorizationState={authorizationState}  setApiCallCountFunction={setApiCallCountFunction}/>} />}
                     {(typeof authorizationState == 'undefined') && <Route path="/login" element={<Login userAuthorized={userAuthorized} />} /> }
                     {authorizationState && <Route path="/map" element={<Gmap authorizationState={authorizationState} />} />}
+                    <Route path="/team" element={<Team/>} />
                     <Route path="*" element={<Home />} />
                 </Routes>
             </Grid>
                 <Grid item xs={12}>
-                    <ViewMenu isHome={isHome} setIsHome={setIsHome} />
+                    <ViewMenu isHome={isHome} setIsHome={setIsHome}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <Footer />
+                    <Footer/>
                 </Grid>
             </Grid>
         </>
