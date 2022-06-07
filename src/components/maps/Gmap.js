@@ -18,6 +18,7 @@ function Gmap() {
     //store  clicked locations in state
     const [places, setPlaces] = React.useState([{lat: 30.282692, lng: -97.77402}]);
     //const save the prev place for calculating route
+
     const [mapLoaded, setMapLoaded] = useState(false);
 
 
