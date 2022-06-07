@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import "./login.css";
 import {Grid} from "@mui/material";
 import axios from "axios";
+import {API_URL} from "../../constants/Constants";
 export default function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -14,7 +15,7 @@ export default function Login(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        axios.post('http://localhost:8080/api/login',`username=${username}&password=${password}`
+        axios.post(API_URL + 'login',`username=${username}&password=${password}`
         ).then((data) => {
             //TODO call state to set Logged in to true
             props.userAuthorized(data);
