@@ -7,7 +7,7 @@ const Team = () => {
     return (
         <Card className="sith-container">
             <div className="container text-center mt-5 mb-2">
-                <h1 className="mb-2" style={{color: 'white'}}>Meet the Sith</h1>
+                <h1 className="mb-2" style={{color: 'white', fontSize: 36, textShadow: "2px 2px #ff0000"}}>Meet the Sith</h1>
                 <span style={{color: 'white'}}>Driven by passion, fueled by hate, masters kindness to control the Jedi council.</span>
             </div>
 
