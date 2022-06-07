@@ -46,7 +46,7 @@
     color: #F7F7F7;
     font-size: 2em;
     margin-top:5em;
-    margin-bottom:4em;
+    margin-bottom:3em;
     position: center;
     padding: 1em;
     border: 1px solid #FFF;
@@ -60,12 +60,22 @@
     }
 
 }
+@media screen and (max-width: 1000px) {
+
+    .callout-container2
+    {
+        margin-top:3.7em;
+        margin-bottom:4.9em;
+    }
+
+}
+
 @media screen and (max-width: 1200px) {
 
     .callout-container2
     {
         margin-top:3.7em;
-        margin-bottom:2.7em;
+        margin-bottom:3.9em;
     }
 
 }

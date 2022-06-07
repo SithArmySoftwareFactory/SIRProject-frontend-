@@ -45,18 +45,20 @@ const Home = () => {
                 </div></div></td></tr></tbody></table>
         </Grid>
             <Grid container
-                  spacing={12}
+                  spacing={2}
                   sx={{
                       minHeight: '600px',
                       justifyContent: 'center',
-                      padding: 'auto',
+                      verticalAlign:'center',
                       margin: 'auto',
-                      width: '100%'
+                      width: '100%',
+
                   }}>
                 <table
                   style={{
+
                     justifyContent: 'center',
-                    padding: 'auto',
+                      verticalAlign:'center',
                     margin: 'auto',
                     width: '75%'}}>
                     <tbody>
@@ -64,10 +66,11 @@ const Home = () => {
                         <td>
                             <Grid container
                                   spacing={0}
+                                  alignItems="center"
                                   sx={{
                                       minHeight: '600px',
                                       justifyContent: 'center',
-                                      padding: 'auto',
+
                                       margin: 'auto'
                                   }}>
                                 <Grid item xs >
@@ -110,12 +113,14 @@ const Home = () => {
                     </tbody>
                 </table>
             </Grid>
+            <hr className="dashed" />
             <Grid container
                   spacing={2}
+                  alignItems="center"
                   sx={{
                       minHeight: '600px',
                       justifyContent: 'center',
-                      padding: 'auto',
+
                       margin: 'auto',
                       width: '100%'
                   }}>
