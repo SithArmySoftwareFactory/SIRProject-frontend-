@@ -57,15 +57,14 @@ const Home = () => {
                         <tr>
                             <td>
                                 <div style={{ maxWidth: '400px', display: "inline-block"}}>
-                                    <h2>Dashboard</h2><p>
+                                    <h2 className="iconTextTitle">Dashboard</h2><p className="iconText">
                                     SIR analytics driven by real time data.
                                 </p></div>
                             </td>
                             <td>
                                 <div style={{maxWidth: '400px', display: "inline-block"}}>
-                                    <h2>User</h2><p>
+                                    <h2 className="iconTextTitle">User</h2><p className="iconText">
                                     Centered around usability and design patterns to ensure the best user experience.
-
                                     Security is integral to operating data and protecting SIR information is paramount.
                                 </p></div>
                             </td>
