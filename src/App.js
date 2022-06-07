@@ -1,7 +1,7 @@
 import './App.css';
 import {Banner} from "./components/common/Banner";
 import SIRForm from "./components/SIRForm/SIRForm";
-import {forwardRef, useState} from "react";
+import { forwardRef, useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
@@ -25,8 +25,10 @@ const Alert = forwardRef(function Alert(props, ref) {
 function App() {
     const [isHome, setIsHome] = useState(true);
     const [open, setOpen] = useState(false);
+
     const [authorizationState, setAuthorizationState] = useState(localStorage.getItem('access_token') || undefined);
     const [apiCallCount, setApiCallCount] = useState(0);
+
     const handleClick = () => {
         setOpen(true);
     }
@@ -74,7 +76,6 @@ function App() {
                                        >
                                            <CloseIcon/>
                                        </Button>
-
                                    </>
                                }
                         >

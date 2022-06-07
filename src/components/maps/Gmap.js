@@ -22,10 +22,12 @@ function Gmap({authorizationState, ...props}) {
     //store  clicked locations in state
     const [places, setPlaces] = React.useState([{lat: 30.282692, lng: -97.77402}]);
     //const save the prev place for calculating route
+
     const [directions, setDirections] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
     //store previous place
     const prevPlace = useRef();
+
 
     const [currentPopUp, setCurrentPopUp] = useState([])
 

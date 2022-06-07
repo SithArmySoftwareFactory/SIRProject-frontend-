@@ -198,7 +198,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
 
     return (
         <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center', backgroundColor: 'darkgray'}}>
-            <Box minWidth="1038px">
+            <Box minWidth="1038px" >
                 {(sent) ?
                     <Alert severity="success" className="sentSuccessMsg">
                         Sent to [Commander]
@@ -207,7 +207,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                     null
                 }
                 <br/> <br/>
-                <h3 className="dataGridHeaderTitle">Incident Reports</h3>
+                <h3 className="dataGridHeaderTitle" style={{color: 'white'}}>Incident Reports</h3>
                 <br/><br/>
                 <SendToCommandDialog dialog={dialog} setDialog={setDialog} handleSent={handleSent}/>
                 {isSIRFormOpen &&
@@ -249,7 +249,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                         </DialogActions>
                     </Dialog>
                 }
-                <DataGrid
+                <DataGrid style={{backgroundColor: "white"}}
                     className="dataGrid"
                     //get page size from state
                     pageSize={pageSize}
