@@ -154,15 +154,7 @@
     transition-duration: 0.4s;
     color:#000000;
 }
-@media only screen and (max-width: 600px) {
 
-    .getStarted
-    {
-        margin-top:5em;
-        margin-bottom:4em;
-    }
-
-}
 @media screen and (max-width: 900px) {
 
     .getStarted
