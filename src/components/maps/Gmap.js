@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {Grid} from "@mui/material";
 import {apiGetIncident} from "../../api/APICalls";
 import './gmap.css'
+import Box from "@mui/material/Box";
 
 function Gmap({authorizationState, ...props}) {
 
@@ -178,8 +179,6 @@ background:'#000000',
                     icon={false}
                     theme="dark"
                 />
-
-                <ToastContainer/>
                 <GoogleMap
                     id="marker-example"
                     mapContainerStyle={mapContainerStyle}
@@ -195,7 +194,7 @@ background:'#000000',
                         {
                             (clusterer) => rowsFromApi.map((place, index) => {
                                 return (
-                                    <>
+                                    <Box key={place.lat+index}>
                                         <Marker
                                             key={place.lat}
                                             position={{lat: place.lat, lng: place.lng}}
@@ -214,7 +213,7 @@ background:'#000000',
                                             onDblClick={handleRenderOff}
                                             clusterer={clusterer}
                                         />
-                                    </>
+                                    </Box>
                                 );
                             })}
 

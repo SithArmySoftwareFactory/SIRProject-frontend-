@@ -1,5 +1,12 @@
 describe('user opens up a report on the Supervisor View', () => {
     before(() => {
+        cy.visit('/login');
+        cy.findByRole('textbox', {name: /username/i}).clear().type('josh');
+        cy.findByLabelText(/password/i).clear().type('1234');
+        cy.findByRole('button', {name: /login/i}).click();
+        cy.findByRole('link', {name: /supervisor/i}).should('exist');
+        cy.findByRole('link', {name: /dashboard/i}).should('exist');
+        cy.findByRole('link', {name: /map/i}).should('exist');
         cy.visit('/supervisor')
     });
     it('should be able to click on the view button', ()=> {

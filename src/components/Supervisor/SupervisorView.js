@@ -21,7 +21,6 @@ import DialogContent from "@mui/material/DialogContent";
 import SIRForm from "../SIRForm/SIRForm";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
-import Form20 from "../form_backup/Form20";
 
 function PaperComponent(props) {
     return (
@@ -251,8 +250,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     }
 
     return (
-        <Box height="auto" width="100%"  display="flex" sx={{textAlign:'center', justifyContent:'center', }}>
-
+        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center', }}>
             <Box minWidth="75%" sx={{backgroundColor:'#fff'}}>
                 {(sent) ?
                     <Alert severity="success" className="sentSuccessMsg">
@@ -274,7 +272,6 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                         fullScreen={fullWidth}
                         fullWidth={true}
                     >
-                        {/*<Form20 rowsViewed={rowViewed}/>*/}
                         <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
                             Incident Report
                             <IconButton
