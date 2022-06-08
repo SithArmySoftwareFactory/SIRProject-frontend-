@@ -311,10 +311,12 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
             }
         }
 
+
         //sent data to Dialog for patching
         handlePatchChange(formValues);
 
-    }, [formValues]);
+    }, [formValues, handleSubmit]);
+
 
     return (
         <Box>

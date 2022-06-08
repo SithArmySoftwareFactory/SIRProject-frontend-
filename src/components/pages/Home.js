@@ -56,6 +56,7 @@ const Home = () => {
                     </tbody>
                 </table>
             </Grid>
+            <br/>
             <Grid container
                   spacing={2}
                   sx={{
@@ -83,7 +84,6 @@ const Home = () => {
                                   sx={{
                                       minHeight: '600px',
                                       justifyContent: 'center',
-                                      margin: 'auto'
                                   }}>
                                 <Grid item xs xl md>
                                     <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
@@ -97,7 +97,10 @@ const Home = () => {
                                 </Grid>
                                 <Grid item xs xl md>
                                     <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
-                                        <SecurityIcon className="page-icon" style={{fontSize: '250px'}}/>
+
+
+                                        <SecurityIcon className="page-icon"
+                                                      style={{fontSize: '250px'}}/>
                                         <h2 className="iconTextTitle">Secure & Reliable</h2><p className="iconText">
                                         Centered around usability and design patterns to ensure the best user
                                         experience.
@@ -108,7 +111,8 @@ const Home = () => {
                                 </Grid>
                                 <Grid item xs xl md>
                                     <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
-                                        <PeopleAltIcon className="page-icon" style={{fontSize: '250px'}}/>
+                                        <PeopleAltIcon className="page-icon"
+                                                       style={{fontSize: '250px'}}/>
                                         <h2 className="iconTextTitle">For Soldiers, by Soldiers</h2>
                                         <p className="iconText">
                                             Software should be developed for Soldiers to ensure that they can operate
