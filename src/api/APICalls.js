@@ -51,3 +51,13 @@ export const apiDeleteIncident = async (index) => {
     return axios.delete(API_URL + "incident/" + index)
 }
 
+export const apiGetRefresh = async () => {
+    let localToken = localStorage.getItem('access_token');
+      if(localToken.length > 20) {
+        return axios.get(API_URL + "token/refresh", {
+            headers: {
+                'Authorization': `Bearer ${localToken}`
+            }
+        })
+    }
+}
