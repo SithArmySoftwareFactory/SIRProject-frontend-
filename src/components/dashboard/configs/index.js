@@ -17,7 +17,6 @@ let pointValues = []
         })
     }
          useMemo( () => {
-             pointColor(datasets.data)
          }, [datasets]);
 
     return {
