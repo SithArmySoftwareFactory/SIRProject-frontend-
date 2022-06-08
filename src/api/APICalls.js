@@ -40,3 +40,4 @@ export const apiPatchIncident = async (index, data) => {
 export const apiDeleteIncident = async (index) => {
     return axios.delete(API_URL + "incident/" + index)
 }
+
