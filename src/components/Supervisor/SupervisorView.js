@@ -62,7 +62,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
             })
             .catch((error) => console.log(error));
     };
-    useEffect(fetchIncidentAPI, [rowsFromApi]);
+    useEffect(fetchIncidentAPI, []);
     let rows = rowsFromApi;
 
 
