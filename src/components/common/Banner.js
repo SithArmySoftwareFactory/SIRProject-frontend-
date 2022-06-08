@@ -10,6 +10,7 @@ import {Grid, Menu} from "@mui/material";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import MapIcon from '@mui/icons-material/Map';
 import Paper from "@mui/material/Paper";
+import AnalyticsEventTracker from "./AnalyticsEventTracker";
 
 export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -29,13 +30,16 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                             <nav>
                                 <img src="/img.png" alt={"logo"} id="logo"/>
                                 <ul>
-                                    <li><HomeIcon className="bannerIcons"/><NavLink className="navLink" page="/"
+                                    <li onClick={() => AnalyticsEventTracker('Home', 'Clicked home button', 'clicked home')}>
+                                        <HomeIcon className="bannerIcons"/><NavLink className="navLink" page="/"
                                                                                     to="/">Home</NavLink></li>
-                                    <li><AssessmentIcon className="bannerIcons"/><NavLink className="navLink"
+                                    <li onClick={() => AnalyticsEventTracker('Submit_report', 'Clicked Submit Report Button', 'clicked Submit Report')}>
+                                        <AssessmentIcon className="bannerIcons"/><NavLink className="navLink"
                                                                                           page="/report" to="/report">Submit
                                         Report</NavLink></li>
                                     {authorizationState &&
-                                        <li><SupervisedUserCircleIcon className="bannerIcons"/><NavLink
+                                        <li onClick={() => AnalyticsEventTracker('Supervisor_View', 'Clicked Supervisor Button', 'clicked Supervisor Report')}>
+                                            <SupervisedUserCircleIcon className="bannerIcons"/><NavLink
                                             className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink>
                                         </li>}
                                     {(typeof authorizationState == 'undefined') &&
@@ -44,7 +48,8 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                                                                                         to="/login">Login</NavLink>
                                         </li>}
                                     {authorizationState &&
-                                        <li><DashboardIcon className="bannerIcons"/><NavLink className="navLink"
+                                        <li onClick={() => AnalyticsEventTracker('Dashboard', 'Clicked Dashboard Button', 'clicked Dashboard')}>
+                                            <DashboardIcon className="bannerIcons"/><NavLink className="navLink"
                                                                                              page="/dashboard"
                                                                                              to="/dashboard">Dashboard</NavLink>
                                         </li>}
@@ -113,7 +118,7 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                 }
                 {(typeof authorizationState == 'undefined') && <><FaceIcon className="bannerIcons"/><NavLink
                     className="navLink" page="/login" to="/login">Login</NavLink><br/></>}
-                {authorizationState && <> <DashboardIcon className="bannerIcons"/><NavLink className="navLink"
+                {authorizationState && <> <DashboardIcon className="bannerIcons" /><NavLink className="navLink"
                                                                                            page="/dashboard"
                                                                                            to="/dashboard">Dashboard</NavLink><br/></>}
                 {authorizationState && <> <MapIcon className="bannerIcons"/><NavLink className="navLink" page="/map"

@@ -1,7 +1,7 @@
 import './App.css';
 import {Banner} from "./components/common/Banner";
 import SIRForm from "./components/SIRForm/SIRForm";
-import { forwardRef, useState} from "react";
+import {forwardRef, useEffect, useState} from "react";
 import ViewMenu from "./components/viewMenu/ViewMenu";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
@@ -15,8 +15,11 @@ import Gmap from "./components/maps/Gmap";
 import Login from "./components/pages/Login";
 import {apiGetIncident} from "./api/APICalls";
 import Team from "./components/team/Team";
+import ReactGA from 'react-ga';
 
 
+const TRACKING_ID = "UA-230927295-1"; // OUR_TRACKING_ID
+ReactGA.initialize(TRACKING_ID)
 
 const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -28,6 +31,10 @@ function App() {
 
     const [authorizationState, setAuthorizationState] = useState(localStorage.getItem('access_token') || undefined);
     const [apiCallCount, setApiCallCount] = useState(0);
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     const handleClick = () => {
         setOpen(true);
