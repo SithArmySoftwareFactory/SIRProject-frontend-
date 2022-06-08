@@ -20,7 +20,6 @@ export default function Login(props) {
             //TODO call state to set Logged in to true
             props.userAuthorized(data);
         }).catch((e) => {
-            console.log(e)
         })
     }
 
