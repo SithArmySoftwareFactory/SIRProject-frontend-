@@ -345,8 +345,8 @@ const Dashboard = ({authorizationState}) => {
                                                                                 }}>
                                                                     <SIRSentimentChart
                                                                         color="dark"
-                                                                        title="Serious Incidents"
-                                                                        description="By-Month Trend"
+                                                                        title="Sentiment"
+                                                                        description="Based on prevention description"
                                                                         date={`Last Updated: ${new Date().toLocaleDateString()}`}
                                                                         chart={tasks}
                                                                         sirData={data}
