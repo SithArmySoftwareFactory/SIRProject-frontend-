@@ -18,7 +18,7 @@ export default function Login({userAuthorized, ...props}) {
         axios.post(API_URL + 'login',`username=${username}&password=${password}`
         ).then((data) => {
             //TODO call state to set Logged in to true
-            props.userAuthorized(data);
+            userAuthorized(data);
         }).catch((e) => {
             console.log(e)
         })
