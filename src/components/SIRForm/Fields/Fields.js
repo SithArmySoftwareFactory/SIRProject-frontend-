@@ -26,17 +26,13 @@ import {useJsApiLoader} from "@react-google-maps/api";
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
 
 
-const Fields = ({handleClick, open, defaultValues, fullWidthFunction}) => {
+const Fields = ({handleClick, open, defaultValues, handlePatchChange = function () {}}) => {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
     });
 
-
-
     let defaultValues2;
-
-
     if (defaultValues != null) {
 
         defaultValues2 = {
@@ -228,9 +224,7 @@ const Fields = ({handleClick, open, defaultValues, fullWidthFunction}) => {
             apiPostIncident(dataToBeSent);
             setFormValues(defaultValues2);
         });
-
         handleClick();
-
         apiPostIncident(dataToBeSent);
         setFormValues(defaultValues2);
 
@@ -316,7 +310,13 @@ const Fields = ({handleClick, open, defaultValues, fullWidthFunction}) => {
                     setIsDisabled(false);
             }
         }
+
+
+        //sent data to Dialog for patching
+        handlePatchChange(formValues);
+
     }, [formValues, handleSubmit]);
+
 
     return (
         <Box>

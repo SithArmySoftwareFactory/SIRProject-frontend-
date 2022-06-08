@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 // import {rows} from './rows'; test data if not getting data from Get Request
 import DraggableDialog from "./DraggableDialog";
 import SendToCommandDialog from "../SendToCommandDialog/SendToCommandDialog";
-import {apiGetIncident} from "../../api/APICalls";
+import {apiGetIncident, apiPatchIncident} from "../../api/APICalls";
 import Draggable from "react-draggable";
 import Paper from "@mui/material/Paper";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -47,10 +47,12 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     const [isSIRFormOpen,setIsSIRFormOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(false);
     const [displayInDialogOnly, setDisplayInDialogOnly] = useState('dialog');
+    const [patchingData, setPatchingData] = useState({});
 
     const fullWidthFunction = (value) => {
         setFullWidth(value);
         setDisplayInDialogOnly('dialog');
+
     }
 
     //Get Data from backend
@@ -196,6 +198,58 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
         // send patch request -> patchMe(id, key, value)
     };
 
+    const handlePatch = () => {
+        let objectData = {...patchingData}
+
+        const dataToBeSent = JSON.parse(JSON.stringify(objectData));
+        let individualsInvolvedString = '';
+        let typeOfEventString = "";
+        let departmentsInvolvedString = "";
+
+        let tempTime = new Date(dataToBeSent.time);
+        let tempTimeHour = tempTime.getHours();
+        let tempTimeMinutes = tempTime.getMinutes();
+
+        if (tempTimeHour < 10) {
+            tempTimeHour = `0${tempTimeHour}`;
+        }
+        if (tempTimeMinutes < 10) {
+            tempTimeMinutes = `0${tempTimeMinutes}`;
+        }
+
+        dataToBeSent.time = `${tempTimeHour}:${tempTimeMinutes}`;
+
+        dataToBeSent.date = dataToBeSent.date.split('T')[0];
+
+
+        dataToBeSent.harm = dataToBeSent.harm === "Yes";
+        dataToBeSent.effects = dataToBeSent.effects !== "No harm sustained";
+
+        for (const individuals in dataToBeSent.individuals) {
+            if (dataToBeSent.individuals[`${individuals}`]) {
+                individualsInvolvedString = individualsInvolvedString + "," + individuals.replace(/^\w/, (c) => c.toUpperCase());
+            }
+        }
+        dataToBeSent.individuals = individualsInvolvedString.substring(1);
+
+        for (const event of dataToBeSent.eventType) {
+            typeOfEventString = typeOfEventString + "," + event;
+        }
+        dataToBeSent.eventType = typeOfEventString.substring(1);
+
+        for (const department of dataToBeSent.department) {
+            departmentsInvolvedString = departmentsInvolvedString + "," + department;
+        }
+        dataToBeSent.department = departmentsInvolvedString.substring(1);
+
+            apiPatchIncident(rowViewed.id, dataToBeSent).then(() => fetchIncidentAPI());
+
+    }
+
+    const handlePatchChange = (data) => {
+        setPatchingData(data);
+    }
+
     return (
         <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center', }}>
             <Box minWidth="75%" sx={{backgroundColor:'#fff'}}>
@@ -235,7 +289,9 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                             </IconButton>
                         </DialogTitle>
                         <DialogContent>
-                            <SIRForm open={isSIRFormOpen} defaultValues={rowViewed} fullWidthFunction={fullWidthFunction} fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
+                            <SIRForm open={isSIRFormOpen}
+                                     handlePatchChange={handlePatchChange}
+                                     defaultValues={rowViewed} fullWidthFunction={fullWidthFunction} fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
                         </DialogContent>
                         <Divider/>
                         <DialogActions>
@@ -243,7 +299,15 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                             {(fullWidth) ? <Button autoFocus onClick={() => setFullWidth(false)} style={{color: "#5D6A18"}}>
                                 RETURN
                                 </Button> :
-                            <Button autoFocus onClick={handleClose} style={{color: "#5D6A18"}}>
+                            <Button autoFocus
+                                    onClick={
+                                () =>
+                                    {
+                                        handleClose();
+                                        handlePatch();
+                                    }
+                            }
+                                    style={{color: "#5D6A18"}}>
                                 SAVE
                             </Button> }
                         </DialogActions>
@@ -307,6 +371,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                         //to the Data grid, to help state
                         setSelectionModel(ids);
                     }}
+
                     //remove various unwanted fields
                     localeText={{
                         toolbarFilters: "",
@@ -332,12 +397,15 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                                                         {count} selected
                                                     </td>
                                                     <td className="sendToCommandBoxTableData">
-                                                        <Button variant="outlined" color="primary"
-                                                                className="sendUpToCmdButton" sx={{
+                                                        <Button variant="outlined"
+                                                                color="primary"
+                                                                className="sendUpToCmdButton"
+                                                                sx={{
                                                             color: "#5D6A18",
                                                             fontWeight: "bold",
                                                             borderColor: "#5D6A18"
-                                                        }} onClick={() => setDialog(true)}>SEND UP TO
+                                                        }}
+                                                                onClick={() => setDialog(true)}>SEND UP TO
                                                             COMMAND</Button>
                                                     </td>
                                                 </tr>

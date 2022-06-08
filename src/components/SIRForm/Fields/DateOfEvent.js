@@ -7,7 +7,9 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
 
 const DateOfEvent = ({formValues, handleInputChange}) => {
-
+  const localChange = (event) => {
+      console.log(event.target.value)
+  }
     return (
         <Grid item xs={6}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -22,6 +24,7 @@ const DateOfEvent = ({formValues, handleInputChange}) => {
                     value={formValues.date}
                     onChange={(newValue) => {
                         handleInputChange(newValue, "date");
+                        localChange(newValue)
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />

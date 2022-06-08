@@ -219,6 +219,7 @@ const Form20 = (props) => {
         if (event.target.value === 'patient') {
             setCheckedPatient(!checkedPatient);
         }
+       console.log(formik.values.date);
     }
 
     //saving state is async, so we use an async function and call it within useEffect

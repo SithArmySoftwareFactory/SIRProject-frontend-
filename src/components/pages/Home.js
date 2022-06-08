@@ -97,6 +97,8 @@ const Home = () => {
                                 </Grid>
                                 <Grid item xs xl md>
                                     <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
+
+
                                         <SecurityIcon className="page-icon"
                                                       style={{fontSize: '250px'}}/>
                                         <h2 className="iconTextTitle">Secure & Reliable</h2><p className="iconText">

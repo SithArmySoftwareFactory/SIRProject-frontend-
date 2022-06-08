@@ -10,6 +10,7 @@ import './gmap.css'
 import Box from "@mui/material/Box";
 
 function Gmap({authorizationState, ...props}) {
+
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
