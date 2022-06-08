@@ -29,7 +29,8 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                             <nav>
                                 <img src="/img.png" alt={"logo"} id="logo"/>
                                 <ul>
-                                    <li><HomeIcon className="bannerIcons"/><NavLink className="navLink" page="/"
+                                    <li><HomeIcon className="
+                                    bannerIcons"/><NavLink className="navLink" page="/"
                                                                                     to="/">Home</NavLink></li>
                                     <li><AssessmentIcon className="bannerIcons"/><NavLink className="navLink"
                                                                                           page="/report" to="/report">Submit
