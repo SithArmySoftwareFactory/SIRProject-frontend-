@@ -5,7 +5,7 @@ import "./login.css";
 import {Grid} from "@mui/material";
 import axios from "axios";
 import {API_URL} from "../../constants/Constants";
-export default function Login(props) {
+export default function Login({userAuthorized, ...props}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 

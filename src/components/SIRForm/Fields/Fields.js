@@ -315,7 +315,7 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
         //sent data to Dialog for patching
         handlePatchChange(formValues);
 
-    }, [formValues, handleSubmit]);
+    }, [formValues]);
 
 
     return (
