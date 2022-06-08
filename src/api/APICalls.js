@@ -29,8 +29,8 @@ export const apiPostIncident = async (data) => {
 export const apiLogin = async (data) => {
     return axios.post(API_URL + "login", data)
 }
-export const apiPostIncidentCommand = async (data) => {
-    return axios.post(API_URL + "send", data)
+export const apiPostIncidentCommand = async (data, token) => {
+    await axios.post(API_URL + "send", data)
 }
 
 export const apiPatchIncident =  (index, data) => {

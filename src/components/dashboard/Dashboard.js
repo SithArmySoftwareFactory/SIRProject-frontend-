@@ -30,7 +30,7 @@ const Dashboard = ({authorizationState}) => {
 
     useEffect(fetchIncidentAPI, []);
 
-    const individualDataset = () => {
+    const individualDataset = async () => {
         let individualsTrimmed = []
         let counts = {}
         data.map((incident) => {

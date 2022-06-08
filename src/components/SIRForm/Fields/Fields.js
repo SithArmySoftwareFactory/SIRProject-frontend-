@@ -220,14 +220,15 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
 
             dataToBeSent.lat = data.lat;
             dataToBeSent.lng = data.lng;
-
-            apiPostIncident(dataToBeSent);
-            setFormValues(defaultValues2);
-        });
+            return dataToBeSent
+                })
+            .then((dataToBeSent)=>{
+                apiPostIncident(dataToBeSent);
+                setFormValues(defaultValues2);
+            });
         handleClick();
         apiPostIncident(dataToBeSent);
         setFormValues(defaultValues2);
-
     }
 
     async function getTheLocation(searchAddress) {
