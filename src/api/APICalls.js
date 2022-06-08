@@ -33,8 +33,18 @@ export const apiPostIncidentCommand = async (data) => {
     return axios.post(API_URL + "send", data)
 }
 
-export const apiPatchIncident = async (index, data) => {
-    return axios.patch(API_URL + "incident/" + index, data)
+export const apiPatchIncident =  (index, data) => {
+    let token = localStorage.getItem('access_token');
+    return axios.patch(API_URL + "incident/" + 1,
+        data,
+    { headers: {
+            'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+
+        }
+        }
+
+    )
 }
 
 export const apiDeleteIncident = async (index) => {

@@ -104,6 +104,7 @@ const Dashboard = ({authorizationState}) => {
                   direction="row"
                   justifyContent="center"
                   alignItems="stretch"
+                  wrap={'wrap'}
                   sx={{
                       backgroundImage: `url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_952510084_395383.jpg")`}}>
                 <Grid item xs={12} margin={2}>
@@ -111,7 +112,7 @@ const Dashboard = ({authorizationState}) => {
                         Real-Time Metrics
                     </Typography>
                 </Grid>
-                <Grid item xs={3.75} margin={1}>
+                <Grid item xs={3.75} margin={1} minWidth={400} maxHeight={500}>
                     <SIRLineChart
                         color="dark"
                         title="Serious Incidents"
@@ -120,7 +121,7 @@ const Dashboard = ({authorizationState}) => {
                         chart={tasks}
                     />
                 </Grid>
-                <Grid item xs={3.75} margin={1}>
+                <Grid item xs={3.75} margin={1} minWidth={400} maxHeight={500}>
                     <SIRPieChart
                         color="dark"
                         title="SIR by Type"
@@ -128,7 +129,7 @@ const Dashboard = ({authorizationState}) => {
                         date={`Last Updated: ${new Date().toLocaleDateString()}`}
                         sirData={data}/>
                 </Grid>
-                <Grid item xs={3.75} margin={1}>
+                <Grid item xs={3.75} margin={1} minWidth={400} maxHeight={500}>
                     <SIRBarChart
                         color="dark"
                         title="SIR by individual"

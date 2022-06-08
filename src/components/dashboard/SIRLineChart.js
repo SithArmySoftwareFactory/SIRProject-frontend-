@@ -26,8 +26,8 @@ const SIRLineChart = ({title, description, date, chart}) => {
     Chart.register(...registerables);
 
     return (
-        <Card sx={{backgroundColor: "darkgray",  border: "2px solid black"}} elevation={24}>
-            <Box padding="1rem" style={{backgroundColor: "darkgray"}} minHeight={570} maxHeight={'100%'}>
+        <Card sx={{backgroundColor: "darkgray", border: "2px solid black"}} elevation={24}>
+            <Box padding="1rem" style={{backgroundColor: "darkgray"}} maxHeight={'100%'}>
                 {useMemo(
                     () => (
                         <Box>

@@ -115,6 +115,7 @@ const getCheckedImageFunctionSrc = (value) => {
             return 'incident_report_files/img-notchecked.png'
        }
     }
+
     return (<>
             <div>
             <Grid container spacing={0} columns={12} justifyContent="center">
