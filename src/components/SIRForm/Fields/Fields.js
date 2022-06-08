@@ -138,6 +138,8 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
         });
     }
     const handleTimeChange = (newValue, name) => {
+        console.log('newValue'+newValue);
+        console.log('name'+name);
         setFormValues({
             ...formValues,
             [name]: newValue,
