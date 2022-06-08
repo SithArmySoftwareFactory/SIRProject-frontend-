@@ -19,48 +19,62 @@ const Home = () => {
                 </div>
             </div>
             <Grid container
-                            spacing={2}
-                            sx={{
-                                minHeight: '600px',
-                                justifyContent: 'center',
-                                padding: 'auto',
-                                margin: 'auto',
-                                width: '100%'
-                            }}>
+                  spacing={2}
+                  sx={{
+                      minHeight: '600px',
+                      justifyContent: 'center',
+                      padding: 'auto',
+                      margin: 'auto',
+                      width: '100%'
+                  }}>
                 <table
                     width="80%" style={{textAlign: 'center'}}>
                     <tbody>
                     <tr>
                         <td>
-            <div>
-                <div className="callout-container2">
-                <div className="callout">
-                    <h1 className="callout-container-h1">SERIOUS &nbsp; </h1><h1 id="red">INCIDENT</h1>
-                </div>
-                <div className="desc">
-                    GLOBAL REPORTING SYSTEM
-                </div>
-                <NavLink sx={{marginTop: '100px', padding: '2em', height: '50px', backgroundColor: '#F7F7F7'}}
-                         className="getStarted" component={NavLink} to={'/report'}>Get Started</NavLink>
-                </div></div></td></tr></tbody></table>
-        </Grid>
+                            <div>
+                                <div className="callout-container2">
+                                    <div className="callout">
+                                        <h1 className="callout-container-h1">SERIOUS &nbsp; </h1><h1
+                                        id="red">INCIDENT</h1>
+                                    </div>
+                                    <div className="desc">
+                                        GLOBAL REPORTING SYSTEM
+                                    </div>
+                                    <NavLink sx={{
+                                        marginTop: '100px',
+                                        padding: '2em',
+                                        height: '50px',
+                                        backgroundColor: '#F7F7F7'
+                                    }}
+                                             className="getStarted" component={NavLink} to={'/report'}>Get
+                                        Started</NavLink>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </Grid>
+            <br/>
             <Grid container
                   spacing={2}
                   sx={{
                       minHeight: '600px',
                       justifyContent: 'center',
-                      verticalAlign:'center',
+                      verticalAlign: 'center',
                       margin: 'auto',
                       width: '100%',
 
                   }}>
                 <table
-                  style={{
+                    style={{
 
-                    justifyContent: 'center',
-                      verticalAlign:'center',
-                    margin: 'auto',
-                    width: '75%'}}>
+                        justifyContent: 'center',
+                        verticalAlign: 'center',
+                        margin: 'auto',
+                        width: '75%'
+                    }}>
                     <tbody>
                     <tr>
                         <td>
@@ -70,33 +84,34 @@ const Home = () => {
                                   sx={{
                                       minHeight: '600px',
                                       justifyContent: 'center',
-                                      margin: 'auto'
                                   }}>
                                 <Grid item xs xl md>
-                                    <div style={{minWidth: '450px', margin: 'auto', textAlign:'center'}}>
-                                            <DashboardIcon className="page-icon"
-                                                           style={{fontSize: '250px'}}/>
-                                            <h2 className="iconTextTitle">Dashboard</h2>
-                                            <p className="iconText">
+                                    <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
+                                        <DashboardIcon className="page-icon"
+                                                       style={{fontSize: '250px'}}/>
+                                        <h2 className="iconTextTitle">Dashboard</h2>
+                                        <p className="iconText">
                                             SIR analytics driven by real time data.
                                         </p>
                                     </div>
                                 </Grid>
                                 <Grid item xs xl md>
-                                    <div style={{minWidth: '450px', margin: 'auto', textAlign:'center'}}>
-                                            <SecurityIcon className="page-icon" style={{fontSize: '250px'}}/>
-                                            <h2 className="iconTextTitle">Secure & Reliable</h2><p className="iconText">
-                                            Centered around usability and design patterns to ensure the best user
-                                            experience.
-                                            Security is integral to operating data and protecting SIR information is
-                                            paramount.
-                                        </p>
+                                    <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
+                                        <SecurityIcon className="page-icon"
+                                                      style={{fontSize: '250px'}}/>
+                                        <h2 className="iconTextTitle">Secure & Reliable</h2><p className="iconText">
+                                        Centered around usability and design patterns to ensure the best user
+                                        experience.
+                                        Security is integral to operating data and protecting SIR information is
+                                        paramount.
+                                    </p>
                                     </div>
                                 </Grid>
                                 <Grid item xs xl md>
-                                    <div style={{minWidth: '450px', margin: 'auto', textAlign:'center'}}>
-                                            <PeopleAltIcon className="page-icon" style={{fontSize: '250px'}}/>
-                                            <h2 className="iconTextTitle">For Soldiers, by Soldiers</h2>
+                                    <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
+                                        <PeopleAltIcon className="page-icon"
+                                                       style={{fontSize: '250px'}}/>
+                                        <h2 className="iconTextTitle">For Soldiers, by Soldiers</h2>
                                         <p className="iconText">
                                             Software should be developed for Soldiers to ensure that they can operate
                                             with the
@@ -112,7 +127,7 @@ const Home = () => {
                     </tbody>
                 </table>
             </Grid>
-            <hr className="dashed" />
+            <hr className="dashed"/>
             <Grid container
                   spacing={2}
                   alignItems="center"
