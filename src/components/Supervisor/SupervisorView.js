@@ -6,7 +6,7 @@ import {
     GridToolbarFilterButton,
     GridToolbarQuickFilter
 } from '@mui/x-data-grid';
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Button from '@mui/material/Button';
 // import {rows} from './rows'; test data if not getting data from Get Request
 import DraggableDialog from "./DraggableDialog";
@@ -21,6 +21,11 @@ import DialogContent from "@mui/material/DialogContent";
 import SIRForm from "../SIRForm/SIRForm";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
+import {jsPDF} from "jspdf";
+import html2canvas from "html2canvas"
+import {renderToString} from "react-dom/server";
+import SIRPDFMagic from "../SIRToPDF/SIRPDFMagic";
+import html2pdf from "html2pdf.js/src";
 
 function PaperComponent(props) {
     return (
@@ -34,7 +39,10 @@ function PaperComponent(props) {
 }
 
 
-const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCount}) => {
+
+
+
+const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCount}) => {
     const [pageSize, setPageSize] = React.useState(5);
     const [dialog, setDialog] = useState(false);
     const [rowsChecked, setRowsChecked] = useState({}); //stores the rows checked
@@ -44,10 +52,23 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     const [selectionModel, setSelectionModel] = useState([]);
     const [rowViewed, setRowViewed] = useState(null);
     const [rowsFromApi, setRowsFromApi] = useState([]);
-    const [isSIRFormOpen,setIsSIRFormOpen] = useState(false);
+    const [isSIRFormOpen, setIsSIRFormOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(false);
     const [displayInDialogOnly, setDisplayInDialogOnly] = useState('dialog');
     const [patchingData, setPatchingData] = useState({});
+
+
+    const handleDownload = () => {
+        const opt = {
+            margin:       [0, -2.2, 0, -2],
+            filename:     'DA-Form_4106.pdf',
+            image:        { type: 'jpeg', quality: 0.90 },
+            html2canvas:  { scale: 4 },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        let element = document.getElementById('to-pdf');
+        const pdf = html2pdf().set(opt).from(element).save()
+    };
 
     const fullWidthFunction = (value) => {
         setFullWidth(value);
@@ -58,7 +79,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     //Get Data from backend
     const fetchIncidentAPI = () => {
         apiGetIncident(0, authorizationState)
-            .then((r) =>  {
+            .then((r) => {
                 setRowsFromApi(r.data);
             })
             .catch((error) => console.log(error));
@@ -80,6 +101,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     }
     const handleClose = () => {
         setIsSIRFormOpen(false);
+        setFullWidth(false)
     };
 
     const handleClickOpen = () => {
@@ -242,7 +264,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
         }
         dataToBeSent.department = departmentsInvolvedString.substring(1);
 
-            apiPatchIncident(rowViewed.id, dataToBeSent).then(() => fetchIncidentAPI());
+        apiPatchIncident(rowViewed.id, dataToBeSent).then(() => fetchIncidentAPI());
 
     }
 
@@ -251,8 +273,8 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     }
 
     return (
-        <Box height="auto" width="100%"  display="flex"sx={{textAlign:'center', justifyContent:'center', }}>
-            <Box minWidth="75%" sx={{backgroundColor:'#fff'}}>
+        <Box height="auto" width="100%" display="flex" sx={{textAlign: 'center', justifyContent: 'center',}}>
+            <Box minWidth="75%" sx={{backgroundColor: '#fff'}}>
                 {(sent) ?
                     <Alert severity="success" className="sentSuccessMsg">
                         Sent to [Commander]
@@ -291,167 +313,168 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                         <DialogContent>
                             <SIRForm open={isSIRFormOpen}
                                      handlePatchChange={handlePatchChange}
-                                     defaultValues={rowViewed} fullWidthFunction={fullWidthFunction} fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
+                                     defaultValues={rowViewed} fullWidthFunction={fullWidthFunction}
+                                     fullWidth={fullWidth} displayInDialogOnly={displayInDialogOnly}/>
                         </DialogContent>
                         <Divider/>
                         <DialogActions>
                             <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
-                            {(fullWidth) ? <Button autoFocus onClick={() => setFullWidth(false)} style={{color: "#5D6A18"}}>
-                                RETURN
+                            {(fullWidth) ?
+                                <Button autoFocus onClick={() => {handleDownload(); setFullWidth(false)}} style={{color: "#5D6A18"}}>
+                                    DOWNLOAD PDF
                                 </Button> :
-                            <Button autoFocus
-                                    onClick={
-                                () =>
-                                    {
-                                        handleClose();
-                                        handlePatch();
-                                    }
-                            }
-                                    style={{color: "#5D6A18"}}>
-                                SAVE
-                            </Button> }
+                                <Button autoFocus
+                                        onClick={
+                                            () => {
+                                                handleClose();
+                                                handlePatch();
+                                            }
+                                        }
+                                        style={{color: "#5D6A18"}}>
+                                    SAVE
+                                </Button>}
                         </DialogActions>
                     </Dialog>
                 }
                 <DataGrid style={{backgroundColor: "white"}}
-                    className="dataGrid"
+                          className="dataGrid"
                     //get page size from state
-                    pageSize={pageSize}
+                          pageSize={pageSize}
                     //function to change page size according to rowsPerPage
-                    onPageSizeChange={(newPage) => setPageSize(newPage)}
-                    pagination
+                          onPageSizeChange={(newPage) => setPageSize(newPage)}
+                          pagination
                     //options for dropdown that selects how many pages to display
-                    rowsPerPageOptions={[5, 10, 15]}
+                          rowsPerPageOptions={[5, 10, 15]}
 
                     //rows should be fetched from api
-                    rows={rows}
+                          rows={rows}
                     //columns prop defines the data structure of the rows
-                    columns={columns}
-                    selectionModel={selectionModel}
+                          columns={columns}
+                          selectionModel={selectionModel}
                     //additional pageSize handling
-                    rowsPerPage={pageSize}
+                          rowsPerPage={pageSize}
                     //For cell editing, if implemented
-                    onCellEditStop={processRowUpdate}
+                          onCellEditStop={processRowUpdate}
                     //various settings to manage display and interaction
-                    checkboxSelection
-                    autoHeight
-                    disableColumnSelector
-                    disableDensitySelector
-                    disableSelectionOnClick
-                    onRowClick={(event) => {
-                        // fetchTextAPI(event)
-                        //here we can handle a specific event for a row being clicked
-                        setRowViewed(event.row)
-                    }}
-                    onSelectionModelChange={(ids) => {
-                        //initial count of rows
-                        let rowCount = 0;
+                          checkboxSelection
+                          autoHeight
+                          disableColumnSelector
+                          disableDensitySelector
+                          disableSelectionOnClick
+                          onRowClick={(event) => {
+                              // fetchTextAPI(event)
+                              //here we can handle a specific event for a row being clicked
+                              setRowViewed(event.row)
+                          }}
+                          onSelectionModelChange={(ids) => {
+                              //initial count of rows
+                              let rowCount = 0;
 
-                        const selectedIDs = new Set(ids);
-                        const selectedRowData = rows.filter((row) =>
-                            selectedIDs.has(row.id),
-                        );
-                        //keep track of ever row checked, store in state for form submit
-                        setRowsChecked(selectedRowData);
-                        //count how many rows are checked, displayed above data grid
-                        for (let selectedRowDataKey in selectedRowData) {
-                            rowCount++
-                        }
-                        //set the state of the rows counted
-                        setCount(rowCount);
-                        //if a row is selected, the row count wil increase, and we can display
-                        //the element that contains the row count text,  managed by state
-                        if (rowCount >= 1) {
-                            setShowCommand(true);
+                              const selectedIDs = new Set(ids);
+                              const selectedRowData = rows.filter((row) =>
+                                  selectedIDs.has(row.id),
+                              );
+                              //keep track of ever row checked, store in state for form submit
+                              setRowsChecked(selectedRowData);
+                              //count how many rows are checked, displayed above data grid
+                              for (let selectedRowDataKey in selectedRowData) {
+                                  rowCount++
+                              }
+                              //set the state of the rows counted
+                              setCount(rowCount);
+                              //if a row is selected, the row count wil increase, and we can display
+                              //the element that contains the row count text,  managed by state
+                              if (rowCount >= 1) {
+                                  setShowCommand(true);
 
-                        } else {
-                            setShowCommand(false);
-                        }
-                        //pass in the information into the model selection, this is given back
-                        //to the Data grid, to help state
-                        setSelectionModel(ids);
-                    }}
+                              } else {
+                                  setShowCommand(false);
+                              }
+                              //pass in the information into the model selection, this is given back
+                              //to the Data grid, to help state
+                              setSelectionModel(ids);
+                          }}
 
                     //remove various unwanted fields
-                    localeText={{
-                        toolbarFilters: "",
-                        footerRowSelected: () => {
-                            return ("");
-                        }
-                    }}
+                          localeText={{
+                              toolbarFilters: "",
+                              footerRowSelected: () => {
+                                  return ("");
+                              }
+                          }}
 
                     //render a custom toolbar
-                    components={{
-                        Toolbar: () => {
-                            //if showCommand is set to true, a row has been selected.
-                            //show sent to command toolbar,
-                            //otherwise show the search and filter toolbar
-                            return (
-                                <>
-                                    {(showCommand) ?
-                                        <Box className="sendToCommandBox">
-                                            <table width="100%">
-                                                <tbody>
-                                                <tr>
-                                                    <td className="selectedCount">
-                                                        {count} selected
-                                                    </td>
-                                                    <td className="sendToCommandBoxTableData">
-                                                        <Button variant="outlined"
-                                                                color="primary"
-                                                                className="sendUpToCmdButton"
-                                                                sx={{
-                                                            color: "#5D6A18",
-                                                            fontWeight: "bold",
-                                                            borderColor: "#5D6A18"
-                                                        }}
-                                                                onClick={() => setDialog(true)}>SEND UP TO
-                                                            COMMAND</Button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </Box>
-                                        :
-                                        <GridToolbarContainer sx={{justifyContent: 'flex', width: '100%'}}>
-                                            <table className="tableDataGrid">
-                                                <tbody>
-                                                <tr>
-                                                    <td><h3 className="dataGridReports">Reports</h3></td>
-                                                    <td className="tableDataGridTD"><GridToolbarFilterButton
-                                                        sx={{color: 'rgba(0, 0, 0, 0.54)'}}/>
-                                                        <GridToolbarQuickFilter
-                                                            sx={{color: 'rgba(0, 0, 0, 0.54)'}}/></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </GridToolbarContainer>
-                                    }
-                                </>)
-                        }
-                    }}
+                          components={{
+                              Toolbar: () => {
+                                  //if showCommand is set to true, a row has been selected.
+                                  //show sent to command toolbar,
+                                  //otherwise show the search and filter toolbar
+                                  return (
+                                      <>
+                                          {(showCommand) ?
+                                              <Box className="sendToCommandBox">
+                                                  <table width="100%">
+                                                      <tbody>
+                                                      <tr>
+                                                          <td className="selectedCount">
+                                                              {count} selected
+                                                          </td>
+                                                          <td className="sendToCommandBoxTableData">
+                                                              <Button variant="outlined"
+                                                                      color="primary"
+                                                                      className="sendUpToCmdButton"
+                                                                      sx={{
+                                                                          color: "#5D6A18",
+                                                                          fontWeight: "bold",
+                                                                          borderColor: "#5D6A18"
+                                                                      }}
+                                                                      onClick={() => setDialog(true)}>SEND UP TO
+                                                                  COMMAND</Button>
+                                                          </td>
+                                                      </tr>
+                                                      </tbody>
+                                                  </table>
+                                              </Box>
+                                              :
+                                              <GridToolbarContainer sx={{justifyContent: 'flex', width: '100%'}}>
+                                                  <table className="tableDataGrid">
+                                                      <tbody>
+                                                      <tr>
+                                                          <td><h3 className="dataGridReports">Reports</h3></td>
+                                                          <td className="tableDataGridTD"><GridToolbarFilterButton
+                                                              sx={{color: 'rgba(0, 0, 0, 0.54)'}}/>
+                                                              <GridToolbarQuickFilter
+                                                                  sx={{color: 'rgba(0, 0, 0, 0.54)'}}/></td>
+                                                      </tr>
+                                                      </tbody>
+                                                  </table>
+                                              </GridToolbarContainer>
+                                          }
+                                      </>)
+                              }
+                          }}
                     //Filter for Data grid
-                    componentsProps={{
-                        toolbar: {
-                            showQuickFilter: true,
-                            quickFilterProps: {debounceMs: 500},
-                        },
-                    }}
+                          componentsProps={{
+                              toolbar: {
+                                  showQuickFilter: true,
+                                  quickFilterProps: {debounceMs: 500},
+                              },
+                          }}
                     //This handles editing just a cell value, this has not been implemented
-                    onCellEditCommit={(params) => setTimeout(handleRowEditCommit(params), 1000)}
+                          onCellEditCommit={(params) => setTimeout(handleRowEditCommit(params), 1000)}
                     //various styling, width set to 100% and display handled by App.js Grid component
-                    sx={{
+                          sx={{
 
-                        justifyContent: 'center',
-                        width: '100%',
+                              justifyContent: 'center',
+                              width: '100%',
 
-                        '.css-1jbbcbn-MuiDataGrid-columnHeaderTitle': {
-                            fontFamily: "Public Sans",
-                        },
-                        '&.MuiDataGrid-root': {
-                            border: 'none',
-                        },
-                    }}
+                              '.css-1jbbcbn-MuiDataGrid-columnHeaderTitle': {
+                                  fontFamily: "Public Sans",
+                              },
+                              '&.MuiDataGrid-root': {
+                                  border: 'none',
+                              },
+                          }}
                 /></Box>
         </Box>)
 }
