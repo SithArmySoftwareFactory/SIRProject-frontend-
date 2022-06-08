@@ -8,7 +8,6 @@
     margin-top: 2em;
     margin-bottom: -2em;
     width: 100%;
-    min-height: 600px;
     background-color: rgb(192, 192, 192, 0.1);
 }
 
@@ -24,7 +23,6 @@
 .callout {
     text-align: center;
     font-family: 'Raleway', sans-serif;
-    width: 500px;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
@@ -106,14 +104,6 @@
     padding: 16px 32px;
 }
 
-.callout {
-    text-align: center;
-    font-family: 'Raleway', sans-serif;
-    width: 100%;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 .callout-container-h1 {
     font-family: 'Lato', sans-serif;
