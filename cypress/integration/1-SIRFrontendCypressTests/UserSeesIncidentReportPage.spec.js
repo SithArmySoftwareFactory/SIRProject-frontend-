@@ -7,7 +7,6 @@ describe('user navigating to the homepage', () => {
         cy.findByRole('button', {name: /login/i}).click();
         cy.findByRole('link', {name: /supervisor/i}).should('exist');
         cy.findByRole('link', {name: /dashboard/i}).should('exist');
-        cy.findByRole('link', {name: /map/i}).should('exist');
         cy.visit('/supervisor')
     });
     it('should see a banner and a menu button', () => {

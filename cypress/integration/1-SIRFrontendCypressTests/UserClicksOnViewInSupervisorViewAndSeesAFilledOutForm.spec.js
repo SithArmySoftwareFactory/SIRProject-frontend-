@@ -6,7 +6,6 @@ describe('user opens up a report on the Supervisor View', () => {
         cy.findByRole('button', {name: /login/i}).click();
         cy.findByRole('link', {name: /supervisor/i}).should('exist');
         cy.findByRole('link', {name: /dashboard/i}).should('exist');
-        cy.findByRole('link', {name: /map/i}).should('exist');
         cy.visit('/supervisor')
     });
     it('should be able to click on the view button', ()=> {
@@ -42,7 +41,7 @@ describe('user opens up a report on the Supervisor View', () => {
         cy.findByRole('checkbox', ({name: /patient/i})).should('exist');
         cy.findAllByText(/family member/i).last().should('exist');
         cy.findByRole('checkbox', ({ name: /family member/i})).should('exist');
-        cy.findByText(/adult/i).should('exist');
+        cy.findAllByText(/adult/i).last().should('exist');
         cy.findByRole('checkbox', ({name: /adult/i})).should('exist');
         cy.findByRole('checkbox', ({name: /adult/i})).should('be.disabled');
 
