@@ -1,17 +1,24 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SIRLineChart from "./SIRLineChart";
-import { Grid, Typography} from "@mui/material";
+import {Grid, Paper, Tab, Tabs, Typography} from "@mui/material";
 import {apiGetIncident} from "../../api/APICalls";
 import SIRPieChart from "./SIRPieChart";
 import SIRBarChart from "./SIRBarChart";
+import Gmap from "../maps/Gmap";
+import SIRSentimentChart from "./SIRSentimentChart";
 
 const Dashboard = ({authorizationState}) => {
     const [data, setData] = useState([]);
     const [monthlyCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     let months = [...monthlyCount]
     let individuals = []
+    const [value, setValue] = React.useState(2);
+    const [display, setDisplay] = useState('showAll');
+    const [title, setTitle] = useState('Real-Time Metrics');
 
-
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     const fetchIncidentAPI = () => {
         apiGetIncident(0, authorizationState)
@@ -100,42 +107,308 @@ const Dashboard = ({authorizationState}) => {
 
     return (
         <>
+            <Grid container
+                  spacing={2}
+                  sx={{
+                      justifyContent: 'center',
+                      verticalAlign: 'center',
+                      margin: 'auto',
+                      width: '100%',
+
+                  }}>
+                <table
+                    style={{
+                        justifyContent: 'center',
+                        verticalAlign: 'center',
+                        margin: 'auto',
+                        width: '85%'
+                    }}>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <Grid container
+                                  spacing={5}
+                                  alignItems="center"
+                                  sx={{
+                                      justifyContent: 'center',
+                                  }}>
+                                <Grid item xs xl md>
+                                    <Tabs value={value} onChange={handleChange} aria-label="chatTabs">
+                                        <Tab label="Map" onClick={() => {
+                                            setDisplay('maps');
+                                            setTitle('SIR Maps');
+                                        }}/>
+                                        <Tab label="Metrics" onClick={
+                                            () => {
+                                                setDisplay('metrics');
+                                                setTitle('Real-Time Metrics');
+                                            }
+                                        }/>
+                                        <Tab label="Show All" onClick={
+                                            () => {
+                                                setDisplay('showAll')
+                                                setTitle('Real-Time Metrics');
+                                            }}/>
+                                    </Tabs>
+                                </Grid>
+                            </Grid>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </Grid>
+            <Grid container
+                  spacing={5}
+                  sx={{
+                      justifyContent: 'center',
+                      verticalAlign: 'center',
+                      margin: 'auto',
+                      width: '100%',
+
+                  }}>
+                <table
+                    style={{
+                        justifyContent: 'center',
+                        verticalAlign: 'center',
+                        margin: 'auto',
+                        width: '85%'
+                    }}>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <Grid item xs xl md>
+                                <Typography color={'#000'} variant={'h2'} textAlign={"center"} style={{marginBottom:'1.2em'}}>
+                                    {title}
+                                </Typography>
+                            </Grid>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Grid container
+                                  spacing={5}
+                                  alignItems="center"
+                                  sx={{
+                                      minHeight: '600px',
+                                      justifyContent: 'center',
+                                  }}>
+                                {
+                                    (display === 'maps')
+                                        ?
+                                        <Grid item xs xl md>
+                                            <Paper elevation={24}>
+                                                <div style={{margin: 'auto', padding: '4em'}}>
+                                                    <Gmap authorizationState={authorizationState}/>
+                                                </div>
+                                            </Paper>
+                                        </Grid>
+                                        :
+                                        null
+                                }
+                                {
+                                    (display === 'metrics')
+                                        ?
+                                        <>
+                                        <Grid container
+                                              spacing={5}
+                                              alignItems="center"
+                                              direction={'row'}
+
+                                              sx={{
+                                                  margin:'auto',
+                                                  justifyContent: 'center',
+                                                  marginBottom:'15em'
+                                              }}>
+                                            <Grid item xs xl md style={{maxHeight:'500px', marginBottom:'5em'}}>
+                                                <table width={"100%"} >
+                                                    <tbody>
+                                                    <tr>
+                                                    <td style={{maxWidth:'600px',   padding: '4em'}}>
+                                                        <Paper elevation={24} style={{
+                                                            padding: '4em',
+                                                            minHeight: '500px',
+                                                        }}>
+                                                            <SIRPieChart
+                                                                color="dark"
+                                                                title="SIR by Type"
+                                                                description="Occurrences by incident type"
+                                                                date={`Last Updated: ${new Date().toLocaleDateString()}`}
+                                                                sirData={data}/>
+                                                    </Paper>
+                                                    </td>
+                                                        <td style={{maxWidth:'600px',   padding: '4em'}}>
+                                                        <Paper elevation={24} style={{
+                                                            padding: '4em',
+                                                            minHeight: '500px',
+                                                        }}>
+                                                            <SIRLineChart
+                                                                color="dark"
+                                                                title="Serious Incidents"
+                                                                description="By-Month Trend"
+                                                                date={`Last Updated: ${new Date().toLocaleDateString()}`}
+                                                                chart={tasks}
+                                                            />
+                                                    </Paper></td>
+                                                        <td style={{maxWidth:'600px',   padding: '4em'}}>
+                                                        <Paper elevation={24} style={{
+                                                        padding: '4em',
+                                                        minHeight: '500px',
+                                                    }}>
+                                                            <SIRSentimentChart
+                                                                color="dark"
+                                                                title="Sentiment"
+                                                                description="Based on prevention description"
+                                                                date={`Last Updated: ${new Date().toLocaleDateString()}`}
+                                                                chart={tasks}
+                                                                sirData={data}
+                                                            />
+                                                    </Paper></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </Grid>
+                                        </Grid>
+                                            <Grid item xs xl md >
+                                                <table width={"100%"}  >
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style={{maxWidth:'600px',   padding: '4em'}}>
+                                                            <div style={{width:'100%'}}>
+                                                            <Paper elevation={24} style={{
+                                                                padding: '4em',
+                                                                minHeight: '500px',
+                                                                display:'flex-end'
+                                                            }}>
+                                                                <SIRBarChart
+                                                                    color="dark"
+                                                                    title="SIR by individual"
+                                                                    description="Occurrences by individuals involved"
+                                                                    date={`Last Updated: ${new Date().toLocaleDateString()}`}
+                                                                    sirData={individuals}/>
+                                                            </Paper>
+</div>
+                                                        </td></tr></tbody></table>
+                                            </Grid>
+                                        </>
+                                        :
+                                        null
+                                }
+                                {
+                                    (display === 'showAll')
+                                        ?
+                                        <>
+                                        <Grid container
+                                              spacing={5}
+                                              direction="row"
+                                              justifyContent="center"
+                                              alignItems="flex-start"
+                                              sx={{
+                                                  margin:'auto',
+                                                  justifyContent: 'flex-start',
+
+                                              }}>
+                                                        <Grid item xs={4}>
+                                                            <Paper elevation={24}>
+                                                                <div style={{
+                                                                    padding: '4em',
+                                                                    minHeight: '500px',
+                                                                    marginBottom:'3em'
+                                                                }}>
+                                                                    <SIRLineChart
+                                                                        color="dark"
+                                                                        title="Serious Incidents"
+                                                                        description="By-Month Trend"
+                                                                        date={`Last Updated: ${new Date().toLocaleDateString()}`}
+                                                                        chart={tasks}
+                                                                    />
+                                                                </div>
+                                                            </Paper>
+                                                                    <Paper elevation={24}>
+                                                                        <div style={{
+                                                                            padding: '4em',
+                                                                            minHeight: '500px',
+                                                                            marginBottom:'3em'
+                                                                        }}>
+                                                                    <SIRPieChart
+                                                                        color="dark"
+                                                                        title="SIR by Type"
+                                                                        description="Occurrences by incident type"
+                                                                        date={`Last Updated: ${new Date().toLocaleDateString()}`}
+                                                                        sirData={data}/>
+                                                                        </div>
+                                                                    </Paper>
+                                                                            <Paper elevation={24}>
+                                                                                <div style={{
+                                                                                    padding: '4em',
+                                                                                    minHeight: '500px',
+                                                                                    marginBottom:'3em'
+                                                                                }}>
+                                                                    <SIRSentimentChart
+                                                                        color="dark"
+                                                                        title="Sentiment"
+                                                                        description="Based on prevention description"
+                                                                        date={`Last Updated: ${new Date().toLocaleDateString()}`}
+                                                                        chart={tasks}
+                                                                        sirData={data}
+                                                                    />
+                                                                </div>
+                                                            </Paper>
+                                                        </Grid>
+                                                        <Grid item xs={8}>
+                                                            <Paper elevation={24}>
+                                                                <div style={{
+                                                                    padding: '4em',
+                                                                    minHeight: '500px',
+                                                                    margin:'auto',
+                                                                    marginBottom:'3em'
+                                                                }}>
+                                                                    <SIRBarChart
+                                                                        color="dark"
+                                                                        title="SIR by individual"
+                                                                        description="Occurrences by individuals involved"
+                                                                        date={`Last Updated: ${new Date().toLocaleDateString()}`}
+                                                                        sirData={individuals}/></div>
+                                                            </Paper>
+                                                            <Paper elevation={24}>
+                                                                <div style={{
+                                                                    padding: '4em',
+                                                                    minHeight: '500px',
+
+                                                                    margin:'auto'
+                                                                }}>
+                                                                    <Gmap authorizationState={authorizationState}/>
+                                                                </div>
+                                                            </Paper>
+                                                        </Grid>
+                                        </Grid>
+                                        </>
+                                        :
+                                        null
+
+
+                                }
+                            </Grid>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </Grid>
             <Grid container columnSpacing={10}
                   direction="row"
                   justifyContent="center"
                   alignItems="stretch"
-                  wrap={'wrap'}
-                  sx={{
-                      backgroundImage: `url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_952510084_395383.jpg")`}}>
+            >
                 <Grid item xs={12} margin={2}>
-                    <Typography color={'white'} variant={'h2'} textAlign={"center"}>
-                        Real-Time Metrics
-                    </Typography>
+
                 </Grid>
-                <Grid item xs={3.75} margin={1} minWidth={400} maxHeight={500}>
-                    <SIRLineChart
-                        color="dark"
-                        title="Serious Incidents"
-                        description="By-Month Trend"
-                        date={`Last Updated: ${new Date().toLocaleDateString()}`}
-                        chart={tasks}
-                    />
+                <Grid item xs={3.75} margin={1}>
+
                 </Grid>
-                <Grid item xs={3.75} margin={1} minWidth={400} maxHeight={500}>
-                    <SIRPieChart
-                        color="dark"
-                        title="SIR by Type"
-                        description="Occurrences by incident type"
-                        date={`Last Updated: ${new Date().toLocaleDateString()}`}
-                        sirData={data}/>
+                <Grid item xs={3.75} margin={1}>
+
                 </Grid>
-                <Grid item xs={3.75} margin={1} minWidth={400} maxHeight={500}>
-                    <SIRBarChart
-                        color="dark"
-                        title="SIR by individual"
-                        description="Occurrences by individuals involved"
-                        date={`Last Updated: ${new Date().toLocaleDateString()}`}
-                        sirData={individuals}/>
+                <Grid item xs={3.75} margin={1}>
+
                 </Grid>
             </Grid>
         </>

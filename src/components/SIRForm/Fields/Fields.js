@@ -138,8 +138,6 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
         });
     }
     const handleTimeChange = (newValue, name) => {
-        console.log('newValue'+newValue);
-        console.log('name'+name);
         setFormValues({
             ...formValues,
             [name]: newValue,
@@ -317,7 +315,7 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
         //sent data to Dialog for patching
         handlePatchChange(formValues);
 
-    }, [formValues, handleSubmit]);
+    }, [formValues]);
 
 
     return (

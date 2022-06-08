@@ -13,9 +13,11 @@ import Footer from "./components/common/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
 import Gmap from "./components/maps/Gmap";
 import Login from "./components/pages/Login";
-import {apiGetIncident} from "./api/APICalls";
+import {apiGetIncident, apiGetRefresh} from "./api/APICalls";
 import Team from "./components/team/Team";
 import ReactGA from 'react-ga';
+import axios from "axios";
+import {API_URL} from "./constants/Constants";
 
 
 
@@ -31,6 +33,7 @@ function App() {
     const [open, setOpen] = useState(false);
 
     const [authorizationState, setAuthorizationState] = useState(localStorage.getItem('access_token') || undefined);
+    const [authorizationStateRefresh, setAuthorizationStateRefresh] = useState(localStorage.getItem('refresh_token') || undefined);
     const [apiCallCount, setApiCallCount] = useState(0);
 
     useEffect(() => {
@@ -46,16 +49,25 @@ function App() {
         if(value){
             //TODO value logic, does it have auth and refresh token? -> yes -> authorize
             setAuthorizationState(value.data.access_token);
+            setAuthorizationStateRefresh(value.data.access_token)
 
             /*TODO add local storage - then in API call check if the access_token is in local storage
                if it is in local storage, use it as the token. */
             localStorage.setItem('access_token', value.data.access_token);
+
+            setInterval(() => {
+                apiGetRefresh().then((tokenRefresh) => {
+                    localStorage.setItem('access_token', tokenRefresh.data.access_token);
+                })
+            }, 1000 * 60 * 50);
+
+
+
+
         } else {
             setAuthorizationState(value);
             localStorage.setItem('access_token', value);
         }
-
-
 
     }
 
@@ -111,7 +123,7 @@ function App() {
                     />} />}
                     {authorizationState && <Route path="/dashboard" element={<Dashboard authorizationState={authorizationState}  setApiCallCountFunction={setApiCallCountFunction}/>} />}
                     {(typeof authorizationState == 'undefined') && <Route path="/login" element={<Login userAuthorized={userAuthorized} />} /> }
-                    {authorizationState && <Route path="/map" element={<Gmap authorizationState={authorizationState} />} />}
+
                     <Route path="/team" element={<Team/>} />
                     <Route path="*" element={<Home />} />
                 </Routes>
