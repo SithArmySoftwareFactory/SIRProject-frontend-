@@ -52,6 +52,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     const fullWidthFunction = (value) => {
         setFullWidth(value);
         setDisplayInDialogOnly('dialog');
+
     }
 
     //Get Data from backend
