@@ -86,6 +86,7 @@ const Home = () => {
                                       justifyContent: 'center',
                                       gridAutoRows: '1fr',
                                   }}>
+
                                 <Grid item xs xl md>
                                     <div className={'iconDivs'}>
                                         <DashboardIcon className="page-icon"
