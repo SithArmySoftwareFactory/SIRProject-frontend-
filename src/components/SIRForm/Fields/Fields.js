@@ -26,7 +26,7 @@ import {useJsApiLoader} from "@react-google-maps/api";
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
 
 
-const Fields = ({handleClick, open, defaultValues, handlePatchChange}) => {
+const Fields = ({handleClick, open, defaultValues, handlePatchChange = function () {}}) => {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",

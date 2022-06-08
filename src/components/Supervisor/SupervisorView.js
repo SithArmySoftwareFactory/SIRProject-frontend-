@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 // import {rows} from './rows'; test data if not getting data from Get Request
 import DraggableDialog from "./DraggableDialog";
 import SendToCommandDialog from "../SendToCommandDialog/SendToCommandDialog";
-import {apiGetIncident} from "../../api/APICalls";
+import {apiGetIncident, apiPatchIncident} from "../../api/APICalls";
 import Draggable from "react-draggable";
 import Paper from "@mui/material/Paper";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -21,6 +21,7 @@ import DialogContent from "@mui/material/DialogContent";
 import SIRForm from "../SIRForm/SIRForm";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
+import Form20 from "../form_backup/Form20";
 
 function PaperComponent(props) {
     return (
@@ -47,6 +48,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     const [isSIRFormOpen,setIsSIRFormOpen] = useState(false);
     const [fullWidth, setFullWidth] = useState(false);
     const [displayInDialogOnly, setDisplayInDialogOnly] = useState('dialog');
+    const [patchingData, setPatchingData] = useState({});
 
     const fullWidthFunction = (value) => {
         setFullWidth(value);
@@ -197,13 +199,86 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     };
 
     const handlePatch = () => {
+        let objectData = {...patchingData}
+
+        let individualsArray = [];
+        for (const property in objectData.individuals) {
+            individualsArray.push(objectData.individuals[property])
+        }
+        if (objectData.harm === "No") {
+            objectData.harm = false;
+        } else {objectData.harm = true;}
+
+        if (!objectData.effects === "Harm sustained") {
+            objectData.effects = false;
+        } else {objectData.effects = true;}
+
+        objectData.individuals = individualsArray.toString();
+        objectData.department = objectData.department.toString();
+        objectData.eventType = objectData.eventType.toString();
+
+        objectData.date= "9-01-05"
+        objectData.time = "1200";
+
+        console.log(objectData)
+     let obj =  {
+            "date": objectData.time,
+            "time":"06:30",
+            "location":"9-01-05",
+            "incidentType":"Actual Event/Incident",
+            "harm":true,
+            "individuals":"true,true,true,true,false,false,false,false",
+            "eventType":"Medical,Property,Adverse Drug Reaction",
+            "effects":true,"patientSSN":"512-409-4941",
+            "patientPhone":"555-432-2000",
+            "patientAddress":"123 Street",
+            "patientName":"Jane",
+            "witness1Name":"Alice",
+            "witness1Phone":"123-456-7890",
+            "witness2Name":"Bob",
+            "witness2Phone":"111-222-3333",
+            "witness3Name":"Witness3IsMe",
+            "witness3Phone":"324-234-5626",
+            "department":"Ambulatory Care,Dental",
+            "description":"SM should have been sedated",
+            "prevention":"Should have read the instruction manual."
+        }
+       let finalObject = {
+            id: rowViewed.id,
+           date: "00",
+           time: "9-01-05",
+            location: objectData.location,
+            incidentType: objectData.incidentType,
+            harm: objectData.harm,
+            individuals: objectData.individuals,
+            eventType: objectData.eventType,
+            effects: objectData.effects,
+            patientSSN: objectData.patientSSN,
+            patientPhone: objectData.patientPhone,
+            patientAddress: objectData.patientAddress,
+            patientName: objectData.patientName,
+            witness1Name: objectData.witness1Name,
+            witness1Phone: objectData.witness1Phone,
+            witness2Name: objectData.witness2Name,
+            witness2Phone: objectData.witness2Phone,
+            witness3Name: objectData.witness3Name,
+            witness3Phone: objectData.witness3Phone,
+            department: objectData.department,
+            description: objectData.description,
+            prevention:objectData.prevention,
+        }
+            console.log(finalObject)
+            apiPatchIncident(rowViewed.id, JSON.stringify(finalObject));
 
     }
-    const handlePatchChange = (event) => {
-        console.log(event);
+
+    const handlePatchChange = (data) => {
+        setPatchingData(data);
     }
+
     return (
         <Box height="auto" width="100%"  display="flex" sx={{textAlign:'center', justifyContent:'center', }}>
+
             <Box minWidth="75%" sx={{backgroundColor:'#fff'}}>
                 {(sent) ?
                     <Alert severity="success" className="sentSuccessMsg">
@@ -225,6 +300,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                         fullScreen={fullWidth}
                         fullWidth={true}
                     >
+                        {/*<Form20 rowsViewed={rowViewed}/>*/}
                         <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
                             Incident Report
                             <IconButton
@@ -356,7 +432,8 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
                                                             color: "#5D6A18",
                                                             fontWeight: "bold",
                                                             borderColor: "#5D6A18"
-                                                        }} onClick={() => setDialog(true)}>SEND UP TO
+                                                        }}
+                                                                onClick={() => setDialog(true)}>SEND UP TO
                                                             COMMAND</Button>
                                                     </td>
                                                 </tr>
