@@ -84,9 +84,11 @@ const Home = () => {
                                   sx={{
                                       minHeight: '600px',
                                       justifyContent: 'center',
+                                      gridAutoRows: '1fr',
                                   }}>
+
                                 <Grid item xs xl md>
-                                    <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
+                                    <div className={'iconDivs'}>
                                         <DashboardIcon className="page-icon"
                                                        style={{fontSize: '250px'}}/>
                                         <h2 className="iconTextTitle">Dashboard</h2>
@@ -96,9 +98,7 @@ const Home = () => {
                                     </div>
                                 </Grid>
                                 <Grid item xs xl md>
-                                    <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
-
-
+                                    <div className={'iconDivs'}>
                                         <SecurityIcon className="page-icon"
                                                       style={{fontSize: '250px'}}/>
                                         <h2 className="iconTextTitle">Secure & Reliable</h2><p className="iconText">
@@ -110,7 +110,7 @@ const Home = () => {
                                     </div>
                                 </Grid>
                                 <Grid item xs xl md>
-                                    <div style={{minWidth: '450px', margin: 'auto', textAlign: 'center'}}>
+                                    <div className={'iconDivs'}>
                                         <PeopleAltIcon className="page-icon"
                                                        style={{fontSize: '250px'}}/>
                                         <h2 className="iconTextTitle">For Soldiers, by Soldiers</h2>
