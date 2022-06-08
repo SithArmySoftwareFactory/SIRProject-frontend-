@@ -63,7 +63,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
             })
             .catch((error) => console.log(error));
     };
-    useEffect(fetchIncidentAPI, []);
+    useEffect(fetchIncidentAPI, [rowsFromApi]);
     let rows = rowsFromApi;
 
 
@@ -201,74 +201,48 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
     const handlePatch = () => {
         let objectData = {...patchingData}
 
-        let individualsArray = [];
-        for (const property in objectData.individuals) {
-            individualsArray.push(objectData.individuals[property])
+        const dataToBeSent = JSON.parse(JSON.stringify(objectData));
+        let individualsInvolvedString = '';
+        let typeOfEventString = "";
+        let departmentsInvolvedString = "";
+
+        let tempTime = new Date(dataToBeSent.time);
+        let tempTimeHour = tempTime.getHours();
+        let tempTimeMinutes = tempTime.getMinutes();
+
+        if (tempTimeHour < 10) {
+            tempTimeHour = `0${tempTimeHour}`;
         }
-        if (objectData.harm === "No") {
-            objectData.harm = false;
-        } else {objectData.harm = true;}
-
-        if (!objectData.effects === "Harm sustained") {
-            objectData.effects = false;
-        } else {objectData.effects = true;}
-
-        objectData.individuals = individualsArray.toString();
-        objectData.department = objectData.department.toString();
-        objectData.eventType = objectData.eventType.toString();
-
-        objectData.date= "9-01-05"
-        objectData.time = "1200";
-
-        console.log(objectData)
-     let obj =  {
-            "date": objectData.time,
-            "time":"06:30",
-            "location":"9-01-05",
-            "incidentType":"Actual Event/Incident",
-            "harm":true,
-            "individuals":"true,true,true,true,false,false,false,false",
-            "eventType":"Medical,Property,Adverse Drug Reaction",
-            "effects":true,"patientSSN":"512-409-4941",
-            "patientPhone":"555-432-2000",
-            "patientAddress":"123 Street",
-            "patientName":"Jane",
-            "witness1Name":"Alice",
-            "witness1Phone":"123-456-7890",
-            "witness2Name":"Bob",
-            "witness2Phone":"111-222-3333",
-            "witness3Name":"Witness3IsMe",
-            "witness3Phone":"324-234-5626",
-            "department":"Ambulatory Care,Dental",
-            "description":"SM should have been sedated",
-            "prevention":"Should have read the instruction manual."
+        if (tempTimeMinutes < 10) {
+            tempTimeMinutes = `0${tempTimeMinutes}`;
         }
-       let finalObject = {
-            id: rowViewed.id,
-           date: "00",
-           time: "9-01-05",
-            location: objectData.location,
-            incidentType: objectData.incidentType,
-            harm: objectData.harm,
-            individuals: objectData.individuals,
-            eventType: objectData.eventType,
-            effects: objectData.effects,
-            patientSSN: objectData.patientSSN,
-            patientPhone: objectData.patientPhone,
-            patientAddress: objectData.patientAddress,
-            patientName: objectData.patientName,
-            witness1Name: objectData.witness1Name,
-            witness1Phone: objectData.witness1Phone,
-            witness2Name: objectData.witness2Name,
-            witness2Phone: objectData.witness2Phone,
-            witness3Name: objectData.witness3Name,
-            witness3Phone: objectData.witness3Phone,
-            department: objectData.department,
-            description: objectData.description,
-            prevention:objectData.prevention,
+
+        dataToBeSent.time = `${tempTimeHour}:${tempTimeMinutes}`;
+
+        dataToBeSent.date = dataToBeSent.date.split('T')[0];
+
+
+        dataToBeSent.harm = dataToBeSent.harm === "Yes";
+        dataToBeSent.effects = dataToBeSent.effects !== "No harm sustained";
+
+        for (const individuals in dataToBeSent.individuals) {
+            if (dataToBeSent.individuals[`${individuals}`]) {
+                individualsInvolvedString = individualsInvolvedString + "," + individuals.replace(/^\w/, (c) => c.toUpperCase());
+            }
         }
-            console.log(finalObject)
-            apiPatchIncident(rowViewed.id, JSON.stringify(finalObject));
+        dataToBeSent.individuals = individualsInvolvedString.substring(1);
+
+        for (const event of dataToBeSent.eventType) {
+            typeOfEventString = typeOfEventString + "," + event;
+        }
+        dataToBeSent.eventType = typeOfEventString.substring(1);
+
+        for (const department of dataToBeSent.department) {
+            departmentsInvolvedString = departmentsInvolvedString + "," + department;
+        }
+        dataToBeSent.department = departmentsInvolvedString.substring(1);
+
+            apiPatchIncident(rowViewed.id, dataToBeSent);
 
     }
 

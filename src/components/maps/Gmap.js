@@ -9,6 +9,7 @@ import {apiGetIncident} from "../../api/APICalls";
 import './gmap.css'
 
 function Gmap({authorizationState, ...props}) {
+
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
