@@ -242,7 +242,7 @@ const SupervisorView = ({authorizationState,  setApiCallCountFunction, apiCallCo
         }
         dataToBeSent.department = departmentsInvolvedString.substring(1);
 
-            apiPatchIncident(rowViewed.id, dataToBeSent);
+            apiPatchIncident(rowViewed.id, dataToBeSent).then(() => fetchIncidentAPI());
 
     }
 
