@@ -53,9 +53,6 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                                                                                              page="/dashboard"
                                                                                              to="/dashboard">Dashboard</NavLink>
                                         </li>}
-                                    {authorizationState &&
-                                        <li><MapIcon className="bannerIcons"/><NavLink className="navLink" page="/map"
-                                                                                       to="/map">Map</NavLink></li>}
 
                                     {(typeof authorizationState !== 'undefined') &&
                                         <li><FaceIcon className="bannerIcons"/><NavLink className="navLink" page="/"
