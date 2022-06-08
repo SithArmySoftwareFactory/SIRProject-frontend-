@@ -386,7 +386,7 @@ tbody {
     margin-top:-1px;
     text-align: center;
     justify-content: center;
-    min-height: 458px;
+    min-height: 365px;
 }
 .page1FooterComments {
     margin-left: 10px;
@@ -402,5 +402,5 @@ tbody {
     margin-left: 10px;
     width: 100%;
     margin-top:0;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
 }

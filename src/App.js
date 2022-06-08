@@ -20,6 +20,7 @@ import axios from "axios";
 import {API_URL} from "./constants/Constants";
 
 
+
 const TRACKING_ID = "UA-230927295-1"; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID)
 
@@ -82,7 +83,7 @@ function App() {
     };
     return (
         <>
-            <Grid container spacing={0} columns={12} justifyContent="center">
+            <Grid container spacing={0} columns={12} justifyContent="center" id="pdf">
                 <Grid item xs={12}>
                     <Banner setIsHome={setIsHome} isHome={isHome}  authorizationState={authorizationState} userAuthorized={userAuthorized}/>
                                       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}
