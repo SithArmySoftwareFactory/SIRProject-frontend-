@@ -66,15 +66,15 @@ describe('user opens up a report on the Supervisor View', () => {
     });
     it('should see three witness name boxes in the modal', () => {
         cy.findByText(/witness name/i).should('exist');
-        cy.findByText(/witness name/i).siblings().first().children().last().children().last().should('exist');
-        cy.findByText(/witness name/i).siblings().first().next().children().last().children().last().should('exist');
-        cy.findByText(/witness name/i).siblings().last().children().last().children().last().should('exist');
+        cy.get('[id="witness1Name"]').should('exist');
+        cy.get('[id="witness2Name"]').should('exist');
+        cy.get('[id="witness3Name"]').should('exist');
     });
     it('should see three witness telephone number boxes in the modal', () => {
         cy.findByText(/witness telephone number/i).should('exist');
-        cy.findByText(/witness telephone number/i).siblings().first().children().last().children().last().should('exist');
-        cy.findByText(/witness telephone number/i).siblings().first().next().children().last().children().last().should('exist');
-        cy.findByText(/witness telephone number/i).siblings().last().children().last().children().last().should('exist');
+        cy.get('[id="witness1Phone"]').should('exist');
+        cy.get('[id="witness2Phone"]').should('exist');
+        cy.get('[id="witness3Phone"]').should('exist');
     });
     it('should see department(s) involved in this incident box in the modal', () => {
         cy.findByText(/department\(s\) involved in this incident/i).should('exist');
