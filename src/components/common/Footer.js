@@ -14,7 +14,7 @@ const Footer = () => {
                             <ul>
                                 <li><a
                                     href="http://borgfrontbigmem-env.eba-xxe2h3wr.us-east-2.elasticbeanstalk.com"
-                                    onClick={() => AnalyticsEventTracker('External Links', 'MEDVAC Link', 'clicked')}>MEDVAC
+                                    onClick={() => AnalyticsEventTracker('External Links', 'MEDVAC Link', 'clicked')} target="_blank">MEDVAC
                                     APP</a></li>
                                 <li><a href="https://dev3395.d20mm6b3fjxaop.amplifyapp.com/"
                                        onClick={() => AnalyticsEventTracker('External Links', 'Incubator Link', 'clicked')} target="_blank">The INCUBATOR</a></li>
