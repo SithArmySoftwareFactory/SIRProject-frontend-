@@ -1,6 +1,6 @@
 import {Grid} from "@mui/material";
 import './pdfmagic.css'
-import {useCallback, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 
 
 //converted PDF to HTML
@@ -10,7 +10,6 @@ import {useCallback, useRef, useState} from "react";
 
 
 const SIRPDFMagic = ({defaultValues}) => {
-
 
     let defaultValues2 = {
         date: new Date(),
@@ -90,14 +89,77 @@ const SIRPDFMagic = ({defaultValues}) => {
         }
 
 
+
     }
-    const [formValues, setFormValues] = useState(defaultValues2);
+    const [formValues, setFormValues] = useState(defaultValues);
+
+
+    const eventTypes = [
+        {title: "Adverse Drug Reaction"},
+        {title: "AMA/Left Without Being Seen"},
+        {title: "Assault"},
+        {title: "Blood Products Related"},
+        {title: "Delay in: Diagnosis/Treatment/Transfer"},
+        {title: "Equipment/Supply Problem"},
+        {title: "Exposure to Blood/Body Fluids"},
+        {title: "Facility/Physical Plant Problem"},
+        {title: "Fall"},
+        {title: "Infant Abduction"},
+        {title: "Infant Discharge to Wrong Family"},
+        {title: "Laboratory Related"},
+        {title: "Medication Related"},
+        {title: "Medical"},
+        {title: "Property"},
+        {title: "Needle Stick/Sharp Injury"},
+        {title: "Obstetrics Related"},
+        {title: "Operative/Invasive Procedure Related"},
+        {title: "Property Damage/Destroyed"},
+        {title: "Property Lost/Stolen"},
+        {title: "Radiology Related"},
+        {title: "Rape"},
+        {title: "Restrained Patient Injury"},
+        {title: "Suicide in a 24-hour Facility"},
+        {title: "Other"}
+    ];
+
+    let evenTypeArray =  defaultValues.eventType.trim().split(",");
+
+    const[updateTypes, setUpdateTypes] = useState(null);
+
+    eventTypes.forEach(function (arrayItem) {
+        for (let i = 0; i < evenTypeArray.length; i++) {
+            if(arrayItem.title === evenTypeArray[i]) {
+                defaultValues[arrayItem.title] = true;
+            }
+        }
+    });
+
+
+
+
+
+    //
+    // eventTypes.forEach(function (arrayItem) {
+    //     setFormValues([...defaultValues,
+    //         {
+    //             [arrayItem.title]: true,
+    //         }
+    //
+    //     ])
+    // }));
+
 
     const getCheckedImageFunctionSrc = (value) => {
         //seed Random checkboxes
         //Used Math.random(100) in the code for src... I wanted a number between 1 and 100
         //TODO -- add real logic to have the checkboxes fill in correct data
-        if (Number(value)) {
+
+
+        if (value === true) {
+            return 'incident_report_files/img-checked.png'
+        } else if (value === false) {
+            return 'incident_report_files/img-notchecked.png'
+        } else  if (Number(value)) {
             //this solves the issue without having to go in the code and replace each math.random()...
             let min = Math.ceil(0);
             let max = Math.floor(100);
@@ -107,10 +169,6 @@ const SIRPDFMagic = ({defaultValues}) => {
             } else {
                 return 'incident_report_files/img-notchecked.png'
             }
-        }
-
-        if (value) {
-            return 'incident_report_files/img-checked.png'
         } else {
             return 'incident_report_files/img-notchecked.png'
         }
@@ -121,7 +179,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                 <Grid container spacing={0} columns={12} justifyContent="center">
                     <Grid item xs={2}><br/></Grid>
                     <Grid item xs={8}>
-                        <div className="pageContent" >
+                        <div className="pageContent">
                             <table
                                 className="incidentTable"
                                 style={{borderCollapse: "collapse", marginLeft: "7.025pt"}}
@@ -260,7 +318,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                         >
                                             1. DATE OF EVENT <span className="s4">(YYYYMMDD)</span>
                                             <br/>
-                                            {JSON.stringify(formValues.date)}
+                                            {formValues.date}
                                         </p>
 
                                     </td>
@@ -284,7 +342,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                         >
                                             2. TIME OF EVENT <span className="s6">(Military time.)</span>
                                             <br/>
-                                            {JSON.stringify(formValues.time)}
+                                            {formValues.time}
                                         </p>
                                     </td>
                                     <td
@@ -712,7 +770,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Adverse Drug Reaction'])}
                                             />
                                         </p>
                                     </td>
@@ -765,7 +823,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Fall'])}
                                             />
                                         </p>
                                     </td>
@@ -820,7 +878,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                     width={13}
                                                     height={13}
                                                     alt="image"
-                                                    src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                    src={getCheckedImageFunctionSrc(defaultValues['Property Damage/Destroyed'])}
                                                 />
                                             </p>
                                         </p>
@@ -876,7 +934,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['AMA/Left Without Being Seen'])}
                                             />
                                         </p>
                                     </td>
@@ -929,7 +987,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Infant Abduction'])}
                                             />
                                         </p>
                                     </td>
@@ -981,7 +1039,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Property Lost/Stolen'])}
                                             />
                                         </p>
                                     </td>
@@ -1036,7 +1094,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Assault'])}
                                             />
                                         </p>
                                     </td>
@@ -1063,7 +1121,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 textAlign: "left"
                                             }}
                                         >
-                                            Assault{" "}
+                                            Assault
                                             <span className="s6">(e.g., physical, verbal, emotional)</span>
                                         </p>
                                     </td>
@@ -1090,7 +1148,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Infant Discharge to Wrong Family'])}
                                             />
                                         </p>
                                     </td>
@@ -1142,7 +1200,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Radiology Related'])}
                                             />
                                         </p>
                                     </td>
@@ -1197,7 +1255,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Blood Products Related'])}
                                             />
                                         </p>
                                     </td>
@@ -1250,7 +1308,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Laboratory Related'])}
                                             />
                                         </p>
                                     </td>
@@ -1302,7 +1360,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Rape'])}
                                             />
                                         </p>
                                     </td>
@@ -1357,7 +1415,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Delay in: Diagnosis/Treatment/Transfer'])}
                                             />
                                         </p>
                                     </td>
@@ -1410,7 +1468,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Medication Related'])}
                                             />
                                         </p>
                                     </td>
@@ -1462,7 +1520,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Restrained Patient Injury'])}
                                             />
                                         </p>
                                     </td>
@@ -1517,7 +1575,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Equipment/Supply Problem'])}
                                             />
                                         </p>
                                     </td>
@@ -1570,7 +1628,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Needle Stick/Sharp Injury'])}
                                             />
                                         </p>
                                     </td>
@@ -1622,7 +1680,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Suicide in a 24-hour Facility'])}
                                             />
                                         </p>
                                     </td>
@@ -1677,7 +1735,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Exposure to Blood/Body Fluids'])}
                                             />
                                         </p>
                                     </td>
@@ -1730,7 +1788,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Obstetrics Related'])}
                                             />
                                         </p>
                                     </td>
@@ -1783,7 +1841,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Other'])}
                                             />
                                         </p>
                                     </td>
@@ -1839,7 +1897,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Facility/Physical Plant Problem'])}
                                             />
                                         </p>
                                     </td>
@@ -1892,7 +1950,7 @@ const SIRPDFMagic = ({defaultValues}) => {
                                                 width={13}
                                                 height={13}
                                                 alt="image"
-                                                src={getCheckedImageFunctionSrc(Math.random(100))}
+                                                src={getCheckedImageFunctionSrc(defaultValues['Operative/Invasive Procedure Related'])}
                                             />
                                         </p>
                                     </td>

@@ -8,6 +8,7 @@ import {API_URL} from "../../constants/Constants";
 export default function Login({userAuthorized, ...props}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     function validateForm() {
         return username.length > 0 && password.length > 0;
@@ -20,6 +21,11 @@ export default function Login({userAuthorized, ...props}) {
             //TODO call state to set Logged in to true
             userAuthorized(data);
         }).catch((e) => {
+            console.log(e);
+            setErrorMessage("Please enter a valid Login")
+            setTimeout(() => {
+                setErrorMessage("");
+            },2000)
         })
     }
 
@@ -45,9 +51,14 @@ export default function Login({userAuthorized, ...props}) {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
+                <br/><br/>
                 <Button block="true" size="lg" type="submit" disabled={!validateForm()}>
                     Login
                 </Button>
+                <br/><br/>
+                <span style={{color: "red"}}>
+                {errorMessage}
+                </span>
             </Form>
         </div>
             </Grid>
