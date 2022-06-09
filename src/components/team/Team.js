@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Card from "@mui/material/Card";
 import "./team.css"
 
 
 const Team = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <Card className="sith-container">
             <div className="container text-center mt-5 mb-2">
