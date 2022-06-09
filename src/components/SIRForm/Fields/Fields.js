@@ -225,8 +225,6 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
             setFormValues(defaultValues2);
         });
         handleClick();
-        apiPostIncident(dataToBeSent);
-        setFormValues(defaultValues2);
 
     }
 

@@ -58,7 +58,7 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                                         <li><FaceIcon className="bannerIcons"/><NavLink className="navLink" page="/"
                                                                                         to="/" onClick={() => {
                                             localStorage.removeItem('access_token');
-                                            userAuthorized(undefined);
+                                            userAuthorized('removeAuth');
                                         }}>Logout</NavLink></li>}
                                 </ul>
                             </nav>
