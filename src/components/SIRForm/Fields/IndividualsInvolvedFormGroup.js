@@ -17,7 +17,7 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange, handleChil
 
 
     const children = (
-        <Box sx={{display: 'flex', flexDirection: 'column', ml: 3}}>
+        <Box sx={{display: 'flex', flexDirection: 'column', justifyContent:'center', width:'100%'}}>
             <FormControlLabel
                 label="Adult"
                 disabled={isDisabled}
@@ -86,8 +86,8 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange, handleChil
 
 
     return (
-        <Box sx={{display: 'flex'}}>
-            <FormControl required sx={{m: 3}} component="fieldset" variant="standard"
+        <Box sx={{display: 'flex', width:'100%'}}>
+            <FormControl required sx={{m: 3, width:'100%'}} component="fieldset" variant="standard"
             >
                 <FormLabel sx={styleLabel}>Individuals Involved</FormLabel>
                 <FormGroup
@@ -119,7 +119,7 @@ const IndividualsInvolvedFormGroup = ({formValues, handleClickChange, handleChil
             <FormControl
                 required
                 component="fieldset"
-                sx={{m: 3}}
+                sx={{m: 3, width:'100%'}}
                 variant="standard"
             >
                 <FormGroup>

@@ -5,60 +5,64 @@ import {styleLabel} from "../../../themes/themes";
 const Witness = ({formValues, handleInputChange}) => {
 
     return (
-        <Grid container spacing={1}>
-            <Grid item xs={6}>
-                <label style={styleLabel}>Witness Name</label>
-                <TextField
-                    required
-                    variant={"outlined"}
-                    fullWidth
-                    name={'witness1Name'}
-                    value={formValues.witness1Name}
-                    onChange={handleInputChange}
-                />
-                <TextField
-                    variant={"outlined"}
-                    name={'witness2Name'}
-                    value={formValues.witness2Name}
-                    onChange={handleInputChange}
-                    fullWidth
-                />
-                <TextField
-                    variant={"outlined"}
-                    name={'witness3Name'}
-                    value={formValues.witness3Name}
-                    onChange={handleInputChange}
-                    fullWidth
-                />
-
-            </Grid>
-            <Grid item xs={6}>
-                <label style={styleLabel}>Witness Telephone Number</label>
-                <TextField
-                    variant={"outlined"}
-                    name={'witness1Phone'}
-                    value={formValues.witness1Phone}
-                    onChange={handleInputChange}
-                    fullWidth
-                />
-                <TextField
-                    variant={"outlined"}
-                    name={'witness2Phone'}
-                    value={formValues.witness2Phone}
-                    onChange={handleInputChange}
-                    fullWidth
-                />
-                <TextField
-                    variant={"outlined"}
-                    name={'witness3Phone'}
-                    value={formValues.witness3Phone}
-                    onChange={handleInputChange}
-                    fullWidth
-                />
-            </Grid>
-
-
-        </Grid>
+                <table width={"100%"} style={{minHeight:'300px'}}>
+                <tbody>
+                <tr>
+                    <th><label style={styleLabel}>Witness Name</label></th>
+                    <th> <label style={styleLabel}>Witness Telephone Number</label></th>
+                </tr>
+                <tr>
+                    <td style={{margin:'auto'}}><TextField
+                        required
+                        variant={"outlined"}
+                        fullWidth
+                        name={'witness1Name'}
+                        value={formValues.witness1Name}
+                        onChange={handleInputChange}
+                    /></td>
+                    <td style={{margin: '.2em'}}><TextField
+                        variant={"outlined"}
+                        name={'witness1Phone'}
+                        value={formValues.witness1Phone}
+                        onChange={handleInputChange}
+                        fullWidth
+                    /></td>
+                </tr>
+                <tr>
+                    <td style={{margin: '.2em'}}>
+                        <TextField
+                            variant={"outlined"}
+                            name={'witness2Name'}
+                            value={formValues.witness2Name}
+                            onChange={handleInputChange}
+                            fullWidth
+                        /></td>
+                    <td style={{margin: '.2em'}}><TextField
+                        variant={"outlined"}
+                        name={'witness2Phone'}
+                        value={formValues.witness2Phone}
+                        onChange={handleInputChange}
+                        fullWidth
+                    /></td>
+                </tr>
+                <tr>
+                    <td style={{margin: '.2em'}}><TextField
+                        variant={"outlined"}
+                        name={'witness3Name'}
+                        value={formValues.witness3Name}
+                        onChange={handleInputChange}
+                        fullWidth
+                    /><br /></td>
+                    <td style={{margin: '.2em'}}><TextField
+                        variant={"outlined"}
+                        name={'witness3Phone'}
+                        value={formValues.witness3Phone}
+                        onChange={handleInputChange}
+                        fullWidth
+                    /></td>
+                </tr>
+                </tbody>
+            </table>
     );
 
 }
