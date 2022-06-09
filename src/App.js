@@ -90,7 +90,7 @@ function App() {
                 <Grid item xs={12}>
                     <Banner setIsHome={setIsHome} isHome={isHome} authorizationState={authorizationState}
                             userAuthorized={userAuthorized}/>
-                    <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
                               userAuthorized={userAuthorized}
                               anchorOrigin={{horizontal: "center", vertical: "top"}} sx={{width: "100%"}}>
 
