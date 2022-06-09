@@ -32,7 +32,7 @@ function App() {
     const [isHome, setIsHome] = useState(true);
     const [open, setOpen] = useState(false);
 
-    const [authorizationState, setAuthorizationState] = useState(localStorage.getItem('access_token') || undefined);
+    const [authorizationState, setAuthorizationState] = useState( localStorage.getItem('access_token') || undefined);
     const [authorizationStateRefresh, setAuthorizationStateRefresh] = useState(localStorage.getItem('refresh_token') || undefined);
     const [apiCallCount, setApiCallCount] = useState(0);
 
@@ -46,10 +46,14 @@ function App() {
 
     const userAuthorized = (value) => {
 
+        if(value === 'removeAuth') {
+            setAuthorizationState(undefined);
+        }
+
         if(value){
             //TODO value logic, does it have auth and refresh token? -> yes -> authorize
             setAuthorizationState(value.data.access_token);
-            setAuthorizationStateRefresh(value.data.access_token)
+            setAuthorizationStateRefresh(value.data.refresh_token)
 
             /*TODO add local storage - then in API call check if the access_token is in local storage
                if it is in local storage, use it as the token. */

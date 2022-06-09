@@ -40,7 +40,9 @@ const ActionsTakenBox = ({formValues,handleInputChange}) => {
                 onChange={handleInputChange}
                 fullWidth
             />
-            <span>Rated sentiment: </span><span style={{color:colorElement, fontFamily:'Lato, sans-serif'}}><b>{formValues.sentiment}</b></span>
+            { formValues.sentiment &&
+                <><span>Rated sentiment: </span>
+                <span style={{color:colorElement, fontFamily:'Lato, sans-serif'}}><b>{formValues.sentiment}</b></span></>}
         </Box>
     );
 
