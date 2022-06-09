@@ -8,7 +8,7 @@ import {Grid} from "@mui/material";
 const HarmEventBox = ({formValues, handleInputChange}) => {
 
     return (
-        <Grid item xs={6}>
+        <>
             <label style={styleLabel}>Harm or Potential Harm</label>
             <FormControl fullWidth>
                 <Select
@@ -23,9 +23,7 @@ const HarmEventBox = ({formValues, handleInputChange}) => {
                     <MenuItem key={'yes'} value={"Yes"}>Yes</MenuItem>
                     <MenuItem key={'no'} value={"No"}>No</MenuItem>
                 </Select>
-            </FormControl>
-        </Grid>
-
+            </FormControl></>
     );
 }
 export default HarmEventBox;

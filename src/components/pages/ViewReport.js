@@ -20,7 +20,7 @@ const ViewReport = ({singleReport }) => {
                     <Grid item xs md xl>
                         <Paper elevation={24} style={{margin: 'auto', padding: '4em', width:'80%', marginBottom:'2em'}}>
                             {Object.entries(report)
-                                .filter(([k, v]) => !(v === null || v === undefined))
+                               .filter(([k, v]) => !(v === null || v === undefined || k === 'harm' || k === 'effects'))
                                 .map(([key, value]) => {
                                 return (<h4>{key} : {value}</h4>);
                             }) }

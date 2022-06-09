@@ -1,5 +1,3 @@
-import {click} from "@testing-library/user-event/dist/click";
-
 describe('user filling out form and submitting to the db', () => {
     before(() => {
         cy.visit('/');
@@ -133,21 +131,21 @@ describe('user filling out form and submitting to the db', () => {
     });
 
     it('should type in name of witnesses and not be able to submit', () => {
-        cy.findByText(/witness name/i).siblings().first().children().last().children().first().type('Bob');
+        cy.get('[id="witness1Name"]').type('Bob');
         cy.findByDisplayValue(/bob/i).should('exist');
-        cy.findByText(/witness name/i).siblings().first().next().children().last().children().first().type('sally');
+        cy.get('[id="witness2Name"]').type('sally');
         cy.findByDisplayValue(/sally/i).should('exist');
-        cy.findByText(/witness name/i).siblings().last().children().last().children().first().type('Tim');
+        cy.get('[id="witness3Name"]').type('Tim');
         cy.findByDisplayValue(/tim/i).should('exist');
         cy.findByRole('button',{name:/submit/i}).should('be.disabled');
     });
 
     it('should type in numbers of witnesses and should not be able to submit ', () => {
-        cy.findByText(/witness telephone number/i).siblings().first().children().last().children().first().type('555-555-5555');
+        cy.get('[id="witness1Phone"]').type('555-555-5555');
         cy.findByDisplayValue(/555-555-5555/i).should('exist');
-        cy.findByText(/witness telephone number/i).siblings().first().next().children().last().children().first().type('666-666-6666');
+        cy.get('[id="witness2Phone"]').type('666-666-6666');
         cy.findByDisplayValue(/666-666-6666/i).should('exist');
-        cy.findByText(/witness telephone number/i).siblings().last().children().last().children().first().type('777-777-7777');
+        cy.get('[id="witness3Phone"]').type('777-777-7777');
         cy.findByDisplayValue(/777-777-7777/i).should('exist');
         cy.findByRole('button',{name:/submit/i}).should('be.disabled');
     });

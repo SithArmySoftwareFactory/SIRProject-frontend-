@@ -43,7 +43,7 @@ function PaperComponent(props) {
 
 
 const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCount}) => {
-    const [pageSize, setPageSize] = React.useState(5);
+    const [pageSize, setPageSize] = React.useState(10);
     const [dialog, setDialog] = useState(false);
     const [rowsChecked, setRowsChecked] = useState({}); //stores the rows checked
     const [count, setCount] = useState(0);
@@ -295,7 +295,7 @@ const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCou
                         fullScreen={fullWidth}
                         fullWidth={true}
                     >
-                        <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
+                        <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title" >
                             Incident Report
                             <IconButton
                                 aria-label="close"
@@ -306,6 +306,7 @@ const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCou
                                     top: 8,
                                     color: (theme) => theme.palette.grey[500],
                                 }}
+                                autoFocus
                             >
                                 <CloseIcon/>
                             </IconButton>
@@ -320,10 +321,10 @@ const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCou
                         <DialogActions>
                             <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
                             {(fullWidth) ?
-                                <Button autoFocus onClick={() => {handleDownload(); setFullWidth(false)}} style={{color: "#5D6A18"}}>
+                                <Button onClick={() => {handleDownload(); setFullWidth(false)}} style={{color: "#5D6A18"}}>
                                     DOWNLOAD PDF
                                 </Button> :
-                                <Button autoFocus
+                                <Button
                                         onClick={
                                             () => {
                                                 handleClose();
@@ -344,7 +345,7 @@ const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCou
                           onPageSizeChange={(newPage) => setPageSize(newPage)}
                           pagination
                     //options for dropdown that selects how many pages to display
-                          rowsPerPageOptions={[5, 10, 15]}
+                          rowsPerPageOptions={[10, 15]}
 
                     //rows should be fetched from api
                           rows={rows}

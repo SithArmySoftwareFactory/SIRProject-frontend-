@@ -37,12 +37,11 @@ const Footer = () => {
                             <p>Driven by passion, fueled by hate, masters kindness to control the Jedi council.</p>
                         </div>
                         <div className="col item social">
-                            <a href="https://www.facebook.com/ArmyFutures/"><i className="icon ion-social-facebook"/></a>
-                            <a href="https://twitter.com/armyfutures"><i className="icon ion-social-twitter"/></a>
-                            <a href="#"><i className="icon ion-social-snapchat"/></a>
-                            <a href="https://www.instagram.com/armyfutures/"><i className="icon ion-social-instagram"/></a></div>
+                            <a href="https://www.facebook.com/ArmyFutures/" target="_blank"><i className="icon ion-social-facebook"/></a>
+                            <a href="https://twitter.com/armyfutures" target="_blank"><i className="icon ion-social-twitter"/></a>
+                            <a href="https://www.instagram.com/armyfutures/" target="_blank"><i className="icon ion-social-instagram"/></a></div>
                     </div>
-                    <p className="copyright">Team SITH</p>
+                    <p className="copyright">{(new Date().getFullYear())} Copyright © Team SITH</p>
                 </div>
             </footer>
         </div>

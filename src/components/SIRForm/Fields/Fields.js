@@ -4,6 +4,7 @@ import TimeOfEvent from "./TimeOfEvent";
 import LocationBox from "./LocationBox";
 import EventTypeBox from "./EventTypeBox";
 import * as React from "react";
+import * as tf from '@tensorflow/tfjs';
 import {useEffect, useState} from "react";
 import HarmEventBox from "./HarmEventBox";
 import IndividualsInvolvedFormGroup from "./IndividualsInvolvedFormGroup";
@@ -25,13 +26,91 @@ import Box from "@mui/material/Box";
 import {useJsApiLoader} from "@react-google-maps/api";
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
 import CommandField from "./CommandField";
+import padSequences from "../../helper/paddedSeq";
 
 
-const Fields = ({handleClick, open, defaultValues, handlePatchChange = function () {}, setSingleReportViewFunction}) => {
+const Fields = ({
+                    handleClick, open, defaultValues, handlePatchChange = function () {
+    }, setSingleReportViewFunction
+                }) => {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
     });
+
+    const url = {
+        model: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json',
+        metadata: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json'
+    };
+    const OOV_INDEX = 2;
+
+    const [metadata, setMetadata] = useState();
+    const [model, setModel] = useState();
+    const [testScore, setScore] = useState("");
+    const [trimedText, setTrim] = useState("")
+    const [seqText, setSeq] = useState("")
+    const [padText, setPad] = useState("")
+    const [inputText, setInput] = useState("")
+
+
+
+    async function loadModel(url) {
+        try {
+            const model = await tf.loadLayersModel(url.model);
+            setModel(model);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async function loadMetadata(url) {
+        try {
+            const metadataJson = await fetch(url.metadata);
+            const metadata = await metadataJson.json();
+            setMetadata(metadata);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
+    const getSentimentScore = (text) => {
+        console.log(text)
+        const inputText = text.trim().toLowerCase().replace(/(\.|\,|\!)/g, '').split(' ');
+        setTrim(inputText)
+        console.log(inputText)
+        const sequence = inputText.map(word => {
+            let wordIndex = metadata.word_index[word] + metadata.index_from;
+            if (wordIndex > metadata.vocabulary_size) {
+                wordIndex = OOV_INDEX;
+            }
+            return wordIndex;
+        });
+        setSeq(sequence)
+        console.log(sequence)
+        // Perform truncation and padding.
+        const paddedSequence = padSequences([sequence], metadata.max_len);
+        console.log(metadata.max_len)
+        setPad(paddedSequence)
+
+        const input = tf.tensor2d(paddedSequence, [1, metadata.max_len]);
+        console.log(input)
+        setInput(input)
+        const predictOut = model.predict(input);
+        const score = predictOut.dataSync()[0];
+        predictOut.dispose();
+        setScore(score)
+        return score;
+    }
+    useEffect(() => {
+        tf.ready().then(
+            () => {
+                loadModel(url)
+                loadMetadata(url)
+            }
+        );
+
+    }, [])
 
     let defaultValues2;
     if (defaultValues != null) {
@@ -217,29 +296,55 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
         }
         dataToBeSent.department = departmentsInvolvedString.substring(1);
 
+        let outlook = "";
+        let score = getSentimentScore(dataToBeSent.prevention)
         getTheLocation(dataToBeSent.location).then((data) => {
             dataToBeSent.lat = data.lat;
             dataToBeSent.lng = data.lng;
+
+
+
+            if(score <= 0.4){
+                outlook = "low"
+            } else if(score > 0.4 && score <= 0.7){
+                outlook = "medium"
+            } else {
+                outlook = "high"
+            }
+
+            dataToBeSent.sentiment = outlook;
+
             apiPostIncident(dataToBeSent)
-                .then((response) =>{
+                .then((response) => {
                     console.log(response.data)
                     setSingleReportViewFunction(response)
                 })
                 .catch((error) => {
-                if( error.response ){
-                    console.log(error.response.data); // => the response payload
-                }
-            });
+                    if (error.response) {
+                        console.log(error.response.data); // => the response payload
+                    }
+                });
             setFormValues(defaultValues2);
         }).catch((error) => {
             //even if there is an error with getting the LatLng we still want to store the information in the database
+
+
+            let outlook = "";
+            if(score <= 0.4){
+                outlook = "low"
+            } else if(score > 0.4 && score <= 0.7){
+                outlook = "medium"
+            } else {
+                outlook = "high"
+            }
+            dataToBeSent.sentiment = outlook;
             apiPostIncident(dataToBeSent)
-                .then((response) =>{
+                .then((response) => {
                     console.log(response.data)
                     setSingleReportViewFunction(response)
                 })
                 .catch((error) => {
-                    if( error.response ){
+                    if (error.response) {
                         console.log(error.response.data); // => the response payload
                     }
                 });
@@ -339,80 +444,83 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
 
     return (
         <Box>
-    <Grid container
-          spacing={2}
-           columns={1}
-          sx={{
-              minHeight: '600px',
-              justifyContent: 'center',
-              margin: 'auto',
-              width: '100%',
-              padding:'0',
-              display:'flex',
-              flexDirection: "column"
-          }}>
-            <form onSubmit={handleSubmit}>
-                <Grid item xs={1} md xl style={{ padding:'0',  flexGrow: 1}}>
-                 <table style={{width:'100%'}}>
-                     <tbody>
-                     <tr>
-                         <td>
-                             <div style={{marginRight:'1em'}}><DateOfEvent formValues={formValues} handleInputChange={handleTimeChange}/></div>
-                         </td>
-                         <td>
-                             <div><TimeOfEvent formValues={formValues} handleInputChange={handleTimeChange}/></div>
-                         </td>
-                     </tr>
-                     </tbody>
-                 </table>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                    <LocationBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-              <Grid item xs md xl style={{marginBottom:'1em'}}>
+            <Grid container
+                  spacing={2}
+                  columns={1}
+                  sx={{
+                      minHeight: '600px',
+                      justifyContent: 'center',
+                      margin: 'auto',
+                      width: '100%',
+                      padding: '0',
+                      display: 'flex',
+                      flexDirection: "column"
+                  }}>
+                <form onSubmit={handleSubmit}>
+                    <Grid item xs={1} md xl style={{padding: '0', flexGrow: 1}}>
+                        <table style={{width: '100%'}}>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div style={{marginRight: '1em'}}><DateOfEvent formValues={formValues}
+                                                                                   handleInputChange={handleTimeChange}/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><TimeOfEvent formValues={formValues} handleInputChange={handleTimeChange}/>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <LocationBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+
                     <EventTypeBox formValues={formValues} handleInputChange={handleInputChange}/>
-             </Grid>
-                  <Grid item xs md xl style={{marginBottom:'1em'}}>
-                    <HarmEventBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl>
-                <IndividualsInvolvedFormGroup formValues={formValues} handleClickChange={handleClickChange}
-                                              handleChildrenClickChange={handleClickChildrenChange}/>
-                </Grid>
-                     <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <TypeOfEventBox formValues={formValues} handleInputChange={handleAutoCompleteTypeOfEvent}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <EffectOfIncidentBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                <br/>
-                 <Grid item xs md xl style={{marginBottom:'auto'}}>
-                <Witness formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <DepartmentsInvolvedBox formValue={formValues}
-                                        handleInputChange={handleAutoCompleteDepartmentsInvolved}/>
-                </Grid>
-                <DescriptionOfIncidentBox formValues={formValues} handleInputChange={handleInputChange}/>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <ActionsTakenBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <PatientNameBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-              <Grid item xs md xl style={{marginBottom:'1em'}}>
-                    <PatientSSNBox formValues={formValues} handleInputChange={handleInputChange}/>
-                    <PatientPhoneBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <AddressBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                {formValues.command && <CommandBox formValues={formValues}/>}
-                {defaultValues && <CommandField />}
-                </Grid>
-             <Grid item xs md xl
-                   style={{marginTop:'2em', display:'flex-end', justifyContent:'right', width:'100%'}}>
+
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <HarmEventBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl>
+                        <IndividualsInvolvedFormGroup formValues={formValues} handleClickChange={handleClickChange}
+                                                      handleChildrenClickChange={handleClickChildrenChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <TypeOfEventBox formValues={formValues} handleInputChange={handleAutoCompleteTypeOfEvent}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <EffectOfIncidentBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <br/>
+                    <Grid item xs md xl style={{marginBottom: 'auto'}}>
+                        <Witness formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <DepartmentsInvolvedBox formValue={formValues}
+                                                handleInputChange={handleAutoCompleteDepartmentsInvolved}/>
+                    </Grid>
+                    <DescriptionOfIncidentBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <ActionsTakenBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <PatientNameBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <PatientSSNBox formValues={formValues} handleInputChange={handleInputChange}/>
+                        <PatientPhoneBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <AddressBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        {formValues.command && <CommandBox formValues={formValues}/>}
+                        {defaultValues && <CommandField/>}
+                    </Grid>
+                    <Grid item xs md xl
+                          style={{marginTop: '2em', display: 'flex-end', justifyContent: 'right', width: '100%'}}>
                         {/*open is inherited state from the supervisor view. If the form is opened from the supervisor view, it will not render a submit button.*/}
                         {!open ?
                             isDisabled ?
@@ -433,10 +541,10 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
                                 </Button>
                             : null}
 
-                </Grid>
-            </form>
-    </Grid>
-            <br /> <br /> <br />
+                    </Grid>
+                </form>
+            </Grid>
+            <br/> <br/> <br/>
         </Box>
 
     );
