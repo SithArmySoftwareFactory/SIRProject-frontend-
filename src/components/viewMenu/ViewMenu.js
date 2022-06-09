@@ -1,28 +1,32 @@
-import React, {useState} from 'react';
-import Drawer from '@mui/material/Drawer';
-import {Button, List, ListItemButton, Menu, MenuItem, Typography} from "@mui/material";
-import {styleMenu, styleMenuItems} from "../../themes/themes";
+import React from 'react';
+import {Drawer, MenuItem, Typography} from "@mui/material";
+import {NavLink} from "react-router-dom";
+
 
 const ViewMenu = ({isHome, setIsHome}) => {
-    const [supervisor, setSupervisor] = useState(false);
+
+    const handleSupervisorView = () => {
+        setIsHome(!isHome)
+    }
+
+    const handleReporterView = () => {
+        setIsHome(true)
+    }
 
     return (
-            <Menu open={!isHome} sx={styleMenu} elevation={0}>
-                <MenuItem sx={styleMenuItems}>
-                <Button sx={{color: 'black'}} onClick={setIsHome(!isHome)}>
-                    <Typography >
-                        Reporter
-                    </Typography>
-                </Button>
+        <Drawer open={!isHome} elevation={16} variant='temporary' sx={{zIndex: 1000}} hideBackdrop={true}>
+            <br/><br/><br/><br/>
+            <MenuItem sx={{color: 'black', cursor: 'default'}} onClick={() => handleReporterView()}>
+                <Typography sx={{width: 250, paddingLeft: '20px'}}>
+                    <NavLink className="navLink" page="/" to="/">Reporter</NavLink>
+                </Typography>
             </MenuItem>
-                <MenuItem sx={styleMenuItems}>
-                <Button sx={{color: 'black'}} onClick={() => setSupervisor(true)}>
-                    <Typography>
-                        Supervisor
-                    </Typography>
-                </Button>
+            <MenuItem sx={{color: 'black', cursor: 'default'}} onClick={() => handleSupervisorView()}>
+                <Typography sx={{paddingLeft: '20px'}}>
+                    <NavLink className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink>
+                </Typography>
             </MenuItem>
-            </Menu>
+        </Drawer>
     );
 };
 

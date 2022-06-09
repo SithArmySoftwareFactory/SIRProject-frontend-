@@ -1,77 +1,112 @@
 import * as React from 'react';
+import {useState} from 'react';
 import Box from '@mui/material/Box';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import {useState} from "react";
 import {styleLabel} from "../../../themes/themes";
 
-const IndividualsInvolvedFormGroup = () => {
-    const [state, setState] = React.useState({
-        patient: false,
-        familyMember: false,
-        staffMember: false,
-        visitor: false,
-        volunteer: false,
-        other: false
-    });
-    const [checked, setChecked] = React.useState([false, false]);
+const IndividualsInvolvedFormGroup = ({formValues, handleClickChange, handleChildrenClickChange}) => {
+
     const [isDisabled, setIsDisabled] = useState(true);
+    const [involvedArray] = useState([]);
 
-    const handleChange = (event) => {
-        setState({
-            ...state,
-            [event.target.name]: event.target.checked,
-        });
-    };
+    let {patient, familyMember, adult, child, staffMember, visitor, volunteer, other} = formValues.individuals;
 
-    const handleChange2 = (event) => {
-        setChecked([event.target.checked, checked[1]]);
-    };
-
-    const handleChange3 = (event) => {
-        setChecked([checked[0], event.target.checked]);
-    };
 
     const children = (
-        <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+        <Box sx={{display: 'flex', flexDirection: 'column', justifyContent:'center', width:'100%'}}>
             <FormControlLabel
                 label="Adult"
                 disabled={isDisabled}
-                control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+                key={'adult'}
+                control={<Checkbox checked={adult} onChange={(event) => {
+                    handleChange2(event);
+                }} name={'adult'}/>}
+
             />
             <FormControlLabel
                 label="Child <18 years old"
                 disabled={isDisabled}
-                control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                key={'child'}
+                control={<Checkbox checked={child} onChange={(event) => {
+                    handleChange3(event);
+                }} name={'child'}/>}
+
             />
         </Box>
     );
 
+    const handleChange = (event) => {
+        let name = event.target.name;
+        let isChecked = event.target.checked;
+        isChecked ? involvedArray.push(name) : involvedArray.splice(involvedArray.indexOf(name), 1);
+        handleClickChange(event);
 
-    const {patient, familyMember, staffMember, visitor, volunteer, other} = state;
-    // const error = [patient, familyMember, staffMember, visitor, volunteer, other].filter((v) => v).length !== 1;
+    };
+
+
+    const handleChange2 = (event) => {
+
+        handleChange(event)
+
+    };
+
+    const handleChange3 = (event) => {
+
+        handleChange(event)
+    };
+
+
+    const handleChange4 = (event) => {
+        setIsDisabled(!isDisabled);
+        handleClickChange(event);
+
+        if (!event.target.checked) {
+
+            handleChildrenClickChange();
+
+            adult = false;
+            child = false;
+
+            involvedArray.forEach(element => {
+                if (element === 'adult') {
+                    involvedArray.splice(involvedArray.indexOf('adult'), 1)
+                }
+            })
+            involvedArray.forEach(element => {
+                if (element === 'child') {
+                    involvedArray.splice(involvedArray.indexOf('child'), 1)
+                }
+            })
+        }
+    }
+
 
     return (
-        <Box sx={{display: 'flex'}}>
-            <FormControl sx={{m: 3}} component="fieldset" variant="standard">
+        <Box sx={{display: 'flex', width:'100%'}}>
+            <FormControl required sx={{m: 3, width:'100%'}} component="fieldset" variant="standard"
+            >
                 <FormLabel sx={styleLabel}>Individuals Involved</FormLabel>
-                <FormGroup>
+                <FormGroup
+                >
                     <FormControlLabel
+                        key='patient'
                         control={
                             <Checkbox checked={patient} onChange={handleChange} name="patient"/>
                         }
                         label="Patient"
                     />
                     <FormControlLabel
+                        key={'familyMember'}
+
                         control={
-                            <Checkbox checked={familyMember || (checked[0] && checked[1])}
-                                      indeterminate={checked[0] !== checked[1]}
+                            <Checkbox checked={familyMember}
+
                                       onChange={(event => {
-                                          handleChange(event);
-                                          setIsDisabled(!isDisabled);
+                                          handleChange4(event);
                                       })}
                                       name="familyMember"
                             />
@@ -79,37 +114,40 @@ const IndividualsInvolvedFormGroup = () => {
                         label="Family Member"
                     />
                     {children}
-
                 </FormGroup>
-
             </FormControl>
             <FormControl
                 required
-                // error={error}
                 component="fieldset"
-                sx={{m: 3}}
+                sx={{m: 3, width:'100%'}}
                 variant="standard"
             >
                 <FormGroup>
                     <FormControlLabel
+                        key={'staffMember'}
                         control={
                             <Checkbox checked={staffMember} onChange={handleChange} name="staffMember"/>
                         }
                         label="Staff Member"
                     />
                     <FormControlLabel
+                        key={'visitor'}
+
                         control={
                             <Checkbox checked={visitor} onChange={handleChange} name="visitor"/>
                         }
                         label="Visitor"
                     />
                     <FormControlLabel
+                        key={'volunteer'}
+
                         control={
                             <Checkbox checked={volunteer} onChange={handleChange} name="volunteer"/>
                         }
                         label="Volunteer"
                     />
                     <FormControlLabel
+                        key={'other'}
                         control={
                             <Checkbox checked={other} onChange={handleChange} name="other"/>
                         }

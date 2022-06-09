@@ -1,19 +1,24 @@
-
 import TextField from "@mui/material/TextField";
 import {styleLabel} from "../../../themes/themes";
+import Box from "@mui/material/Box";
 
-const LocationBox = () => {
+const LocationBox = ({formValues, handleInputChange}) => {
 
     return (
-      <>
-          <br/>
-          <label style={styleLabel}>Location of Event</label>
-          <TextField
-              id="Location of Event"
-              name={"Location of Event"}
-              variant={"outlined"}
-          />
-      </>
+        <Box>
+            <br/>
+            <label style={styleLabel}>Location of Event</label>
+            <TextField
+                required
+                id="Location of Event"
+                name={"location"}
+                variant={"outlined"}
+                type={"text"}
+                value={formValues.location}
+                onChange={handleInputChange}
+                fullWidth
+            />
+        </Box>
     );
 
 }

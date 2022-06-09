@@ -1,24 +1,63 @@
 import {API_URL} from "../constants/Constants";
 import axios from "axios";
 
+export const apiGetIncident = async (index, token) => {
+    let localToken = localStorage.getItem('access_token');
 
-export const apiGetIncident = async (index) => {
     if (index > 0) {
-        return axios.get(API_URL + "incident/" + {index})
-    } else {
-        return axios.get(API_URL + "incident")
-    }
+        return axios.get(API_URL + "incident/" + index)
+    } else if(localToken.length > 20) {
+
+    return axios.get(API_URL + "incident", {
+        headers: {
+            'Authorization': `Bearer ${localToken}`
+        }
+    })
+} else {
+        return axios.get(API_URL + "incident", {
+            headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
 
 }
 
 export const apiPostIncident = async (data) => {
     return axios.post(API_URL + "incident", data)
 }
-
-export const apiPatchIncident = async (index, data) =>{
-    return axios.patch(API_URL + "incident/" + {index}, data)
+export const apiLogin = async (data) => {
+    return axios.post(API_URL + "login", data)
+}
+export const apiPostIncidentCommand = async (data) => {
+    return axios.post(API_URL + "send", data)
 }
 
-export const apiDeleteIncident = async (index) =>{
-    return axios.delete(API_URL + "incident/" + {index})
+export const apiPatchIncident =  (index, data) => {
+    let token = localStorage.getItem('access_token');
+    return axios.patch(API_URL + "incident/" + 1,
+        data,
+    { headers: {
+            'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+
+        }
+        }
+
+    )
+}
+
+export const apiDeleteIncident = async (index) => {
+    return axios.delete(API_URL + "incident/" + index)
+}
+
+export const apiGetRefresh = async () => {
+    let localToken = localStorage.getItem('access_token');
+      if(localToken.length > 20) {
+        return axios.get(API_URL + "token/refresh", {
+            headers: {
+                'Authorization': `Bearer ${localToken}`
+            }
+        })
+    }
 }

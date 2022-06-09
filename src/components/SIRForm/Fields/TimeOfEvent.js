@@ -3,25 +3,27 @@ import TextField from '@mui/material/TextField';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {TimePicker} from '@mui/x-date-pickers/TimePicker';
-import {Grid} from "@mui/material";
-import {useState} from "react";
+import {FormControl, Grid} from "@mui/material";
 import {styleLabel} from "../../../themes/themes";
 
 
-const TimeOfEvent = () => {
-    const [value, setValue] = useState(new Date('2018-01-01T00:00:00.000Z'));
+const TimeOfEvent = ({formValues, handleInputChange}) => {
+
 
     return (
-        <Grid item xs={6}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <label style={styleLabel}>Time of Event</label>
+                <FormControl sx={{width:'100%'}}>
                 <TimePicker
-                    value={value}
-                    onChange={setValue}
+                    required
+                    value={formValues.time}
+                    name={"time"}
+                    onChange={(newValue) => {
+                        handleInputChange(newValue, "time");
+                    }}
                     renderInput={(params) => <TextField {...params} />}
-                />
+                /></FormControl>
             </LocalizationProvider>
-        </Grid>
     );
 }
 export default TimeOfEvent;

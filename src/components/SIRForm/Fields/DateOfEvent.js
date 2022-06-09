@@ -5,31 +5,29 @@ import {Grid} from "@mui/material";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
+import FormControl from "@mui/material/FormControl";
 
-
-const DateOfEvent = () => {
-    const [value, setValue] = React.useState(new Date());
-
-
-
+const DateOfEvent = ({formValues, handleInputChange}) => {
 
     return (
-        <Grid item xs={6}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <label style={styleLabel}>Date of Event</label>
+                <FormControl sx={{width:'100%'}}>
                 <DatePicker
+                    required
                     style={styleDate}
                     disableFuture
                     openTo="year"
                     views={['year', 'month', 'day']}
-                    value={value}
+                    name={"date"}
+                    value={formValues.date}
                     onChange={(newValue) => {
-                        setValue(newValue);
+                        handleInputChange(newValue, "date");
                     }}
-                    renderInput={(params) => <TextField {...params} />}
-                />
+                    renderInput={(params) => <TextField {...params}
+                    />}
+                /></FormControl>
             </LocalizationProvider>
-        </Grid>
     );
 }
 export default DateOfEvent;
