@@ -6,7 +6,7 @@ import SIRPDFMagic from "../SIRToPDF/SIRPDFMagic";
 import Button from "@mui/material/Button";
 
 
-const SIRForm = ({handleClick, open, defaultValues, fullWidthFunction, fullWidth, displayInDialogOnly, handlePatchChange}) =>{
+const SIRForm = ({handleClick, open, defaultValues, fullWidthFunction, fullWidth, displayInDialogOnly, handlePatchChange, setSingleReportViewFunction}) =>{
     return (
         <>
             {(fullWidth)
@@ -18,7 +18,7 @@ const SIRForm = ({handleClick, open, defaultValues, fullWidthFunction, fullWidth
                     <Container component={"div"} maxWidth={"sm"}>
                         <Stack>
                             <Header/>
-                            <Fields handleClick={handleClick} open={open} defaultValues={defaultValues}  handlePatchChange={handlePatchChange}/>
+                            <Fields handleClick={handleClick} open={open} defaultValues={defaultValues}  handlePatchChange={handlePatchChange} setSingleReportViewFunction={setSingleReportViewFunction}/>
                         </Stack>
                     </Container>
                 </>
