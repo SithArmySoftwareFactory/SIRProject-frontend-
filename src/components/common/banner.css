@@ -31,6 +31,16 @@ header {
     .mobileMenu {display:inline}
 
 }
+@media screen and (min-width: 920px) {
+
+    .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+        display:none;
+    }
+
+
+}
+
+
 
 
 
