@@ -1,5 +1,3 @@
-import {click} from "@testing-library/user-event/dist/click";
-
 describe('user filling out form and submitting to the db', () => {
     before(() => {
         cy.visit('/');
