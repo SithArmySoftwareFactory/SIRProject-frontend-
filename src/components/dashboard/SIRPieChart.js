@@ -88,8 +88,8 @@ const SIRPieChart = ({ title, description, date, sirData}) => {
 
 
     return (
-        <Card sx={{backgroundColor: "darkgray",  border: "2px solid black"}} elevation={24}>
-            <Box padding="1rem" minHeight={'500px'} maxHeight={'100%'} >
+        <Card sx={{backgroundColor: "darkgray",  border: "2px solid black", minWidth:'400px'}} elevation={24}>
+            <Box padding="1rem" minHeight={'500px'} minWidth={'400px'} maxHeight={'100%'} >
                     <Pie data={data} height={'400px'}
                          />
                 </Box>

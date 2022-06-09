@@ -47,8 +47,8 @@ const SIRBarChart = ({sirData, title, description, date}) => {
     }
 
     return (
-        <Card sx={{ backgroundColor: "darkgray",  border: "2px solid black"}} elevation={12}>
-            <Box padding="1rem" style={{backgroundColor: "darkgray"}} minHeight={'500px'} maxHeight={'100%'}>
+        <Card sx={{ backgroundColor: "darkgray",  border: "2px solid black", minWidth:'400px'}}  elevation={12}>
+            <Box padding="1rem" style={{backgroundColor: "darkgray"}} minWidth={'400px'} minHeight={'500px'} maxHeight={'100%'}>
                 <Bar data={bar.data} options={bar.options} height={'100%'}/>
             </Box>
             <Box pl={1}>
