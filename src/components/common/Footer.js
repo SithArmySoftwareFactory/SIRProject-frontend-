@@ -35,7 +35,7 @@ const Footer = () => {
                             <a href="https://twitter.com/armyfutures" target="_blank"><i className="icon ion-social-twitter"/></a>
                             <a href="https://www.instagram.com/armyfutures/" target="_blank"><i className="icon ion-social-instagram"/></a></div>
                     </div>
-                    <p className="copyright">Team SITH</p>
+                    <p className="copyright">{(new Date().getFullYear())} Copyright © Team SITH</p>
                 </div>
             </footer>
         </div>
