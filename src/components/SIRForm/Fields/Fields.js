@@ -29,7 +29,10 @@ import CommandField from "./CommandField";
 import padSequences from "../../helper/paddedSeq";
 
 
-const Fields = ({handleClick, open, defaultValues, handlePatchChange = function () {}, setSingleReportViewFunction}) => {
+const Fields = ({
+                    handleClick, open, defaultValues, handlePatchChange = function () {
+    }, setSingleReportViewFunction
+                }) => {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
@@ -312,15 +315,15 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
             dataToBeSent.sentiment = outlook;
 
             apiPostIncident(dataToBeSent)
-                .then((response) =>{
+                .then((response) => {
                     console.log(response.data)
                     setSingleReportViewFunction(response)
                 })
                 .catch((error) => {
-                if( error.response ){
-                    console.log(error.response.data); // => the response payload
-                }
-            });
+                    if (error.response) {
+                        console.log(error.response.data); // => the response payload
+                    }
+                });
             setFormValues(defaultValues2);
         }).catch((error) => {
             //even if there is an error with getting the LatLng we still want to store the information in the database
@@ -336,12 +339,12 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
             }
             dataToBeSent.sentiment = outlook;
             apiPostIncident(dataToBeSent)
-                .then((response) =>{
+                .then((response) => {
                     console.log(response.data)
                     setSingleReportViewFunction(response)
                 })
                 .catch((error) => {
-                    if( error.response ){
+                    if (error.response) {
                         console.log(error.response.data); // => the response payload
                     }
                 });
@@ -441,80 +444,83 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
 
     return (
         <Box>
-    <Grid container
-          spacing={2}
-           columns={1}
-          sx={{
-              minHeight: '600px',
-              justifyContent: 'center',
-              margin: 'auto',
-              width: '100%',
-              padding:'0',
-              display:'flex',
-              flexDirection: "column"
-          }}>
-            <form onSubmit={handleSubmit}>
-                <Grid item xs={1} md xl style={{ padding:'0',  flexGrow: 1}}>
-                 <table style={{width:'100%'}}>
-                     <tbody>
-                     <tr>
-                         <td>
-                             <div style={{marginRight:'1em'}}><DateOfEvent formValues={formValues} handleInputChange={handleTimeChange}/></div>
-                         </td>
-                         <td>
-                             <div><TimeOfEvent formValues={formValues} handleInputChange={handleTimeChange}/></div>
-                         </td>
-                     </tr>
-                     </tbody>
-                 </table>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                    <LocationBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-              <Grid item xs md xl style={{marginBottom:'1em'}}>
+            <Grid container
+                  spacing={2}
+                  columns={1}
+                  sx={{
+                      minHeight: '600px',
+                      justifyContent: 'center',
+                      margin: 'auto',
+                      width: '100%',
+                      padding: '0',
+                      display: 'flex',
+                      flexDirection: "column"
+                  }}>
+                <form onSubmit={handleSubmit}>
+                    <Grid item xs={1} md xl style={{padding: '0', flexGrow: 1}}>
+                        <table style={{width: '100%'}}>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div style={{marginRight: '1em'}}><DateOfEvent formValues={formValues}
+                                                                                   handleInputChange={handleTimeChange}/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><TimeOfEvent formValues={formValues} handleInputChange={handleTimeChange}/>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <LocationBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+
                     <EventTypeBox formValues={formValues} handleInputChange={handleInputChange}/>
-             </Grid>
-                  <Grid item xs md xl style={{marginBottom:'1em'}}>
-                    <HarmEventBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl>
-                <IndividualsInvolvedFormGroup formValues={formValues} handleClickChange={handleClickChange}
-                                              handleChildrenClickChange={handleClickChildrenChange}/>
-                </Grid>
-                     <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <TypeOfEventBox formValues={formValues} handleInputChange={handleAutoCompleteTypeOfEvent}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <EffectOfIncidentBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                <br/>
-                 <Grid item xs md xl style={{marginBottom:'auto'}}>
-                <Witness formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <DepartmentsInvolvedBox formValue={formValues}
-                                        handleInputChange={handleAutoCompleteDepartmentsInvolved}/>
-                </Grid>
-                <DescriptionOfIncidentBox formValues={formValues} handleInputChange={handleInputChange}/>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <ActionsTakenBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <PatientNameBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-              <Grid item xs md xl style={{marginBottom:'1em'}}>
-                    <PatientSSNBox formValues={formValues} handleInputChange={handleInputChange}/>
-                    <PatientPhoneBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                <AddressBox formValues={formValues} handleInputChange={handleInputChange}/>
-                </Grid>
-                 <Grid item xs md xl style={{marginBottom:'1em'}}>
-                {formValues.command && <CommandBox formValues={formValues}/>}
-                {defaultValues && <CommandField />}
-                </Grid>
-             <Grid item xs md xl
-                   style={{marginTop:'2em', display:'flex-end', justifyContent:'right', width:'100%'}}>
+
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <HarmEventBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl>
+                        <IndividualsInvolvedFormGroup formValues={formValues} handleClickChange={handleClickChange}
+                                                      handleChildrenClickChange={handleClickChildrenChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <TypeOfEventBox formValues={formValues} handleInputChange={handleAutoCompleteTypeOfEvent}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <EffectOfIncidentBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <br/>
+                    <Grid item xs md xl style={{marginBottom: 'auto'}}>
+                        <Witness formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <DepartmentsInvolvedBox formValue={formValues}
+                                                handleInputChange={handleAutoCompleteDepartmentsInvolved}/>
+                    </Grid>
+                    <DescriptionOfIncidentBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <ActionsTakenBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <PatientNameBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <PatientSSNBox formValues={formValues} handleInputChange={handleInputChange}/>
+                        <PatientPhoneBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        <AddressBox formValues={formValues} handleInputChange={handleInputChange}/>
+                    </Grid>
+                    <Grid item xs md xl style={{marginBottom: '1em'}}>
+                        {formValues.command && <CommandBox formValues={formValues}/>}
+                        {defaultValues && <CommandField/>}
+                    </Grid>
+                    <Grid item xs md xl
+                          style={{marginTop: '2em', display: 'flex-end', justifyContent: 'right', width: '100%'}}>
                         {/*open is inherited state from the supervisor view. If the form is opened from the supervisor view, it will not render a submit button.*/}
                         {!open ?
                             isDisabled ?
@@ -535,10 +541,10 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
                                 </Button>
                             : null}
 
-                </Grid>
-            </form>
-    </Grid>
-            <br /> <br /> <br />
+                    </Grid>
+                </form>
+            </Grid>
+            <br/> <br/> <br/>
         </Box>
 
     );

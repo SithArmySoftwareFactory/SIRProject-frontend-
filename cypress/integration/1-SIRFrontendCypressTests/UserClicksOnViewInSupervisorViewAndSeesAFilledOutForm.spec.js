@@ -50,7 +50,7 @@ describe('user opens up a report on the Supervisor View', () => {
         cy.findByRole('checkbox', ({name: /child/i})).should("be.disabled");
         cy.findByText(/staff member/i).should('exist');
         cy.findByRole('checkbox', ({name: /staff member/i})).should('exist');
-        cy.findByText(/visitor/i).should('exist');
+        cy.findAllByText(/visitor/i).last().should('exist');
         cy.findByRole('checkbox', ({name: /visitor/i})).should('exist');
         cy.findAllByText(/other/i).last().should('exist');
         cy.findByRole('checkbox', ({name: /other/i})).should('exist');
