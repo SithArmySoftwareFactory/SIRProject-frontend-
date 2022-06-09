@@ -42,7 +42,7 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                                             <SupervisedUserCircleIcon className="bannerIcons"/><NavLink
                                             className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink>
                                         </li>}
-                                    {(typeof authorizationState == 'undefined') &&
+                                    {!authorizationState &&
                                         <li><FaceIcon className="bannerIcons"/><NavLink className="navLink"
                                                                                         page="/login"
                                                                                         to="/login">Login</NavLink>
@@ -54,7 +54,7 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                                                                                              to="/dashboard">Dashboard</NavLink>
                                         </li>}
 
-                                    {(typeof authorizationState !== 'undefined') &&
+                                    {authorizationState &&
                                         <li><FaceIcon className="bannerIcons"/><NavLink className="navLink" page="/"
                                                                                         to="/" onClick={() => {
                                             localStorage.removeItem('access_token');
@@ -113,7 +113,7 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                     :
                     null
                 }
-                {(typeof authorizationState == 'undefined') && <><FaceIcon className="bannerIcons"/><NavLink
+                {!authorizationState  && <><FaceIcon className="bannerIcons"/><NavLink
                     className="navLink" page="/login" to="/login">Login</NavLink><br/></>}
                 {authorizationState && <> <DashboardIcon className="bannerIcons" /><NavLink className="navLink"
                                                                                            page="/dashboard"
