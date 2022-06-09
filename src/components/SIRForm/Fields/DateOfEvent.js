@@ -5,13 +5,14 @@ import {Grid} from "@mui/material";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {styleDate, styleLabel} from "../../../themes/themes";
+import FormControl from "@mui/material/FormControl";
 
 const DateOfEvent = ({formValues, handleInputChange}) => {
 
     return (
-        <Grid item xs={6}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <label style={styleLabel}>Date of Event</label>
+                <FormControl sx={{width:'100%'}}>
                 <DatePicker
                     required
                     style={styleDate}
@@ -24,9 +25,8 @@ const DateOfEvent = ({formValues, handleInputChange}) => {
                         handleInputChange(newValue, "date");
                     }}
                     renderInput={(params) => <TextField {...params} />}
-                />
+                /></FormControl>
             </LocalizationProvider>
-        </Grid>
     );
 }
 export default DateOfEvent;
