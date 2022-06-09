@@ -295,7 +295,7 @@ const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCou
                         fullScreen={fullWidth}
                         fullWidth={true}
                     >
-                        <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
+                        <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title" >
                             Incident Report
                             <IconButton
                                 aria-label="close"
@@ -306,6 +306,7 @@ const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCou
                                     top: 8,
                                     color: (theme) => theme.palette.grey[500],
                                 }}
+                                autoFocus
                             >
                                 <CloseIcon/>
                             </IconButton>
@@ -320,10 +321,10 @@ const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCou
                         <DialogActions>
                             <Button onClick={handleClose} style={{color: "#5D6A18"}}>CANCEL</Button>
                             {(fullWidth) ?
-                                <Button autoFocus onClick={() => {handleDownload(); setFullWidth(false)}} style={{color: "#5D6A18"}}>
+                                <Button onClick={() => {handleDownload(); setFullWidth(false)}} style={{color: "#5D6A18"}}>
                                     DOWNLOAD PDF
                                 </Button> :
-                                <Button autoFocus
+                                <Button
                                         onClick={
                                             () => {
                                                 handleClose();

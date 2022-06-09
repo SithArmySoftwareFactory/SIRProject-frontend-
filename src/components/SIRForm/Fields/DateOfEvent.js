@@ -24,7 +24,8 @@ const DateOfEvent = ({formValues, handleInputChange}) => {
                     onChange={(newValue) => {
                         handleInputChange(newValue, "date");
                     }}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => <TextField {...params}
+                    />}
                 /></FormControl>
             </LocalizationProvider>
     );
