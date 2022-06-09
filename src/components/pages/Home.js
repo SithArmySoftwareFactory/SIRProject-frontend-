@@ -136,7 +136,6 @@ const Home = () => {
                   sx={{
                       minHeight: '600px',
                       justifyContent: 'center',
-
                       margin: 'auto',
                       width: '100%'
                   }}>
@@ -153,15 +152,17 @@ const Home = () => {
                                       padding: 'auto'
                                   }}>
                                 <Grid item>
-                                    <Card sx={{minWidth: '400px', maxWidth: '400px', margin: '50px'}}>
-                                        <CardActionArea>
+                                    <Card  sx={{minWidth: '400px', maxWidth: '400px', margin: '50px'}}>
+                                        <CardActionArea className="disableHover">
                                             <CardMedia
                                                 component="img"
                                                 height="250"
                                                 image="/2.jpeg"
                                                 alt="green iguana"
+                                                className="disableHover"
+
                                             />
-                                            <CardContent>
+                                            <CardContent className="disableHover">
                                                 <Typography gutterBottom variant="h5" component="div">
                                                     Serious Incident Reporting
                                                 </Typography>
@@ -175,15 +176,16 @@ const Home = () => {
                                     </Card>
                                 </Grid>
                                 <Grid item>
-                                    <Card sx={{minWidth: '400px', maxWidth: '400px', margin: '50px'}}>
-                                        <CardActionArea>
+                                    <Card sx={{minWidth: '400px', maxWidth: '400px', margin: '50px'}} >
+                                        <CardActionArea className="disableHover">
                                             <CardMedia
                                                 component="img"
                                                 height="250"
                                                 image="/3.jpeg"
                                                 alt="green iguana"
+                                                className="disableHover"
                                             />
-                                            <CardContent>
+                                            <CardContent className="disableHover">
                                                 <Typography gutterBottom variant="h5" component="div">
                                                     Seamlessly Visualize SIRs
                                                 </Typography>
@@ -197,14 +199,15 @@ const Home = () => {
                                 </Grid>
                                 <Grid item>
                                     <Card sx={{minWidth: '400px', maxWidth: '400px', margin: '50px'}}>
-                                        <CardActionArea>
+                                        <CardActionArea className="disableHover">
                                             <CardMedia
                                                 component="img"
                                                 height="250"
                                                 image="/users.jpeg"
                                                 alt="green iguana"
+                                                className="disableHover"
                                             />
-                                            <CardContent>
+                                            <CardContent className="disableHover">
                                                 <Typography gutterBottom variant="h5" component="div">
                                                     The Software Factory
                                                 </Typography>
