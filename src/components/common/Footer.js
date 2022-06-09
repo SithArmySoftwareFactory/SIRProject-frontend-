@@ -33,7 +33,6 @@ const Footer = () => {
                         <div className="col item social">
                             <a href="https://www.facebook.com/ArmyFutures/" target="_blank"><i className="icon ion-social-facebook"/></a>
                             <a href="https://twitter.com/armyfutures" target="_blank"><i className="icon ion-social-twitter"/></a>
-                            <a href="#"><i className="icon ion-social-snapchat"/></a>
                             <a href="https://www.instagram.com/armyfutures/" target="_blank"><i className="icon ion-social-instagram"/></a></div>
                     </div>
                     <p className="copyright">Team SITH</p>
