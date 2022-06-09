@@ -307,42 +307,49 @@ const Dashboard = ({authorizationState}) => {
                                                   justifyContent: 'flex-start',
 
                                               }}>
-                                                        <Grid item xs={4}>
-                                                            <Paper elevation={24}>
-                                                                <div style={{
-                                                                    padding: '4em',
-                                                                    minHeight: '500px',
-                                                                    marginBottom:'3em'
-                                                                }}>
+                                                        <Grid item xs={12} md={4} xl={4}>
+                                                            <Paper elevation={24} style={{
+                                                                padding: '4em',
+                                                                minHeight: '500px',
+                                                                marginBottom:'3em',
+                                                                minWidth:'500px',
+                                                                display:'block'
+                                                            }}>
+
                                                                     <SIRLineChart
+                                                                        className={"hideMap"}
                                                                         color="dark"
                                                                         title="Serious Incidents"
                                                                         description="By-Month Trend"
                                                                         date={`Last Updated: ${new Date().toLocaleDateString()}`}
                                                                         chart={tasks}
                                                                     />
-                                                                </div>
                                                             </Paper>
-                                                                    <Paper elevation={24}>
-                                                                        <div style={{
-                                                                            padding: '4em',
-                                                                            minHeight: '500px',
-                                                                            marginBottom:'3em'
-                                                                        }}>
+                                                                    <Paper elevation={24}  style={{
+                                                                        padding: '4em',
+                                                                        minHeight: '500px',
+                                                                        marginBottom:'3em',
+                                                                        minWidth:'500px',
+                                                                        display:'block'
+                                                                    }}>
+
                                                                     <SIRPieChart
                                                                         color="dark"
                                                                         title="SIR by Type"
                                                                         description="Occurrences by incident type"
                                                                         date={`Last Updated: ${new Date().toLocaleDateString()}`}
                                                                         sirData={data}/>
-                                                                        </div>
+
                                                                     </Paper>
-                                                                            <Paper elevation={24}>
-                                                                                <div style={{
-                                                                                    padding: '4em',
-                                                                                    minHeight: '500px',
-                                                                                    marginBottom:'3em'
-                                                                                }}>
+                                                                            <Paper elevation={24}
+                                                                                   style={{
+                                                                                padding: '4em',
+                                                                                minHeight: '500px',
+                                                                                marginBottom:'3em',
+                                                                                minWidth:'500px',
+                                                                                       display:'block'
+                                                                            }}>
+
                                                                     <SIRSentimentChart
                                                                         color="dark"
                                                                         title="Sentiment"
@@ -351,10 +358,9 @@ const Dashboard = ({authorizationState}) => {
                                                                         chart={tasks}
                                                                         sirData={data}
                                                                     />
-                                                                </div>
                                                             </Paper>
                                                         </Grid>
-                                                        <Grid item xs={8}>
+                                                        <Grid item xs={12} md={8} xl={8}>
                                                             <Paper elevation={24}>
                                                                 <div style={{
                                                                     padding: '4em',
@@ -369,7 +375,7 @@ const Dashboard = ({authorizationState}) => {
                                                                         date={`Last Updated: ${new Date().toLocaleDateString()}`}
                                                                         sirData={individuals}/></div>
                                                             </Paper>
-                                                            <Paper elevation={24}>
+                                                            <Paper elevation={24} className={"hideMap"}>
                                                                 <div style={{
                                                                     padding: '4em',
                                                                     minHeight: '500px',
