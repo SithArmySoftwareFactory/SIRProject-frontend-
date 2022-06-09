@@ -33,12 +33,12 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                                     <li onClick={() => AnalyticsEventTracker('Home', 'Clicked home button', 'clicked home')}>
                                         <HomeIcon className="bannerIcons"/><NavLink className="navLink" page="/"
                                                                                     to="/">Home</NavLink></li>
-                                    <li onClick={() => AnalyticsEventTracker('Submit_report', 'Clicked Submit Report Button', 'clicked Submit Report')}>
+                                    <li onClick={() => AnalyticsEventTracker('Home', 'Clicked Submit Report Button', 'clicked Submit Report')}>
                                         <AssessmentIcon className="bannerIcons"/><NavLink className="navLink"
                                                                                           page="/report" to="/report">Submit
                                         Report</NavLink></li>
                                     {authorizationState &&
-                                        <li onClick={() => AnalyticsEventTracker('Supervisor_View', 'Clicked Supervisor Button', 'clicked Supervisor Report')}>
+                                        <li onClick={() => AnalyticsEventTracker('Home', 'Clicked Supervisor Button', 'clicked Supervisor Report')}>
                                             <SupervisedUserCircleIcon className="bannerIcons"/><NavLink
                                             className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink>
                                         </li>}
