@@ -209,3 +209,10 @@ video {
     margin: auto;
     text-align: center;
 }
+
+.disableHover {
+    cursor: default;
+    background-color: transparent;
+    pointer-events: none;
+
+}
