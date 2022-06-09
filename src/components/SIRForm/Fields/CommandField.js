@@ -50,7 +50,6 @@ export default function CommandField(props, {rowsChecked}) {
                                 Command
                             </Typography>
                             <Select
-                                autoFocus
                                 value={currentCommand}
                                 onChange={(ev) => {
                                     setCurrentCommand(ev.target.value);

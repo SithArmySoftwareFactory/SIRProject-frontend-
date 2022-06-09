@@ -14,7 +14,7 @@ const SIRForm = ({handleClick, open, defaultValues, fullWidthFunction, fullWidth
                 <SIRPDFMagic defaultValues={defaultValues}/>
                 :
                 <>
-                    { (displayInDialogOnly === 'dialog') ? <Button onClick={() => fullWidthFunction(true)}>View as DA Form</Button>: null}
+                    { (displayInDialogOnly === 'dialog') ? <Button onClick={() => fullWidthFunction(true)} >View as DA Form</Button>: null}
                     <Container component={"div"} maxWidth={"sm"}>
                         <Stack>
                             <Header/>
