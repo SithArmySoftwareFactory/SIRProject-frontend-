@@ -43,7 +43,7 @@ function PaperComponent(props) {
 
 
 const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCount}) => {
-    const [pageSize, setPageSize] = React.useState(5);
+    const [pageSize, setPageSize] = React.useState(10);
     const [dialog, setDialog] = useState(false);
     const [rowsChecked, setRowsChecked] = useState({}); //stores the rows checked
     const [count, setCount] = useState(0);
@@ -345,7 +345,7 @@ const SupervisorView = ({authorizationState, setApiCallCountFunction, apiCallCou
                           onPageSizeChange={(newPage) => setPageSize(newPage)}
                           pagination
                     //options for dropdown that selects how many pages to display
-                          rowsPerPageOptions={[5, 10, 15]}
+                          rowsPerPageOptions={[10, 15]}
 
                     //rows should be fetched from api
                           rows={rows}

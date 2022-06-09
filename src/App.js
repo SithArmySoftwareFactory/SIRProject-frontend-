@@ -133,7 +133,7 @@ function App() {
                         {authorizationState && <Route path="/dashboard"
                                                       element={<Dashboard authorizationState={authorizationState}
                                                                           setApiCallCountFunction={setApiCallCountFunction}/>}/>}
-                        {(typeof authorizationState == 'undefined') &&
+                        {!authorizationState &&
                             <Route path="/login" element={<Login userAuthorized={userAuthorized}/>}/>}
                         {<Route path="/viewreport"
                                                       element={<ViewReport authorizationState={authorizationState}
