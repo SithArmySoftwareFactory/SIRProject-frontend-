@@ -26,7 +26,7 @@ import {useJsApiLoader} from "@react-google-maps/api";
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
 
 
-const Fields = ({handleClick, open, defaultValues, handlePatchChange = function () {}}) => {
+const Fields = ({handleClick, open, defaultValues, handlePatchChange = function () {}, setSingleReportViewFunction}) => {
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
@@ -217,11 +217,31 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
         dataToBeSent.department = departmentsInvolvedString.substring(1);
 
         getTheLocation(dataToBeSent.location).then((data) => {
-
             dataToBeSent.lat = data.lat;
             dataToBeSent.lng = data.lng;
-
-            apiPostIncident(dataToBeSent);
+            apiPostIncident(dataToBeSent)
+                .then((response) =>{
+                    console.log(response.data)
+                    setSingleReportViewFunction(response)
+                })
+                .catch((error) => {
+                if( error.response ){
+                    console.log(error.response.data); // => the response payload
+                }
+            });
+            setFormValues(defaultValues2);
+        }).catch((error) => {
+            //even if there is an error with getting the LatLng we still want to store the information in the database
+            apiPostIncident(dataToBeSent)
+                .then((response) =>{
+                    console.log(response.data)
+                    setSingleReportViewFunction(response)
+                })
+                .catch((error) => {
+                    if( error.response ){
+                        console.log(error.response.data); // => the response payload
+                    }
+                });
             setFormValues(defaultValues2);
         });
         handleClick();

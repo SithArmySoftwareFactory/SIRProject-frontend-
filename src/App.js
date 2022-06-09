@@ -6,7 +6,7 @@ import ViewMenu from "./components/viewMenu/ViewMenu";
 import {Button, Grid, Snackbar, Typography} from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import CloseIcon from '@mui/icons-material/Close'
-import {Route, Routes} from 'react-router-dom'
+import {NavLink, Route, Routes} from 'react-router-dom'
 import SupervisorView from "./components/Supervisor/SupervisorView";
 import Home from "./components/pages/Home";
 import Footer from "./components/common/Footer";
@@ -18,6 +18,7 @@ import Team from "./components/team/Team";
 import ReactGA from 'react-ga';
 import axios from "axios";
 import {API_URL} from "./constants/Constants";
+import ViewReport from "./components/pages/ViewReport";
 
 
 
@@ -35,6 +36,11 @@ function App() {
     const [authorizationState, setAuthorizationState] = useState( localStorage.getItem('access_token') || undefined);
     const [authorizationStateRefresh, setAuthorizationStateRefresh] = useState(localStorage.getItem('refresh_token') || undefined);
     const [apiCallCount, setApiCallCount] = useState(0);
+    const [singleReport, setSingleReport] = useState([]);
+
+    const setSingleReportViewFunction = (response) => {
+        setSingleReport(response);
+    }
 
     useEffect(() => {
         ReactGA.pageview(window.location.pathname);
@@ -98,7 +104,7 @@ function App() {
                                sx={{width: "100%", background: "#EAF5F4", color: "#2A9D8F", fontWeight: "600"}}
                                action={
                                    <>
-                                       <Typography noWrap textAlign={"right"}>View Report</Typography>
+                                       <NavLink noWrap path="/viewreport" to="/viewreport" textAlign={"right"}>View Report</NavLink>
                                        <Button onClick={() => handleClose()}
                                                sx={{
                                                    width: "5%",
@@ -119,7 +125,7 @@ function App() {
                 <Grid item  xs={12} >
                 <Routes>
                     <Route exact path="/" element={<Home />} />
-                    <Route exact path="/report" element={<SIRForm handleClick={handleClick}  />} />
+                    <Route exact path="/report" element={<SIRForm handleClick={handleClick}  setSingleReportViewFunction={setSingleReportViewFunction}/>} />
                     {authorizationState && <Route path="/supervisor" element={<SupervisorView
                         authorizationState={authorizationState}
                         setApiCallCountFunction={setApiCallCountFunction}
@@ -127,7 +133,7 @@ function App() {
                     />} />}
                     {authorizationState && <Route path="/dashboard" element={<Dashboard authorizationState={authorizationState}  setApiCallCountFunction={setApiCallCountFunction}/>} />}
                     {(typeof authorizationState == 'undefined') && <Route path="/login" element={<Login userAuthorized={userAuthorized} />} /> }
-
+                    {authorizationState && <Route path="/viewreport" element={<ViewReport authorizationState={authorizationState} singleReport={singleReport} />} /> }
                     <Route path="/team" element={<Team/>} />
                     <Route path="*" element={<Home />} />
                 </Routes>
