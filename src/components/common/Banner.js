@@ -6,11 +6,12 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import FaceIcon from '@mui/icons-material/Face';
 import {NavLink} from "react-router-dom";
-import {Grid, Menu} from "@mui/material";
+import {Grid, IconButton, Menu} from "@mui/material";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import MapIcon from '@mui/icons-material/Map';
 import Paper from "@mui/material/Paper";
 import AnalyticsEventTracker from "./AnalyticsEventTracker";
+import { useNavigate } from 'react-router-dom';
 
 export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -21,6 +22,11 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const navigate = useNavigate();
+    const handleClickIcon = (e) => {
+        navigate(e);
+    }
+
     return (<>
         <div className="menu">
             <Box component={"div"} sx={{flexGrow: 1}}>
@@ -31,31 +37,31 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                                 <img src="/img.png" alt={"logo"} id="logo"/>
                                 <ul>
                                     <li onClick={() => AnalyticsEventTracker('Home', 'Clicked home button', 'clicked home')}>
-                                        <HomeIcon className="bannerIcons"/><NavLink className="navLink" page="/"
+                                        <HomeIcon onClick={ () => handleClickIcon("/")} style={{cursor:"pointer"}} className="bannerIcons"/><NavLink className="navLink" page="/"
                                                                                     to="/">Home</NavLink></li>
                                     <li onClick={() => AnalyticsEventTracker('Submit_report', 'Clicked Submit Report Button', 'clicked Submit Report')}>
-                                        <AssessmentIcon className="bannerIcons"/><NavLink className="navLink"
+                                        <AssessmentIcon onClick={ () => handleClickIcon("/report")} style={{cursor:"pointer"}} className="bannerIcons"/><NavLink className="navLink"
                                                                                           page="/report" to="/report">Submit
                                         Report</NavLink></li>
                                     {authorizationState &&
                                         <li onClick={() => AnalyticsEventTracker('Supervisor_View', 'Clicked Supervisor Button', 'clicked Supervisor Report')}>
-                                            <SupervisedUserCircleIcon className="bannerIcons"/><NavLink
+                                            <SupervisedUserCircleIcon onClick={ () => handleClickIcon("/supervisor")} style={{cursor:"pointer"}} className="bannerIcons"/><NavLink
                                             className="navLink" page="/supervisor" to="/supervisor">Supervisor</NavLink>
                                         </li>}
                                     {!authorizationState &&
-                                        <li><FaceIcon className="bannerIcons"/><NavLink className="navLink"
+                                        <li><FaceIcon onClick={ () => handleClickIcon("/login")} style={{cursor:"pointer"}} className="bannerIcons"/><NavLink className="navLink"
                                                                                         page="/login"
                                                                                         to="/login">Login</NavLink>
                                         </li>}
                                     {authorizationState &&
                                         <li onClick={() => AnalyticsEventTracker('Dashboard', 'Clicked Dashboard Button', 'clicked Dashboard')}>
-                                            <DashboardIcon className="bannerIcons"/><NavLink className="navLink"
+                                            <DashboardIcon onClick={ () => handleClickIcon("/dashboard")} style={{cursor:"pointer"}}className="bannerIcons"/><NavLink className="navLink"
                                                                                              page="/dashboard"
                                                                                              to="/dashboard">Dashboard</NavLink>
                                         </li>}
 
                                     {authorizationState &&
-                                        <li><FaceIcon className="bannerIcons"/><NavLink className="navLink" page="/"
+                                        <li><FaceIcon onClick={ () => handleClickIcon("/")} style={{cursor:"pointer"}} className="bannerIcons"/><NavLink className="navLink" page="/"
                                                                                         to="/" onClick={() => {
                                             localStorage.removeItem('access_token');
                                             userAuthorized('removeAuth');
@@ -101,7 +107,7 @@ export function Banner({setIsHome, isHome, authorizationState, userAuthorized}) 
                     'aria-labelledby': 'basic-button',
                 }}
             > <Paper sx={{width: 320, maxWidth: '100%'}}>
-                <HomeIcon className="bannerIcons"/><NavLink component="NavLink" className="navLink" page="/" to="/"
+                <a href={"/"}><HomeIcon className="bannerIcons" /> </a> <NavLink component="NavLink" className="navLink" page="/" to="/"
                                                             sx={{padding: '2em'}}>Home</NavLink><br/>
                 <AssessmentIcon className="bannerIcons"/><NavLink className="navLink" page="/report" to="/report"
                                                                   sx={{margin: '2em', padding: '2em'}}>Submit
