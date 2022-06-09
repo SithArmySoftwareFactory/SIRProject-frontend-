@@ -45,7 +45,7 @@ export default function CommandField(props, {rowsChecked}) {
         // Need to input Logic for SMTP Server //
     }
     return (
-                        <FormControl sx={{ minWidth: 120, width:'100%', maxWidth:'550px', overflow:'hidden'}}>
+                        <FormControl sx={{ minWidth: 120, width:'100%', maxWidth:'550px' }}>
                             <Typography>
                                 Command
                             </Typography>

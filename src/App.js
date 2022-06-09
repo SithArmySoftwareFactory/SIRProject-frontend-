@@ -11,11 +11,15 @@ import SupervisorView from "./components/Supervisor/SupervisorView";
 import Home from "./components/pages/Home";
 import Footer from "./components/common/Footer";
 import Dashboard from "./components/dashboard/Dashboard";
+import Gmap from "./components/maps/Gmap";
 import Login from "./components/pages/Login";
 import {apiGetRefresh} from "./api/APICalls";
 import Team from "./components/team/Team";
 import ReactGA from 'react-ga';
+import axios from "axios";
+import {API_URL} from "./constants/Constants";
 import ViewReport from "./components/pages/ViewReport";
+
 
 
 const TRACKING_ID = "UA-230927295-1"; // OUR_TRACKING_ID
@@ -52,7 +56,6 @@ function App() {
             setAuthorizationState(null);
         } else if (value) {
             //TODO value logic, does it have auth and refresh token? -> yes -> authorize
-            console.log(value);
             setAuthorizationState(value.data.access_token);
             setAuthorizationStateRefresh(value.data.refresh_token)
 
@@ -132,7 +135,7 @@ function App() {
                                                                           setApiCallCountFunction={setApiCallCountFunction}/>}/>}
                         {(typeof authorizationState == 'undefined') &&
                             <Route path="/login" element={<Login userAuthorized={userAuthorized}/>}/>}
-                        {authorizationState && <Route path="/viewreport"
+                        {<Route path="/viewreport"
                                                       element={<ViewReport authorizationState={authorizationState}
                                                                            singleReport={singleReport}/>}/>}
                         <Route path="/team" element={<Team/>}/>

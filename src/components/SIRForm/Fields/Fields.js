@@ -4,6 +4,7 @@ import TimeOfEvent from "./TimeOfEvent";
 import LocationBox from "./LocationBox";
 import EventTypeBox from "./EventTypeBox";
 import * as React from "react";
+import * as tf from '@tensorflow/tfjs';
 import {useEffect, useState} from "react";
 import HarmEventBox from "./HarmEventBox";
 import IndividualsInvolvedFormGroup from "./IndividualsInvolvedFormGroup";
@@ -25,6 +26,7 @@ import Box from "@mui/material/Box";
 import {useJsApiLoader} from "@react-google-maps/api";
 import {getGeocode, getLatLng,} from "use-places-autocomplete";
 import CommandField from "./CommandField";
+import padSequences from "../../helper/paddedSeq";
 
 
 const Fields = ({handleClick, open, defaultValues, handlePatchChange = function () {}, setSingleReportViewFunction}) => {
@@ -32,6 +34,80 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyAvmc8J1ekNy512EDD3lAyfEFmQZUP_U7g",
     });
+
+    const url = {
+        model: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json',
+        metadata: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json'
+    };
+    const OOV_INDEX = 2;
+
+    const [metadata, setMetadata] = useState();
+    const [model, setModel] = useState();
+    const [testScore, setScore] = useState("");
+    const [trimedText, setTrim] = useState("")
+    const [seqText, setSeq] = useState("")
+    const [padText, setPad] = useState("")
+    const [inputText, setInput] = useState("")
+
+
+
+    async function loadModel(url) {
+        try {
+            const model = await tf.loadLayersModel(url.model);
+            setModel(model);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async function loadMetadata(url) {
+        try {
+            const metadataJson = await fetch(url.metadata);
+            const metadata = await metadataJson.json();
+            setMetadata(metadata);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
+    const getSentimentScore = (text) => {
+        console.log(text)
+        const inputText = text.trim().toLowerCase().replace(/(\.|\,|\!)/g, '').split(' ');
+        setTrim(inputText)
+        console.log(inputText)
+        const sequence = inputText.map(word => {
+            let wordIndex = metadata.word_index[word] + metadata.index_from;
+            if (wordIndex > metadata.vocabulary_size) {
+                wordIndex = OOV_INDEX;
+            }
+            return wordIndex;
+        });
+        setSeq(sequence)
+        console.log(sequence)
+        // Perform truncation and padding.
+        const paddedSequence = padSequences([sequence], metadata.max_len);
+        console.log(metadata.max_len)
+        setPad(paddedSequence)
+
+        const input = tf.tensor2d(paddedSequence, [1, metadata.max_len]);
+        console.log(input)
+        setInput(input)
+        const predictOut = model.predict(input);
+        const score = predictOut.dataSync()[0];
+        predictOut.dispose();
+        setScore(score)
+        return score;
+    }
+    useEffect(() => {
+        tf.ready().then(
+            () => {
+                loadModel(url)
+                loadMetadata(url)
+            }
+        );
+
+    }, [])
 
     let defaultValues2;
     if (defaultValues != null) {
@@ -217,9 +293,24 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
         }
         dataToBeSent.department = departmentsInvolvedString.substring(1);
 
+        let outlook = "";
+        let score = getSentimentScore(dataToBeSent.prevention)
         getTheLocation(dataToBeSent.location).then((data) => {
             dataToBeSent.lat = data.lat;
             dataToBeSent.lng = data.lng;
+
+
+
+            if(score <= 0.4){
+                outlook = "low"
+            } else if(score > 0.4 && score <= 0.7){
+                outlook = "medium"
+            } else {
+                outlook = "high"
+            }
+
+            dataToBeSent.sentiment = outlook;
+
             apiPostIncident(dataToBeSent)
                 .then((response) =>{
                     console.log(response.data)
@@ -233,6 +324,17 @@ const Fields = ({handleClick, open, defaultValues, handlePatchChange = function 
             setFormValues(defaultValues2);
         }).catch((error) => {
             //even if there is an error with getting the LatLng we still want to store the information in the database
+
+
+            let outlook = "";
+            if(score <= 0.4){
+                outlook = "low"
+            } else if(score > 0.4 && score <= 0.7){
+                outlook = "medium"
+            } else {
+                outlook = "high"
+            }
+            dataToBeSent.sentiment = outlook;
             apiPostIncident(dataToBeSent)
                 .then((response) =>{
                     console.log(response.data)
