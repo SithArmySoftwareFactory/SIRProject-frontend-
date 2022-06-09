@@ -8,7 +8,7 @@ import {Grid} from "@mui/material";
 const EventTypeBox = ({formValues, handleInputChange}) => {
 
     return (
-        <Grid item xs={6}>
+        <>
             <label style={styleLabel}>Event Type </label>
             <FormControl fullWidth>
                 <Select
@@ -26,8 +26,7 @@ const EventTypeBox = ({formValues, handleInputChange}) => {
                         Call</MenuItem>
                 </Select>
             </FormControl>
-        </Grid>
-
+        </>
     );
 }
 
