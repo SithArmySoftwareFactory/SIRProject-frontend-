@@ -67,7 +67,7 @@ describe('user navigating to the homepage', () => {
     });
 
     it('should see button changes row per page',()=>{
-        cy.findByRole('button',{name:/rows per page: 5/i}).should('exist');
+        cy.findByRole('button',{name:/rows per page:/i}).should('exist');
     });
 
     it('should see button changes to the next page',()=>{
